@@ -105,6 +105,21 @@ class category extends admin {
                 }
             }
 
+            //取得图片列表 wy add at 2018-05-14
+            $catpics = $_POST['catpics_url'];
+            //取得图片说明
+            $catpics_alt = isset($_POST['catpics_alt']) ? $_POST['catpics_alt'] : array();
+            $catpicsarray = $temp = array();
+            if(!empty($catpics)) {
+                foreach($catpics as $key=>$pic) {
+                    $temp['url'] = $pic;
+                    $temp['alt'] = str_replace(array('"',"'"),'`',$catpics_alt[$key]);
+                    $catpicsarray[$key] = $temp;
+                }
+            }
+            $catpicsarray = array2string($catpicsarray);
+            $_POST['info']['catpics'] = $catpicsarray;
+
             $_POST['info']['siteid'] = $this->siteid;
             $_POST['info']['module'] = 'content';
             $setting = $_POST['setting'];
@@ -294,6 +309,21 @@ class category extends admin {
             );
             $category_ext = pc_base::load_model('category_ext_model');
             $category_ext->update($ext_data, array('catid' => $catid));
+
+            //取得图片列表 wy add at 2018-05-14
+            $catpics = $_POST['catpics_url'];
+            //取得图片说明
+            $catpics_alt = isset($_POST['catpics_alt']) ? $_POST['catpics_alt'] : array();
+            $catpicsarray = $temp = array();
+            if(!empty($catpics)) {
+                foreach($catpics as $key=>$pic) {
+                    $temp['url'] = $pic;
+                    $temp['alt'] = str_replace(array('"',"'"),'`',$catpics_alt[$key]);
+                    $catpicsarray[$key] = $temp;
+                }
+            }
+            $catpicsarray = array2string($catpicsarray);
+            $_POST['info']['catpics'] = $catpicsarray;
 
             $this->db->update($_POST['info'],array('catid'=>$catid,'siteid'=>$this->siteid));
             $this->update_priv($catid, $_POST['priv_roleid']);

@@ -12,6 +12,7 @@
       'category.html' => '文章频道页',
       'category_download.html' => '下载频道页',
       'category_picture.html' => '图片频道页',
+      'category_maerkte.html' => '核心市场频道页',
       'download.html' => '下载连接页',
       'footer.html' => '底部',
       'header.html' => '顶部',
@@ -21,6 +22,7 @@
       'list.html' => '列表页',
       'list_download.html' => '下载列表页',
       'list_picture.html' => '图片列表页',
+      'list_maerkte.html' => '核心市场列表页',
       'message.html' => '消息提示页',
       'page.html' => '单网页',
       'rss.html' => 'RSS页',
@@ -28,6 +30,7 @@
       'show.html' => '文章内容页',
       'show_download.html' => '下载内容页',
       'show_picture.html' => '图片内容页',
+      'show_maerkte.html' => '核心市场内容页',
       'tag.html' => 'tag',
     ),
     'templates|default|' => 

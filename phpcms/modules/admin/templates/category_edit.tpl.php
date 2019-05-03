@@ -60,14 +60,34 @@ include $this->admin_tpl('header');?>
         <th><?php echo L('catdir')?>：</th>
         <td><input type="text" name="info[catdir]" id="catdir" class="input-text" value="<?php echo $catdir;?>"></td>
       </tr>
-	<tr>
+	<tr style="display: none;">
         <th><?php echo L('catgory_img')?>：</th>
         <td><?php echo form::images('info[image]', 'image', $image, 'content');?></td>
       </tr>
+    <!-- 栏目上传多图  start-->
+    <tr>
+        <th width="80">组图：</th>
+        <td>
+            <?php echo catimages('catpics',$catid,$catpics); ?>
+        </td>
+    </tr>
+    <!-- 单页上传多图 end -->
 	<tr>
         <th><?php echo L('description')?>：</th>
         <td>
-		<textarea name="info[description]" maxlength="255" style="width:300px;height:60px;"><?php echo $description;?></textarea>
+<!--		<textarea name="info[description]" maxlength="255" style="width:300px;height:60px;">--><?php //echo $description;?><!--</textarea>-->
+            <script type="text/javascript" src="/statics/js/ckeditor/ckeditor.js"></script>
+            <textarea name="info[description]" cols="50" rows="8" id="content"><?php echo $description;?></textarea>
+            <script type="text/javascript">
+                CKEDITOR.replace( 'content',{height:200,width:600,pages:false,subtitle:false,textareaid:'content',module:'',catid:'',
+                    flashupload:true,alowuploadexts:'',allowbrowser:'1',allowuploadnum:'10',authkey:'c8e07e653e467f2f1b2058ee44db799c',
+                    filebrowserUploadUrl : '/index.php?m=attachment&c=attachments&a=upload&module=&catid=&dosubmit=1',
+                    toolbar :
+                        [
+                            ['Source'],['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],['Maximize'],    //这是工具列表
+                        ]
+                });
+            </script>
 		</td>
       </tr>
 	 <tr>

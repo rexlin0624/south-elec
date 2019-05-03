@@ -39,10 +39,18 @@ include $this->admin_tpl('header');?>
         <th><?php echo L('catdir')?>：</th>
         <td><input type="text" name="info[catdir]" id="catdir" class="input-text" value="<?php echo $catdir;?>"></td>
       </tr>
-	<tr>
+	<tr style="display: none;">
         <th><?php echo L('catgory_img')?>：</th>
         <td><?php echo form::images('info[image]', 'image', $image, 'content');?></td>
       </tr>
+    <!-- 栏目上传多图  start-->
+    <tr>
+        <th width="80">组图：</th>
+        <td>
+            <?php echo catimages('catpics',$catid,$catpics); ?>
+        </td>
+    </tr>
+    <!-- 单页上传多图 end -->
 	<tr>
         <th><?php echo L('description')?>：</th>
         <td>
