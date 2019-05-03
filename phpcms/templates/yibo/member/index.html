@@ -1,0 +1,109 @@
+{template 'member', 'header'}
+<div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2 margin-bottom">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="user_left_meun user_left_meun_top">
+							<h5>个人中心</h5>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<a href="/index.php?m=member&c=index">
+							<div class="user_left_meun">
+								<h5>账户信息<span class="pull-right glyphicon glyphicon-menu-right"></span>
+								</h5>
+							</div>
+						</a>
+					</div>
+					<div class="col-md-12" style="display: none;">
+						<a href="user_form.html">
+							<div class="user_left_meun">
+								<h5>我的订单<span class="pull-right glyphicon glyphicon-menu-right"></span></h5>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-10 user_main_padding">
+				<h3 class="user_herder_border">用户信息</h3>
+				<div class="col-md-3 center-block user_head_img"><img src="images/work-2.jpg" width="150px;" height="150px;"></div>
+				<div class="col-md-12 margin-top">
+					<h4>我的订单<span class="pull-right"></span></h4>
+					<table class="table text-center">
+						<tbody>
+						<thead>
+						<tr>
+							<td>订单号</td>
+							<td>项目名称</td>
+							<td>支付方式</td>
+							<td>总价</td>
+							<td>状态</td>
+							<td>操作</td>
+						</tr>
+						</thead>
+						<tbody>
+						<?php
+						foreach ($orders as $order) {
+						?>
+						<tr>
+							<td><?php echo $order['order_no']; ?></td>
+							<td><?php echo $order['title']; ?></td>
+							<td><?php echo $order['pay_type'] == 2 ? '支付宝' : '微信支付'; ?></td>
+							<td><?php echo $order['order_sum']; ?></td>
+							<td><?php echo $order['order_status'] == 1 ? '已支付' : '未支付'; ?></td>
+							<td><a href="/index.php?m=member&c=index&a=order_detail&id=<?php echo $order['id']; ?>">查看</a></td>
+						</tr>
+						<?php
+						}
+						?>
+						</tbody>
+					</table>
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<li>
+								<a href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+							</li>
+							<li><a href="#">1</a></li>
+							<li>
+								<a href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="user_index_gonggao" style="">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 user_main_padding">
+				<h3><span class="glyphicon glyphicon-edit user_index_gg_logo"></span>公告</h3>
+				<div>
+					{pc:content action="lists" catid="10" num="25" siteid="$siteid" order="listorder ASC" moreinfo="1"}
+					{loop $data $r}
+					<a href="{$r['url']}"><p>{$r['title']}<span class="pull-right">{date('Y-m-d',$r[inputtime])}</span></p></a>
+					{/loop}
+					{/pc}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="user_footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 img-responsive text-center">
+				<img src="images/logo-2.png" width="20%">
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
