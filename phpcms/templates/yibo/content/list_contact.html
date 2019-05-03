@@ -1,0 +1,86 @@
+
+
+{template "content","header"}
+<!-- 返回顶部 -->
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=A1LU7iHS0avqQwPLAxbhKn0UYSQCuRVH"></script>
+
+<div id="inner-page">
+  <div id="inner-page" style="background-color: #fff;">
+    <div class="top-center" style="background-image: url('{$CATEGORYS[$catid]['image']}');">
+    </div>
+  <div class="container">
+    <div class="col-md-12">
+      <ol class="breadcrumb" style="text-align: right;">
+        <li><a target="_blank" href="{siteurl($siteid)}">首页</a></li>
+        <li><a target="_blank" href="{$CATEGORYS[$catid]['url']}">{$CATEGORYS[$catid]['catname']}</a></li>
+      </ol>
+    </div>
+    <div class="row contact_top">
+      <div class="col-md-12">
+        <div style="height:300px;width: 90%;margin: 20px auto;" id="l-map"></div>
+      </div>
+      <div class="col-md-10 col-md-offset-1">
+         <div class="col-xs-4 contact_details"> 
+          <i class="fa fa-map-marker fa-2x"></i>
+          <p>地址：广州市天河区大观中路新塘大街横岗头9号鑫盛工业园D305号</p>
+        </div>
+        <div class="col-xs-4 contact_details"> 
+          <i class="fa fa-envelope-o fa-2x"></i>
+          <p>QQ：2200502589</p>
+        </div>
+        <div class="col-xs-4 contact_details"> 
+          <i class="fa fa-phone fa-2x"></i>
+          <p>客服热线：400-900-8136</p>
+        </div>
+      </div>
+    </div>
+    <div class="center">
+      <h3>给我们发邮件</h3>
+      <p class="lead">给我们发邮件让我们知道你的存在</p>
+    </div>
+    <form name="?m=formguide&c=index&a=show&formid=15&siteid=<?php echo $this->siteid;?>" id="contactForm" novalidate>
+      <div class="row">
+        <div class="col-sm-5 col-sm-offset-1">
+          <div class="form-group">
+            <label>姓名 *</label>
+            <input type="text" id="name" class="form-control" required="required">
+            <p class="help-block text-danger"></p>
+          </div>
+          <div class="form-group">
+            <label>邮箱 *</label>
+            <input type="email" id="email" class="form-control" required="required">
+            <p class="help-block text-danger"></p>
+          </div>
+          <div class="form-group">
+            <label>电话 *</label>
+            <input type="tel" id="phone" class="form-control" required="required">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="form-group">
+            <label>留言 *</label>
+            <textarea name="message" required class="form-control" rows="8"></textarea>
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <div id="success"></div>
+          <button type="submit" class="btn btn-primary btn-lg">提 交</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br>
+  <br>
+</div>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("l-map");            // 创建Map实例
+  map.centerAndZoom(new BMap.Point(113.412797, 23.15905), 11);
+  var local = new BMap.LocalSearch(map, {
+    renderOptions: {map: map}
+  });
+  local.search("广州市天河区大观中路新塘大街横岗头9号鑫盛工业园D305号");
+</script>
+{template "content","footer"}

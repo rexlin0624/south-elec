@@ -1,0 +1,169 @@
+{template "content","header"}
+{pc:content action="lists" catid="41" num="25" siteid="$siteid" order="listorder ASC" moreinfo="1}
+{/pc}
+
+<div class="top-center" id="pc" style="background-color: #fff;background-image: url('{$CATEGORYS[$catid]['image']}');"></div>
+<div class="top-center" id="moblie" style="background-color: #fff;background-image: url('/statics/images/m-b-b.jpg');"></div>
+<!-- <?php
+array_values(array_unshift($data, Array(
+'name' => '南海诸岛','tooltip' => Array('show'=>false),
+'itemStyle'=>Array('normal'=>Array('opacity'=> 0,'label'=>Array('show'=>false),'borderWidth'=>'0','borderColor'=>'#fff','areaStyle'=>Array('color'=>'#fff'))
+,'emphasis'=>Array('opacity'=> 0,'label'=>Array('show'=>false),'areaStyle'=>Array('color'=>'#fff'))))
+));
+?> -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="breadcrumb" style="text-align: right;">
+        <li><a target="_blank" href="{siteurl($siteid)}">首页</a></li>
+        <li><a target="_blank" href="{$CATEGORYS[$catid]['url']}">{$CATEGORYS[$catid]['catname']}</a></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- 地图 -->
+
+
+
+<link rel="stylesheet" href="/statics/css/form_css/css/style.css">
+
+
+
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-12">
+        <!-- 地图 -->
+        <div class="wrap" style="height:100%;width: 100%;">
+          <div class="itemCon" id="business-map">
+            <div id="ChinaMap" style="margin: 0px;"></div>
+            <div id="stateTip" style="display: block;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 join-right-color">
+        <div class="join-right">
+          <div class="header">
+            <h3>您要查询的省份和城市</h3>
+            <span>YOU WANGT TO SEE THEPROVINCES AND CITIES</span>
+          </div>
+          <div class="sec">
+            <form class="cd-form floating-labels">
+              <fieldset style="min-width: 100%;">
+                <div class="icon-1 row">
+                  <label class="cd-label col-xs-12 h4">输入关键词：</label>
+                  <div class="col-xs-12">
+                    <input class="" type="text" name="cd-name" required id="keywords">
+                  </div>
+
+                </div>
+              </fieldset>
+              <fieldset>
+                <input class="pull-right" type="submit" value="立即查询" id="btn-search">
+              </fieldset>
+            </form>
+
+          </div>
+          <div class="footer">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <table class="table table-striped" id="tbl-business">
+          <thead>
+          <tr>
+            <th>网点名称</th>
+            <th>地址</th>
+            <th>联系人</th>
+            <th>服务热线</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/statics/css/form_css/js/main.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        $('#ChinaMap').SVGMap({
+            mapWidth: 400,
+            mapHeight: 400
+        });
+    });
+
+    window.onload = function () {
+        $('#ChinaMap').find('path').click(function () {
+            var kw = $(this).next().find('tspan').html();
+            $('#keywords').val(kw);
+            get_list();
+        });
+        $('#ChinaMap').find('text').click(function () {
+            var kw = $(this).find('tspan').html();
+
+            $('#keywords').val(kw);
+            get_list();
+        });
+    }
+</script>
+
+
+
+{template "content","footer"}
+<script type="text/javascript" src="/statics/js/lib/raphael-min.js"></script>
+<script type="text/javascript" src="/statics/js/res/chinaMapConfig.js"></script>
+<script type="text/javascript" src="/statics/js/map-min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        if (isMobile()) {
+            $('#ChinaMap').css({width: '100%'});
+            $('#ChinaMap').find('svg').setAttr('width', '110%');
+        }
+
+        function get_list() {
+            var keywords = $.trim($('#keywords').val());
+
+            $.ajax({
+                type: 'GET',
+                url: '/index.php?m=content&c=index&a=get_business&keywords=' + keywords,
+                data: {},
+                beforeSend: function () {
+                    //
+                },
+                success: function (data) {
+                    var items = $.parseJSON(data);
+                    var html = [];
+                    for (var i = 0;i < items.length;i++) {
+                        html.push('<tr>');
+                        html.push('<th>',items[i].title,'</th>');
+                        html.push('<td>',items[i].address,'</td>');
+                        html.push('<td>',items[i].contacts,'</td>');
+                        html.push('<td>',items[i].service_phone,'</td>');
+                        html.push('</tr>');
+                    }
+
+                    $('#tbl-business').find('tbody').html(html.join(''));
+                }
+            });
+        }
+
+        get_list();
+
+        $('#btn-search').click(function (e) {
+            e.preventDefault();
+
+            get_list();
+        });
+    });
+</script>

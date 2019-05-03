@@ -1,0 +1,41 @@
+﻿@charset "utf-8";
+/**{margin:0;padding:0;list-style-type:none;}*/
+a,img{border:0;}
+/*body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}*/
+/* side */
+@media (max-width: 443px) {
+	.side{
+		display: none;
+	}
+}
+.side{position:fixed;width:54px;height:275px;right:0;top:20%;z-index:990;}
+.side ul li{width:54px;height:54px;float:left;position:relative;background-color: #daa845;}
+.side ul li .sidebox{position:absolute;width:54px;height:54px;top:0;right:0;transition:all 0.3s;background:#daa845;opacity:0.8;filter:Alpha(opacity=80);color:#fff;font:14px/54px "微软雅黑";overflow:hidden;}
+.side ul li .sidebox-1{position:absolute;width:54px;height:54px;top:0;right:0;transition:all 0.3s;background:#daa845;opacity:0.8;filter:Alpha(opacity=80);color:#fff;font:14px/54px "微软雅黑";overflow:hidden;}
+.side ul li .sidetop{width:54px;height:54px;line-height:54px;display:inline-block;background:#daa845;opacity:0.8;filter:Alpha(opacity=80);transition:all 0.3s;}
+.side ul li .sidetop:hover{background:#daa845;opacity:1;filter:Alpha(opacity=100);}
+.side ul li img{float:left;}
+.side ul li .right_shopgoods{
+	position: relative;
+	display: block;
+	padding: 15px;
+}
+.p_indent{
+	text-indent: 35px;
+}
+.side ul li .div{
+	display: inline-block;
+	position: relative;
+}
+.side ul li .right_shopggoods_nmb{
+	position: absolute;
+	background-color:red;
+	color: #fff;
+	top: 5px;
+	width: 15px;
+	height: 15px;
+	padding: 2px;
+	font-size: 10px;
+	border-radius: 30px;
+	text-align: center;
+}

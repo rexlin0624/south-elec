@@ -1,0 +1,163 @@
+{template "content","top"}
+<div class="content-layout form-horizontal" id="design" lab="0" initlab="0">
+  <div class="design group draggable_area design_main" id="web_design_main">
+    <div id="public_set">
+      <div class="modulebox box_webset" id="com_9"></div>
+    </div>
+    <div id="page_set">
+      <div class="hide"></div>
+    </div>
+    <div id="member_lan">
+      <div class="modulebox box_member" id="com_7">
+        <style>#com_7{z-index: 1;}
+        #member_com_7{}
+        </style>
+      </div>
+    </div>
+    {template "content","header"}
+    <div id="Web_Main_Head">
+      <div id="web_top_float" class="web_hide_float" style=""></div>
+    </div>
+    <div id="design_edu_main" class="group web_Column">
+      <div id="box_web_float" class="group box_web_main"></div>
+      <div class="modulebox box_banner" id="com_176">
+        <div class="view" id="banner_com_176" style="height: 421px;" data-bwidth="1903" data-bheight="421">
+          <div class="style_view" id="style_view_com_176">
+            <style> </style>
+          </div>
+          <a class="bannerDiv " style="background-image: url('{$CATEGORYS[$CAT[parentid]][image]}');" href="javascript:void(0)" target=""></a>
+        </div>
+        <style id="com_176_style">#com_176.modulebox{z-index: 1; position: relative; height: 421px;}#banner_com_176{height: 421px;}</style>
+      </div>
+      <div class="modulebox box_freeColumn box_web_main" id="com_220">
+        <div class="view clearfix" id="freeColumn_com_220" style="min-height: 744px;" data-bwidth="1200" data-bheight="744">
+          <div class="style_view" id="style_view_com_220">
+            <style>#freeColumn_com_220 {margin-left:0px;margin-top:45px;margin-right:0px;margin-bottom:0px;}
+            </style>
+          </div>
+          <div class="kenfor-column hasSub has_size_com_220 free_sort skin_model_view" style="min-height: 744px;">
+            <div class="modulebox box_moreColumn box_web_main" id="com_221">
+              <div class="view" id="moreColumn_com_221" style="min-height: 398px;" data-bwidth="1200" data-bheight="398">
+                <div class="style_view" id="style_view_com_221">
+                  <style> </style>
+                </div>
+                <div class="container-fluid no-padding clearfix has_size_com_221" style="min-height: 398px;">
+                  <table style="width:100%" border="0" cellpadding="0" cellspacing="0" class="moreColumn_tab">
+                    <tbody>
+                    <tr>
+                      <td class="moreColumnTxt normal_padding  ui-resizable ui-resizable-autohide" style="width: 226px;" width="226">
+                        {template "content","nav_left"}
+                      </td>
+                      <td class="moreColumnTxt" style="">
+                        <div class="no-padding kenfor-column hasSub has_size_com_221" style="min-height: 398px;">
+                          <div class="modulebox box_location box_web_main" id="com_224">
+                            <style>#com_224{position: relative; min-height: 47px; z-index: 1;}
+                            #location_com_224{min-height: 47px;}
+                            </style>
+                            <div class="view" id="location_com_224">
+                              <div class="style_view"><style>#location_com_224 .skin_model_view .location_title_left {font-size:16px;}
+                              #location_com_224 .skin_model_view .location_title_left {color:#00449e;}
+                              #location_com_224 .skin_model_view .location_title_left {font-weight:bold;}
+                              #location_com_224 .skin_model_view {border-bottom-color:#bdbdbd;}
+                              #location_com_224 .skin_model_view {border-bottom-width:1px;}
+                              #location_com_224 .skin_model_view {border-bottom-style:solid;}
+                              </style></div>
+                              <div class="skin_model_view">
+                                <div class="location_title clear_float">
+                                  <div class="location_style1">    <div class="location_title_left" style="text-align:left">{$catname}</div>
+                                    <div class="location_title_right" style="text-align:left">
+                                      {catpos($catid)}列表
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="modulebox box_articleList box_web_main" id="com_412">
+                            <style>#com_412{z-index: 1;}
+                            #articleList_com_412{}
+                            </style>
+                            <div class="view" id="articleList_com_412">
+                              <div class="style_view"><style>#articleList_com_412 .skin_model_view .listArticle .ellipsis1 {font-size:12px;}
+                              #articleList_com_412 .skin_model_view .listArticle .ellipsis1 {line-height:1.8;}
+                              #articleList_com_412 .skin_model_view .listArticle .ellipsis1 {color:#6e6e6e;}
+                              #articleList_com_412 .skin_model_view .ellipsis {font-size:16px;}
+                              #articleList_com_412 .skin_model_view .ellipsis > a{line-height:1.8;}
+                              #articleList_com_412 .skin_model_view .ellipsis > a{color:#1a1a1a;}
+                              #articleList_com_412 .skin_model_view .ellipsis > a:hover{color:#000cad;}
+                              </style></div>
+
+                              <div class="skin_model_view">
+
+
+                                <div class="listArticle">
+                                  <div id="article_list_com_412" class="default6 clearfix ">
+                                    {pc:content action="lists" catid="$catid" num="25" order="id DESC" page="$page"}
+                                    {loop $data $r}
+                                    <ul class="newsItemMg">
+                                      <li class="list clearfix">
+                                        <dd class="ellipsis title">
+                                          <a href="{$r[url]}" target="_blank">{$r[title]}</a>
+                                        </dd>
+                                        <time style="background:#f2f2f2;">
+                                          <span>{date('d',$r[inputtime])}</span>
+                                          <font>{date('Y-m',$r[inputtime])}</font>
+                                        </time>
+                                        <p class="ellipsis1">
+                                          {$r[description]}
+                                        </p>
+                                      </li>
+                                    </ul>
+                                    {/loop}
+                                    {/pc}
+                                  </div>
+                                  <div id="article_page_com_412">
+                                    <div class="page_style_dh">{$pages}</div>
+                                  </div>
+                                </div>
+                                <script>
+                                    require(["jquery"],function($){
+                                        $.each($(".default6 > ul"),function(i,item){
+                                            var ddHtml = $(item).find(".list > dd").clone(true);
+                                            $(item).find(".list > dd").remove();
+                                            $(item).find(".list > time").after(ddHtml);
+                                        })
+                                    });
+                                </script>
+
+                              </div>
+                            </div>
+
+
+                          </div>
+                        </div> </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <style>#moreColumn_com_221 .normal_padding{padding-right:35px;}
+
+              #moreColumn_com_221 .ui-resizable-e {width: 35px;}
+              </style>
+              <script>
+                  var mdId = "com_221";
+                  var temp = "moreColumn";
+                  var colWidth = "35";
+                  webUtil.setMoreColumn(mdId,temp,colWidth);
+              </script>
+              <style id="com_221_style">#com_221{position: relative; z-index: 1; min-height: 398px;}#moreColumn_com_221{min-height: 398px;}</style>
+            </div>
+          </div>
+        </div>
+        <style id="com_220_style">#com_220{position: relative; z-index: 1; min-height: 789px;}#freeColumn_com_220{min-height: 744px;}</style>
+      </div>
+    </div>
+    {template "content","footer"}
+  </div>
+  <div style="position: absolute; opacity: 0.2; z-index: 499; display: none; width: 158px; height: 301px; left: 943px; top: 398px;"></div>
+</div>
+</div>
+</body>
+</html>

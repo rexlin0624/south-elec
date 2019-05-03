@@ -1,0 +1,76 @@
+{template "content","header"}
+	<!-- 新闻列表栏目 -->
+	<div class="container" style="margin-top: 30px;">
+		<div class="row" style="padding-bottom: 50px;">
+      <div class="col-md-12">
+        <ol class="breadcrumb" style="text-align: right;">
+          <li><a target="_blank" href="{siteurl($siteid)}">首页</a></li>
+          <li><a target="_blank" href="{$CATEGORYS[$catid]['url']}">{$CATEGORYS[$catid]['catname']}</a></li>
+        </ol>
+      </div>
+			<h1 class="col-md-12" >
+              {$title}
+			</h1>
+			<div class="col-md-12">
+				<div class="row" style="padding: 10px 0px;">
+					<div class="col-md-4 col-xs-4">
+						<span class="">
+							<div id="socialShare" style="box-sizing: content-box;"></div>
+						</span>
+					</div>
+					<div class="col-md-4 col-xs-4">
+						<div>
+							<span style="font-size: 20px; ">字体：</span>
+							<div class="ctrl text-center" style=" padding-top: 5px;font-size: 20px; display: inline-block;">
+								<a href="javascript:;"><span class="glyphicon glyphicon-zoom-in"></span></a>
+								<a href="javascript:;"><span class="glyphicon glyphicon-zoom-out"></span></a>
+								<a href="javascript:;"><span class="glyphicon glyphicon-repeat"></span></a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-xs-4 text-center" style="font-size: 20px; padding-top: 5px;">
+						<span class="">{date('Y-m-d',time($inputtime))}</span>
+					</div>
+				</div>
+			</div>
+			<div id="context" class="col-md-12" style="padding: 15px;">
+              {$content}
+			</div>
+		</div>
+	</div>
+{template "content","footer"}
+<script language=javascript>
+    $(function(){
+		$("#context").find("img").addClass("img-responsive center-block img-thumbnail").css("width","100%");
+        $("#context").find("span").addClass("cont");
+        function sizeIn(){
+	    var sizeCont = parseInt($(".cont").css("fontSize")); // 获取原设定的font-size的值
+	    if(sizeCont == 40){ // 判断font-size增大到30像素时停止
+	      $(".cont").css({fontSize:sizeCont});
+	    }else{
+	      $(".cont").css({fontSize:sizeCont + 1});
+	    }
+	  }
+	  function sizeOut(){
+	    var sizeCont = parseInt($(".cont").css("fontSize"));
+	    if(sizeCont == 10){ // 判断font-size减小到10像素时停止
+	      $(".cont").css({fontSize:sizeCont});
+	    }else{
+	      $(".cont").css({fontSize:sizeCont - 1});
+	    }
+	  }
+	  function sizeDefault(){
+	    $(".cont").css({fontSize:""})
+	  }
+	  $(".ctrl a").click(function(){
+	    if($(this).index() == 0){
+	      sizeIn();
+	    }else if($(this).index() == 1){
+	      sizeOut();
+	    }else{
+	      sizeDefault();
+	    }
+	 
+	  })
+	});
+</script>

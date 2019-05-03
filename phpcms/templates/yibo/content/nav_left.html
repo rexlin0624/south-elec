@@ -1,0 +1,87 @@
+<div class="no-padding kenfor-column hasSub has_size_com_213" style="min-height: 398px;">
+    <div class="modulebox box_title_v1 box_web_main" id="com_214">
+        <div class="view" id="title_com_214" data-bwidth="191" data-bheight="70">
+            <!-- 装载编辑样式里面的样式 -->
+            <div class="style_view" id="style_view_com_214">
+                <style>
+                    /*#title_com_214 .title_wrap {background-color:rgba(0,66,153,1);}*/
+                    #title_com_214 .title_wrap {background-color:#666666;}
+                    #title_com_214 .title_wrap {background-repeat:repeat;background-position:center;}
+                    #title_com_214 .title_wrap {padding-left:20px;padding-top:10px;padding-right:0px;padding-bottom:10px;}
+                    #title_com_214 .mainTitleCls {font-size:22px;}
+                    #title_com_214 .mainTitleCls {font-weight:bold;}
+                    #title_com_214 .mainTitleCls {color:#ffffff;}
+                    #title_com_214 .mainTitleCls {padding-left:10px;padding-right:10px;}
+                </style>
+            </div>
+            <div class="title_wrap title_type_007">
+                <div class="title_wrap_inner " style="">
+                    <h4 class="title_h4 mainTitleCls" style="">{$CATEGORYS[$CAT[parentid]][catname]} </h4>
+                    <span class="title_icon icon_bg"> <i class=""></i> </span>
+                    <span class="title_line line_bg"></span>
+                </div>
+            </div>
+        </div>
+        <style id="com_214_style">#com_214{z-index: 1;}</style>
+    </div>
+    <div class="modulebox box_navigation box_web_main" id="com_215">
+        <style>#com_215{z-index: 10; position: relative; min-height: 280px; opacity: 1; top: 0px; left: 0px;}
+        /*#navigation_com_215{min-height: 280px;}*/
+        </style>
+        <div class="view" id="navigation_com_215">
+            <div class="style_view"><style>#navigation_com_215 {border-color:#e8e8e8;}
+            #navigation_com_215 {border-width:1px;}
+            #navigation_com_215 {border-style:solid;}
+            #navigation_com_215 { background-color:#f2f2f2;}
+            #navigation_com_215 {background-image:none;}
+            #navigation_com_215 {background-repeat:repeat;background-position:center;}
+            #navigation_com_215 .skin_model_view a{font-size:14px;}
+            #navigation_com_215 .skin_model_view a{color:#242424;}
+            #navigation_com_215 .skin_model_view a{text-align:center;}
+            #navigation_com_215 .skin_model_view a { background-color:#ffffff;}
+            #navigation_com_215 .skin_model_view a {background-image:url("http://koss.iyong.com/swift/v1/iyong_public/iyong_2631626088743488/image/20180428/1524904418255006648.png");}
+            #navigation_com_215 .skin_model_view a {background-repeat:no-repeat;background-position:right;}
+            #navigation_com_215 .skin_model_view a.on ,#navigation_com_215 .skin_model_view a:hover {color:#ffffff;}
+            #navigation_com_215 .skin_model_view a:hover ,#navigation_com_215 .skin_model_view a.on { background-color:#ffba30;}
+            #navigation_com_215 .skin_model_view a:hover ,#navigation_com_215 .skin_model_view a.on {background-image:url("http://koss.iyong.com/swift/v1/iyong_public/iyong_2631626088743488/image/20180428/1524904367167078969.png");}
+            #navigation_com_215 .skin_model_view a:hover ,#navigation_com_215 .skin_model_view a.on {background-repeat:no-repeat;background-position:right;}
+            #navigation_com_215 .navigationList > li {margin-left:0px;margin-top:5px;margin-right:0px;margin-bottom:0px;}
+            #navigation_com_215 .navigationList > li> a {padding-left:30px;padding-top:5px;padding-right:0px;padding-bottom:5px;}
+            #navigation_com_215 .skin_model_view ul ul {padding-left:0px;padding-top:5px;padding-right:0px;padding-bottom:0px;}
+            #navigation_com_215 .skin_model_view ul ul a {font-size:13px;}
+            #navigation_com_215 .skin_model_view ul ul a {color:#333333;}
+            #navigation_com_215 .skin_model_view ul ul a {text-align:center;}
+            #navigation_com_215 .skin_model_view ul ul a { background-color:#fafafa;}
+            #navigation_com_215 .skin_model_view ul ul a {background-image:url("http://koss.iyong.com/swift/v1/iyong_public/iyong_2631626088743488/image/20180428/1524905253693053889.png");}
+            #navigation_com_215 .skin_model_view ul ul a {background-repeat:no-repeat;background-position:left;}
+            #navigation_com_215 .skin_model_view ul ul a {padding-left:40px;padding-top:5px;padding-right:0px;padding-bottom:5px;}
+            #navigation_com_215 .skin_model_view ul ul a {border-bottom-color:#c7c7c7;}
+            #navigation_com_215 .skin_model_view ul ul a {border-bottom-width:1px;}
+            #navigation_com_215 .skin_model_view ul ul a {border-bottom-style:dotted;}
+            </style></div>
+
+            <div class="skin_model_view">
+
+
+                <ul class="navigationList model1  clearfix" id="navList_com_215">
+                    {pc:content action="category" catid="$CATEGORYS[$CAT[parentid]][catid]" num="25" siteid="$siteid" order="listorder ASC"}
+                    {loop $data $r}
+                    <li class="sec ">
+                        <a href="{$r[url]}" class="{if $r[catid] == $catid}on{else}sp{/if}" ><span>{$r[catname]}</span></a>
+                    </li>
+                    {/loop}
+                    {/pc}
+                </ul>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px;width: 192px;">
+            <a href="/leave-message.html"><img src="/statics/yibo/images/guestbook_before.png" style="width: 100%;"></a>
+        </div>
+        <div style="margin-top: 20px;width: 192px;">
+            <a href="/leave-message.html?type=1"><img src="/statics/yibo/images/guestbook_after.png" style="width: 100%;"></a>
+        </div>
+
+
+    </div>
+</div>

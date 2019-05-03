@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}购物车</title>
+    <link rel="stylesheet" href="/statics/css/main.css">
+    <link rel="stylesheet" href="/statics/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/statics/css/carts.css">
+</head>
+
+<body>
+<div style="background-color:black;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3" style="padding: 15px 18px;">
+                <img src="/statics/images/logo-2.png" class="img-responsive " width="150" height="100" >
+            </div>
+        </div>
+    </div>
+</div>
+<section class="cartMain">
+    <div class="cartMain_hd">
+        <ul class="order_lists cartTop">
+            <li class="list_chk">
+                <!--所有商品全选-->
+                <input type="checkbox" id="all" class="whole_check" checked="">
+                <label for="all"></label>
+                全选
+            </li>
+            <li class="list_con">商品信息</li>
+            <li class="list_info">商品参数</li>
+            <li class="list_price">单价</li>
+            <li class="list_amount">数量</li>
+            <li class="list_sum">金额</li>
+            <li class="list_op">操作</li>
+        </ul>
+    </div>
+
+
+    <div class="cartBox">
+
+        <div class="order_content">
+
+            {loop $cart $key $val}
+            <ul class="order_lists">
+                <li class="list_chk">
+                    <input name="checkname"  type="checkbox" id="checkbox_{$key}" class="son_check" value="{$val[goods_id]}">
+                    <label for="checkbox_{$key}"></label>
+                </li>
+                <li class="list_con">
+                    <div class="list_img"><a href="{APP_PATH}index.php?m=content&c=index&a=show&catid=10&id={$val[goods_id]}"><img src="{$val[thumb]}" alt=""></a></div>
+                    <div class="list_text"><a href="{APP_PATH}index.php?m=content&c=index&a=show&catid=10&id={$val[goods_id]}">{$val[title]}</a></div>
+                </li>
+                <li class="list_info">
+                    <p>{if $val[is_sale] == 'D'}首付{elseif  $val[is_sale]=='A'}全额{else}打折{/if}</p>
+                </li>
+                <li class="list_price">
+                    <p class="price">￥{$val[price]}</p>
+                </li>
+                <li class="list_amount">
+                    <div class="amount_box">
+                        <a href="javascript:action('goodscount_{$val[goods_id]}','aod','{$val[goods_id]}','{$val[is_sale]}')" class="reduce reSty">-</a>
+                        <input id="goodscount_{$val[goods_id]}"  type="text" value="{$val[goods_count]}" class="sum">
+                        <a href="javascript:action('goodscount_{$val[goods_id]}','aod','{$val[goods_id]}','{$val[is_sale]}')" class="plus">+</a>
+                    </div>
+                </li>
+                <li class="list_sum">
+                    <p class="sum_price">￥<?php echo $val[price]*$val[goods_count];?></p>
+                </li>
+                <li class="list_op">
+                    <p class="del"><a href="javascript:;" class="delBtn">移除商品</a></p>
+                </li>
+            </ul>
+            {/loop}
+        </div>
+    </div>
+
+
+    <!--底部-->
+    <div class="bar-wrapper">
+        <div class="bar-right">
+            <div class="piece">已选商品<strong class="piece_num">0</strong>件</div>
+            <div class="totalMoney">共计: <strong class="total_text">0.00</strong></div>
+            <div class="calBtn"><a href="javaScript:void(0);" onclick="jiesuan()">结算</a></div>
+        </div>
+    </div>
+</section>
+<section class="model_bg">
+    <section class="my_model">
+        <p class="title">删除商品<span class="closeModel"><i class="glyphicon glyphicon-remove"></i></span></p>
+        <p>您确认要删除该商品吗？</p>
+        <div class="opBtn"><a href="javascript:action('','delete','{$val[goods_id]}','{$val[is_sale]}')" class="dialog-sure">确定</a><a href="javascript:;" class="dialog-close">关闭</a></div>
+    </section>
+</section>
+<script type="text/javascript" src="/statics/js/jquery.js"></script>
+<script type="text/javascript" src="/statics/js/carts.js"></script>
+<script>
+
+    function action(goodscount_id,stuts,goodsid,issale){
+        if(goodscount_id!='') {
+            var goodscount = document.getElementById(goodscount_id).value;
+        }
+            $.ajax({
+                type: 'POST',
+                url: "/index.php?m=order&c=index&a=action_goods",
+                data:{stuts:stuts,goodsid:goodsid,issale:issale,goodscount:goodscount},
+            success: function (data) {
+                console.log(data);
+            }
+        });
+    }
+    function jiesuan(){
+        //获取选中
+        var checkboxval =[];
+        $("input:checkbox[name=checkname]:checked").each(function(){
+            checkboxval.push($(this).val());
+        })
+        $("input:checkbox[name=checkname]:checked").each(function(){
+            checkboxval.push($(this).val());
+        })
+        $.ajax({
+            type: 'POST',
+            url: "/index.php?m=order&c=index&a=editistrue",
+            data:{checkboxval:checkboxval},
+            success: function (data) {
+                console.log(data);
+              location.href="{APP_PATH}index.php?m=order&c=index&a=order_detail";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
