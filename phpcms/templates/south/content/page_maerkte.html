@@ -1,0 +1,124 @@
+{template "content","top"}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!--10378-->
+            <div id="d3239eb9" class=" slickCarousel">
+                {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+                <div class="sliderBox">
+                    <div class="background-image-holder">
+                        <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
+                    </div>
+                </div>
+                {/loop}
+            </div>
+        </div>
+    </div>
+</div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="breadCrumbMenu">
+                <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+                {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row equalize">
+        <div class="col-sm-8">
+            <div class="well well-lg">
+                <!--10379-->
+                <div class="csc-header csc-header-n1">
+                    {php $arrchildid = explode(',', $CATEGORYS[$catid]['arrchildid']);}
+                    {$CATEGORYS[$arrchildid[1]]['description']}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="well well-lg">
+                <h3>{$catname}</h3>
+                <div class="subNavigation">
+                    <ul class="nav navist">
+                        {pc:content action="category" catid="3" num="20" siteid="$siteid" order="listorder ASC"}
+                        {loop $data $r}
+                        <li class="item"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container contentContainer" role="main">
+    <div class="row">
+        {php $i=0;}
+        {php $new_catid = $catid == 3 ? 4 : $catid;}
+        {loop $CATEGORYS $category}
+        {if $category[catid] != $new_catid and $category[parentid] == 3}
+        <div class="col-md-4 col-sm-6">
+            <div class="well well-lg">
+                <div class="csc-header csc-header-n1">
+                    <h3 class="csc-firstHeader"><a href="{$category[url]}">{$category[catname]}</a></h3></div>
+                <div class="csc-textpic-text">
+                    <p> {strip_tags($category[description])} &nbsp; </p>
+                    <p><a href="{$category[url]}" class="internal-link">阅读更多… </a></p>
+                </div>
+            </div>
+        </div>
+        {php $i++;}
+        {if $i == 3}
+    </div><div class="row">
+        {/if}
+        {if $i == 5}
+        <div class="col-md-4 col-sm-6">
+        </div>
+    </div>
+        {/if}
+        {/if}
+        {/loop}
+    <!--8471-->
+    <div class="row">
+        <div class="col-md-4 col-sm-6">
+            <div class="well well-lg">
+                <!--8472-->
+                <div class="csc-header csc-header-n1">
+                    <h3 class="csc-firstHeader"><a href="../../downloads/index.html">案例研究</a></h3></div>
+                <div class="csc-textpic-text">
+                    <p> EAO生产的人机界面组件在世界各地得到应用，受到客户和最终用户的一致好评。 &nbsp;
+                    </p>
+                    <p><a href="../../downloads/index.html" title="Opens internal link in current window" class="internal-link">阅读更多…&nbsp; </a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="well well-lg">
+                <!--8473-->
+                <div class="csc-header csc-header-n1">
+                    <h3 class="csc-firstHeader"><a href="../../downloads/index.html">下载 </a></h3></div>
+                <div class="csc-textpic-text">
+                    <p> 有关EAO的最新下载和其他信息。 &nbsp;
+                    </p>
+                    <p><a href="../../downloads/index.html" title="Opens internal link in current window" class="internal-link">阅读更多… </a></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="well well-lg">
+                <!--8474-->
+                <div class="csc-header csc-header-n1">
+                    <h3 class="csc-firstHeader"><a href="../../kontakt/index.html">联系人</a></h3></div>
+                <div class="csc-textpic-text">
+                    <p> 紧密的客户关系和完善的服务是我们企业政策的核心原则。 &nbsp;
+                    </p>
+                    <p><a href="../../kontakt/index.html" title="Opens internal link in current window" class="internal-link">阅读更多… </a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--TYPO3SEARCH_end-->
+{template "content","footer"}

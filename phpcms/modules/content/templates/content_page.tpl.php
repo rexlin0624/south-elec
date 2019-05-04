@@ -52,6 +52,12 @@ function closeParent() {
 <textarea name="info[content]" id="content"><?php echo $content?></textarea>
 <?php echo form::editor('content','full','','','',1,1)?>
 </td></tr>
+    <tr>
+        <th width="80"> 描述	  </th>
+        <td>
+            <textarea name="info[description]" id="description"><?php echo $description?></textarea>
+            <?php echo form::editor('description','full','','','',1,1)?>
+        </td></tr>
 </table>
 </div>
 <div class="bk10"></div>

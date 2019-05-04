@@ -31,63 +31,20 @@
 			<div class="navbar-collapse collapse navbar-left" id="bs-example-navbar-collapse-1">
 				<nav role="navigation">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a href="home/index.html">Home</a></li>
-						<li class="dropdown"><a href="maerkte/index.html" class="dropdown-toggle">Markets</a>
+						<li><a href="{siteurl($siteid)}/">首页</a></li>
+						{pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
+						{loop $data $r}
+						<li class="dropdown"><a href="{$r[url]}" class="dropdown-toggle">{$r[catname]}</a>
 							<ul class="nav dropdown-menu">
-								<li class="dropdown"><a href="maerkte/transportation/index.html" class="dropdown-toggle">Transportation</a></li>
-								<li class="dropdown"><a href="maerkte/automotive/index.html" class="dropdown-toggle">Automotive</a></li>
-								<li class="dropdown"><a href="maerkte/machinery/index.html" class="dropdown-toggle">Machinery</a></li>
-								<li class="dropdown"><a href="maerkte/heavy-duty-special-vehicles/index.html" class="dropdown-toggle">Heavy Duty & Special Vehicles</a></li>
-								<li><a href="maerkte/weitere-maerkte/index.html">More markets</a></li>
+								{pc:content action="category" catid="$r[catid]" num="20" siteid="$siteid" order="listorder ASC" return="data2"}
+								{loop $data2 $r2}
+								<li class="dropdown"><a href="{$r2[url]}" class="dropdown-toggle">{$r2[catname]}</a></li>
+								{/loop}
+								{/pc}
 							</ul>
 						</li>
-						<li class="dropdown"><a href="produkte-loesungen/index.html" class="dropdown-toggle">Products  and solutions</a>
-							<ul class="nav dropdown-menu">
-								<li class="dropdown"><a href="produkte-loesungen/hmi-komponenten/index.html" class="dropdown-toggle">HMI Components</a></li>
-								<li class="dropdown"><a href="produkte-loesungen/hmi-systeme/index.html" class="dropdown-toggle">HMI Systems</a></li>
-								<li class="dropdown"><a href="produkte-loesungen/hmi-automotive/index.html" class="dropdown-toggle">EAO Automotive</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="kompetenzen/index.html" class="dropdown-toggle">Production expertise</a>
-							<ul class="nav dropdown-menu">
-								<li><a href="kompetenzen/research-development/index.html">Research and development</a></li>
-								<li><a href="kompetenzen/swiss-touch/index.html">Quality</a></li>
-								<li><a href="kompetenzen/value-added-services/index.html">Value Added Services</a></li>
-								<li><a href="kompetenzen/zertifikate-zulassungen/index.html">Certificates and approvals</a></li>
-								<li><a href="production-expertise/production-and-supply-chain/index.html">Production and supply chain</a></li>
-								<li><a href="kompetenzen/preise-und-auszeichnungen/index.html">Awards and recognition</a></li>
-								<li><a href="kompetenzen/referenzen/index.html">References</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="news-downloads/index.html" class="dropdown-toggle">News and downloads</a>
-							<ul class="nav dropdown-menu">
-								<li><a href="news-downloads/aktuelle-news/index.html">News and press releases</a></li>
-								<li><a href="news-downloads/messen-und-ausstellungen/index.html">Trade fairs and exhibitons</a></li>
-								<li><a href="downloads/index.html">Downloads</a></li>
-								<li><a href="news-downloads/pressekontakt/index.html">Press enquiries</a></li>
-								<li><a href="news-downloads/bildmaterial/index.html">Images</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="ueber-eao/index.html" class="dropdown-toggle">About EAO</a>
-							<ul class="nav dropdown-menu">
-								<li><a href="ueber-eao/das-unternehmen/index.html">The company</a></li>
-								<li><a href="about-eao/manufacturing-companies/index.html">Manufacturing companies</a></li>
-								<li><a href="ueber-eao/the-human-touch/index.html">The Human Touch ®</a></li>
-								<li><a href="ueber-eao/swiss-touch/index.html">Swiss Touch ®</a></li>
-								<li><a href="ueber-eao/green-touch/index.html">Green Touch</a></li>
-								<li><a href="ueber-eao/eao-weltweit/index.html">EAO Group</a></li>
-								<li><a href="ueber-eao/jobs-karriere/index.html">Jobs</a></li>
-							</ul>
-						</li>
-						<li class="dropdown"><a href="kontakt/index.html" class="dropdown-toggle">Contact us</a>
-							<ul class="nav dropdown-menu">
-								<li><a href="ueber-eao/eao-weltweit/index.html">EAO worldwide</a></li>
-								<li><a href="contact-us/contact-form/index.html">Contact form</a></li>
-								<li><a href="news-downloads/pressekontakt/index.html">Press inquiries</a></li>
-								<li><a href="ueber-eao/jobs-karriere/index.html">Jobs & Career</a></li>
-								<li><a href="kontakt/e-newsletter/index.html">E-newletter</a></li>
-							</ul>
-						</li>
+						{/loop}
+						{/pc}
 					</ul>
 				</nav>
 			</div>

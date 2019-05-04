@@ -25,6 +25,7 @@
       'list_maerkte.html' => '核心市场列表页',
       'message.html' => '消息提示页',
       'page.html' => '单网页',
+      'page_maerkte.html' => '核心市场单网页',
       'rss.html' => 'RSS页',
       'search.html' => '搜索',
       'show.html' => '文章内容页',
