@@ -4,6 +4,7 @@ defined('IN_PHPCMS') or exit('No permission resources.');
 define('CACHE_MODEL_PATH',CACHE_PATH.'caches_model'.DIRECTORY_SEPARATOR.'caches_data'.DIRECTORY_SEPARATOR);
 pc_base::load_app_func('util','content');
 pc_base::load_app_func('global');
+pc_base::load_sys_class('form', '', '');
 class index {
 	private $db;
     private $sms_sign;
@@ -250,13 +251,6 @@ class index {
 		$_userid = $this->_userid;
 		$_username = $this->_username;
 		$_groupid = $this->_groupid;
-
-		if ($catid == 9) {
-		    $sql = 'SELECT * FROM lldz_category_ext WHERE catid = ' . $catid;
-		    $this->db->query($sql);
-            $ext_data = $this->db->fetch_array();
-            $ext_data = $ext_data[0];
-        }
 
 		if(!$catid) showmessage(L('category_not_exists'),'blank');
 		$siteids = getcache('category_content','commons');

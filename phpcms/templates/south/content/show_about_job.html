@@ -32,13 +32,18 @@
             <div class="well well-lg">
                 <!--10379-->
                 <div class="csc-header csc-header-n1">
+                    {$description}
+                    <br /><br />
+                    <h1>{$title}</h1>
+                    <h3>{$title_en}</h3>
+                    <br /><br />
                     {$content}
                 </div>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="well well-lg">
-                <h3>{$catname}</h3>
+                <h3>{$title}</h3>
                 <div class="subNavigation">
                     <ul class="nav navist">
                         {pc:content action="category" catid="$CATEGORYS[$catid][parentid]" num="20" siteid="$siteid" order="listorder ASC"}
@@ -52,20 +57,4 @@
         </div>
     </div>
 </div>
-{php if ($description || $general_view) {}
-<div class="container contentContainer" role="main">
-    <div class="row">
-        <div class="col-md-8 ">
-            <div class="well well-lg same-height-left" style="height: 271px;">
-                {$description}
-            </div>
-        </div>
-        <div class="col-md-4 ">
-            <div class="well same-height-right" style="height: 522px;">
-                {$general_view}
-            </div>
-        </div>
-    </div>
-</div>
-{php }}
 {template "content","footer"}

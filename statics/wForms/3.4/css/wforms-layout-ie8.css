@@ -1,0 +1,21 @@
+/*
+ wFORMS 3.0 Stylesheet - Minimal Stylesheet
+ See http://www.formassembly.com/wForms
+
+ To be used along with wforms-jsonly.css
+ This stylesheet and the associated images are Copyright (c) 2007 Veer West LLC (http://www.veerwest.com)	
+ and licensed under the Creative Commons Attribution-ShareAlike License (http://creativecommons.org/licenses/by-sa/2.0/) 
+*/
+ 
+/* IE8 BUG FIXES ==================================================================== */
+
+.wForm form .oneChoice label {
+	vertical-align: baseline;	/* text-top doesn't work well in IE8 */
+}
+
+/* workaround for what is otherwise label { vertical-align: text-top } */
+.wForm form .oneChoice input[type="radio"],
+.wForm form .oneChoice input[type="checkbox"]  {
+	vertical-align: top;		
+	margin-top:0.4em;			
+}

@@ -100,7 +100,42 @@ include $this->admin_tpl('header');?>
             </script>
 		</td>
       </tr>
-
+    <?php if ($catid == 62) { ?>
+        <tr>
+            <th>主动申请：</th>
+            <td>
+                <script type="text/javascript" src="/statics/js/ckeditor/ckeditor.js"></script>
+                <textarea name="info[approve]" cols="50" rows="8" id="approve"></textarea>
+                <script type="text/javascript">
+                    CKEDITOR.replace( 'approve',{height:200,width:600,pages:false,subtitle:false,textareaid:'content',module:'',catid:'',
+                        flashupload:true,alowuploadexts:'',allowbrowser:'1',allowuploadnum:'10',authkey:'c8e07e653e467f2f1b2058ee44db799c',
+                        filebrowserUploadUrl : '/index.php?m=attachment&c=attachments&a=upload&module=&catid=&dosubmit=1',
+                        toolbar :
+                            [
+                                ['Source'],['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],['Maximize'],    //这是工具列表
+                            ]
+                    });
+                </script>
+            </td>
+        </tr>
+        <tr>
+            <th>训练成为专家：</th>
+            <td>
+                <script type="text/javascript" src="/statics/js/ckeditor/ckeditor.js"></script>
+                <textarea name="info[expert]" cols="50" rows="8" id="expert"></textarea>
+                <script type="text/javascript">
+                    CKEDITOR.replace( 'expert',{height:200,width:600,pages:false,subtitle:false,textareaid:'content',module:'',catid:'',
+                        flashupload:true,alowuploadexts:'',allowbrowser:'1',allowuploadnum:'10',authkey:'c8e07e653e467f2f1b2058ee44db799c',
+                        filebrowserUploadUrl : '/index.php?m=attachment&c=attachments&a=upload&module=&catid=&dosubmit=1',
+                        toolbar :
+                            [
+                                ['Source'],['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],['Maximize'],    //这是工具列表
+                            ]
+                    });
+                </script>
+            </td>
+        </tr>
+    <?php } ?>
 	 <tr>
       <th><?php echo L('workflow');?>：</th>
       <td>

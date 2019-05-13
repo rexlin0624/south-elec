@@ -1,0 +1,298 @@
+{template "content","top"}
+{php $type = isset($_GET['type']) ? (int)$_GET['type'] : 0}
+<div class="content-layout form-horizontal" id="design" lab="0" initlab="0">
+	<div class="design group draggable_area design_main" id="web_design_main">
+		<div id="public_set">
+			<div class="modulebox box_webset" id="com_9"></div>
+		</div>
+		<div id="page_set">
+			<div class="hide"></div>
+		</div>
+		<div id="member_lan">
+			<div class="modulebox box_member" id="com_7">
+				<style>#com_7{z-index: 1;}
+				#member_com_7{}
+				</style>
+			</div>
+		</div>
+		{template "content","header"}
+		<div id="Web_Main_Head">
+			<div id="web_top_float" class="web_hide_float" style=""></div>
+		</div>
+		<div id="design_edu_main" class="group web_Column">
+			<div id="box_web_float" class="group box_web_main"></div>
+			<div class="modulebox box_banner" id="com_176">
+				<div class="view" id="banner_com_176" style="height: 421px;" data-bwidth="1903" data-bheight="421">
+					<div class="style_view" id="style_view_com_176">
+						<style> </style>
+					</div>
+					{pc:get sql="select image from yibo_category where catid=72" cache="3600" page="$page" return="data_ext"}
+					{loop $data_ext $key $val}
+					<a class="bannerDiv " style="background-image: url('{$val[image]}');" href="javascript:void(0)" target=""></a>
+					{/loop}
+					{/pc}
+				</div>
+				<style id="com_176_style">#com_176.modulebox{z-index: 1; position: relative; height: 421px;}#banner_com_176{height: 421px;}</style>
+			</div>
+			<div class="modulebox box_freeColumn box_web_main" id="com_277">
+				<div class="view clearfix" id="freeColumn_com_277" style="min-height: 509px;" data-bwidth="1200" data-bheight="509">
+					<div class="style_view" id="style_view_com_277">
+						<style>#freeColumn_com_277 {margin-left:0px;margin-top:45px;margin-right:0px;margin-bottom:0px;}
+						</style>
+					</div>
+					<div class="kenfor-column hasSub has_size_com_277 free_sort skin_model_view" style="min-height: 509px;">
+						<div class="modulebox box_moreColumn box_web_main" id="com_278">
+							<div class="view" id="moreColumn_com_278" style="min-height: 398px;" data-bwidth="1200" data-bheight="398">
+								<div class="style_view" id="style_view_com_278">
+									<style> </style>
+								</div>
+								<div class="container-fluid no-padding clearfix has_size_com_278" style="min-height: 398px;">
+									<table style="width:100%" border="0" cellpadding="0" cellspacing="0" class="moreColumn_tab">
+										<tbody>
+										<tr>
+											<td class="moreColumnTxt normal_padding  ui-resizable ui-resizable-autohide" style="width: 226px;" width="226">
+												<div class="no-padding kenfor-column hasSub has_size_com_278" style="min-height: 398px;">
+													<div class="modulebox box_title_v1 box_web_main" id="com_279">
+														<div class="view" id="title_com_279" data-bwidth="191" data-bheight="70">
+															<!-- 装载编辑样式里面的样式 -->
+															<div class="style_view" id="style_view_com_279">
+																<style>#title_com_279 .title_wrap {background-color:rgba(0,66,153,1);}
+																#title_com_279 .title_wrap {background-repeat:repeat;background-position:center;}
+																#title_com_279 .title_wrap {padding-left:20px;padding-top:10px;padding-right:0px;padding-bottom:10px;}
+																#title_com_279 .mainTitleCls {font-size:22px;}
+																#title_com_279 .mainTitleCls {font-weight:bold;}
+																#title_com_279 .mainTitleCls {color:#ffffff;}
+																#title_com_279 .mainTitleCls {padding-left:10px;padding-right:10px;}
+																</style>
+															</div>
+															<div class="title_wrap title_type_007">
+																<div class="title_wrap_inner " style="">
+																	<h4 class="title_h4 mainTitleCls" style="">联系我们 </h4>
+																	<h5 class="title_h5 subTitleCls"></h5>
+																	<span class="title_icon icon_bg"> <i class=""></i> </span>
+																	<span class="title_line line_bg"></span>
+																</div>
+															</div>
+														</div>
+														<script>
+                                                            // 针对第二种图标居中
+
+														</script>
+														<style id="com_279_style">#com_279{z-index: 1;}</style>
+													</div>
+													<div class="modulebox box_navigation box_web_main" id="com_280">
+														<style>#com_280{z-index: 10; position: relative; min-height: 117px;}
+														#navigation_com_280{min-height: 117px;}
+														</style>
+														<div class="view" id="navigation_com_280">
+															<div class="style_view"><style>#navigation_com_280 {border-color:#e8e8e8;}
+															#navigation_com_280 {border-width:1px;}
+															#navigation_com_280 {border-style:solid;}
+															#navigation_com_280 { background-color:#f2f2f2;}
+															#navigation_com_280 {background-image:none;}
+															#navigation_com_280 {background-repeat:repeat;background-position:center;}
+															#navigation_com_280 .skin_model_view a {font-size:14px;}
+															#navigation_com_280 .skin_model_view a {color:#242424;}
+															#navigation_com_280 .skin_model_view a {text-align:center;}
+															#navigation_com_280 .skin_model_view a { background-color:#ffffff;}
+															#navigation_com_280 .skin_model_view a {background-image:url("http://koss.iyong.com/swift/v1/iyong_public/iyong_2631626088743488/image/20180428/1524904418255006648.png");}
+															#navigation_com_280 .skin_model_view a {background-repeat:no-repeat;background-position:right;}
+															#navigation_com_280 .skin_model_view a.on ,#navigation_com_280 .skin_model_view a:hover {color:#ffffff;}
+															#navigation_com_280 .skin_model_view a:hover ,#navigation_com_280 .skin_model_view a.on { background-color:#ffba30;}
+															#navigation_com_280 .skin_model_view a:hover ,#navigation_com_280 .skin_model_view a.on {background-image:url("http://koss.iyong.com/swift/v1/iyong_public/iyong_2631626088743488/image/20180428/1524904367167078969.png");}
+															#navigation_com_280 .skin_model_view a:hover ,#navigation_com_280 .skin_model_view a.on {background-repeat:no-repeat;background-position:right;}
+															#navigation_com_280 .navigationList > li {margin-left:0px;margin-top:5px;margin-right:0px;margin-bottom:0px;}
+															#navigation_com_280 .navigationList > li> a {padding-left:30px;padding-top:5px;padding-right:0px;padding-bottom:5px;}
+															#navigation_com_280 .skin_model_view ul ul {padding-left:0px;padding-top:5px;padding-right:0px;padding-bottom:0px;}
+															#navigation_com_280 .skin_model_view ul ul a {font-size:13px;}
+															#navigation_com_280 .skin_model_view ul ul a {color:#333333;}
+															#navigation_com_280 .skin_model_view ul ul a {text-align:center;}
+															#navigation_com_280 .skin_model_view ul ul a { background-color:#fafafa;}
+															#navigation_com_280 .skin_model_view ul ul a {background-image:url("http://koss.iyong.com/swift/v1/iyong_public/iyong_2631626088743488/image/20180428/1524905253693053889.png");}
+															#navigation_com_280 .skin_model_view ul ul a {background-repeat:no-repeat;background-position:left;}
+															#navigation_com_280 .skin_model_view ul ul a {padding-left:40px;padding-top:5px;padding-right:0px;padding-bottom:5px;}
+															#navigation_com_280 .skin_model_view ul ul a {border-bottom-color:#c7c7c7;}
+															#navigation_com_280 .skin_model_view ul ul a {border-bottom-width:1px;}
+															#navigation_com_280 .skin_model_view ul ul a {border-bottom-style:dotted;}
+															</style></div>
+
+															<div class="skin_model_view">
+
+
+																<ul class="navigationList model1  clearfix" id="navList_com_280">
+																	{pc:content action="category" catid="72" num="25" siteid="$siteid" order="listorder ASC"}
+																	{loop $data $r}
+																	<li class="sec ">
+																		<a href="{$r[url]}" class="{if $r[catid] == 73}on{else}sp{/if}" ><span>{$r[catname]}</span></a>
+																	</li>
+																	{/loop}
+																	{/pc}
+																</ul>
+																<script>
+                                                                    require(["jquery"],function($){
+                                                                        var dom=$("#navList_com_280");
+                                                                        var temp=0;
+                                                                        if("1"=="2") {
+                                                                            dom.find("li").hover(function () {
+                                                                                $(this).children('ul').stop(true, true).show("fast");
+                                                                            }, function () {
+                                                                                $(this).children('ul').stop(true, true).hide("fast");
+                                                                            });
+                                                                        }
+                                                                        else{
+                                                                            if("1"=="1") {
+                                                                                if("1"==1 && "0"==1){
+                                                                                    dom.find("ul").show();
+                                                                                    dom.find("a.sp").addClass('navOpen');
+                                                                                }
+                                                                                else{
+                                                                                    dom.find("ul").hide();
+                                                                                    dom.find("a.sp").removeClass('navOpen');
+                                                                                }
+                                                                                if(dom.find("a").hasClass("on")){
+                                                                                    temp=1;
+                                                                                }
+                                                                                if(temp==1){
+                                                                                    $.each(dom.find("a"), function(i, item) {
+                                                                                        if($(item).hasClass("on")){
+                                                                                            $(item).addClass('navOpen');
+                                                                                            if($(item).parents("li.sec").children("ul")){
+                                                                                                $(item).parents("li.sec").children("ul").show();
+                                                                                            }
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                                dom.find("a.sp").click(function () {
+                                                                                    if ($(this).hasClass('navOpen')) {
+                                                                                        $(this).parent("li").children("ul").slideUp("fast");
+                                                                                        $(this).removeClass('navOpen');
+                                                                                    } else {
+                                                                                        $(this).parent("li").children("ul").slideDown("fast");
+                                                                                        $(this).addClass('navOpen');
+                                                                                    }
+                                                                                })
+                                                                            }
+                                                                        }
+                                                                    })
+
+																</script>
+															</div>
+														</div>
+
+
+													</div>
+												</div> </td>
+											<td class="moreColumnTxt" style="">
+												<div class="no-padding kenfor-column hasSub has_size_com_278" style="min-height: 398px;">
+													<div class="modulebox box_location box_web_main" id="com_281">
+														<style>#com_281{position: relative; min-height: 47px; z-index: 1;}
+														#location_com_281{min-height: 47px;}
+														</style>
+														<div class="view" id="location_com_281">
+															<div class="style_view"><style>#location_com_281 .skin_model_view .location_title_left {font-size:16px;}
+															#location_com_281 .skin_model_view .location_title_left {color:#00449e;}
+															#location_com_281 .skin_model_view .location_title_left {font-weight:bold;}
+															#location_com_281 .skin_model_view {border-bottom-color:#bdbdbd;}
+															#location_com_281 .skin_model_view {border-bottom-width:1px;}
+															#location_com_281 .skin_model_view {border-bottom-style:solid;}
+															</style></div>
+															<div class="skin_model_view">
+																<div class="location_title clear_float">
+																	<div class="location_style1">    <div class="location_title_left" style="text-align:left">在线留言</div>
+																		<div class="location_title_right" style="text-align:left">
+																			<a href="/" class="langText" data-lang="location_indexTxt">首页</a><span>></span>
+																			<a href="page-id=47.html">联系我们</a>
+																			<span>></span><a href="page-id=48.html">{$name}</a>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+													</div>
+													<div class="modulebox box_msgSubmit box_web_main" id="com_283">
+														<div class="view" id="msgSubmit_com_283" data-bwidth="914" data-bheight="0">
+															<div class="style_view" id="style_view_com_283">
+																<style>#msgSubmit_com_283 {margin-left:30px;margin-top:10px;margin-right:30px;margin-bottom:0px;}
+																#msgSubmit_com_283 .msgSubmitBox .botton a { background-color:#666666;}
+																#msgSubmit_com_283 .msgSubmitBox .botton a {background-image:none;}
+																#msgSubmit_com_283 .msgSubmitBox .botton a {background-repeat:repeat;background-position:center;}
+																</style>
+															</div>
+															<div class="msgSubmitBox clearfix skin_model_view">
+																<!--表单项-->
+																<form method="post" action="?m=formguide&c=index&a=show&formid={$formid}&siteid=<?php echo $this->siteid;?>" name="myform" id="myform">
+																	{loop $forminfos_data $field $info}
+																	{if $info['formtype']=='omnipotent'}
+																		{loop $forminfos_data $_fm $_fm_value}
+																			{if $_fm_value['iscomnipotent']}
+																				{php $info['form'] = str_replace('{'.$_fm.'}',$_fm_value['form'],$info['form']);}
+																			{/if}
+																		{/loop}
+																	{/if}
+																	<ul class="list input">
+																		<li>
+																			<span style="display: inline-block;width: 60px;">{$info['name']}：</span>{$info['form']} {if $info['star']}<i class="msgSubSign">*</i>{/if}
+																		</li>
+																	</ul>
+																	{/loop}
+																	<p class="submit-tips text-danger" style="color: red; display: none;"></p>
+																	<div class="botton">
+																		<a onclick="submitForm('com_283')" id="submitMsg_com_283">提交</a>
+																	</div>
+																</form><br />
+																<!--显示留言列表-->
+															</div>
+														</div>
+														<script>
+                                                            /*加载样式*/
+                                                            var mdId="com_283";
+
+                                                            webUtil.msgSubmit(mdId);
+                                                            /*留言列表和表单项交换位置*/
+                                                            if("0" == "1") {
+                                                                var cloneForm = $("#form_submitcom_283").clone(true);
+                                                                $("#form_submitcom_283").remove();
+                                                                $("#msgSubmit_com_283 .msgSubmitBox").append(cloneForm);
+                                                            }
+														</script>
+														<style id="com_283_style">#com_283{z-index: 1;}</style>
+													</div>
+												</div> </td>
+										</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<style>#moreColumn_com_278 .normal_padding{padding-right:35px;}
+
+							#moreColumn_com_278 .ui-resizable-e {width: 35px;}
+							</style>
+							<script>
+                                var mdId = "com_278";
+                                var temp = "moreColumn";
+                                var colWidth = "35";
+                                webUtil.setMoreColumn(mdId,temp,colWidth);
+							</script>
+							<style id="com_278_style">#com_278{position: relative; z-index: 1; min-height: 398px;}#moreColumn_com_278{min-height: 398px;}</style>
+						</div>
+					</div>
+				</div>
+				<style id="com_277_style">#com_277{position: relative; z-index: 1; min-height: 554px;}</style>
+			</div>
+		</div>
+		{template "content","footer"}
+	</div>
+	<div style="position: absolute; opacity: 0.2; z-index: 499; display: none; width: 158px; height: 301px; left: 943px; top: 398px;"></div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+$(document).ready(function () {
+	var type = {$type};
+	if (type == 1) {
+        $('#ly_type').val('售后咨询');
+	}
+});
+</script>

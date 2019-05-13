@@ -1,6 +1,8 @@
 <?php
 defined('IN_PHPCMS') or exit('No permission resources.');
 define('CACHE_MODEL_PATH',PHPCMS_PATH.'caches'.DIRECTORY_SEPARATOR.'caches_model'.DIRECTORY_SEPARATOR.'caches_data'.DIRECTORY_SEPARATOR);
+$session_storage = 'session_'.pc_base::load_config('system','session_storage');
+pc_base::load_sys_class($session_storage);
 
 class index {
 	private $db, $m_db, $M;
@@ -49,8 +51,16 @@ class index {
 		$userid = param::get_cookie('_userid');
 		if ($setting['allowunreg']==0 && !$userid && $_GET['action']!='js') showmessage(L('please_login_in'), APP_PATH.'index.php?m=member&c=index&a=login&forward='.urlencode(HTTP_REFERER));
 		if (isset($_POST['dosubmit'])) {
-			$tablename = 'form_'.$r['tablename'];
-			$this->m_db->change_table($tablename);
+            $tablename = 'form_' . $r['tablename'];
+            $this->m_db->change_table($tablename);
+
+            // 判断验证码
+            if (!empty($_SESSION['code'])) {
+                $code = isset($_POST['captcha']) && trim($_POST['captcha']) ? trim($_POST['captcha']) : showmessage(L('input_code'), HTTP_REFERER);
+                if ($_SESSION['code'] != strtolower($code)) {
+                    showmessage(L('code_error'), HTTP_REFERER);
+                }
+            }
 
 			$data = array();
 			require CACHE_MODEL_PATH.'formguide_input.class.php';

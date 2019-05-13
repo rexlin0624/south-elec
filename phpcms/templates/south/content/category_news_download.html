@@ -30,9 +30,8 @@
     <div class="row equalize">
         <div class="col-sm-8">
             <div class="well well-lg">
-                <!--10379-->
                 <div class="csc-header csc-header-n1">
-                    {$content}
+                    {$CATEGORYS[$catid]['description']}
                 </div>
             </div>
         </div>
@@ -41,9 +40,9 @@
                 <h3>{$catname}</h3>
                 <div class="subNavigation">
                     <ul class="nav navist">
-                        {pc:content action="category" catid="$CATEGORYS[$catid][parentid]" num="20" siteid="$siteid" order="listorder ASC"}
+                        {pc:content action="category" catid="$catid" num="20" siteid="$siteid" order="listorder ASC"}
                         {loop $data $r}
-                        <li class="item{if $r[catid] == $catid} current{/if}"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
+                        <li class="item"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
                         {/loop}
                         {/pc}
                     </ul>
@@ -52,20 +51,23 @@
         </div>
     </div>
 </div>
-{php if ($description || $general_view) {}
 <div class="container contentContainer" role="main">
     <div class="row">
-        <div class="col-md-8 ">
-            <div class="well well-lg same-height-left" style="height: 271px;">
-                {$description}
+        {loop $CATEGORYS $category}
+        {if $category[parentid] == 48}
+        <div class="col-md-4 col-sm-6">
+            <div class="well well-lg">
+                <div class="csc-header csc-header-n1">
+                    <h3 class="csc-firstHeader"><a href="{$category[url]}">{$category[catname]}</a></h3></div>
+                <div class="csc-textpic-text">
+                    <p> {strip_tags($category[description])} &nbsp; </p>
+                    <p><a href="{$category[url]}" class="internal-link">阅读更多… </a></p>
+                </div>
             </div>
         </div>
-        <div class="col-md-4 ">
-            <div class="well same-height-right" style="height: 522px;">
-                {$general_view}
-            </div>
-        </div>
+        {/if}
+        {/loop}
     </div>
 </div>
-{php }}
+<!--TYPO3SEARCH_end-->
 {template "content","footer"}

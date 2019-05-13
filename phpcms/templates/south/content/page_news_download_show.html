@@ -1,4 +1,3 @@
-{template "content","top"}
 <div class="container">
     <div class="row">
         <div class="col-xs-12">
@@ -52,20 +51,34 @@
         </div>
     </div>
 </div>
-{php if ($description || $general_view) {}
+{if $description}
 <div class="container contentContainer" role="main">
     <div class="row">
+        {if $catid == 64}
+        <div class="col-md-12">
+            <div class="well well-lg same-height-left">
+                {$description}
+            </div>
+        </div>
+        {else}
         <div class="col-md-8 ">
             <div class="well well-lg same-height-left" style="height: 271px;">
                 {$description}
             </div>
         </div>
         <div class="col-md-4 ">
-            <div class="well same-height-right" style="height: 522px;">
-                {$general_view}
+            {if $catid == 66}
+            <div class="well well-lg" style="height: 271px;">
+                <div class="csc-textpic csc-textpic-center csc-textpic-above">
+                    {$moreinfo}
+                </div>
             </div>
+            {else}
+            {template "content","product_solution"}
+            {/if}
         </div>
+        {/if}
     </div>
+
 </div>
-{php }}
-{template "content","footer"}
+{/if}
