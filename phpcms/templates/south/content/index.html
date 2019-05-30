@@ -4,46 +4,19 @@
             <div class="col-xs-12">
                 <!--1648-->
                 <div id="df43c04a" class=" slickCarousel">
+                    {pc:link  action="type_list" typeid="77" siteid="$siteid" linktype="1" order="listorder DESC" num="10" return="pic_link"}
+                    {loop $pic_link $v}
                     <div class="sliderBox">
                         <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/8/4/csm_eao_series-84_e-stop_and_stop_switches_1280x470_EN_9f432e4ca4.jpg" width="1260" height="463" alt="" />
+                            {if $v[url]}
+                            <a href="{$v['url']}"><img src="{$v['logo']}" width="1260" height="463" alt="" /></a>
+                            {else}
+                            <img src="{$v['logo']}" width="1260" height="463" alt="" />
+                            {/if}
                         </div>
                     </div>
-                    <div class="sliderBox">
-                        <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/a/8/csm_0-1-1_EAO_Application_Machinery_1280x470_EN_d1cd21580a.jpg" width="1260" height="463" alt="" />
-                        </div>
-                    </div>
-                    <div class="sliderBox">
-                        <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/d/8/csm_2-0-1_EAO_Banner_Produkte_1280x470_EN_e0347b837b.png" width="1260" height="463" alt="" />
-                        </div>
-                    </div>
-                    <div class="sliderBox">
-                        <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/8/1/csm_2-0-2_EAO_Banner_Produkte_1280x470_EN_531b96c83f.png" width="1260" height="463" alt="" />
-                        </div>
-                    </div>
-                    <div class="sliderBox">
-                        <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/7/7/csm_2-2-4_EAO_Banner_ProsDesign_1280x470_EN-01_be2ff8c969.png" width="1260" height="463" alt="" />
-                        </div>
-                    </div>
-                    <div class="sliderBox">
-                        <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/1/e/csm_2-3_EAO_Banner_HMIA_1280x470_EN-01_6ca7a8a784.png" width="1260" height="463" alt="" />
-                        </div>
-                    </div>
-                    <div class="sliderBox">
-                        <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/a/2/csm_3-3_EAO_Banner_VAS_1280x470_EN-01_e4635adc4c.png" width="1260" height="463" alt="" />
-                        </div>
-                    </div>
-                    <div class="sliderBox">
-                        <div class="background-image-holder">
-                            <img src="/statics/fileadmin/_processed_/0/4/csm_5-1_EAO_Banner_About_1280x470_EN_b0125b40ea.png" width="1260" height="463" alt="" />
-                        </div>
-                    </div>
+                    {/loop}
+                    {/pc}
                 </div>
             </div>
         </div>
@@ -57,91 +30,6 @@
     </div>
     <!--TYPO3SEARCH_begin-->
     <div class="container">
-        <!-- Modal -->
-        <div class="modal fade" id="countryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4>
-                            EAO – Your Expert Partner for Human Machine Interfaces
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <div class="pull-left countryModalLabel">
-                                    <p style="font-size: 18px;">
-                                        Choose your country
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-sm-7">
-                                <form action="javascript:void();" class="form-inline pull-right" role="form">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="form-group">
-                                                <select id="landesauswahl" class="form-control">
-                                                    <option name="international" data-country=""><a href="countries/verkaufsgesellschaften/international/index.html">International</a></option>
-                                                    <option class="" disabled>–––</option>
-                                                    <option name="austria" data-country="AT"><a href="austria/en/index.html">Austria</a></option>
-                                                    <option name="belgium" data-country="BE"><a href="belgium/en/index.html">Belgium</a></option>
-                                                    <option name="china" data-country="CN"><a href="china/en/index.html">China</a></option>
-                                                    <option name="denmark" data-country="NO"><a href="denmark/en/index.html">Denmark</a></option>
-                                                    <option name="germany" data-country="DE"><a href="germany/en/index.html">Germany</a></option>
-                                                    <option name="sweden" data-country="FI"><a href="finland/en/index.html">Finland</a></option>
-                                                    <option name="france" data-country="FR"><a href="france/en/index.html">France</a></option>
-                                                    <option name="hongkong" data-country="CN HK"><a href="hongkong/en/index.html">Hong Kong (Asia Pacific)</a></option>
-                                                    <option name="ir" data-country="IR"><a href="ireland/en/index.html">Ireland</a></option>
-                                                    <option name="italy" data-country="IT"><a href="italy/en/index.html">Italy</a></option>
-                                                    <option name="japan" data-country="JP"><a href="japan/en/index.html">Japan</a></option>
-                                                    <option name="luxembourg" data-country="LU"><a href="luxembourg/en/index.html">Luxembourg</a></option>
-                                                    <option name="netherlands" data-country="NL"><a href="netherlands/en/index.html">Netherlands</a></option>
-                                                    <option name="sweden" data-country="NO"><a href="norway/en/index.html">Norway</a></option>
-                                                    <option name="north-america" data-country="US"><a href="north-america/en/index.html">North America</a></option>
-                                                    <option name="poland" data-country="PL"><a href="poland/en/index.html">Poland</a></option>
-                                                    <option name="sweden" data-country="SE"><a href="sweden/en/index.html">Sweden</a></option>
-                                                    <option name="switzerland" data-country="CH"><a href="switzerland/en/index.html">Switzerland</a></option>
-                                                    <option name="uk" data-country="GB"><a href="uk/en/index.html">United Kingdom</a></option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div class="form-group">
-                                                <select class="form-control" id="language_switch">
-                                                    <option value="CN">Chinese</option>
-                                                    <option value="CN_TR">Traditional Chinese</option>
-                                                    <option value="DE">Deutsch</option>
-                                                    <option value="NL">Dutch</option>
-                                                    <option value="EN">English (UK)</option>
-                                                    <option value="EN_US">English (US)</option>
-                                                    <option value="FR">French</option>
-                                                    <option value="IT">Italian</option>
-                                                    <option value="JP">Japanese</option>
-                                                    <option value="ES">Spanish</option>
-                                                    <option value="SE">Swedish</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-2">
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-success" id="submit-country"><i class="fa fa-check"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <img class="map-location" title="Locationmap" alt="Choose your location" width="569" height="318" src="/statics/typo3conf/ext/speciality/Resources/Public/Images/map-location.jpg" />
-                    </div>
-                </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>
-        <!-- /.modal -->
         <div class="row contentContainer" role="main">
             <div class="col-xs-12">
                 <!--1811-->

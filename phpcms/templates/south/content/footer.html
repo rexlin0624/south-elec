@@ -50,334 +50,54 @@
     <div class="container">
         <!-- Sitemap -->
         <div class="row">
+            {pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
+            {loop $data $r}
             <div class="col-sm-2 hidden-xs">
-                <strong>
-
-
-
-                </strong>
+                <strong>{$r[catname]}</strong>
                 <ul class="list-unstyled">
+                    {pc:content action="category" catid="$r[catid]" num="25" siteid="$siteid" order="listorder ASC" return="data2"}
+                    {loop $data2 $r2}
                     <li class="sub ">
-                        <a tabindex="101" href="maerkte/transportation/index.html" class="sub ">
-                            <i class="icon-chevron-right"></i> Transportation
+                        <a href="{$r2[url]}" class="sub ">
+                            <i class="icon-chevron-right"></i> {$r2[catname]}
                         </a>
                         <!-- Sub menu -->
                     </li>
-                    <li class="sub">
-                        <a tabindex="102" href="maerkte/automotive/index.html" class="sub">
-                            <i class="icon-chevron-right"></i> Automotive
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="sub">
-                        <a tabindex="103" href="maerkte/machinery/index.html" class="sub">
-                            <i class="icon-chevron-right"></i> Machinery
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="sub">
-                        <a tabindex="104" href="maerkte/heavy-duty-special-vehicles/index.html" class="sub">
-                            <i class="icon-chevron-right"></i> Heavy Duty &amp; Special Vehicles
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="105" href="maerkte/weitere-maerkte/index.html" class="">
-                            <i class="icon-chevron-right"></i> More markets
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
+                    {/loop}
+                    {/pc}
                 </ul>
             </div>
-            <div class="col-sm-2 hidden-xs">
-                <strong>
-
-
-
-                </strong>
-                <ul class="list-unstyled">
-                    <li class="">
-                        <a tabindex="101" href="kompetenzen/research-development/index.html" class="">
-                            <i class="icon-chevron-right"></i> Research and development
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="102" href="kompetenzen/swiss-touch/index.html" class="">
-                            <i class="icon-chevron-right"></i> Quality
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="103" href="kompetenzen/value-added-services/index.html" class="">
-                            <i class="icon-chevron-right"></i> Value Added Services
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="104" href="kompetenzen/zertifikate-zulassungen/index.html" class="">
-                            <i class="icon-chevron-right"></i> Certificates and approvals
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="105" href="production-expertise/production-and-supply-chain/index.html" class="">
-                            <i class="icon-chevron-right"></i> Production and supply chain
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="106" href="kompetenzen/preise-und-auszeichnungen/index.html" class="">
-                            <i class="icon-chevron-right"></i> Awards and recognition
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="107" href="kompetenzen/referenzen/index.html" class="">
-                            <i class="icon-chevron-right"></i> References
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-2 hidden-xs">
-                <strong>
-
-
-
-                </strong>
-                <ul class="list-unstyled">
-                    <li class="sub ">
-                        <a tabindex="101" href="produkte-loesungen/hmi-komponenten/index.html" class="sub ">
-                            <i class="icon-chevron-right"></i> HMI Components
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="sub">
-                        <a tabindex="102" href="produkte-loesungen/hmi-systeme/index.html" class="sub">
-                            <i class="icon-chevron-right"></i> HMI Systems
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="sub ">
-                        <a tabindex="103" href="produkte-loesungen/hmi-automotive/index.html" class="sub ">
-                            <i class="icon-chevron-right"></i> EAO Automotive
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-2 hidden-xs">
-                <strong>
-
-
-
-                </strong>
-                <ul class="list-unstyled">
-                    <li class="">
-                        <a tabindex="101" href="news-downloads/aktuelle-news/index.html" class="">
-                            <i class="icon-chevron-right"></i> News and press releases
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="102" href="news-downloads/messen-und-ausstellungen/index.html" class="">
-                            <i class="icon-chevron-right"></i> Trade fairs and exhibitons
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="103" href="downloads/index.html" class="">
-                            <i class="icon-chevron-right"></i> Downloads
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="104" href="news-downloads/pressekontakt/index.html" class="">
-                            <i class="icon-chevron-right"></i> Press enquiries
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="105" href="news-downloads/bildmaterial/index.html" class="">
-                            <i class="icon-chevron-right"></i> Images
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-2 hidden-xs">
-                <strong>
-
-
-
-                </strong>
-                <ul class="list-unstyled">
-                    <li class="">
-                        <a tabindex="101" href="ueber-eao/das-unternehmen/index.html" class="">
-                            <i class="icon-chevron-right"></i> The company
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="102" href="about-eao/manufacturing-companies/index.html" class="">
-                            <i class="icon-chevron-right"></i> Manufacturing companies
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="103" href="ueber-eao/the-human-touch/index.html" class="">
-                            <i class="icon-chevron-right"></i> The Human Touch ®
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="104" href="ueber-eao/swiss-touch/index.html" class="">
-                            <i class="icon-chevron-right"></i> Swiss Touch ®
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="105" href="ueber-eao/green-touch/index.html" class="">
-                            <i class="icon-chevron-right"></i> Green Touch
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="106" href="ueber-eao/eao-weltweit/index.html" class="">
-                            <i class="icon-chevron-right"></i> EAO Group
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="107" href="ueber-eao/jobs-karriere/index.html" class="">
-                            <i class="icon-chevron-right"></i> Jobs
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                </ul>
-            </div>
-            <div class="col-sm-2 hidden-xs">
-                <strong>
-
-
-
-                </strong>
-                <ul class="list-unstyled">
-                    <li class="">
-                        <a tabindex="101" href="ueber-eao/eao-weltweit/index.html" class="">
-                            <i class="icon-chevron-right"></i> EAO worldwide
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="102" href="contact-us/contact-form/index.html" class="">
-                            <i class="icon-chevron-right"></i> Contact form
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="103" href="news-downloads/pressekontakt/index.html" class="">
-                            <i class="icon-chevron-right"></i> Press inquiries
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="104" href="ueber-eao/jobs-karriere/index.html" class="">
-                            <i class="icon-chevron-right"></i> Jobs &amp; Career
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                    <li class="">
-                        <a tabindex="105" href="kontakt/e-newsletter/index.html" class="">
-                            <i class="icon-chevron-right"></i> E-newletter
-                        </a>
-                        <!-- Sub menu -->
-                    </li>
-                </ul>
-            </div>
+            {/loop}
+            {/pc}
         </div>
         <hr class="hidden-xs">
         <!-- Information Footer -->
         <div class="row">
             <div class="col-xs-12">
-                <nav class="navbar navbar-default navbar-footer dropup pull-right" role="navigation">
-                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" id="dropUpLanguageNavigation" data-toggle="dropdown">
-                        English (UK)
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu selLanguage">
-                        <li class="cn"><a href="cn/index.html">Chinese</a></li>
-                        <li class="de"><a href="de/index.html">Deutsch</a></li>
-                        <li class="nl"><a href="nl/index.html">Dutch</a></li>
-                        <li class="en"><a href="en/index.html">English (UK)</a></li>
-                        <li class="en_us"><a href="en_us/index.html">English (US)</a></li>
-                        <li class="fr"><a href="fr/index.html">French</a></li>
-                        <li class="it"><a href="it/index.html">Italian</a></li>
-                        <li class="jp"><a href="jp/index.html">Japanese</a></li>
-                        <li class="es"><a href="es/index.html">Spanish</a></li>
-                        <li class="se"><a href="se/index.html">Swedish</a></li>
-                    </ul>
-                </nav>
-                <nav class="navbar navbar-default navbar-footer dropup pull-right" role="navigation">
-                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropUpCountryNavigation" data-toggle="dropdown">Country&nbsp;<span class="caret"></span></button>
-                    <ul class="dropdown-menu selCountry">
-                        <li class="austria" data-language="de"><a href="austria/de/index.html" target="_blank">Austria</a></li>
-                        <li class="belgium" data-language="nl"><a href="belgium/nl/index.html" target="_blank">Belgium</a></li>
-                        <li class="china" data-language="cn"><a href="china/cn/index.html" target="_blank">China</a></li>
-                        <li class="denmark" data-language="en"><a href="denmark/en/index.html" target="_blank">Denmark</a></li>
-                        <li class="finand" data-language="en"><a href="finland/en/index.html" target="_blank">Finland</a></li>
-                        <li class="france" data-language="fr"><a href="france/fr/index.html" target="_blank">France</a></li>
-                        <li class="germany" data-language="de"><a href="germany/de/index.html" target="_blank">Germany</a></li>
-                        <li class="hongkong" data-language="cn"><a href="hongkong/cn/index.html" target="_blank">Hong Kong (Asia Pacific)</a></li>
-                        <li class="ireland" data-language="en"><a href="ireland/en/index.html" target="_blank">Ireland</a></li>
-                        <li class="italy" data-language="it"><a href="italy/it/index.html" target="_blank">Italy</a></li>
-                        <li class="japan" data-language="jp"><a href="japan/jp/index.html" target="_blank">Japan</a></li>
-                        <li class="luxembourg" data-language="fr"><a href="luxembourg/fr/index.html" target="_blank">Luxembourg</a></li>
-                        <li class="netherlands" data-language="nl"><a href="netherlands/nl/index.html" target="_blank">Netherlands</a></li>
-                        <li class="norway" data-language="en"><a href="norway/no/index.html" target="_blank">Norway</a></li>
-                        <li class="north-america" data-language="en_us"><a href="north-america/en_us/index.html" target="_blank">North America</a></li>
-                        <li class="poland" data-language="en"><a href="poland/en/index.html" target="_blank">Poland</a></li>
-                        <li class="sweden" data-language="se"><a href="sweden/se/index.html" target="_blank">Sweden</a></li>
-                        <li class="switzerland" data-language="de"><a href="switzerland/de/index.html" target="_blank">Switzerland</a></li>
-                        <li class="uk" data-language="en"><a href="uk/en/index.html" target="_blank">United Kingdom</a></li>
-                    </ul>
-                </nav>
                 <ul class="nav navbar-nav navbar-right footerNavigation hidden-xs">
-                    <li><a href="3d-login/index.html" title="3D-Login">3D-Login</a></li>
-                    <li><a href="sitemap/index.html" title="Sitemap">Sitemap</a></li>
-                    <li><a href="ueber-eao/index.html" title="About EAO">About EAO</a></li>
-                    <li><a href="kontakt/index.html" title="Contact">Contact</a></li>
-                    <li><a href="impressum/index.html" title="Legal Notice">Legal Notice</a></li>
-                    <li><a href="rechtliche-hinweise/index.html" title="Legal Disclaimer">Legal Disclaimer</a></li>
-                    <li><a href="privacy-policies/index.html" title="Privacy Policies">Privacy Policies</a></li>
+                    {pc:link  action="type_list" typeid="76" siteid="$siteid" order="listorder DESC" num="10" return="pic_link"}
+                    {loop $pic_link $v}
+                    <li><a href="{$v['url']}" title="{$v['name']}">{$v['name']}</a></li>
+                    {/loop}
+                    {/pc}
                 </ul>
                 <ul class="navbar navbar-nav list-unstyled" style="font-size: 2em;">
+                    {pc:link  action="type_list" typeid="75" siteid="$siteid" linktype="1" order="listorder DESC" num="8" return="pic_link"}
+                    {loop $pic_link $v}
                     <li style="margin-right: .75em;">
-                        <a href="https://eao.com/socialnavigation/linkedin/" target="_blank">
-                            <!-- Zeige erstes Bild aus den "Media Ressourcen" -->
-                            <img src="/statics/fileadmin/_processed_/2/5/csm_icon_linkedin_0fbd7d12c8.jpg" width="32" height="32" alt="" />
+                        <a href="{$v['url']}" target="_blank">
+                            <img src="{$v[logo]}" width="32" height="32" alt="" />
                         </a>
                     </li>
-                    <li style="margin-right: .75em;">
-                        <a href="https://eao.com/socialnavigation/xing/" target="_blank">
-                            <!-- Zeige erstes Bild aus den "Media Ressourcen" -->
-                            <img src="/statics/fileadmin/_processed_/c/a/csm_icon_xing_fde005fd0c.jpg" width="32" height="32" alt="" />
-                        </a>
-                    </li>
-                    <li style="margin-right: .75em;">
-                        <a href="https://eao.com/socialnavigation/youtube/" target="_blank">
-                            <!-- Zeige erstes Bild aus den "Media Ressourcen" -->
-                            <img src="/statics/fileadmin/_processed_/3/a/csm_icon_youtube_940d4e3fdf.jpg" width="32" height="32" alt="" />
-                        </a>
-                    </li>
+                    {/loop}
+                    {/pc}
                 </ul>
             </div>
         </div>
         <hr/>
         <!-- CopyRight -->
         <!--453-->
-        <p>Copyright © 2013 EAO AG. All rights reserved.&nbsp;Disclaimer</p>
+        <p>Copyright © 2019 EAO AG. All rights reserved.&nbsp;Disclaimer</p>
     </div>
 </footer>
 <script>
