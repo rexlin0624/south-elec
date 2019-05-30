@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <!--1648-->
-                <div id="df43c04a" class=" slickCarousel">
-                    {pc:link  action="type_list" typeid="77" siteid="$siteid" linktype="1" order="listorder DESC" num="10" return="pic_link"}
+                <div id="df43c04a" class="slickCarousel">
+                    {pc:link action="type_list" typeid="77" siteid="$siteid" linktype="1" order="listorder DESC" num="10" return="pic_link"}
                     {loop $pic_link $v}
                     <div class="sliderBox">
                         <div class="background-image-holder">
@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <hr>
+                <hr />
             </div>
         </div>
     </div>
@@ -36,18 +36,7 @@
                 <div class="row">
                     <div class="col-md-8 ">
                         <div class="well well-lg">
-                            <!--1649-->
-                            <div class="csc-header csc-header-n1">
-                                <h1 class="csc-firstHeader">Human Machine Interfaces. Since 1947.</h1></div>
-                            <p>
-                            <p class="lead">EAO AG, a Swiss, family-owned company founded in 1947, has developed into one of the world’s leading manufacturers of high-quality industrial switches, complete custom HMI panels and interface systems, and specialised automotive switch systems.</h2>
-                            </p>
-                            <p>With over 600 dedicated employees, EAO has a global production and distribution network at its disposal. EAO has production sites in Switzerland, Germany, North America and China, as well as 10 wholly owned international sales companies and distributors in over 50 countries, so we can guarantee global availability – around the world, around the clock.
-                                <br />
-                                <br />
-                            </p>
-                            <h3>Your solution-focused expert and partner</h3>
-                            <p>We do much more than just manufacture individual control elements. As a solution-focused partner, we provide the option of technically and mechanically customising existing HMI Components in line with our customers’ individual requirements. From simple control elements through to sophisticated HMI Systems, from serial production through to installation – we offer the entire range of HMI services and inspire the confidence of our customers.</p>
+                            {$settings['info']}
                         </div>
                     </div>
                     <div class="col-md-4 ">
@@ -57,34 +46,13 @@
                                 <h3 class="csc-firstHeader">Quicklinks</h3></div>
                             <div class="subNavigation " style="">
                                 <ul class="nav nav-list">
+                                    {pc:link  action="type_list" typeid="78" siteid="$siteid" order="listorder DESC" num="10" return="pic_link"}
+                                    {loop $pic_link $v}
                                     <li class="item">
-                                        <a href="products-and-solutions/hmi-components/functions/index.html">
-                                            HMI Components
-                                        </a>
+                                        <a href="{$v['url']}">{$v['name']}</a>
                                     </li>
-                                    <li class="item">
-                                        <a href="products-and-solutions/hmi-components/hmi-product-series/index.html">
-                                            HMI Series
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="produkte-loesungen/hmi-systeme/index.html">
-                                            HMI Systems
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="produkte-loesungen/hmi-automotive/index.html">
-                                            HMI Automotive
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="downloads/index.html">
-                                            Downloads
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="http://products.eao.com?lang=en" target="_blank">Online Product Configurator</a>
-                                    </li>
+                                    {/loop}
+                                    {/pc}
                                 </ul>
                             </div>
                         </div>

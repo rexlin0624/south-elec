@@ -242,7 +242,7 @@ final class db_mysqli {
 						if (is_numeric($v)) {
 							$fields[] = $this->add_special_char($k).'='.$this->add_special_char($k).'+'.$this->escape_string($v, '', false);
 						} else {
-							continue;
+							continue 2;
 						}
 						
 						break;
@@ -251,7 +251,7 @@ final class db_mysqli {
 						if (is_numeric($v)) {
 							$fields[] = $this->add_special_char($k).'='.$this->add_special_char($k).'-'.$this->escape_string($v, '', false);
 						} else {
-							continue;
+							continue 2;
 						}
 						break;
 					default:

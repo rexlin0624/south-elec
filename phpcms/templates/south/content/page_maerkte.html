@@ -83,31 +83,22 @@
     {/loop}
     {else}
     <div class="row">
-        {php $i=0;}
-        {php $new_catid = $catid == 3 ? 4 : $catid;}
         {loop $CATEGORYS $category}
-        {if $category[catid] != $new_catid and $category[parentid] == 3}
+        {if $category[parentid] == $catid}
         <div class="col-md-4 col-sm-6">
             <div class="well well-lg">
                 <div class="csc-header csc-header-n1">
-                    <h3 class="csc-firstHeader"><a href="{$category[url]}">{$category[catname]}</a></h3></div>
+                    <h3 class="csc-firstHeader"><a href="{$category[url]}">{$category[catname]}</a></h3>
+                </div>
                 <div class="csc-textpic-text">
                     <p> {strip_tags($category[description])} &nbsp; </p>
                     <p><a href="{$category[url]}" class="internal-link">阅读更多… </a></p>
                 </div>
             </div>
         </div>
-        {php $i++;}
-        {if $i == 3}
-    </div><div class="row">
-        {/if}
-        {if $i == 5}
-        <div class="col-md-4 col-sm-6">
-        </div>
-    </div>
-        {/if}
         {/if}
         {/loop}
+    </div>
     {/if}
 </div>
 {/if}

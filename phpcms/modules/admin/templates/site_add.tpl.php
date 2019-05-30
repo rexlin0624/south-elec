@@ -177,6 +177,37 @@ function default_list() {
 </fieldset>
 </div>
 <div class="bk15"></div>
+    <fieldset>
+        <legend>站点信息</legend>
+        <table width="100%"  class="table_form">
+            <tr>
+                <th width="80">LOGO：</th>
+                <td class="y-bg"><?php echo form::images('setting[logo]', 'image', '', 'content');?></td>
+            </tr>
+            <tr>
+                <th>Copyright：</th>
+                <td class="y-bg"><input type="text" class="input-text" name="copyright" id="copyright" style="width: 90%;" /></td>
+            </tr>
+            <tr>
+                <th>介绍：</th>
+                <td>
+                    <script type="text/javascript" src="/statics/js/ckeditor/ckeditor.js"></script>
+                    <textarea name="info[info]" cols="50" rows="8" id="content"></textarea>
+                    <script type="text/javascript">
+                        CKEDITOR.replace( 'content',{height:200,width:600,pages:false,subtitle:false,textareaid:'content',module:'',catid:'',
+                            flashupload:true,alowuploadexts:'',allowbrowser:'1',allowuploadnum:'10',authkey:'c8e07e653e467f2f1b2058ee44db799c',
+                            filebrowserUploadUrl : '/index.php?m=attachment&c=attachments&a=upload&module=&catid=&dosubmit=1',
+                            toolbar :
+                                [
+                                    ['Source'],['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],['Maximize'],    //这是工具列表
+                                ]
+                        });
+                    </script>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <div class="bk15"></div>
     <input type="submit" class="dialog" id="dosubmit" name="dosubmit" value="<?php echo L('submit')?>" />
 </div>
 </div>

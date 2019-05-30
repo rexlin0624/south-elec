@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://fast.fonts.net/cssapi/bd1c6a4d-0f09-476c-89b9-ccdb91168c19.css" />
 	<script type="text/javascript" src="/statics/typo3temp/vhs-assets-jquery-1552439706.js"></script>
 </head>
-
+<?php $settings=[];?>{pc:get sql="SELECT setting FROM se_site WHERE siteid=1" return="data"}{loop $data $val}<?php $settings=string2array($val['setting'])?>{/loop}{/pc}
 <body class="page-1">
 	<div class="navbar-header navbar navbar-default navbar-fixed-top">
 		<div class="container">
@@ -25,7 +25,7 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand pull-right" href="index.html" tabindex="1">
-					<img src="/statics/typo3conf/ext/speciality/Resources/Public/Images/EAO-logo-claim.svg" alt="EAO AG" width="244" height="46" border="0" />
+					<img src="{$settings['logo']}" width="244" height="46" border="0" />
 				</a>
 			</div>
 			<div class="navbar-collapse collapse navbar-left" id="bs-example-navbar-collapse-1">

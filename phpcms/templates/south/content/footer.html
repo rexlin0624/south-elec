@@ -1,4 +1,3 @@
-<!-- Teaserboxen -->
 <div class="container">
     <hr>
     <div class="row teaseBox small-gutter">
@@ -48,7 +47,6 @@
 
 <footer>
     <div class="container">
-        <!-- Sitemap -->
         <div class="row">
             {pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
             {loop $data $r}
@@ -61,7 +59,6 @@
                         <a href="{$r2[url]}" class="sub ">
                             <i class="icon-chevron-right"></i> {$r2[catname]}
                         </a>
-                        <!-- Sub menu -->
                     </li>
                     {/loop}
                     {/pc}
@@ -71,7 +68,6 @@
             {/pc}
         </div>
         <hr class="hidden-xs">
-        <!-- Information Footer -->
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav navbar-nav navbar-right footerNavigation hidden-xs">
@@ -95,40 +91,12 @@
             </div>
         </div>
         <hr/>
-        <!-- CopyRight -->
-        <!--453-->
-        <p>Copyright © 2019 EAO AG. All rights reserved.&nbsp;Disclaimer</p>
+        <p>{$settings['copyright']}</p>
     </div>
 </footer>
-<script>
-    window.addEventListener("load", function() {
-        window.cookieconsent.initialise({
-            "palette": {
-                "popup": {
-                    "background": "#626262"
-                },
-                "button": {
-                    "background": "transparent",
-                    "border": "#ffffff",
-                    "text": "#ffffff"
-                }
-            },
-            "content": {
-
-                "message": "Our website uses cookies to provide you the information in the best way and to improve our offer continuously. By confirming this message, you accept the use of cookies.",
-                "dismiss": "Accept",
-                "link": "Privacy Policies",
-                "href": "/privacy-policies/"
-
-
-            }
-        })
-    });
-</script>
 <script src="/statics/typo3temp/compressor/merged-e7556a4553d9956f4c487cde98d935a3-e394eca65dc03146bd515ae886c32a9f-1540889520.js" type="text/javascript"></script>
 <script src="/statics/typo3temp/compressor/merged-de1e6cd9fa425d75636a55b7bdf6d06b-0b71fb46a62d1d6ae94b294e0faff909-1540889520.js" type="text/javascript"></script>
 <script type="text/javascript" src="/statics/typo3temp/vhs-assets-MapsCountrySelect-1552439706.js"></script>
 <script type="text/javascript" src="/statics/typo3temp/vhs-assets-a-cc-e-o-1552439706.js"></script>
 </body>
-
 </html>
