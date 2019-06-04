@@ -46,7 +46,7 @@
                                 <h3 class="csc-firstHeader">Quicklinks</h3></div>
                             <div class="subNavigation " style="">
                                 <ul class="nav nav-list">
-                                    {pc:link  action="type_list" typeid="78" siteid="$siteid" order="listorder DESC" num="10" return="pic_link"}
+                                    {pc:link  action="type_list" typeid="78" siteid="$siteid" order="listorder ASC" num="10" return="pic_link"}
                                     {loop $pic_link $v}
                                     <li class="item">
                                         <a href="{$v['url']}">{$v['name']}</a>
