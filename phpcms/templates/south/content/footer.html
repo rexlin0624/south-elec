@@ -1,46 +1,20 @@
 <div class="container">
     <hr>
     <div class="row teaseBox small-gutter">
+        {pc:link action="type_list" typeid="79" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+        {loop $pic_link $v}
         <div class="col-xs-6 col-sm-3">
-            <div class="teaser" style="background: #fff url('/statics/fileadmin/_processed_/2/e/csm_Teaser_45_function_ID-keylock-switch_370x180_b09c533cfc.jpg') no-repeat center top;">
-                <a href="45/functions/id-keylock-switches/index.html">
+            <div class="teaser" style="background: #fff url('{$v[logo]}') no-repeat center top;">
+                <a href="{$v['url']}">
                     <div class="teaseText">
-                        <h3>Series 45 - ID keylock switches</h3>
-                        <p class="pad-bottom"></p>
-                    </div>
-            </a>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-            <div class="teaser" style="background: #fff url('/statics/fileadmin/_processed_/7/f/csm_EAO_teaser_Smart-Box_370x180_101a64192c.jpg') no-repeat center top;">
-                <a href="smart-box/index.html">
-                    <div class="teaseText">
-                        <h3>Smart Box</h3>
-                        <p class="pad-bottom"></p>
-                    </div>
-            </a>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-            <div class="teaser" style="background: #fff url('/statics/fileadmin/_processed_/4/c/csm_Info-Teaser_EAO-Series-61_e-stop-compact_afc531b128.jpg') no-repeat center top;">
-                <a href="61-e-stop/index.html">
-                    <div class="teaseText">
-                        <h3>Series 61 e-stop switch compact</h3>
-                        <p class="pad-bottom"></p>
-                    </div>
-            </a>
-            </div>
-        </div>
-        <div class="col-xs-6 col-sm-3">
-            <div class="teaser" style="background: #fff url('/statics/fileadmin/_processed_/2/c/csm_EAO_WEB-Konfigurator_f86cae707d.png') no-repeat center top;">
-                <a href="http://products.eao.com?lang=en" target="_blank">
-                    <div class="teaseText">
-                        <h3>Online Product Configurator</h3>
+                        <h3>{$v['name']}</h3>
                         <p class="pad-bottom"></p>
                     </div>
                 </a>
             </div>
         </div>
+        {/loop}
+        {/pc}
     </div>
     <hr/>
 </div>
@@ -71,14 +45,14 @@
         <div class="row">
             <div class="col-xs-12">
                 <ul class="nav navbar-nav navbar-right footerNavigation hidden-xs">
-                    {pc:link  action="type_list" typeid="76" siteid="$siteid" order="listorder DESC" num="10" return="pic_link"}
+                    {pc:link  action="type_list" typeid="76" siteid="$siteid" order="listorder ASC" num="10" return="pic_link"}
                     {loop $pic_link $v}
                     <li><a href="{$v['url']}" title="{$v['name']}">{$v['name']}</a></li>
                     {/loop}
                     {/pc}
                 </ul>
                 <ul class="navbar navbar-nav list-unstyled" style="font-size: 2em;">
-                    {pc:link  action="type_list" typeid="75" siteid="$siteid" linktype="1" order="listorder DESC" num="8" return="pic_link"}
+                    {pc:link  action="type_list" typeid="75" siteid="$siteid" linktype="1" order="listorder ASC" num="8" return="pic_link"}
                     {loop $pic_link $v}
                     <li style="margin-right: .75em;">
                         <a href="{$v['url']}" target="_blank">
