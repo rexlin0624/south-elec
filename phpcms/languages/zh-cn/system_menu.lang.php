@@ -466,4 +466,8 @@ $LANG['market_add'] = '添加市场';
 $LANG['market_setting'] = '市场配置';
 $LANG['functions'] = '功能';
 $LANG['series'] = '系列';
+$LANG['series_add'] = '添加系列';
+$LANG['series_setting'] = '系列配置';
+$LANG['functions_setting'] = '功能配置';
+$LANG['functions_add'] = '添加功能';
 ?>
