@@ -23,6 +23,7 @@
       'category_about_factory.html' => '关于我们_工厂频道页',
       'category_about_job.html' => '关于我们_工作频道页',
       'category_contact.html' => '联系我们频道页',
+      'category_product.html' => '产品配置器频道页',
       'download.html' => '下载连接页',
       'footer.html' => '底部',
       'header.html' => '顶部',
@@ -43,6 +44,7 @@
       'list_about_factory.html' => '关于我们_工厂列表页',
       'list_about_job.html' => '关于我们_工作列表页',
       'list_contact.html' => '联系我们列表页',
+      'list_product.html' => '产品配置器列表页',
       'message.html' => '消息提示页',
       'page.html' => '单网页',
       'page_maerkte.html' => '核心市场单网页',
@@ -73,6 +75,7 @@
       'show_about_factory.html' => '关于我们_工厂内容页',
       'show_about_job.html' => '关于我们_工作内容页',
       'show_contact.html' => '联系我们内容页',
+      'show_product.html' => '产品配置器内容页',
       'tag.html' => 'tag',
     ),
     'templates|default|' => 

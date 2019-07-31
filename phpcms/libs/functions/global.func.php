@@ -1507,7 +1507,7 @@ function atturl($path) {
  * @param $m	模块名称
  */
 function module_exists($m = '') {
-	if ($m=='admin') return true;
+	if ($m=='admin' || $m=='product') return true;
 	$modules = getcache('modules', 'commons');
 	$modules = array_keys($modules);
 	return in_array($m, $modules);

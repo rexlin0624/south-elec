@@ -103,8 +103,9 @@ class menu extends admin {
 			//结束语言文件修改
 			showmessage(L('operation_success'));
 		} else {
-			$show_validator = $array = $r = '';
-			$tree = pc_base::load_sys_class('tree');
+			$show_validator = $r = '';
+            $array = [];
+            $tree = pc_base::load_sys_class('tree');
 			$id = intval($_GET['id']);
 			$r = $this->db->get_one(array('id'=>$id));
 			if($r) extract($r);

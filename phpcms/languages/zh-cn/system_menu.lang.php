@@ -457,4 +457,13 @@ $LANG['player_manage'] = '播放器管理';
 $LANG['video_upload'] = '视频上传'; 
 $LANG['orders'] = '会员订单';
 $LANG['sitemap'] = '网站地图';
+
+$LANG['product_config'] = '产品配置管理';
+$LANG['product_cfg_index'] = '产品配置器';
+$LANG['add_product'] = '添加产品';
+$LANG['market'] = '市场';
+$LANG['market_add'] = '添加市场';
+$LANG['market_setting'] = '市场配置';
+$LANG['functions'] = '功能';
+$LANG['series'] = '系列';
 ?>
