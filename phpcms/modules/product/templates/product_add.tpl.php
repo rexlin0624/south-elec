@@ -73,7 +73,8 @@ $functions_id = isset($info['functions_id']) ? $info['functions_id'] : 0;
             var data = {
                 id: $.trim($('#product_id').val()) - 0,
                 title: title,
-                thumb: thumb
+                thumb: thumb,
+                functions_id: $('#functions_id').val()
             };
 
             <?php

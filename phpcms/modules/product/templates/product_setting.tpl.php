@@ -15,6 +15,14 @@ include $this->admin_tpl('header', 'admin');
                 <th><strong>描述：</strong></th>
                 <td><textarea name="product[description]" id="description" style="width: 350px;height:80px;"><?php echo !empty($info) ? $info['description'] : ''; ?></textarea></td>
             </tr>
+            <tr>
+                <th><strong>PDF头部：</strong></th>
+                <td><input name="product[pdf_title]" id="pdf_title" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo !empty($info) ? $info['pdf_title'] : ''; ?>"></td>
+            </tr>
+            <tr>
+                <th><strong>PDF描述：</strong></th>
+                <td><input name="product[pdf_desc]" id="pdf_desc" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo !empty($info) ? $info['pdf_desc'] : ''; ?>"></td>
+            </tr>
             </tbody>
         </table>
         <div class="bk15"></div>

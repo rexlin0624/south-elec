@@ -7,7 +7,7 @@ use Knp\Snappy\Pdf;
 pc_base::load_app_class('admin','admin',0);
 
 class product extends admin {
-    private $db_setting, $db, $db_functions;
+    private $db_setting, $db, $db_functions, $db_series;
     private $_snappy;
     private $_product_props = null;
 
@@ -21,6 +21,7 @@ class product extends admin {
         $this->db = pc_base::load_model('productions_model');
 
         $this->db_functions = pc_base::load_model('productions_functions_list_model');
+        $this->db_series = pc_base::load_model('productions_series_list_model');
 
         $this->_snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
     }
@@ -66,6 +67,16 @@ class product extends admin {
             $id = (int)$_POST['product']['id'];
             unset($_POST['product']['id']);
             $product = $_POST['product'];
+
+            $function = $this->db_functions->get_one(['id' => $product['functions_id']]);
+
+            // 产品编码组合
+            // 规则：系列-前圈尺寸、前圈/按键材料、前圈/按键形状、前圈/按键颜色.开关元件、照明形式、LED灯颜色、LED灯电压.前圈/磁、序列号
+            $series = $this->db_series->get_one(['id' => $function['series_id']]);
+            $code  = $series['title'] . '-' . $product['front_shape'] . $product['front_button_material'] . $product['front_button_shape'] . $product['front_button_color'];
+            $code .= '.' . $product['switch_element'] . $product['light_style'] . $product['led_color'] . $product['led_voltage'] . '.' . $product['front_magnetic'];
+            $product['code'] = $code;
+
             if ($id > 0) {
                 $this->db->update($product, ['id' => $id]);
             } else {
