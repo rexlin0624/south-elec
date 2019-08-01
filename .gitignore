@@ -3,3 +3,5 @@ caches
 uploadfile
 /index.html
 /info.txt
+composer.lock
+vendor
