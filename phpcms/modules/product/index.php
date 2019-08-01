@@ -1,5 +1,6 @@
 <?php
 defined('IN_PHPCMS') or exit('No permission resources.');
+
 //模型缓存路径
 define('CACHE_MODEL_PATH',CACHE_PATH.'caches_model'.DIRECTORY_SEPARATOR.'caches_data'.DIRECTORY_SEPARATOR);
 pc_base::load_app_func('util','content');
@@ -12,7 +13,11 @@ class index {
 	const MARKET = 1;
 	const SERIES = 2;
 
+	private $_product_props = null;
+
 	function __construct() {
+        require_once __DIR__ . '/../../../product_props.php';
+
 		$this->db = pc_base::load_model('productions_model');
 		$this->db_setting = pc_base::load_model('productions_setting_model');
 
@@ -23,6 +28,8 @@ class index {
 		$this->db_market_list = pc_base::load_model('productions_market_list_model');
 		$this->db_function_list = pc_base::load_model('productions_functions_list_model');
 		$this->db_series_list = pc_base::load_model('productions_series_list_model');
+
+		$this->_product_props = $product_props;
 	}
 
 	//首页
@@ -87,5 +94,26 @@ class index {
 
     public function lists() {
         $functions_id = (int)$_GET['functions_id'];
+        $setting = $this->db_setting->get_one(['id' => 1]);
+        $props = $this->_product_props;
+        $page = 1;
+
+        $function_info = $this->db_function_list->get_one(['id' => $functions_id]);
+
+        $total = $this->db->count('functions_id = ' . $functions_id);
+        $lists = $this->db->listinfo(['functions_id' => $functions_id], 'id DESC', $page, 1);
+        $pages = $this->db->pages;
+
+        include template('product', 'lists');
+    }
+
+    public function show() {
+	    $id = (int)$_GET['id'];
+        $setting = $this->db_setting->get_one(['id' => 1]);
+        $props = $this->_product_props;
+
+        $item = $this->db->get_one(['id' => $id]);
+
+        include template('product', 'show');
     }
 }

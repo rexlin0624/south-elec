@@ -1,0 +1,113 @@
+{template "product","header"}
+<div class="row">
+    <div class="column grid_2 column_margin">
+        <div class="box">
+            <span class="boxheader"><h3>{$setting['title']}</h3></span>
+            <div class="boxcontent">
+                <div id="basketContentDynamic">
+                    <p>{$setting['description']}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="content grid_6">
+            <h1 class="c_3x2_h1">{$function_info['title']}</h1>
+            <div class="column grid_6 bg">
+
+                <div class="row">
+                    <form action="index.php" method="post" name="mWebProfiSearch" id="mWebProfiSearch">
+                        <?php foreach ($props as $prop) { ?>
+                        <fieldset class="filter column grid_filter">
+                            <label>
+                                <?php echo $prop['title']; ?>
+                                (<?php echo count($prop['options']); ?>)
+                            </label>
+                            <select onchange="setFilter();" class="prodFinder" style="display: inline-block;">
+                                <option value="-"></option>
+                                <?php foreach ($prop['options'] as $key => $option) { ?>
+                                <option value="<?php echo $key; ?>">
+                                    <?php echo $key,'  ',$option; ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </fieldset>
+                        <?php } ?>
+                    </form>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="column">
+                        <h6>查找到 {$total} 条记录</h6></div>
+                    <div class="column float_right">
+                        <ul class="mWebPagination">
+                            <li>{$pages}</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <table id="sortTable" class="list">
+                    <tbody>
+                    <?php $index = 1; foreach ($lists as $list) { ?>
+                    <tr>
+                        <td>
+                            <div class="product_list_row">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="product_counter">
+                                            <span><?php echo $index; ?></span>
+                                        </td>
+                                        <td>
+                                            <a href="/index.php?m=product&c=index&a=show&functions_id=<?php echo $list['functions_id']; ?>&id=<?php echo $list['id']; ?>">
+                                                <img src="<?php echo $list['thumb']; ?>" width="48"
+                                                     height="36"
+                                                     alt="<?php echo $list['title']; ?>"
+                                                     title="<?php echo $list['title']; ?>">
+                                            </a>
+
+
+                                        </td>
+                                        <td class="clickable" rel="/index.php?m=product&c=index&a=show&functions_id=<?php echo $list['functions_id']; ?>&id=<?php echo $list['id']; ?>" target="self">
+                                            <a href="/index.php?m=product&c=index&a=show&functions_id=<?php echo $list['functions_id']; ?>&id=<?php echo $list['id']; ?>">
+                                                <em><?php echo $list['title']; ?></em>
+                                            </a>
+
+                                            <table class="attrList">
+                                                <tbody>
+                                                <?php foreach ($props as $key => $prop) { ?>
+                                                <tr>
+                                                    <td class="attribute" width="120"><?php echo $prop['title']; ?>:</td>
+                                                    <td class="attribute_value"><?php echo $prop['options'][$list[$key]]; ?></td>
+                                                </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <hr>
+                        </td>
+                    </tr>
+                    <?php $index++; } ?>
+
+                    </tbody>
+                </table>
+
+                <div class="last">
+                    <ul class="mWebPagination">
+                        <li>{$pages}</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {template "product","footer"}

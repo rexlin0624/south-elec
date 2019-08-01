@@ -178,8 +178,8 @@ class product extends admin {
                 $this->db->update($product, ['id' => $id]);
                 $message = '修改成功';
             } else {
-                $series['created_at'] = time();
-                $id = $this->db->insert($series, true);
+                $product['created_at'] = time();
+                $id = $this->db->insert($product, true);
                 $message = '添加成功';
             }
 
