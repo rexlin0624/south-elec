@@ -8,7 +8,7 @@ $functions_id = isset($info['functions_id']) ? $info['functions_id'] : 0;
 ?>
 <div class="pad-10">
     <form method="post" action="?m=product&c=product&a=add" name="myform" id="myform">
-        <input type="hidden" name="product[id]" value="<?php echo $id; ?>">
+        <input type="hidden" name="product[id]" id="product_id" value="<?php echo $id; ?>">
         <table class="table_form" width="100%" cellspacing="0">
             <tbody>
             <tr>
@@ -70,15 +70,44 @@ $functions_id = isset($info['functions_id']) ? $info['functions_id'] : 0;
                 alert('请上传缩略图');
                 return false;
             }
+            var data = {
+                id: $.trim($('#product_id').val()) - 0,
+                title: title,
+                thumb: thumb
+            };
 
             <?php
                 foreach ($product_props as $name => $prop) {
                     echo 'var ',$name,' = $.trim($("#',$name,'").val());',"\r\n";
-                    echo 'if (!',$name,') { alert("请选择',$prop['title'],'"); return false; }';
+                    echo 'if (!',$name,') { alert("请选择',$prop['title'],'"); return false; }',"\r\n";
+                    echo 'data["',$name,'"] = ',$name,';';
                 }
             ?>
 
-            $('#myform').submit();
+            $.ajax({
+                type: 'POST',
+                url: '?m=product&c=product&a=add&pc_hash=<?php echo $_GET['pc_hash']; ?>',
+                data: {
+                    product: data
+                },
+                beforeSend: function () {
+                    $('#dosubmit').attr('disabled', 'disabled');
+                    $('#dosubmit').val('正在提交数据，请稍候...');
+                },
+                success: function (response) {
+                    $('#dosubmit').removeAttr('disabled');
+                    $('#dosubmit').val('提交');
+
+                    if (response === 'success') {
+                        alert('操作成功');
+                        location.href = '?m=product&c=product&a=config_list&pc_hash=<?php echo $_GET['pc_hash']; ?>';
+                    }
+                },
+                error: function (error) {
+                    $('#dosubmit').removeAttr('disabled');
+                    $('#dosubmit').val('提交');
+                }
+            });
         });
     });
 </script>

@@ -16,11 +16,10 @@
 <div id="page">
     <div class="row">
         <ul class="column grid_3  service_links">
-            <li><a href="index.php-IdTreeGroup=3.html">首页</a></li> |
-            <li><a href="http://products.eao.com/index.php?IdTreeGroup=55&amp;lang=de">中文</a>/<a href="http://products.eao.com/index.php?IdTreeGroup=55&amp;lang=en">English</a></li>
+            <li><a href="/index.php?m=product&c=index&a=init">首页</a></li>
         </ul>
         <div class="column right grid_5 logo">
-            <a href="http://eao.com" target="_blank"><img src="layout/eao/img/Logo_EAO_Claim.png" alt="logo"></a>
+            <a href="/index.php" target="_blank"><img src="layout/eao/img/Logo_EAO_Claim.png" alt="logo"></a>
         </div>
     </div>
 
@@ -29,46 +28,38 @@
         <div class="column grid_5 float_right">
             <ul class="nav row">
                 <li class="column">
-                    <a href="index.php-IdTreeGroup=55&amp;cfn=1.html"  id="activer_link">市场</a>
+                    <a href="/index.php?m=product&c=index&a=step&type=1"  id="activer_link">市场</a>
                     <ul class="nav2">
                         <div class="col">
+                            {loop $market_list $market}
                             <li>
-                                <a href="index.php-IdTreeGroup=58&amp;cfn=1.html" >运输</a>
+                                <a href="/index.php?m=product&c=index&a=functions&type=1&id={$market['id']}" >{$market['title']}</a>
                             </li>
-                            <li>
-                                <a href="index.php-IdTreeGroup=59&amp;cfn=1.html" >机械</a>
-                            </li>
-                            <li>
-                                <a href="index.php-IdTreeGroup=2883&amp;cfn=1.html" >重工</a>
-                            </li>
+                            {/loop}
                         </div>
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="index.php-IdTreeGroup=56&amp;cfn=1.html" >功能</a>
+                    <a href="/index.php?m=product&c=index&a=functions" >功能</a>
                     <ul class="nav2 small">
                         <div class="col">
-
+                            {loop $function_list $function}
                             <li>
-                                <a href="index.php-IdTreeGroup=124&amp;cfn=1.html" >Leuchtmelder</a>
+                                <a href="/index.php?m=product&c=index&a=lists&functions_id={$function['id']}">{$function['title']}</a>
                             </li>
-                            <li>
-                                <a href="index.php-IdTreeGroup=2898&amp;cfn=1.html" >Palm Switch/Grobhandtaste</a>
-                            </li>
+                            {/loop}
                         </div>
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="index.php-IdTreeGroup=279&amp;cfn=1.html" >系列</a>
+                    <a href="/index.php?m=product&c=index&a=step&type=2">系列</a>
                     <ul class="nav2 small">
                         <div class="col">
-
+                            {loop $series_list $series}
                             <li>
-                                <a href="http://products.eao.com/index.php?IdTreeGroup=1076&amp;cfn=1" >01</a>
+                                <a href="/index.php?m=product&c=index&a=functions&type=2&id={$series['id']}" >{$series['title']}</a>
                             </li>
-                            <li>
-                                <a href="index.php-IdTreeGroup=1087&amp;cfn=1.html" >02</a>
-                            </li>
+                            {/loop}
                         </div>
                     </ul>
                 </li>

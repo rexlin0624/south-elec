@@ -38,12 +38,15 @@ class index {
 
 	    // market setting
         $market_setting = $this->db_market_setting->get_one(['id' => 1]);
+        $market_list = $this->db_market_list->listinfo([], '', 1, 100);
 
         // functions setting
         $function_setting = $this->db_function_setting->get_one(['id' => 1]);
+        $function_list = $this->db_function_list->listinfo([], '', 1, 1000);
 
         // series setting
         $series_setting = $this->db_series_setting->get_one(['id' => 1]);
+        $series_list = $this->db_series_list->listinfo([], '', 1, 100);
 
 		include template('product', 'index');
 	}

@@ -8,122 +8,14 @@ pc_base::load_app_class('admin','admin',0);
 
 class product extends admin {
     private $db_setting, $db, $db_functions;
-
-    private static $_product_props = [
-        // 前圈尺寸
-        'front_shape' => [
-            'title' => '前圈尺寸',
-            'options' => [
-                'A' => '12mm 圆形',
-                'B' => '16mm 圆形',
-                '1' => '24mm 圆形',
-                '2' => '24mm 方形',
-                '3' => '22mm 圆形',
-                '4' => '20mm 圆形',
-                'Z' => '定制',
-            ],
-        ],
-        // 前圈/按钮材料
-        'front_button_material' => [
-            'title' => '前圈/按钮材料',
-            'options' => [
-                'A' => '12mm 圆形',
-                'B' => '16mm 圆形',
-                '1' => '24mm 圆形',
-                '2' => '24mm 方形',
-                '3' => '22mm 圆形',
-                '4' => '20mm 圆形',
-                'Z' => '定制',
-            ],
-        ],
-        // 前圈/按钮形状
-        'front_button_shape' => [
-            'title' => '前圈/按钮形状',
-            'options' => [
-                'A' => '平面/平面（12mm开关)',
-                'B' => '平面/平面 (16mm开关)',
-                '1' => '凹面/凸弧面',
-                '2' => '凹面/凸弧面',
-                '3' => '平面/凸弧面',
-                'Z' => '定制',
-            ]
-        ],
-        // 前圈/按钮颜色
-        'front_button_color' => [
-            'title' => '前圈/按钮颜色',
-            'options' => [
-                '1' => '哑光（不锈钢）',
-                '2' => '金色（不锈钢）',
-                '3' => '黑色（不锈钢）',
-                '4' => '自然色 (铝）',
-                '5' => '红色 (铝）',
-                '6' => '黄色 (铝）',
-                '7' => '绿色 (铝）',
-                'Z' => '定制',
-            ],
-        ],
-        // 开关元件
-        'switch_element' => [
-            'title' => '开关元件',
-            'options' => [
-                '0' => '指示灯',
-                '1' => '瞬时 1 NO / 1 NC ( 5.0系列 3 NO / 3 NC)',
-                '2' => '自锁 1 NO / 1 NC ( 5.0系列 3 NO / 3 NC)',
-                '3' => '瞬时 3 NO / 3 NC',
-                '4' => '自锁 3 NO / 3 NC',
-                'Z' => '定制',
-            ],
-        ],
-        // 照明形式
-        'light_style' => [
-            'title' => '照明形式',
-            'options' => [
-                '1' => '环形照明',
-                '2' => '点照明',
-                '3' => '无照明',
-                'Z' => '定制',
-            ]
-        ],
-        // LED灯颜色
-        'led_color' => [
-            'title' => 'LED灯颜色',
-            'options' => [
-                '0' => '无',
-                '1' => '红色',
-                '2' => '黄色',
-                '3' => '绿色',
-                '4' => '白色',
-                'Z' => '定制',
-            ]
-        ],
-        // LED灯电压
-        'led_voltage' => [
-            'title' => 'LED灯电压',
-            'options' => [
-                '0' => '无',
-                '1' => '6V',
-                '2' => '24V',
-                '3' => '110V',
-                '4' => '230V',
-                'Z' => '定制',
-            ]
-        ],
-        // 前圈/磁
-        'front_magnetic' => [
-            'title' => '前圈/磁',
-            'options' => [
-                'A' => 'Ø 8',
-                'B' => 'Ø 12',
-                'C' => 'Ø 19',
-                'D' => 'Ø 22',
-                'M' => '磁场灭弧',
-            ],
-        ],
-    ];
     private $_snappy;
+    private $_product_props = null;
 
     public function __construct() {
         parent::__construct();
+
+        require_once __DIR__ . '/../../../product_props.php';
+        $this->_product_props = $product_props;
 
         $this->db_setting = pc_base::load_model('productions_setting_model');
         $this->db = pc_base::load_model('productions_model');
@@ -167,7 +59,7 @@ class product extends admin {
         $info = [];
 
         $functions = $this->db_functions->listinfo([], '', 1, 10);
-        $product_props = self::$_product_props;
+        $product_props = $this->_product_props;
         $message = '';
 
         if (isset($_POST['product'])) {
@@ -176,11 +68,9 @@ class product extends admin {
             $product = $_POST['product'];
             if ($id > 0) {
                 $this->db->update($product, ['id' => $id]);
-                $message = '修改成功';
             } else {
                 $product['created_at'] = time();
                 $id = $this->db->insert($product, true);
-                $message = '添加成功';
             }
 
             $pdf_path = $this->get_pdf_path($id);
@@ -194,7 +84,8 @@ class product extends admin {
             ]);
             $this->_snappy->generateFromHtml($pdf_content, $pdf_path, [], true);
 
-            showmessage($message, '?m=product&c=product&a=config_list');
+            echo 'success';
+            exit;
         }
 
         if ($id > 0) {
