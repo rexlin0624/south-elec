@@ -269,6 +269,51 @@ class index {
 
 		$template = $setting['category_template'] ? $setting['category_template'] : 'category';
 		$template_list = $setting['list_template'] ? $setting['list_template'] : 'list';
+
+		// 下载页面，获取分类、系列、功能、认证、语言等数据
+        if ($catid == 65) {
+            $sql = 'SELECT `field`,`name`,`setting` FROM se_model_field WHERE `modelid` = 2';
+            $this->db->query($sql);
+            $model_downloads = $this->db->fetch_array();
+            $map_download = [];
+            foreach ($model_downloads as $mdl) {
+                $map_download[$mdl['field']] = json_decode($mdl['setting'], true);
+            }
+            $category = explode("\n", $map_download['category']['options']);
+            $category_options = [];
+            foreach ($category as $dlcat) {
+                $tmp = explode('|', $dlcat);
+                $category_options[$tmp[0]] = $tmp[1];
+            }
+
+            $serious = explode("\n", $map_download['serious']['options']);
+            $serious_options = [];
+            foreach ($serious as $dlcat) {
+                $tmp = explode('|', $dlcat);
+                $serious_options[$tmp[0]] = $tmp[1];
+            }
+
+            $functions = explode("\n", $map_download['function']['options']);
+            $functions_options = [];
+            foreach ($functions as $dlcat) {
+                $tmp = explode('|', $dlcat);
+                $functions_options[$tmp[0]] = $tmp[1];
+            }
+
+            $certified = explode("\n", $map_download['certified']['options']);
+            $certified_options = [];
+            foreach ($certified as $dlcat) {
+                $tmp = explode('|', $dlcat);
+                $certified_options[$tmp[0]] = $tmp[1];
+            }
+
+            $language = explode("\n", $map_download['language']['options']);
+            $language_options = [];
+            foreach ($language as $dlcat) {
+                $tmp = explode('|', $dlcat);
+                $language_options[$tmp[0]] = $tmp[1];
+            }
+        }
 		
 		if($type==0) {
 			$template = $child ? $template : $template_list;
@@ -458,74 +503,58 @@ class index {
          $sms_content_db->insert($sms_content);
      }
 
-    /**
-     * 终身质保数据保存
-     */
-	 public function zszb_save() {
-	     $values = [
-	         'datetime' => time(),
-             'ip'       => ip(),
-             'nickname' => trim($_POST['nickname']),
-             'car_no' => trim($_POST['car_no']),
-             'telephone' => trim($_POST['telephone']),
-             'product' => trim($_POST['product']),
-             'address' => trim($_POST['address']),
-         ];
-
-        $sql  = 'INSERT INTO lldz_form_zszb(`datetime`, `ip`, `nickname`, `car_no`, `telephone`, `product`, `address`) VALUES ';
-        $sql .= '(\'' . implode('\',\'', array_values($values)) . '\')';
-
-        $this->db->query($sql);
-
-        $message  = '提交参加终身质保: ' . $values['nickname'] . '(' . $values['telephone'] . ')于' . date('Y-m-d H:i:s', $values['datetime']) . '提交终身质保。产品为' . $values['product'];
-        $message .= '，地址：' . $values['address'];
-        $this->_send_sms($values['telephone'], $message);
-        $this->_send_sms('13922127384', $message);
-     }
-
-    /**
-     * 终身质保查询
-     */
-     public function zszb_list() {
-         $keywords = trim($_GET['keywords']);
-         if (empty($keywords)) {
-             echo json_encode([]);
-             exit;
-         }
-
-         $sql = 'SELECT * FROM lldz_form_zszb WHERE nickname LIKE \'%' . $keywords . '%\' OR car_no LIKE \'%' . $keywords . '%\' OR telephone LIKE \'%' . $keywords . '%\' OR product LIKE \'%' . $keywords . '%\'';
-         $this->db->query($sql);
-         $rows = $this->db->fetch_array();
-
-         $items = [];
-         if (is_array($rows) && !empty($rows)) {
-             foreach ($rows as $row) {
-                 $items[] = [
-                     'nickname' => $row['nickname'],
-                     'datetime' => date('Y年n月j日', $row['datetime']),
-                     'telephone' => $row['telephone'],
-                     'product' => $row['product'],
-                 ];
+     public function get_downloads() {
+	     $where = '1 = 1';
+	     if (!empty($_POST['category'])) {
+	         $category = [];
+	         foreach ($_POST['category'] as $item) {
+                 $category[] = 'd.category LIKE \'%,' . $item . ',%\'';
              }
+	         $where .= ' AND (' . implode(' OR ', $category) . ')';
+         }
+         if (!empty($_POST['serious'])) {
+             $serious = [];
+             foreach ($_POST['serious'] as $item) {
+                 $serious[] = 'd.serious = "' . $item . '""';
+             }
+             $where .= ' AND (' . implode(' OR ', $serious) . ')';
+         }
+         if (!empty($_POST['functions'])) {
+             $functions = [];
+             foreach ($_POST['functions'] as $item) {
+                 $functions[] = 'd.`function` = "' . $item . '"';
+             }
+             $where .= ' AND (' . implode(' OR ', $functions) . ')';
+         }
+         if (!empty($_POST['certified'])) {
+             $certified = [];
+             foreach ($_POST['certified'] as $item) {
+                 $certified[] = 'd.`certified` = "' . $item . '"';
+             }
+             $where .= ' AND (' . implode(' OR ', $certified) . ')';
+         }
+         if (!empty($_POST['language'])) {
+             $language = [];
+             foreach ($_POST['language'] as $item) {
+                 $language[] = 'd.`language` LIKE \'%,' . $item . ',%\'';
+             }
+             $where .= ' AND (' . implode(' OR ', $language) . ')';
          }
 
-         echo json_encode($items);
-         exit;
-     }
-
-    /**
-     * 运营中心列表
-     */
-     public function get_business() {
-         $keywords = trim($_GET['keywords']);
-
-         $sql = 'SELECT title, address, service_phone, contacts FROM lldz_lldz_business';
-         if (!empty($keywords)) {
-             $sql .= ' WHERE title LIKE \'%' . $keywords . '%\' OR address LIKE \'%' . $keywords . '%\' OR service_phone LIKE \'%' . $keywords . '%\' OR contacts LIKE \'%' . $keywords . '%\'';
-         }
+         $sql  = 'SELECT d.id,d.title,d.thumb,d.description,d.category,d.serious,d.`function`,d.certified,d.filesize,d.`language`,dd.downfiles ';
+         $sql .= 'FROM se_download d ';
+         $sql .= 'LEFT JOIN se_download_data dd ON d.id = dd.id ';
+         $sql .= 'WHERE ' . $where;
          $this->db->query($sql);
          $rows = $this->db->fetch_array();
-         echo json_encode($rows);
-         exit;
+
+         $lists = [];
+         foreach ($rows as $row) {
+             $row['downfiles'] = json_decode($row['downfiles'], true);
+
+             $lists[] = $row;
+         }
+
+         echo json_encode($lists);
      }
 }

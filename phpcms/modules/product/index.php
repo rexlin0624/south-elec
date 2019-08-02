@@ -99,12 +99,27 @@ class index {
         $functions_id = (int)$_GET['functions_id'];
         $setting = $this->db_setting->get_one(['id' => 1]);
         $props = $this->_product_props;
-        $page = 1;
+        $page = (int)$_GET['page'];
+        $page = $page > 1 ? $page : 1;
+        $where = 'functions_id = ' . $functions_id;
+
+        $filter = $_POST;
+        $conditon = [];
+        if (!empty($filter)) {
+            foreach ($filter as $field => $flt) {
+                if ($flt == '-') {
+                    continue;
+                }
+
+                $conditon[] = $field . ' = "' . $flt . '"';
+            }
+        }
+        $where .= ' AND (' . implode(' OR ', $conditon) . ')';
 
         $function_info = $this->db_function_list->get_one(['id' => $functions_id]);
 
-        $total = $this->db->count('functions_id = ' . $functions_id);
-        $lists = $this->db->listinfo(['functions_id' => $functions_id], 'id DESC', $page, 1);
+        $total = $this->db->count($where);
+        $lists = $this->db->listinfo($where, 'id DESC', $page, 10);
         $pages = $this->db->pages;
 
         include template('product', 'lists');

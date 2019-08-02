@@ -16,17 +16,20 @@
             <div class="column grid_6 bg">
 
                 <div class="row">
-                    <form action="index.php" method="post" name="mWebProfiSearch" id="mWebProfiSearch">
-                        <?php foreach ($props as $prop) { ?>
+                    <form action="/index.php?m=product&c=index&a=lists&functions_id={$functions_id}" method="post" id="myformmm">
+                        <?php foreach ($props as $kk => $prop) { ?>
                         <fieldset class="filter column grid_filter">
                             <label>
                                 <?php echo $prop['title']; ?>
                                 (<?php echo count($prop['options']); ?>)
                             </label>
-                            <select onchange="setFilter();" class="prodFinder" style="display: inline-block;">
+                            <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>
-                                <?php foreach ($prop['options'] as $key => $option) { ?>
-                                <option value="<?php echo $key; ?>">
+                                <?php
+                                foreach ($prop['options'] as $key => $option) {
+                                $selected = ($filter[$kk] != "-" && $filter[$kk] == $key) ? ' selected="selected"' : '';
+                                ?>
+                                <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
                                     <?php echo $key,'  ',$option; ?>
                                 </option>
                                 <?php } ?>
@@ -111,3 +114,8 @@
         </div>
     </div>
     {template "product","footer"}
+<script type="text/javascript">
+function setSeFilter() {
+    $('#myformmm').submit();
+}
+</script>

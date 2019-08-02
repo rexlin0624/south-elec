@@ -1,66 +1,316 @@
-{template "content","header"}
-<link href="{CSS_PATH}download.css" rel="stylesheet" type="text/css" />
-<!--main-->
-<div class="main">
-	<!--left_bar-->
-	<div class="col-left">
-    <div class="crumbs"><a href="#">首页</a><span> &gt; </span>{catpos($catid)}</div>
-    	<!--最新下载-->
-    <div class="box mg_b10">
-        		<h5>最新下载</h5>
-            <ul class="content news-photo col4">
-			{pc:content action="lists" catid="$catid" num="4"  thumb="1" order="id DESC"}
-			{loop $data $r}
-            	<li>
-                    <div class="img-wrap">
-                        <a href="{$r[url]}"><img src="{thumb($r[thumb],110,90)}" width="110" height="90"></a>
+{template "content","top"}
+<link rel="stylesheet" href="/statics/typo3temp/compressor/download.css" />
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!--10378-->
+            <div id="d3239eb9" class=" slickCarousel">
+                {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+                <div class="sliderBox">
+                    <div class="background-image-holder">
+                        <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
                     </div>
-                    <a href="{$r[url]}" title="{$r[title]}" style="color:{$r[style]}">{str_cut($r[title],24,'')}</a>
-                </li>
-			{/loop}	
-			{/pc}
-            </ul>
-        </div>
-		{pc:content action="lists" catid="$catid" num="15" order="id DESC" page="$page"}
-        <div class="box boxsbg">
-		{loop $data $r}
-        	<dl class="down_list sysnews">
-              <dt><h5><a target="_blank" href="{$r[url]}" title="{$r[title]}">{$r[title]}</a></h5></dt>
-              <dd class="down_txt">{$r[description]}</dd>
-              <dd class="down_attribute align_r"><span class="icon_1">软件大小：{$r[filesize]}</span><span class="icon_3">星级：{$r[stars]}</span><span class="icon_4">更新时间：{date('Y-m-d',$r[inputtime])}</span></dd>
-            </dl>
-		{/loop}	
-        	<!--pages-->
-        <div class="text-c mg_t20" id="pages">{$pages}</div>
-		{/pc}
-        </div>
-    </div>
-    <!--right_bar-->
-    <div class="col-auto">
-    	<!--广告228x90-->
-    	<div class="brd mg_b10"><script language="javascript" src="{APP_PATH}caches/poster_js/5.js"></script></div>
-        <div class="box">
-            <h5 class="title-2">下载排行</h5>
-            <ul class="content digg">
-			{pc:content action="hits" catid="$catid" num="10" order="views DESC" cache="3600"}
-				{loop $data $r}
-					<li><a href="{$r[url]}" target="_blank">{$r[title]}</a></li>
-				{/loop}
-			{/pc}
-            </ul>
-        </div>
-        <div class="bk10"></div>
-        <div class="box">
-            <h5 class="title-2">推荐下载</h5>
-            <ul class="content digg">
-            	{pc:content  action="position" posid="5" order="listorder DESC" num="4"}
-        	 	{loop $data $r}        
-                <li><a href="{$r[url]}" title="{$r[title]}">{str_cut($r[title],34)}</a></li>
-               	{/loop}  
-             	{/pc} 
-            </ul>
+                </div>
+                {/loop}
+            </div>
         </div>
     </div>
 </div>
-<div class="bk10"></div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="breadCrumbMenu">
+                <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+                {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row equalize">
+        <div class="col-sm-8">
+            <div class="well well-lg">
+                <!--10379-->
+                <div class="csc-header csc-header-n1">
+                    {$description}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="well well-lg">
+                <h3>{$catname}</h3>
+                <div class="subNavigation">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container contentContainer" role="main">
+    <div class="well well-lg"> <!--16898-->
+        <div class="tx-eao-filelist">
+            <div class="wrapper">
+                <div class="button-group filters-button-group">
+                    <div class="selectItem">
+                        <p class="parent_category Media" data-filter=".item-51">分类</p>
+                        <select class="option-set clearfix form-control item-51 filterfields" data-filter-group="filelist_51" id="Media" multiple="multiple" style="display: none;">
+                            <option value="*" data-filter-value="" class="selected">--</option>
+
+                            {loop $category_options $key $cate}
+                            <option value="{$key}" data-filter="{$key}">{$cate}</option>
+                            {/loop}
+
+                        </select>
+                        <div class="btn-group" style="width: 200px;">
+                            <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="--" style="width: 200px; overflow: hidden; text-overflow: ellipsis;" aria-expanded="false">
+                                <span class="multiselect-selected-text">--</span> <b class="caret"></b>
+                            </button>
+                            <ul class="multiselect-container dropdown-menu">
+                                <li class="multiselect-item multiselect-all">
+                                    <a tabindex="0" class="multiselect-all"><label class="checkbox">--</label></a>
+                                </li>
+                                {loop $category_options $key $cate}
+                                <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="{$key}" class="category" onclick="get_download_list()">{$cate}</label></a></li>
+                                {/loop}
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="selectItem">
+                        <p class="parent_category Series" data-filter=".item-52">系列</p>
+                        <select class="option-set clearfix form-control item-52 filterfields" data-filter-group="filelist_52" id="Series" multiple="multiple" style="display: none;">
+                            <option value="*" data-filter-value="" class="selected">--</option>
+
+                            {loop $serious_options $key $cate}
+                            <option value="{$key}" data-filter="{$key}">{$cate}</option>
+                            {/loop}
+
+                        </select>
+                        <div class="btn-group" style="width: 150px;">
+                            <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="--" style="width: 150px; overflow: hidden; text-overflow: ellipsis;">
+                                <span class="multiselect-selected-text">--</span> <b class="caret"></b>
+                            </button>
+                            <ul class="multiselect-container dropdown-menu">
+                                <li class="multiselect-item multiselect-all">
+                                    <a tabindex="0" class="multiselect-all"><label class="checkbox">--</label></a>
+                                </li>
+                                {loop $serious_options $key $cate}
+                                <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="{$key}" class="serious" onclick="get_download_list()">{$cate}</label></a></li>
+                                {/loop}
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="selectItem">
+                        <p class="parent_category Function" data-filter=".item-63">功能</p>
+                        <select class="option-set clearfix form-control item-63 filterfields" data-filter-group="filelist_63" id="Function" multiple="multiple" style="display: none;">
+                            <option value="*" data-filter-value="" class="selected">--</option>
+
+                            {loop $functions_options $key $cate}
+                            <option value="{$key}" data-filter="{$key}">{$cate}</option>
+                            {/loop}
+
+                        </select>
+                        <div class="btn-group" style="width: 150px;">
+                            <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="--" style="width: 150px; overflow: hidden; text-overflow: ellipsis;">
+                                <span class="multiselect-selected-text">--</span> <b class="caret"></b>
+                            </button>
+                            <ul class="multiselect-container dropdown-menu">
+                                <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox">--</label></a></li>
+                                {loop $functions_options $key $cate}
+                                <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="{$key}" class="functions" onclick="get_download_list()">{$cate}</label></a></li>
+                                {/loop}
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="selectItem">
+                        <p class="parent_category Certified" data-filter=".item-139">认证</p>
+                        <select class="option-set clearfix form-control item-139 filterfields" data-filter-group="filelist_139" id="Certified" multiple="multiple" style="display: none;">
+                            <option value="*" data-filter-value="" class="selected">--</option>
+
+                            {loop $certified_options $key $cate}
+                            <option value="{$key}" data-filter="{$key}">{$cate}</option>
+                            {/loop}
+                        </select>
+                        <div class="btn-group" style="width: 150px;">
+                            <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="--" style="width: 150px; overflow: hidden; text-overflow: ellipsis;">
+                                <span class="multiselect-selected-text">--</span> <b class="caret"></b>
+                            </button>
+                            <ul class="multiselect-container dropdown-menu">
+                                <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox">--</label></a></li>
+                                {loop $certified_options $key $cate}
+                                <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="{$key}" class="certified" onclick="get_download_list()">{$cate}</label></a></li>
+                                {/loop}
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="selectItem">
+                        <p class="parent_category Language" data-filter=".item-49">语言</p>
+                        <select class="option-set clearfix form-control item-49 filterfields" data-filter-group="filelist_49" id="Language" multiple="multiple" style="display: none;">
+                            <option value="*" data-filter-value="" class="selected">--</option>
+
+                            {loop $language_options $key $cate}
+                            <option value="{$key}" data-filter="{$key}">{$cate}</option>
+                            {/loop}
+
+                        </select>
+                        <div class="btn-group" style="width: 150px;">
+                            <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="EN, ZH" style="width: 150px; overflow: hidden; text-overflow: ellipsis;">
+                                <span class="multiselect-selected-text">--</span> <b class="caret"></b>
+                            </button>
+                            <ul class="multiselect-container dropdown-menu">
+                                <li class="multiselect-item multiselect-all"><a tabindex="0" class="multiselect-all"><label class="checkbox">--</label></a></li>
+                                {loop $language_options $key $cate}
+                                <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="{$key}" class="language" onclick="get_download_list()">{$cate}</label></a></li>
+                                {/loop}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-title clearfix">
+                    <span class="file_title">标题</span>
+                    <span class="medium_title">分类</span>
+                    <span class="filetype">文件大小</span>
+                    <span class="file_infoblock">语言          </span>
+                </div>
+                <div class="grid" style="position: relative; height: 500px;">
+                    <div id="download_list" class="element-item item-70 item-69 item-68 item-181 item-67 item-187 item-121 item-127 item-171 item-169 item-160 item-144 " data-category="category-item" style="position: absolute; left: 0px; top: 0px;"></div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade tx-eao-filepopup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body" id="modal_body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="imageHolder">
+                                                <img id="modal_thumb">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="filename underline">  </p>
+                                            <div class="description underline">  </div>
+                                            <p class="cat1 underline">
+                                                <span>分类:&nbsp; <span id="modal_category"></span></span>
+                                            </p>
+                                            <p class="cat2 underline">
+                                                <span>系列:&nbsp;<span id="modal_serious"></span></span>
+                                            </p>
+                                            <p class="cat3 underline">
+                                                <span>功能:&nbsp;<span id="modal_functions"></span></span>
+                                            </p>
+                                            <p class="cat4 underline">
+                                                <span>认证: &nbsp;<span id="modal_certified"></span></span>
+                                            </p>
+                                            <p class="cat5 underline">
+                                                <span>语言:&nbsp;<span id="modal_language"></span></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="empty_filterlistmsg" style="display: none;">No documents available. Please set filters again.</div>
+
+
+                <input type="hidden" value="" class="mediaCode">
+                <input type="hidden" value="" class="seriesCode">
+                <input type="hidden" value="" class="functionCode">
+                <input type="hidden" value="" class="certificateCode">
+                <input type="hidden" value="163,160" class="langCodes">
+                <input type="hidden" value="{&quot;de&quot;:&quot;German&quot;,&quot;fr&quot;:&quot;French&quot;,&quot;it&quot;:&quot;Italian&quot;,&quot;nl&quot;:&quot;Dutch&quot;,&quot;jp&quot;:&quot;Japanese&quot;,&quot;sv&quot;:&quot;Swedish&quot;,&quot;cn&quot;:&quot;Chinese&quot;,&quot;en&quot;:&quot;English UK&quot;,&quot;us&quot;:&quot;English US&quot;,&quot;es&quot;:&quot;Spanish&quot;}" class="languages">
+
+
+
+                <input type="hidden" value="more details" class="more_details_value">
+                <input type="hidden" value="Date" class="date_value">
+                <input type="hidden" value="Format" class="format_value">
+                <input type="hidden" value="231" class="pageid">
+                <input type="hidden" value="https://eao.com/china/cn/downloads/" class="url">
+            </div>
+        </div>
+    </div>
+</div>
 {template "content","footer"}
+<script type="text/javascript">
+var INFO = {};
+$(document).ready(function () {
+    get_download_list();
+});
+
+function get_filter(type) {
+    var filter = [];
+    $('.' + type).each(function () {
+        if (!$(this).is(':checked')) {
+            return true;
+        }
+
+        filter.push($(this).val());
+    });
+
+    return filter;
+}
+
+function get_download_list() {
+    var data = {
+        category: get_filter('category'),
+        serious: get_filter('serious'),
+        functions: get_filter('functions'),
+        certified: get_filter('certified'),
+        language: get_filter('language'),
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: '/index.php?m=content&c=index&a=get_downloads',
+        data: data,
+        success: function (response) {
+            var lists = $.parseJSON(response);
+            var download_html = [], tmp, j, downloadfile;
+            for (var i = 0;i < lists.length;i++) {
+                tmp = lists[i];
+                INFO[tmp['id']] = tmp;
+                download_html.push('<span class="file_title displaymore pdf" data-id="' + tmp['id'] + '">' + tmp['title'] + '</span>');
+                download_html.push('<span class="medium_title">' + tmp['category'].replace(/,/g, ' ') + '</span>');
+                download_html.push('<span class="filetype"> ' + tmp['filesize'] + '</span>');
+                download_html.push('<span class="file_infoblock">');
+                download_html.push('  <span class="filedownload">');
+                for (j = 0;j < tmp['downfiles'].length;j++) {
+                    downloadfile = tmp['downfiles'][j];
+                    download_html.push('    <a href="' + downloadfile['fileurl'] + '" target="_blank"> ' + downloadfile['filename'] + ' </a>');
+                }
+                download_html.push('  </span>');
+                download_html.push('  <span class="moreInfo"><a href="javascript:void(0);" class="displaymore" data-id="' + tmp['id'] + '">more details</a></span>');
+                download_html.push('</span>');
+            }
+
+            $('#download_list').html(download_html.join(''));
+
+            $('.displaymore').click(function () {
+                var did = $(this).attr('data-id');
+
+                $('#modal_thumb').attr('src', INFO[did]['thumb']);
+                $('#modal_category').html(INFO[did]['category'].replace(/,/g, ' '));
+                $('#modal_serious').html(INFO[did]['serious']);
+                $('#modal_functions').html(INFO[did]['function']);
+                $('#modal_certified').html(INFO[did]['certified']);
+                $('#modal_language').html(INFO[did]['language'].replace(/,/g, ' '));
+                $('#myModal').modal('show');
+            });
+        }
+    });
+}
+</script>
