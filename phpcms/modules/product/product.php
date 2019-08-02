@@ -84,8 +84,21 @@ class product extends admin {
                 $id = $this->db->insert($product, true);
             }
 
+            $setting = $this->db_setting->get_one(['id' => 1]);
+
             $pdf_path = $this->get_pdf_path($id);
             $pdf_content = $this->get_pdf_template();
+            $pdf_content = preg_replace('/{pdf_title}/', $setting['pdf_title'], $pdf_content);
+            $pdf_content = preg_replace('/{pdf_desc}/', $setting['pdf_desc'], $pdf_content);
+            $pdf_content = preg_replace('/{title}/', $code . ' - ' . $product['title'], $pdf_content);
+            $pdf_content = preg_replace('/{description}/', $product['description'], $pdf_content);
+            $pdf_content = preg_replace('/{thumb}/', 'http://' . $_SERVER['HTTP_HOST'] . $product['thumb'], $pdf_content);
+
+            $prop_string = [];
+            foreach ($product_props as $key => $prop) {
+                $prop_string[] = '<li>' . $prop['title'] . '：' . $prop['options'][$product[$key]] . '</li>';
+            }
+            $pdf_content = preg_replace('/{props}/', implode('', $prop_string), $pdf_content);
 
             // generate pdf
             $this->_snappy->setOptions([
