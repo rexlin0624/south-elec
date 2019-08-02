@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>pdf.html</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'simsun';
+    }
+    </style>
 </head>
 
 <body style="margin: 0px;padding: 0px;">
