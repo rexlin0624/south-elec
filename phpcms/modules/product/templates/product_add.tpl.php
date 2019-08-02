@@ -100,8 +100,8 @@ $functions_id = isset($info['functions_id']) ? $info['functions_id'] : 0;
                     $('#dosubmit').val('提交');
 
                     if (response === 'success') {
-                        //alert('操作成功');
-                        //location.href = '?m=product&c=product&a=config_list&pc_hash=<?php //echo $_GET['pc_hash']; ?>//';
+                        alert('操作成功');
+                        location.href = '?m=product&c=product&a=config_list&pc_hash=<?php echo $_GET['pc_hash']; ?>';
                     }
                 },
                 error: function (error) {
