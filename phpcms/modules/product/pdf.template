@@ -26,7 +26,7 @@
         </div>
 
         <div style="margin-top: 1cm;">
-            <div style="width: 50%;float: left;border-right: 1px solid #000000;text-align: center;height: 20.7cm;">
+            <div style="width: 10cm;float: left;border-right: 1px solid #000000;text-align: center;height: 20.7cm;">
                 <div style="font-weight: bold;">{title}</div>
                 <div style="margin-top: 20px;">
                     <img src="{thumb}" style="width:80%;" />
@@ -35,8 +35,8 @@
                     {description}
                 </div>
             </div>
-            <div style="float: left;display: inline-block;">
-                <ul style="margin: 0px;padding: 0px 0px 0px 20px;list-style-type: none;line-height: 50px;max-width:49%;">
+            <div style="float: left;">
+                <ul style="margin: 0px;padding: 0px 0px 0px 20px;list-style-type: none;line-height: 50px;width: 10cm;">
                     {props}
                 </ul>
             </div>
