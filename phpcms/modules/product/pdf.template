@@ -26,10 +26,10 @@
         </div>
 
         <div style="margin-top: 1cm;">
-            <div style="width: 49%;float: left;border-right: 1px solid #000000;text-align: center;height: 22.7cm;">
+            <div style="width: 50%;float: left;border-right: 1px solid #000000;text-align: center;height: 20.7cm;">
                 <div style="font-weight: bold;">{title}</div>
                 <div style="margin-top: 20px;">
-                    <img src="{thumb}" />
+                    <img src="{thumb}" style="width:80%;" />
                 </div>
                 <div style="font-style: italic;font-size: 11px;">
                     {description}
