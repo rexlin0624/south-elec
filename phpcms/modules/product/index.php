@@ -114,7 +114,9 @@ class index {
                 $conditon[] = $field . ' = "' . $flt . '"';
             }
         }
-        $where .= ' AND (' . implode(' OR ', $conditon) . ')';
+        if (!empty($conditon)) {
+            $where .= ' AND (' . implode(' OR ', $conditon) . ')';
+        }
 
         $function_info = $this->db_function_list->get_one(['id' => $functions_id]);
 
