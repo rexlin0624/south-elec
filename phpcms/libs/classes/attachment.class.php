@@ -142,6 +142,9 @@ class attachment {
 	 */
 	function download($field, $value,$watermark = '0',$ext = 'gif|jpg|jpeg|bmp|png', $absurl = '', $basehref = '')
 	{
+                if (!is_string($ext)) {
+                    return false;
+                }
 		global $image_d;
 		$this->att_db = pc_base::load_model('attachment_model');
 		$upload_url = pc_base::load_config('system','upload_url');
