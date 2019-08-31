@@ -76,9 +76,12 @@
                                             <a href="/index.php?m=product&c=index&a=show&functions_id=<?php echo $list['functions_id']; ?>&id=<?php echo $list['id']; ?>">
                                                 <em><?php echo $list['title']; ?></em>
                                             </a>
-
                                             <table class="attrList">
                                                 <tbody>
+                                                <tr>
+                                                    <td class="attribute" width="120">产品编码：</td>
+                                                    <td class="attribute_value"><?php echo $list['code']; ?></td>
+                                                </tr>
                                                 <?php foreach ($props as $key => $prop) { ?>
                                                 <tr>
                                                     <td class="attribute" width="120"><?php echo $prop['title']; ?>:</td>
