@@ -43,7 +43,6 @@
             <div style="clear: both;"></div>
         </div>
     </div>
-    <div style="overflow: hidden;page-break-after: always;"></div>
-    <div>new page</div>
+    {project_images}
 </body>
 </html>
