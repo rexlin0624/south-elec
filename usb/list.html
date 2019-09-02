@@ -1,0 +1,109 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>产品配置器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script type="text/javascript" src="statics/layout/eao/script/modernizr.js"></script>
+    <script type="text/javascript" src="statics/layout/eao/script/selectivizr.js"></script>
+    <link rel="stylesheet" type="text/css" href="statics/layout/eao/combine.css"/>
+</head>
+
+<body>
+<div id="page">
+    <div class="row">
+        <ul class="column grid_3  service_links">
+            <li><a href="/index.php?m=product&c=index&a=init">首页</a></li>
+        </ul>
+        <div class="column right grid_5 logo">
+            <a href="/index.php" target="_blank"><img src="layout/eao/img/Logo_EAO_Claim.png" alt="logo"></a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column grid_3"></div>
+        <div class="column grid_5 float_right">
+            <ul class="nav row">
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=step&type=1" id="activer_link">市场</a>
+                    <ul class="nav2">
+                        <div class="col">
+                            {market_menus}
+                        </div>
+                    </ul>
+                </li>
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=functions">功能</a>
+                    <ul class="nav2 small">
+                        <div class="col">
+                            {function_menus}
+                        </div>
+                    </ul>
+                </li>
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=step&type=2">系列</a>
+                    <ul class="nav2 small">
+                        <div class="col">
+                            {series_menus}
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="column grid_2 column_margin">
+            <div class="box">
+                <span class="boxheader"><h3>{setting_title}</h3></span>
+                <div class="boxcontent">
+                    <div id="basketContentDynamic">
+                        <p>{setting_content}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="content grid_6">
+                <h1 class="c_3x2_h1">功能1</h1>
+                <div class="column grid_6 bg">
+                    <div class="row">
+                        {list_filter}
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="column">
+                            <h6>查找到 <span id="total_record">0</span> 条记录</h6></div>
+                        <div class="column float_right">
+                            <ul class="mWebPagination">
+                                <li></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <table id="sortTable" class="list">
+                        <tbody id="sortTableTbody"></tbody>
+                    </table>
+
+                    <div class="last">
+                        <ul class="mWebPagination">
+                            <li></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            &copy;copyright at 2019
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="statics/layout/eao/combine.js"></script>
+<script type="text/javascript" src="list.js"></script>

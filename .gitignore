@@ -5,3 +5,4 @@ uploadfile
 /info.txt
 composer.lock
 vendor
+usb_output

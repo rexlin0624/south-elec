@@ -1,0 +1,109 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>产品配置器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script type="text/javascript" src="statics/layout/eao/script/modernizr.js"></script>
+    <script type="text/javascript" src="statics/layout/eao/script/selectivizr.js"></script>
+    <link rel="stylesheet" type="text/css" href="statics/layout/eao/combine.css" />
+</head>
+
+<body>
+<div id="page">
+    <div class="row">
+        <ul class="column grid_3  service_links">
+            <li><a href="/index.php?m=product&c=index&a=init">首页</a></li>
+        </ul>
+        <div class="column right grid_5 logo">
+            <a href="/index.php" target="_blank"><img src="layout/eao/img/Logo_EAO_Claim.png" alt="logo"></a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column grid_3"></div>
+        <div class="column grid_5 float_right">
+            <ul class="nav row">
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=step&type=1"  id="activer_link">市场</a>
+                    <ul class="nav2">
+                        <div class="col">
+                            {market_menus}
+                        </div>
+                    </ul>
+                </li>
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=functions" >功能</a>
+                    <ul class="nav2 small">
+                        <div class="col">
+                            {function_menus}
+                        </div>
+                    </ul>
+                </li>
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=step&type=2">系列</a>
+                    <ul class="nav2 small">
+                        <div class="col">
+                            {series_menus}
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr><div class="row">
+    <div class="column grid_2 column_margin">
+        <div class="box">
+            <span class="boxheader"><h3>{setting_title}</h3></span>
+            <div class="boxcontent">
+                <div id="basketContentDynamic">
+                    <p>{setting_content}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="content grid_6">
+            <div class="">
+                <div class="column grid_2 banner_box">
+                    <a href="functions-1.html" class="banner">
+                        <img src="{market_thumb}" alt="Markets" class="banner_logo">
+                        <h1>{market_title}</h1>
+                        <h2>{market_description}</h2>
+                        <img src="statics/layout/eao/img/arrow.png" class="arrow_root">
+                    </a>
+                </div>
+
+                <div class="column grid_2 banner_box">
+                    <a href="functions.html" class="banner">
+                        <img src="{function_thumb}" alt="Functions" class="banner_logo">
+                        <h1>{function_title}</h1>
+                        <h2>{function_description}</h2>
+                        <img src="statics/layout/eao/img/arrow.png" class="arrow_root">
+                    </a>
+                </div>
+
+                <div class="column grid_2 banner_box" id="last_banner_box">
+                    <a href="functions-2.html" class="banner">
+                        <img src="{series_thumb}" alt="Series" class="banner_logo">
+                        <h1>{series_title}</h1>
+                        <h2>{series_description}</h2>
+                        <img src="statics/layout/eao/img/arrow.png" class="arrow_root">
+                    </a>
+                </div>
+            </div>
+            <div class=""></div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        &copy;copyright at 2019
+    </div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="statics/layout/eao/combine.js"></script>

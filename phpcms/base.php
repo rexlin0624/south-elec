@@ -156,7 +156,9 @@ class pc_base {
 	 */
 	public static function load_app_func($func, $m = '') {
 		$m = empty($m) && defined('ROUTE_M') ? ROUTE_M : $m;
-		if (empty($m)) return false;
+		if (empty($m)) {
+            return false;
+        }
 		return self::_load_func($func, 'modules'.DIRECTORY_SEPARATOR.$m.DIRECTORY_SEPARATOR.'functions');
 	}
 	
@@ -208,7 +210,9 @@ class pc_base {
 	 */
 	private static function _load_func($func, $path = '') {
 		static $funcs = array();
-		if (empty($path)) $path = 'libs'.DIRECTORY_SEPARATOR.'functions';
+		if (empty($path)) {
+            $path = 'libs'.DIRECTORY_SEPARATOR.'functions';
+        }
 		$path .= DIRECTORY_SEPARATOR.$func.'.func.php';
 		$key = md5($path);
 		if (isset($funcs[$key])) return true;
