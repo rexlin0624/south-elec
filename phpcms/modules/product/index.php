@@ -341,6 +341,9 @@ class index {
         $show_template = preg_replace('/{function_menus}/', implode('', $function_menus), $show_template);
         $show_template = preg_replace('/{series_menus}/', implode('', $series_menus), $show_template);
         foreach ($products as $product) {
+            $show_template_tmp = $show_template;
+            $product_id = $product['id'];
+
             // 产品属性
             $show_props = [];
             foreach ($this->_product_props as $kk => $props) {
@@ -351,12 +354,28 @@ class index {
 
                 $show_props[] = $tmp;
             }
-            $show_template = preg_replace('/{title}/', $product['title'], $show_template);
-            $show_template = preg_replace('/{thumb}/', $product['thumb'], $show_template);
-            $show_template = preg_replace('/{props_list}/', implode('', $show_props), $show_template);
+            $show_template_tmp = preg_replace('/{title}/', $product['title'], $show_template_tmp);
+            $show_template_tmp = preg_replace('/{thumb}/', substr($product['thumb'], 1, strlen($product['thumb'])), $show_template_tmp);
+            $show_template_tmp = preg_replace('/{props_list}/', implode('', $show_props), $show_template_tmp);
 
-            file_put_contents($output_path . 'show-' . $product['id'] . '.html', $show_template);
+            // 工程图
+            $project_images = [];
+            for ($p = 1;$p <= 4;$p++) {
+                $proj_img = $product['project_image_' . $p];
+                if (empty($proj_img)) {
+                    continue;
+                }
+                $proj_img = substr($proj_img, 1, strlen($proj_img));
+                $project_images[] = '<a href="' . $proj_img . '" target="_blank">工程图' . $p . ' (eps)</a>';
+            }
+            $show_template_tmp = preg_replace('/{project_images}/', implode('', $project_images), $show_template_tmp);
+            $show_template_tmp = preg_replace('/{pdf_name}/', $product_id, $show_template_tmp);
+
+            file_put_contents($output_path . 'show-' . $product_id . '.html', $show_template_tmp);
         }
+
+        // 复制PDF到USB版本目录下
+        dir_copy(CACHE_PATH . 'pdf', $output_path . 'pdf');
 
         echo 'ok';
     }
