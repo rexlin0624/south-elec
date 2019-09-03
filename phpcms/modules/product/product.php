@@ -95,11 +95,22 @@ class product extends admin {
             // 工程图
             $project_images = [];
             for ($i = 1;$i <= 4;$i++) {
-                if (empty($product['project_image_' . $i])) {
+                $img = $product['project_image_' . $i];
+                if (empty($img)) {
                     continue;
                 }
-                $url = 'http://' . $_SERVER['HTTP_HOST'] . $product['project_image_' . $i];
 
+                // 把eps转为png图片
+                $eps_path = PHPCMS_PATH . substr($img, 1, strlen($img));
+                $png_path = substr($eps_path, 0, -4) . '.png';
+                $image = new Imagick();
+                $image->setResolution(1200, 1200);
+                $image->readimage($eps_path);
+                $image->setBackgroundColor(new ImagickPixel('transparent'));
+                $image->setImageFormat('png');
+                $image->writeImage($png_path);
+
+                $url = 'http://' . $_SERVER['HTTP_HOST'] . substr($img, 0, -4) . '.png';
                 $project_images[] = '<div style="overflow: hidden;page-break-after: always;"></div><div><img src="' . $url . '" /></div>';
             }
             $pdf_content = preg_replace('/{project_images}/', implode('', $project_images), $pdf_content);

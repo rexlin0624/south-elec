@@ -103,9 +103,9 @@ class form {
 		if(!$size) $size= 50;
 		if(!empty($thumb_setting) && count($thumb_setting)) $thumb_ext = $thumb_setting[0].','.$thumb_setting[1];
 		else $thumb_ext = ',';
-		if(!$alowexts) $alowexts = 'jpg|jpeg|gif|bmp|png';
+		if(!$alowexts) $alowexts = 'eps|jpg|jpeg|gif|bmp|png';
 		if(!defined('IMAGES_INIT')) {
-			$str = '<script type="text/javascript" src="'.JS_PATH.'swfupload/swf2ckeditor.js"></script>';
+			$str = '<script type="text/javascript" src="'.JS_PATH.'swfupload/swf2ckeditor.js?v=20190903"></script>';
 			define('IMAGES_INIT', 1);
 		}
 		$value = new_html_special_chars($value);
