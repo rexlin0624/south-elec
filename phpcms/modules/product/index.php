@@ -144,11 +144,15 @@ class index {
 	    $usb_template_path = PHPCMS_PATH . 'usb' . DIRECTORY_SEPARATOR;
 	    $output_path = PHPCMS_PATH . 'usb_output' . DIRECTORY_SEPARATOR;
 
-	    // 复制JS和CSS文件
+	    /*
+	     * 复制JS和CSS文件
+	     */
         dir_copy($usb_template_path . 'statics', $output_path . 'statics');
         dir_copy(PHPCMS_PATH . 'uploadfile', $output_path . 'uploadfile');
 
-        // 生成首页数据：市场分类、功能分类、系列分类、配置数据
+        /*
+         * 生成首页数据：市场分类、功能分类、系列分类、配置数据
+         */
         $this->db_setting = pc_base::load_model('productions_setting_model');
         $setting = $this->db_setting->get_one(['id' => 1]);
         $index_template = file_get_contents($usb_template_path . 'index.html');
@@ -156,7 +160,7 @@ class index {
         $index_template = preg_replace('/{setting_title}/', $setting['title'], $index_template);
         $index_template = preg_replace('/{setting_content}/', $setting['description'], $index_template);
 
-        // market
+        // 市场
         $market_setting = $this->db_market_setting->get_one(['id' => 1]);
         $market_list = $this->db_market_list->listinfo([], '', 1, 100);
         $market_menus = [];
@@ -197,7 +201,9 @@ class index {
 
         file_put_contents($output_path . 'index.html', $index_template);
 
-        // 生成二级页面数据
+        /*
+         * 生成二级页面数据
+         */
         $category_template = file_get_contents($usb_template_path . 'category.html');
         $category_template = preg_replace('/{setting_title}/', $setting['title'], $category_template);
         $category_template = preg_replace('/{setting_content}/', $setting['description'], $category_template);
@@ -290,14 +296,18 @@ class index {
         $series_category_template = preg_replace('/{category_list}/', implode('', $categories), $series_category_template);
         file_put_contents($output_path . 'functions-2.html', $series_category_template);
 
-        // 把所有产品数据生成到一个JS变量中，并独立生成JS文件
+        /*
+         * 把所有产品数据生成到一个JS变量中，并独立生成JS文件
+         */
         $products = $this->db->listinfo([], 'id DESC', 1, 1000000);
         $js_list_template = file_get_contents($usb_template_path . 'list.js');
         $js_list_template = preg_replace('/{products}/', json_encode($products), $js_list_template);
         $js_list_template = preg_replace('/{properties}/', json_encode($this->_product_props), $js_list_template);
         file_put_contents($output_path . 'list.js', $js_list_template);
 
-        // 生成产品列表数据
+        /*
+         * 产品配置器列表页
+         */
         $list_template = file_get_contents($usb_template_path . 'list.html');
         $list_template = preg_replace('/{setting_title}/', $setting['title'], $list_template);
         $list_template = preg_replace('/{setting_content}/', $setting['description'], $list_template);
@@ -320,6 +330,33 @@ class index {
         }
         $list_template = preg_replace('/{list_filter}/', implode('', $list_filter), $list_template);
         file_put_contents($output_path . 'list.html', $list_template);
+
+        /*
+         * 产品配置器详情页
+         */
+        $show_template = file_get_contents($usb_template_path . 'show.html');
+        $show_template = preg_replace('/{setting_title}/', $setting['title'], $show_template);
+        $show_template = preg_replace('/{setting_content}/', $setting['description'], $show_template);
+        $show_template = preg_replace('/{market_menus}/', implode('', $market_menus), $show_template);
+        $show_template = preg_replace('/{function_menus}/', implode('', $function_menus), $show_template);
+        $show_template = preg_replace('/{series_menus}/', implode('', $series_menus), $show_template);
+        foreach ($products as $product) {
+            // 产品属性
+            $show_props = [];
+            foreach ($this->_product_props as $kk => $props) {
+                $tmp  = '<tr style="line-height: 30px;">';
+                $tmp .= '<td>' . $props['title'] . '</td>';
+                $tmp .= '<td class="right">' . $props['options'][$product[$kk]] . '</td>';
+                $tmp .= '</tr>';
+
+                $show_props[] = $tmp;
+            }
+            $show_template = preg_replace('/{title}/', $product['title'], $show_template);
+            $show_template = preg_replace('/{thumb}/', $product['thumb'], $show_template);
+            $show_template = preg_replace('/{props_list}/', implode('', $show_props), $show_template);
+
+            file_put_contents($output_path . 'show-' . $product['id'] . '.html', $show_template);
+        }
 
         echo 'ok';
     }

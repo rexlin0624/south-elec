@@ -58,7 +58,7 @@ function setSeFilter() {
 
     var items = PRODUCTS;
 
-    // filter items
+    // filter item
     var fn_condition = new Function('filters', 'item', 'if (Object.keys(filters).length === 0) { return true; } var condition = [];for (var filter in filters) { condition.push("item[\'" + filter + "\'] === \'" + filters[filter] + "\'"); } return condition.join(" && ");');
     var myfilter = {};
     for (var filter in filters) {
@@ -79,7 +79,7 @@ function setSeFilter() {
 
         replace = {
             '{index}': index,
-            '{url}': 'product-' + item['id'] + '.html',
+            '{url}': 'show-' + item['id'] + '.html',
             '{thumb}': item['thumb'].slice(1),
             '{title}': item['title'],
             '{code}': item['code']

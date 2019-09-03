@@ -94,7 +94,7 @@ class product extends admin {
 
             // 工程图
             $project_images = [];
-            for ($i = 1;$i <= 3;$i++) {
+            for ($i = 1;$i <= 4;$i++) {
                 if (empty($product['project_image_' . $i])) {
                     continue;
                 }

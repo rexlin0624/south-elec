@@ -7,6 +7,7 @@ $thumb = isset($info['thumb']) ? $info['thumb'] : '';
 $project_image_1 = isset($info['project_image_1']) ? $info['project_image_1'] : '';
 $project_image_2 = isset($info['project_image_2']) ? $info['project_image_2'] : '';
 $project_image_3 = isset($info['project_image_3']) ? $info['project_image_3'] : '';
+$project_image_4 = isset($info['project_image_4']) ? $info['project_image_4'] : '';
 $functions_id = isset($info['functions_id']) ? $info['functions_id'] : 0;
 $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
 ?>
@@ -83,6 +84,12 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
                 <th><strong>工程图3：</strong></th>
                 <td>
                     <?php echo form::images('product[project_image_3]', 'project_image_3', $project_image_3, 'product', '', 40)?>
+                </td>
+            </tr>
+            <tr>
+                <th><strong>工程图4：</strong></th>
+                <td>
+                    <?php echo form::images('product[project_image_4]', 'project_image_4', $project_image_4, 'product', '', 40)?>
                 </td>
             </tr>
             </tbody>
@@ -169,7 +176,8 @@ $(document).ready(function(){
             series_id: $('#series_id').val(),
             project_image_1: $('#project_image_1').val(),
             project_image_2: $('#project_image_2').val(),
-            project_image_3: $('#project_image_3').val()
+            project_image_3: $('#project_image_3').val(),
+            project_image_4: $('#project_image_4').val()
         };
 
         <?php
