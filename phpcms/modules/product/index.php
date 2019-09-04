@@ -233,7 +233,7 @@ class index {
             foreach ($functions as $item1) {
                 $thumb = substr($item1['thumb'], 1, strlen($item1['thumb']));
                 $tmp  = '<div class="column grid_2 column_margin">';
-                $tmp .= '<a href="functions-1-' . $item1['id'] . '.html" class="c_3x2">';
+                $tmp .= '<a href="list.html?fid=' . $item1['id'] . '" class="c_3x2">';
                 $tmp .= '<div class="img_chapter">';
                 $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item1['title'] . '</h5>';
                 $tmp .= '</span>';
@@ -254,7 +254,7 @@ class index {
         foreach ($function_list as $item) {
             $thumb = substr($item['thumb'], 1, strlen($item['thumb']));
             $tmp  = '<div class="column grid_2 column_margin">';
-            $tmp .= '<a href="functions-' . $item['id'] . '.html" class="c_3x2">';
+            $tmp .= '<a href="list.html?fid=' . $item['id'] . '" class="c_3x2">';
             $tmp .= '<div class="img_chapter">';
             $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item['title'] . '</h5>';
             $tmp .= '</span>';
@@ -283,7 +283,7 @@ class index {
             $arr_series = [];
             foreach ($series as $item1) {
                 $tmp  = '<div class="column grid_2 column_margin">';
-                $tmp .= '<a href="functions-2-' . $item1['id'] . '.html" class="c_3x2">';
+                $tmp .= '<a href="list.html?fid=' . $item1['id'] . '" class="c_3x2">';
                 $tmp .= '<span><h5>' . $item1['title'] . '</h5>';
                 $tmp .= '</span>';
                 $tmp .= '</a>';

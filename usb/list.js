@@ -13,6 +13,17 @@ String.prototype.allReplace = function(obj) {
     return retStr;
 };
 
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
+
+window.onload = function () {
+    console.log(getUrlParameter('fid'));
+};
+
 function setSeFilter() {
     var filters = {};
     var temp_props = [], prop = {}, props = [];
