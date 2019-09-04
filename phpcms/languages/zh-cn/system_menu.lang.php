@@ -471,4 +471,5 @@ $LANG['series_setting'] = '系列配置';
 $LANG['functions_setting'] = '功能配置';
 $LANG['functions_add'] = '添加功能';
 $LANG['product_setting'] = '基础配置';
+$LANG['generate_offline'] = '生成离线版本';
 ?>

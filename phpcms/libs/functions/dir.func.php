@@ -154,4 +154,30 @@ function dir_delete($dir) {
     return @rmdir($dir);
 }
 
-?>
+/**
+ * 压缩目录及目录下的所有文件
+ *
+ * @param   string  $fromDir    目录绝对路径
+ * @param   string  $toDir      压缩文件存放路径
+ * @param   string  $subDir     压缩文件上层目录
+ * @return	bool	如果成功则返回 TRUE，失败则返回 FALSE
+ */
+function dir_zip($fromDir, $toDir, $subDir) {
+    $zip = new ZipArchive();
+    if (!$zip->open($toDir, ZipArchive::CREATE)) {
+        return false;
+    }
+
+    $dir_list = dir_list($fromDir);
+    foreach ($dir_list as $list) {
+        $zip_file = str_replace($subDir, '', $list);
+
+        if (is_dir($list)) {
+            $zip->addEmptyDir($zip_file);
+        } else {
+            $zip->addFile($list, $zip_file);
+        }
+    }
+
+    return $zip->close();
+}

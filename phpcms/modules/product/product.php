@@ -4,10 +4,12 @@ defined('IN_PHPCMS') or exit('No permission resources.');
 require_once __DIR__ . '/../../../vendor/autoload.php';
 use Knp\Snappy\Pdf;
 
+pc_base::load_sys_func('dir');
 pc_base::load_app_class('admin','admin',0);
 
 class product extends admin {
-    private $db_setting, $db, $db_functions, $db_series;
+    private $db_setting, $db, $db_market, $db_functions, $db_series;
+    private $db_market_setting, $db_function_setting, $db_series_setting;
     private $_snappy;
     private $_product_props = null;
 
@@ -20,8 +22,13 @@ class product extends admin {
         $this->db_setting = pc_base::load_model('productions_setting_model');
         $this->db = pc_base::load_model('productions_model');
 
+        $this->db_market = pc_base::load_model('productions_market_list_model');
         $this->db_functions = pc_base::load_model('productions_functions_list_model');
         $this->db_series = pc_base::load_model('productions_series_list_model');
+
+        $this->db_market_setting = pc_base::load_model('productions_market_model');
+        $this->db_function_setting = pc_base::load_model('productions_functions_model');
+        $this->db_series_setting = pc_base::load_model('productions_series_model');
 
         $this->_snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
     }
@@ -172,7 +179,7 @@ class product extends admin {
     }
 
     public function setting() {
-        pc_base::load_sys_class('form','',0);
+        pc_base::load_sys_class('form', '', 0);
 
         if (isset($_POST['product'])) {
             $id = (int)$_POST['product']['id'];
@@ -192,5 +199,285 @@ class product extends admin {
         }
 
         include $this->admin_tpl('product_setting');
+    }
+
+    /**
+     * 生成离线版本
+     */
+    public function generate_offline() {
+        if (isset($_POST['generate'])) {
+            $zip_name = '华南电子网_' . date('YmdHis');
+
+            $usb_template_path = PHPCMS_PATH . 'usb' . DIRECTORY_SEPARATOR;
+            $output_path = CACHE_PATH . 'offline/' . $zip_name . DIRECTORY_SEPARATOR;
+            if (!is_dir($output_path)) {
+                mkdir($output_path);
+            }
+
+            /*
+             * 复制JS和CSS文件
+             */
+            dir_copy($usb_template_path . 'statics', $output_path . 'statics');
+            dir_copy(PHPCMS_PATH . 'uploadfile', $output_path . 'uploadfile');
+
+            /*
+         * 生成首页数据：市场分类、功能分类、系列分类、配置数据
+         */
+            $this->db_setting = pc_base::load_model('productions_setting_model');
+            $setting = $this->db_setting->get_one(['id' => 1]);
+            $index_template = file_get_contents($usb_template_path . 'index.html');
+
+            $index_template = preg_replace('/{setting_title}/', $setting['title'], $index_template);
+            $index_template = preg_replace('/{setting_content}/', $setting['description'], $index_template);
+
+            // 市场
+            $market_setting = $this->db_market_setting->get_one(['id' => 1]);
+            $market_list = $this->db_market->listinfo([], '', 1, 100);
+            $market_menus = [];
+            foreach ($market_list as $item) {
+                $market_menus[] = '<li><a href="functions-1-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
+            }
+            $market_thumb = substr($market_setting['thumb'], 1, strlen($market_setting['thumb']));
+            $index_template = preg_replace('/{market_menus}/', implode('', $market_menus), $index_template);
+            $index_template = preg_replace('/{market_thumb}/', $market_thumb, $index_template);
+            $index_template = preg_replace('/{market_title}/', $market_setting['title'], $index_template);
+            $index_template = preg_replace('/{market_description}/', $market_setting['description'], $index_template);
+
+            // 功能
+            $function_setting = $this->db_function_setting->get_one(['id' => 1]);
+            $function_list = $this->db_functions->listinfo([], '', 1, 100);
+            $function_menus = [];
+            foreach ($function_list as $item) {
+                $function_menus[] = '<li><a href="functions-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
+            }
+            $thumb = substr($function_setting['thumb'], 1, strlen($function_setting['thumb']));
+            $index_template = preg_replace('/{function_menus}/', implode('', $function_menus), $index_template);
+            $index_template = preg_replace('/{function_thumb}/', $thumb, $index_template);
+            $index_template = preg_replace('/{function_title}/', $function_setting['title'], $index_template);
+            $index_template = preg_replace('/{function_description}/', $function_setting['description'], $index_template);
+
+            // 系列
+            $series_setting = $this->db_series_setting->get_one(['id' => 1]);
+            $list = $this->db_series->listinfo([], '', 1, 100);
+            $series_menus = [];
+            foreach ($list as $item) {
+                $series_menus[] = '<li><a href="functions-2-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
+            }
+            $thumb = substr($series_setting['thumb'], 1, strlen($series_setting['thumb']));
+            $index_template = preg_replace('/{series_menus}/', implode('', $series_menus), $index_template);
+            $index_template = preg_replace('/{series_thumb}/', $thumb, $index_template);
+            $index_template = preg_replace('/{series_title}/', $series_setting['title'], $index_template);
+            $index_template = preg_replace('/{series_description}/', $series_setting['description'], $index_template);
+
+            file_put_contents($output_path . 'index.html', $index_template);
+
+            /*
+             * 生成二级页面数据
+             */
+            $category_template = file_get_contents($usb_template_path . 'category.html');
+            $category_template = preg_replace('/{setting_title}/', $setting['title'], $category_template);
+            $category_template = preg_replace('/{setting_content}/', $setting['description'], $category_template);
+            $category_template = preg_replace('/{market_menus}/', implode('', $market_menus), $category_template);
+            $category_template = preg_replace('/{function_menus}/', implode('', $function_menus), $category_template);
+            $category_template = preg_replace('/{series_menus}/', implode('', $series_menus), $category_template);
+
+            // 市场
+            $market_category_template = $category_template;
+            $market_category_template = preg_replace('/{category_title}/', '市场', $market_category_template);
+            $categories = [];
+            foreach ($market_list as $item) {
+                $thumb = substr($item['thumb'], 1, strlen($item['thumb']));
+                $tmp  = '<div class="column grid_2 column_margin">';
+                $tmp .= '<a href="functions-1-' . $item['id'] . '.html" class="c_3x2">';
+                $tmp .= '<div class="img_chapter">';
+                $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item['title'] . '</h5>';
+                $tmp .= '</span>';
+                $tmp .= '</a>';
+                $tmp .= '</div>';
+                $categories[] = $tmp;
+
+                // 生成对应的功能列表页面
+                $functions = $this->db_functions->listinfo(['market_id' => $item['id']], '', 1, 1000);
+                $market_functions_template = $market_category_template;
+                $arr_functions = [];
+                foreach ($functions as $item1) {
+                    $thumb = substr($item1['thumb'], 1, strlen($item1['thumb']));
+                    $tmp  = '<div class="column grid_2 column_margin">';
+                    $tmp .= '<a href="functions-1-' . $item1['id'] . '.html" class="c_3x2">';
+                    $tmp .= '<div class="img_chapter">';
+                    $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item1['title'] . '</h5>';
+                    $tmp .= '</span>';
+                    $tmp .= '</a>';
+                    $tmp .= '</div>';
+                    $arr_functions[] = $tmp;
+                }
+                $market_functions_template = preg_replace('/{category_list}/', implode('', $arr_functions), $market_functions_template);
+                file_put_contents($output_path . 'functions-1-' . $item['id'] . '.html', $market_functions_template);
+            }
+            $market_category_template = preg_replace('/{category_list}/', implode('', $categories), $market_category_template);
+            file_put_contents($output_path . 'functions-1.html', $market_category_template);
+
+            // 功能
+            $function_category_template = $category_template;
+            $function_category_template = preg_replace('/{category_title}/', '功能', $function_category_template);
+            $categories = [];
+            foreach ($function_list as $item) {
+                $thumb = substr($item['thumb'], 1, strlen($item['thumb']));
+                $tmp  = '<div class="column grid_2 column_margin">';
+                $tmp .= '<a href="functions-' . $item['id'] . '.html" class="c_3x2">';
+                $tmp .= '<div class="img_chapter">';
+                $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item['title'] . '</h5>';
+                $tmp .= '</span>';
+                $tmp .= '</a>';
+                $tmp .= '</div>';
+                $categories[] = $tmp;
+            }
+            $function_category_template = preg_replace('/{category_list}/', implode('', $categories), $function_category_template);
+            file_put_contents($output_path . 'functions.html', $function_category_template);
+
+            // 系列
+            $series_category_template = $category_template;
+            $series_category_template = preg_replace('/{category_title}/', '系列', $series_category_template);
+            $categories = [];
+            foreach ($list as $item) {
+                $tmp  = '<div class="column grid_2 column_margin">';
+                $tmp .= '<a href="functions-2-' . $item['id'] . '.html" class="c_3x2">';
+                $tmp .= '<span><h5>' . $item['title'] . '</h5></span>';
+                $tmp .= '</a>';
+                $tmp .= '</div>';
+                $categories[] = $tmp;
+
+                // 生成对应的功能列表页面
+                $series = $this->db_functions->listinfo(['series_id' => $item['id']], '', 1, 1000);
+                $series_functions_template = $series_category_template;
+                $arr_series = [];
+                foreach ($series as $item1) {
+                    $tmp  = '<div class="column grid_2 column_margin">';
+                    $tmp .= '<a href="functions-2-' . $item1['id'] . '.html" class="c_3x2">';
+                    $tmp .= '<span><h5>' . $item1['title'] . '</h5>';
+                    $tmp .= '</span>';
+                    $tmp .= '</a>';
+                    $tmp .= '</div>';
+                    $arr_series[] = $tmp;
+                }
+                $series_functions_template = preg_replace('/{category_list}/', implode('', $arr_series), $series_functions_template);
+                file_put_contents($output_path . 'functions-2-' . $item['id'] . '.html', $series_functions_template);
+            }
+            $series_category_template = preg_replace('/{category_list}/', implode('', $categories), $series_category_template);
+            file_put_contents($output_path . 'functions-2.html', $series_category_template);
+
+            /*
+             * 把所有产品数据生成到一个JS变量中，并独立生成JS文件
+             */
+            $products = $this->db->listinfo([], 'id DESC', 1, 1000000);
+            $js_list_template = file_get_contents($usb_template_path . 'list.js');
+            $js_list_template = preg_replace('/{products}/', json_encode($products), $js_list_template);
+            $js_list_template = preg_replace('/{properties}/', json_encode($this->_product_props), $js_list_template);
+            file_put_contents($output_path . 'list.js', $js_list_template);
+
+            /*
+             * 产品配置器列表页
+             */
+            $list_template = file_get_contents($usb_template_path . 'list.html');
+            $list_template = preg_replace('/{setting_title}/', $setting['title'], $list_template);
+            $list_template = preg_replace('/{setting_content}/', $setting['description'], $list_template);
+            $list_template = preg_replace('/{market_menus}/', implode('', $market_menus), $list_template);
+            $list_template = preg_replace('/{function_menus}/', implode('', $function_menus), $list_template);
+            $list_template = preg_replace('/{series_menus}/', implode('', $series_menus), $list_template);
+            $list_filter = [];
+            foreach ($this->_product_props as $kk => $props) {
+                $tmp  = '<fieldset class="filter column grid_filter">';
+                $tmp .= '<label>' . $props['title'] . '(' . count($props['options']) . ')</label>';
+                $tmp .= '<select onchange="setSeFilter();" name="' . $kk . '" id="' . $kk . '" class="prodFinder" style="display: inline-block;">';
+                $tmp .= '<option value="-"></option>';
+                foreach ($props['options'] as $key => $option) {
+                    $tmp .= '<option value="' . $key . '">' . ($key . '  ' . $option) . '</option>';
+                }
+                $tmp .= '</select>';
+                $tmp .= '</fieldset>';
+
+                $list_filter[] = $tmp;
+            }
+            $list_template = preg_replace('/{list_filter}/', implode('', $list_filter), $list_template);
+            file_put_contents($output_path . 'list.html', $list_template);
+
+            /*
+             * 产品配置器详情页
+             */
+            $show_template = file_get_contents($usb_template_path . 'show.html');
+            $show_template = preg_replace('/{setting_title}/', $setting['title'], $show_template);
+            $show_template = preg_replace('/{setting_content}/', $setting['description'], $show_template);
+            $show_template = preg_replace('/{market_menus}/', implode('', $market_menus), $show_template);
+            $show_template = preg_replace('/{function_menus}/', implode('', $function_menus), $show_template);
+            $show_template = preg_replace('/{series_menus}/', implode('', $series_menus), $show_template);
+            foreach ($products as $product) {
+                $show_template_tmp = $show_template;
+                $product_id = $product['id'];
+
+                // 产品属性
+                $show_props = [];
+                foreach ($this->_product_props as $kk => $props) {
+                    $tmp  = '<tr style="line-height: 30px;">';
+                    $tmp .= '<td>' . $props['title'] . '</td>';
+                    $tmp .= '<td class="right">' . $props['options'][$product[$kk]] . '</td>';
+                    $tmp .= '</tr>';
+
+                    $show_props[] = $tmp;
+                }
+                $show_template_tmp = preg_replace('/{title}/', $product['title'], $show_template_tmp);
+                $show_template_tmp = preg_replace('/{thumb}/', substr($product['thumb'], 1, strlen($product['thumb'])), $show_template_tmp);
+                $show_template_tmp = preg_replace('/{props_list}/', implode('', $show_props), $show_template_tmp);
+
+                // 工程图
+                $project_images = [];
+                for ($p = 1;$p <= 4;$p++) {
+                    $proj_img = $product['project_image_' . $p];
+                    if (empty($proj_img)) {
+                        continue;
+                    }
+                    $proj_img = substr($proj_img, 1, strlen($proj_img));
+                    $project_images[] = '<a href="' . $proj_img . '" target="_blank">工程图' . $p . ' (eps)</a>';
+                }
+                $show_template_tmp = preg_replace('/{project_images}/', implode('', $project_images), $show_template_tmp);
+                $show_template_tmp = preg_replace('/{pdf_name}/', $product_id, $show_template_tmp);
+
+                file_put_contents($output_path . 'show-' . $product_id . '.html', $show_template_tmp);
+            }
+
+            // 复制PDF到USB版本目录下
+            dir_copy(CACHE_PATH . 'pdf', $output_path . 'pdf');
+
+            /*
+             * zip offline
+             */
+            $zip_path = CACHE_PATH . 'offline/' . $zip_name . '.zip';
+            dir_zip($output_path, $zip_path, $output_path);
+
+            // 删除临时文件夹
+            dir_delete($output_path);
+
+            echo $zip_name;
+            exit;
+        }
+        include $this->admin_tpl('product_generate_offline');
+    }
+
+    /**
+     * 下载离线版本
+     */
+    public function download_offline() {
+        $filename = trim($_GET['file']) . '.zip';
+        $file_path = CACHE_PATH . 'offline/' . $filename;
+        $fileHandle = fopen($file_path,"rb");
+
+        header('Content-type:application/octet-stream; charset=utf-8');
+        header("Content-Transfer-Encoding: binary");
+        header("Accept-Ranges: bytes");
+        header("Content-Length: " . filesize($file_path));
+        header('Content-Disposition:attachment;filename="' . urlencode($filename) . '"');
+        while(!feof($fileHandle)) {
+            echo fread($fileHandle, 10240);
+        }
+        fclose($fileHandle);
     }
 }
