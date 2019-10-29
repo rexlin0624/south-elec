@@ -11,7 +11,7 @@
     <script type="text/javascript" src="/statics/layout/eao/script/selectivizr.js"></script>
     <link rel="stylesheet" type="text/css" href="/statics/layout/eao/combine.css" />
 </head>
-
+<?php $settings=[];?>{pc:get sql="SELECT setting FROM se_site WHERE siteid=1" return="data"}{loop $data $val}<?php $settings=string2array($val['setting'])?>{/loop}{/pc}
 <body>
 <div id="page">
     <div class="row">
