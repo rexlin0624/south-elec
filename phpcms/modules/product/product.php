@@ -9,7 +9,7 @@ pc_base::load_app_class('admin','admin',0);
 
 class product extends admin {
     private $db_setting, $db, $db_market, $db_functions, $db_series;
-    private $db_market_setting, $db_function_setting, $db_series_setting;
+    private $db_market_setting, $db_function_setting, $db_series_setting, $db_site;
     private $_snappy;
     private $_product_props = null;
 
@@ -18,6 +18,8 @@ class product extends admin {
 
         require_once __DIR__ . '/../../../product_props.php';
         $this->_product_props = $product_props;
+
+        $this->db_site = pc_base::load_model('site_model');
 
         $this->db_setting = pc_base::load_model('productions_setting_model');
         $this->db = pc_base::load_model('productions_model');
@@ -220,13 +222,21 @@ class product extends admin {
             dir_copy($usb_template_path . 'statics', $output_path . 'statics');
             dir_copy(PHPCMS_PATH . 'uploadfile', $output_path . 'uploadfile');
 
-            /*
-         * 生成首页数据：市场分类、功能分类、系列分类、配置数据
-         */
             $this->db_setting = pc_base::load_model('productions_setting_model');
             $setting = $this->db_setting->get_one(['id' => 1]);
             $index_template = file_get_contents($usb_template_path . 'index.html');
 
+            /*
+             * 网站LOGO
+             */
+            $site = $this->db_site->get_one(['siteid' => 1]);
+            $settings = string2array($site['setting']);
+            $logo = substr($settings['logo'], 1, strlen($settings['logo']));
+            $index_template = preg_replace('/{logo}/', $logo, $index_template);
+
+            /*
+             * 生成首页数据：市场分类、功能分类、系列分类、配置数据
+             */
             $index_template = preg_replace('/{setting_title}/', $setting['title'], $index_template);
             $index_template = preg_replace('/{setting_content}/', $setting['description'], $index_template);
 
