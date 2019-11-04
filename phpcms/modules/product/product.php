@@ -9,7 +9,7 @@ pc_base::load_app_class('admin','admin',0);
 
 class product extends admin {
     private $db_setting, $db, $db_market, $db_functions, $db_series;
-    private $db_market_setting, $db_function_setting, $db_series_setting, $db_site;
+    private $db_market_setting, $db_function_setting, $db_series_setting, $db_site, $db_contact_setting;
     private $_snappy;
     private $_product_props = null;
 
@@ -31,6 +31,7 @@ class product extends admin {
         $this->db_market_setting = pc_base::load_model('productions_market_model');
         $this->db_function_setting = pc_base::load_model('productions_functions_model');
         $this->db_series_setting = pc_base::load_model('productions_series_model');
+        $this->db_contact_setting = pc_base::load_model('productions_contact_setting_model');
 
         $this->_snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
     }
@@ -490,5 +491,31 @@ class product extends admin {
             echo fread($fileHandle, 10240);
         }
         fclose($fileHandle);
+    }
+
+    /**
+     * 联系工程师
+     */
+    public function contact() {
+        pc_base::load_sys_class('form', '', 0);
+
+        if (isset($_POST['contact'])) {
+            $id = (int)$_POST['contact']['id'];
+            unset($_POST['contact']['id']);
+            $product = $_POST['contact'];
+
+            if ($id > 0) {
+                $this->db_contact_setting->update($product, ['id' => $id]);
+            } else {
+                $product['created_at'] = time();
+
+                $this->db_contact_setting->insert($product, true);
+            }
+            showmessage('配置成功', HTTP_REFERER);
+        } else {
+            $info = $this->db_contact_setting->get_one(['id' => 1]);
+        }
+
+        include $this->admin_tpl('product_contact_setting');
     }
 }

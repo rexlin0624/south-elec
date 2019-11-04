@@ -76,7 +76,7 @@ function setSeFilter() {
         if (!filters.hasOwnProperty(filter)) {
             continue;
         }
-        if (filters[filter] === '-') {
+        if (filters[filter] === '-' || filters[filter] === 'Z') {
             continue;
         }
 
