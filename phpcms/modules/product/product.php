@@ -97,6 +97,7 @@ class product extends admin {
             $pdf_content = $this->get_pdf_template();
             $pdf_content = preg_replace('/{pdf_title}/', $setting['pdf_title'], $pdf_content);
             $pdf_content = preg_replace('/{pdf_desc}/', $setting['pdf_desc'], $pdf_content);
+            $pdf_content = preg_replace('/{pdf_header_bgcolor}/', $setting['header_bgcolor'], $pdf_content);
             $pdf_content = preg_replace('/{title}/', $code . ' - ' . $product['title'], $pdf_content);
             $pdf_content = preg_replace('/{description}/', $product['description'], $pdf_content);
             $pdf_content = preg_replace('/{thumb}/', 'http://' . $_SERVER['HTTP_HOST'] . $product['thumb'], $pdf_content);

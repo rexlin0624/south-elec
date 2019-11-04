@@ -53,7 +53,7 @@ include $this->admin_tpl('header', 'admin');
             <tr>
                 <th><strong>PDF头部背景颜色：</strong></th>
                 <td>
-                    <input type="text" id="colorpicker-popup" value="">
+                    <input type="text" id="colorpicker-popup" name="product[header_bgcolor]" value="<?php echo !empty($info) ? $info['header_bgcolor'] : '939598'; ?>">
                 </td>
             </tr>
             </tbody>

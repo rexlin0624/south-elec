@@ -14,10 +14,10 @@
 
 <body style="margin: 0px;padding: 0px;">
     <div>
-        <div style="background-color: #939598;height: 5cm;">
-            <div style="color: #ffffff;padding-left: 1.5cm;padding-top: 1.6cm;">
-                <div style="font-size: 48px;">{pdf_title}</div>
-                <div style="font-weight: bold;font-size: 48px;">{pdf_desc}</div>
+        <div style="background-color: #{pdf_header_bgcolor};height: 5cm;">
+            <div style="color: #ffffff;padding-left: 1.5cm;padding-top: 1cm;">
+                <div>{pdf_title}</div>
+                <div>{pdf_desc}</div>
             </div>
         </div>
 
