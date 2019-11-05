@@ -1,5 +1,6 @@
 var PRODUCTS = {products};
 var PROPERTIES = {properties};
+var ARR_PDF_IDS = [];
 
 String.prototype.allReplace = function(obj) {
     var retStr = this;
@@ -72,11 +73,16 @@ function setSeFilter() {
     // filter item
     var fn_condition = new Function('filters', 'item', 'if (Object.keys(filters).length === 0) { return true; } var condition = [];for (var filter in filters) { condition.push("item[\'" + filter + "\'] === \'" + filters[filter] + "\'"); } return condition.join(" && ");');
     var myfilter = {};
+    var is_show_contact = false;
     for (var filter in filters) {
         if (!filters.hasOwnProperty(filter)) {
             continue;
         }
-        if (filters[filter] === '-' || filters[filter] === 'Z') {
+        if (filters[filter] === '-') {
+            continue;
+        }
+        if (filters[filter] === 'Z') {
+            is_show_contact = true;
             continue;
         }
 
@@ -84,7 +90,14 @@ function setSeFilter() {
     }
     items = items.filter(function (item) { return eval(fn_condition(myfilter, item)); });
 
+    if (is_show_contact) {
+        $('#show-contact-engineer').show();
+    } else {
+        $('#show-contact-engineer').hide();
+    }
+
     var html = [], item = {}, index = 1, replace = {}, j;
+    ARR_PDF_IDS = [];
     for (var i = 0;i < items.length;i++) {
         item = items[i];
 
@@ -99,10 +112,20 @@ function setSeFilter() {
             replace['{' + props[j] + '}'] = PROPERTIES[props[j]]['options'][item[props[j]]];
         }
         html.push(template.allReplace(replace));
+        ARR_PDF_IDS.push(item['id']);
 
         index++;
     }
 
     document.getElementById('total_record').innerHTML = html.length + '';
     document.getElementById('sortTableTbody').innerHTML = html.join('');
+}
+
+function download_pdfs() {
+    var pdfs = ARR_PDF_IDS;
+    var path = '';
+    for (var i = 0;i < pdfs.length;i++) {
+        path = 'pdf/' + pdfs[i] + '.pdf';
+        window.open(path);
+    }
 }

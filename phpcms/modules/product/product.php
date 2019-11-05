@@ -288,6 +288,7 @@ class product extends admin {
              */
             $category_template = file_get_contents($usb_template_path . 'category.html');
             $category_template = preg_replace('/{setting_title}/', $setting['title'], $category_template);
+            $category_template = preg_replace('/{logo}/', $logo, $category_template);
             $category_template = preg_replace('/{setting_content}/', $setting['description'], $category_template);
             $category_template = preg_replace('/{market_menus}/', implode('', $market_menus), $category_template);
             $category_template = preg_replace('/{function_menus}/', implode('', $function_menus), $category_template);
@@ -388,14 +389,26 @@ class product extends admin {
             file_put_contents($output_path . 'list.js', $js_list_template);
 
             /*
+             * 转移css
+             */
+            $modal_css = file_get_contents($usb_template_path . 'modal.css');
+            file_put_contents($output_path . 'modal.css', $modal_css);
+
+            /*
              * 产品配置器列表页
              */
+            // 获取工程师联系方式
+            $contacts = $this->db_contact_setting->get_one(['id' => 1]);
+            $contact_info = '联系电话：' . $contacts['telephone'] . '<br />QQ：' . $contacts['qq'] . '<br />微信：' . $contacts['wechat'] . '<br />邮箱：' . $contacts['email'];
+
             $list_template = file_get_contents($usb_template_path . 'list.html');
             $list_template = preg_replace('/{setting_title}/', $setting['title'], $list_template);
+            $list_template = preg_replace('/{logo}/', $logo, $list_template);
             $list_template = preg_replace('/{setting_content}/', $setting['description'], $list_template);
             $list_template = preg_replace('/{market_menus}/', implode('', $market_menus), $list_template);
             $list_template = preg_replace('/{function_menus}/', implode('', $function_menus), $list_template);
             $list_template = preg_replace('/{series_menus}/', implode('', $series_menus), $list_template);
+            $list_template = preg_replace('/{contact-enginer-info}/', $contact_info, $list_template);
             $list_filter = [];
             foreach ($this->_product_props as $kk => $props) {
                 $tmp  = '<fieldset class="filter column grid_filter">';

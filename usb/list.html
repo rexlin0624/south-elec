@@ -10,6 +10,7 @@
     <script type="text/javascript" src="statics/layout/eao/script/modernizr.js"></script>
     <script type="text/javascript" src="statics/layout/eao/script/selectivizr.js"></script>
     <link rel="stylesheet" type="text/css" href="statics/layout/eao/combine.css"/>
+    <link rel="stylesheet" type="text/css" href="modal.css" />
 </head>
 
 <body>
@@ -19,7 +20,7 @@
             <li><a href="/index.php?m=product&c=index&a=init">首页</a></li>
         </ul>
         <div class="column right grid_5 logo">
-            <a href="/index.php" target="_blank"><img src="layout/eao/img/Logo_EAO_Claim.png" alt="logo"></a>
+            <a href="/index.php" target="_blank"><img src="{logo}" alt="logo"></a>
         </div>
     </div>
 
@@ -63,6 +64,14 @@
                     <div id="basketContentDynamic">
                         <p>{setting_content}</p>
                     </div>
+                    <ul style="text-align:center;padding:5px;list-style-type:none;display: none;" id="show-contact-engineer">
+                        <li style="display:inline-block;margin-right: 10px;">
+                            <a href="javascript:void(0);" class="del-wrap-aa" style="color:#FF0000;"><span class="del-t-aa">联系工程师</span></a>
+                        </li>
+                        <li style="display:inline-block;">
+                            <a href="javascript:void(0);" style="color:#FF0000;" onclick="download_pdfs()">导出PDF</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -103,7 +112,43 @@
         </div>
     </div>
 </div>
+<section class="modal-aa">
+    <div class="modal-info-aa center-self-xy-aa mYBounceInDown-aa">
+        <div class="modal-t-aa">
+            <p class="center-self-xy-aa">{contact-enginer-info}</p>
+        </div>
+        <div class="modal-b-aa clearfix-aa">
+            <button class="fl-aa cancel-aa">关闭</button>
+        </div>
+    </div>
+</section>
 </body>
 </html>
 <script type="text/javascript" src="statics/layout/eao/combine.js"></script>
 <script type="text/javascript" src="list.js"></script>
+<script type="text/javascript">
+(function(){
+    // 垃圾桶动画
+    var del = document.querySelectorAll('.del-wrap-aa');
+    var modal = document.querySelector('.modal-aa');
+    var gz = null;
+    for (const data of del) {
+        data.addEventListener('click',function(){
+            // 找到自己点击的那个垃圾桶的盖子
+            gz = this.querySelector('.del-t-aa');
+
+            gz.style.transform = 'rotate(-20deg) translateX(-2px)';
+
+            modal.style.display = 'block';
+        })
+    }
+    // 点击取消按钮关闭模态框
+    var cancel = modal.querySelector('.cancel-aa');
+    cancel.addEventListener('click',function(){
+        // 关闭模态框
+        modal.style.display = 'none';
+        // 关闭盖子
+        gz.style.transform = 'none';
+    })
+})()
+</script>
