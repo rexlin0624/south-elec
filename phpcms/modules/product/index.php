@@ -8,7 +8,7 @@ pc_base::load_sys_func('dir');
 pc_base::load_sys_class('form', '', '');
 class index {
 	private $db, $db_setting, $db_market_setting, $db_function_setting, $db_series_setting;
-	private $db_market_list, $db_function_list, $db_series_list;
+	private $db_market_list, $db_function_list, $db_series_list, $db_contact_setting;
 
 	const MARKET = 1;
 	const SERIES = 2;
@@ -28,6 +28,7 @@ class index {
 		$this->db_market_list = pc_base::load_model('productions_market_list_model');
 		$this->db_function_list = pc_base::load_model('productions_functions_list_model');
 		$this->db_series_list = pc_base::load_model('productions_series_list_model');
+        $this->db_contact_setting = pc_base::load_model('productions_contact_setting_model');
 
 		$this->_product_props = $product_props;
 	}
@@ -98,6 +99,7 @@ class index {
     public function lists() {
         $functions_id = (int)$_GET['functions_id'];
         $setting = $this->db_setting->get_one(['id' => 1]);
+        $contacts = $this->db_contact_setting->get_one(['id' => 1]);
         $props = $this->_product_props;
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
@@ -105,9 +107,14 @@ class index {
 
         $filter = $_POST;
         $conditon = [];
+        $is_display_contact = 'none';
         if (!empty($filter)) {
             foreach ($filter as $field => $flt) {
                 if ($flt == '-') {
+                    continue;
+                }
+                if ($flt == 'Z') {
+                    $is_display_contact = 'block';
                     continue;
                 }
 
@@ -119,6 +126,8 @@ class index {
         }
 
         $function_info = $this->db_function_list->get_one(['id' => $functions_id]);
+
+        $contact_info = '联系电话：' . $contacts['telephone'] . '<br />QQ：' . $contacts['qq'] . '<br />微信：' . $contacts['wechat'] . '<br />邮箱：' . $contacts['email'];
 
         $total = $this->db->count($where);
         $lists = $this->db->listinfo($where, 'id DESC', $page, 10);
