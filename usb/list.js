@@ -96,6 +96,22 @@ function setSeFilter() {
         $('#show-contact-engineer').hide();
     }
 
+    // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{前圈/磁}{序列号}
+    var selected_code = [
+        filters['front_shape'] ? filters['front_shape'] : 'X',
+        filters['front_button_material'] ? filters['front_button_material'] : 'X',
+        filters['front_button_shape'] ? filters['front_button_shape'] : 'X',
+        filters['front_button_color'] ? filters['front_button_color'] : 'X',
+        '.',
+        filters['switch_element'] ? filters['switch_element'] : 'X',
+        filters['light_style'] ? filters['light_style'] : 'X',
+        filters['led_color'] ? filters['led_color'] : 'X',
+        filters['led_voltage'] ? filters['led_voltage'] : 'X',
+        '.',
+        filters['front_magnetic'] ? filters['front_magnetic'] : 'X'
+    ].join('');
+    document.getElementById('current-selected-code').innerHTML = selected_code;
+
     var html = [], item = {}, index = 1, replace = {}, j;
     ARR_PDF_IDS = [];
     for (var i = 0;i < items.length;i++) {
