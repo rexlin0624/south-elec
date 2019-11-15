@@ -4,7 +4,7 @@ include $this->admin_tpl('header', 'admin');
 ?>
 <div class="pad-10">
     <form method="post" action="?m=product&c=product&a=contact" name="myform" id="myform">
-        <input type="hidden" name="product[id]" value="<?php echo !empty($info) ? $info['id'] : 0; ?>">
+        <input type="hidden" name="contact[id]" value="<?php echo !empty($info) ? $info['id'] : 0; ?>">
         <table class="table_form" width="100%" cellspacing="0">
             <tbody>
             <tr>
