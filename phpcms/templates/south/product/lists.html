@@ -15,7 +15,7 @@
                     <li style="display:inline-block;margin-right: 10px;">
                         <a href="javascript:void(0);" class="del-wrap-aa" style="color:#FF0000;"><span class="del-t-aa">联系工程师</span></a>
                     </li>
-                    <li style="display:inline-block;">
+                    <li style="display:none;">
                         <a href="javascript:void(0);" style="color:#FF0000;" onclick="download_pdfs()">导出PDF</a>
                     </li>
                 </ul>
@@ -39,7 +39,7 @@
                                 <option value="-"></option>
                                 <?php
                                 foreach ($prop['options'] as $key => $option) {
-                                $selected = ($filter[$kk] != "-" && $filter[$kk] == $key) ? ' selected="selected"' : '';
+                                $selected = ($filter[$kk] != '' && $filter[$kk] != "-" && $filter[$kk] == $key) ? ' selected="selected"' : '';
                                 ?>
                                 <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
                                     <?php echo $key,'  ',$option; ?>
