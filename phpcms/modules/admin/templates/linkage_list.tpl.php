@@ -22,6 +22,7 @@ include $this->admin_tpl('header');?>
 		<?php 
 		if(is_array($infos)){
 			foreach($infos as $info){
+				if ($info['linkageid'] == 1) { continue; }
 		?>
 		<tr>
 		<td width="10%" align="center"><?php echo $info['linkageid']?></td>
