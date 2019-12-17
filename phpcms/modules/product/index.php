@@ -110,8 +110,14 @@ class index {
         $page = $page > 1 ? $page : 1;
         $where = 'functions_id = ' . $functions_id;
 
+        $props_total = [];
+        foreach ($props as $k => $v) {
+            $ww = $k . ' IN(\'' . implode('\',\'', array_keys($v['options'])) . '\')';
+            $props_total[$k] = $this->db->count($ww);
+        }
+
         $filter = $_POST;
-        $conditon = [];
+        $condition = [];
         $is_display_contact = 'none';
         if (!empty($filter)) {
             foreach ($filter as $field => $flt) {
@@ -123,11 +129,11 @@ class index {
                     continue;
                 }
 
-                $conditon[] = $field . ' = "' . $flt . '"';
+                $condition[] = $field . ' = "' . $flt . '"';
             }
         }
-        if (!empty($conditon)) {
-            $where .= ' AND (' . implode(' OR ', $conditon) . ')';
+        if (!empty($condition)) {
+            $where .= ' AND (' . implode(' OR ', $condition) . ')';
         }
 
         $function_info = $this->db_function_list->get_one(['id' => $functions_id]);

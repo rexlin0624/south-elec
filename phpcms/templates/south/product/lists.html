@@ -33,7 +33,7 @@
                         <fieldset class="filter column grid_filter">
                             <label>
                                 <?php echo $prop['title']; ?>
-                                (<?php echo count($prop['options']); ?>)
+                                (<?php echo $props_total[$kk]; ?>)
                             </label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>
