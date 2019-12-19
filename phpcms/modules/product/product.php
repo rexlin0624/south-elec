@@ -160,7 +160,8 @@ class product extends admin {
     public function get_functions_by_series_id()
     {
         $series_id = (int)$_GET['series_id'];
-        $functions = $this->db_functions->listinfo(['series_id' => $series_id], '', 1, 10);
+        $where = 'series_id LIKE \'%,' . $series_id . ',%\'';
+        $functions = $this->db_functions->listinfo($where, '', 1, 10);
 
         echo json_encode($functions);
         exit;
