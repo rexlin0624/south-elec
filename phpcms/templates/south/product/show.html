@@ -31,24 +31,16 @@
                         </p>
                         <br>
 
-                        <div class="row content" style="display:none;">
+                        <div class="row content">
                             <div class="column grid_1 caption">
-
-
-
-
-                                <a rel="zoom" href="./media/zoom/BR04_MA_01_00001_zoom.jpg" class="modalImg" title="704.022.5 - Indicator full-face illumination compact - Dimensions <br />">
-                                    <img src="./media/klein/BR04_MA_01_00001_klein.jpg" width="110" height="125" alt="undefined" title="">
-
+                                <?php
+                                    for ($i = 1;$i <= 4;$i++) {
+                                        if (!empty($item['project_image_' . $i])) {
+                                ?>
+                                <a rel="zoom" href="<?php echo $item['project_image_' . $i] ?>" class="modalImg">
+                                    <img src="<?php echo $item['project_image_' . $i] ?>" height="125">
                                 </a>
-                                <a rel="zoom" href="./media/zoom/BR04_LO_01_00002_zoom.jpg" class="modalImg hidden" title="704.022.5 - Indicator full-face illumination compact - Mounting cut-outs <br />">
-                                    <img src="./media/klein/BR04_LO_01_00002_klein.jpg" width="110" height="153" alt="undefined" title="">
-
-                                </a>
-                                <a rel="zoom" href="./media/zoom/piz25024_zoom.jpg" class="modalImg hidden" title="704.022.5 - Indicator full-face illumination compact - Wiring diagram ">
-                                    <img src="./media/klein/piz25024_klein.jpg" width="27" height="124" alt="undefined" title="">
-
-                                </a>
+                                <?php }} ?>
                             </div>
                             <div class="column grid_1 caption detail_pic">
 
