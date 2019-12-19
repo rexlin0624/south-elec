@@ -110,6 +110,10 @@ class index {
         $page = $page > 1 ? $page : 1;
         $where = 'functions_id = ' . $functions_id;
 
+        $function = $this->db_function_list->get_one(['id' => $functions_id]);
+        $serial_id = $function['series_id'];
+        $serial = $this->db_series_list->get_one(['id' => $serial_id]);
+
         $props_total = [];
         foreach ($props as $k => $v) {
             $ww = $where . ' AND ' . $k . ' IN(\'' . implode('\',\'', array_keys($v['options'])) . '\')';
@@ -146,7 +150,8 @@ class index {
 
         // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{前圈/磁}{序列号}
         $this->_filter_params = $filter;
-        $code  = $this->_c('front_shape') . $this->_c('front_button_material') . $this->_c('front_button_shape') . $this->_c('front_button_color');
+        $code  = $serial['title'] . '-';
+        $code .= $this->_c('front_shape') . $this->_c('front_button_material') . $this->_c('front_button_shape') . $this->_c('front_button_color');
         $code .= '.' . $this->_c('switch_element') . $this->_c('light_style') . $this->_c('led_color') . $this->_c('led_voltage');
         $code .= '.' . $this->_c('front_magnetic');
 
