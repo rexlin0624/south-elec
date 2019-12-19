@@ -33,7 +33,21 @@
                         <fieldset class="filter column grid_filter">
                             <label>
                                 <?php echo $prop['title']; ?>
-                                (<?php echo $props_total[$kk]; ?>)
+                                (<?php
+                                    if (empty($filter)) {
+                                        echo $props_total[$kk];
+                                    } else {
+                                        if (empty($condition)) {
+                                            echo $props_total[$kk];
+                                        } else {
+                                            if (isset($filter[$kk]) && $filter[$kk] != '-') {
+                                                echo $props_total[$kk];
+                                            } else {
+                                                echo 0;
+                                            }
+                                        }
+                                    }
+                                ?>)
                             </label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>

@@ -112,7 +112,7 @@ class index {
 
         $props_total = [];
         foreach ($props as $k => $v) {
-            $ww = $k . ' IN(\'' . implode('\',\'', array_keys($v['options'])) . '\')';
+            $ww = $where . ' AND ' . $k . ' IN(\'' . implode('\',\'', array_keys($v['options'])) . '\')';
             $props_total[$k] = $this->db->count($ww);
         }
 
