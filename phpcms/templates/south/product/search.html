@@ -1,0 +1,225 @@
+{template "product","header"}
+<link rel="stylesheet" type="text/css" href="/usb/modal.css" />
+<script type="text/javascript">
+    var ARR_PDF_IDS = [];
+</script>
+<div class="row">
+    <div class="column grid_2 column_margin">
+        <div class="box">
+            <span class="boxheader"><h3>{$setting['title']}</h3></span>
+            <div class="boxcontent">
+                <div id="basketContentDynamic">
+                    <p>{$setting['description']}</p>
+                </div>
+                <ul style="text-align:center;padding:5px;list-style-type:none;display: {$is_display_contact};" id="show-contact-engineer">
+                    <li style="display:inline-block;margin-right: 10px;">
+                        <a href="javascript:void(0);" class="del-wrap-aa" style="color:#FF0000;"><span class="del-t-aa">联系工程师</span></a>
+                    </li>
+                    <li style="display:none;">
+                        <a href="javascript:void(0);" style="color:#FF0000;" onclick="download_pdfs()">导出PDF</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="content grid_6">
+            <h1 class="c_3x2_h1">{$function_info['title']}</h1>
+            <div class="column grid_6 bg">
+
+                <div class="row">
+                    <form action="/index.php?m=product&c=search&a=init" method="get" id="myformmm">
+                        <input type="hidden" name="m" value="product">
+                        <input type="hidden" name="c" value="search">
+                        <input type="hidden" name="a" value="init">
+                        <fieldset class="filter column grid_filter">
+                            <label>系列(<?php echo $props_total['front_shape']; ?>)</label>
+                            <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
+                                <option value="-"></option>
+                                <?php foreach ($serials as $serial) { ?>
+                                <?php $selected = ($serial_id == $serial['id']) ? ' selected="selected"' : ''; ?>
+                                <option<?php echo $selected; ?> value="<?php echo $serial['id']; ?>"><?php echo $serial['title']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </fieldset>
+                        <fieldset class="filter column grid_filter">
+                            <label>功能(<?php echo $props_total['front_shape']; ?>)</label>
+                            <select onchange="setSeFilter();" name="function_id" class="prodFinder" style="display: inline-block;">
+                                <option value="-"></option>
+                                <?php foreach ($functions as $function) { ?>
+                                <?php $selected = ($function_id == $function['id']) ? ' selected="selected"' : ''; ?>
+                                <option<?php echo $selected; ?> value="<?php echo $function['id']; ?>"><?php echo $function['title']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </fieldset>
+                        <div style="clear: both;"></div>
+                        <?php foreach ($props as $kk => $prop) { ?>
+                        <fieldset class="filter column grid_filter">
+                            <label>
+                                <?php echo $prop['title']; ?>
+                                (<?php
+                                    if (empty($filter)) {
+                                        echo $props_total[$kk];
+                                    } else {
+                                        if (empty($condition)) {
+                                            echo $props_total[$kk];
+                                        } else {
+                                            if (isset($filter[$kk]) && $filter[$kk] != '-') {
+                                                echo $props_total[$kk];
+                                            } else {
+                                                echo 0;
+                                            }
+                                        }
+                                    }
+                                ?>)
+                            </label>
+                            <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
+                                <option value="-"></option>
+                                <?php
+                                foreach ($prop['options'] as $key => $option) {
+                                $selected = ($filter[$kk] != '' && $filter[$kk] != "-" && $filter[$kk] == $key) ? ' selected="selected"' : '';
+                                ?>
+                                <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
+                                    <?php echo $key,'  ',$option; ?>
+                                </option>
+                                <?php } ?>
+                            </select>
+                        </fieldset>
+                        <?php } ?>
+                    </form>
+                </div>
+                <div class="row" id="current-selected-code">{$code}</div>
+                <hr>
+                <div class="row">
+                    <div class="column">
+                        <h6>查找到 {$total} 条记录</h6></div>
+                    <div class="column float_right">
+                        <ul class="mWebPagination">
+                            <li>{$pages}</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+                <table id="sortTable" class="list">
+                    <tbody>
+                    <?php $index = 1; foreach ($lists as $list) { ?>
+                    <script type="text/javascript">
+                        ARR_PDF_IDS.push('<?php echo $list["id"]; ?>');
+                    </script>
+                    <tr>
+                        <td>
+                            <div class="product_list_row">
+                                <table>
+                                    <tbody>
+                                    <tr>
+                                        <td class="product_counter">
+                                            <span><?php echo $index; ?></span>
+                                        </td>
+                                        <td>
+                                            <a href="/index.php?m=product&c=index&a=show&functions_id=<?php echo $list['functions_id']; ?>&id=<?php echo $list['id']; ?>">
+                                                <img src="<?php echo $list['thumb']; ?>"
+                                                     height="36"
+                                                     alt="<?php echo $list['title']; ?>"
+                                                     title="<?php echo $list['title']; ?>">
+                                            </a>
+
+
+                                        </td>
+                                        <td class="clickable" rel="/index.php?m=product&c=index&a=show&functions_id=<?php echo $list['functions_id']; ?>&id=<?php echo $list['id']; ?>" target="self">
+                                            <a href="/index.php?m=product&c=index&a=show&functions_id=<?php echo $list['functions_id']; ?>&id=<?php echo $list['id']; ?>">
+                                                <em><?php echo $list['title']; ?></em>
+                                            </a>
+                                            <table class="attrList">
+                                                <tbody>
+                                                <tr>
+                                                    <td class="attribute" width="120">产品编码：</td>
+                                                    <td class="attribute_value"><?php echo $list['code']; ?></td>
+                                                </tr>
+                                                <?php foreach ($props as $key => $prop) { ?>
+                                                <tr>
+                                                    <td class="attribute" width="120"><?php echo $prop['title']; ?>:</td>
+                                                    <td class="attribute_value"><?php echo $prop['options'][$list[$key]]; ?></td>
+                                                </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <hr>
+                        </td>
+                    </tr>
+                    <?php $index++; } ?>
+
+                    </tbody>
+                </table>
+
+                <div class="last">
+                    <ul class="mWebPagination">
+                        <li>{$pages}</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <section class="modal-aa">
+        <div class="modal-info-aa center-self-xy-aa mYBounceInDown-aa">
+            <div class="modal-t-aa">
+                <p class="center-self-xy-aa">{$contact_info}</p>
+            </div>
+            <div class="modal-b-aa clearfix-aa">
+                <button class="fl-aa cancel-aa">关闭</button>
+            </div>
+        </div>
+    </section>
+    {template "product","footer"}
+<script type="text/javascript">
+function setSeFilter() {
+    $('#myformmm').submit();
+}
+
+function download_pdfs() {
+    var pdfs = ARR_PDF_IDS;
+    var path = '';
+    for (var i = 0;i < pdfs.length;i++) {
+        path = 'pdf/' + pdfs[i] + '.pdf';
+        window.open(path);
+    }
+}
+(function(){
+    document.title += ' - 参数搜索';
+    jQuery('.column').find('a').removeAttr('id');
+    jQuery('.column').find('a:eq(3)').attr({'id': 'activer_link'});
+
+    // 垃圾桶动画
+    var del = document.querySelectorAll('.del-wrap-aa');
+    var modal = document.querySelector('.modal-aa');
+    var gz = null;
+    for (const data of del) {
+        data.addEventListener('click',function(){
+            // 找到自己点击的那个垃圾桶的盖子
+            gz = this.querySelector('.del-t-aa');
+
+            gz.style.transform = 'rotate(-20deg) translateX(-2px)';
+
+            modal.style.display = 'block';
+        })
+    }
+    // 点击取消按钮关闭模态框
+    var cancel = modal.querySelector('.cancel-aa');
+    cancel.addEventListener('click',function(){
+        // 关闭模态框
+        modal.style.display = 'none';
+        // 关闭盖子
+        gz.style.transform = 'none';
+    })
+})();
+</script>

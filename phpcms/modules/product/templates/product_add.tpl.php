@@ -3,6 +3,7 @@ defined('IN_ADMIN') or exit('No permission resources.');
 include $this->admin_tpl('header', 'admin');
 $id = isset($info['id']) ? $info['id'] : 0;
 $title = isset($info['title']) ? $info['title'] : '';
+$description = isset($info['description']) ? $info['description'] : '';
 $thumb = isset($info['thumb']) ? $info['thumb'] : '';
 $project_image_1 = isset($info['project_image_1']) ? $info['project_image_1'] : '';
 $project_image_2 = isset($info['project_image_2']) ? $info['project_image_2'] : '';
@@ -11,92 +12,141 @@ $project_image_4 = isset($info['project_image_4']) ? $info['project_image_4'] : 
 $functions_id = isset($info['functions_id']) ? $info['functions_id'] : 0;
 $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
 ?>
+<style type="text/css">
+    .form-tabs {
+        display: none;
+    }
+    .add-nav {
+        padding: 0;
+        margin: 0;
+        list-style-type: none;
+        margin-bottom: 10px;
+    }
+    .add-nav li {
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .add-nav li.select {
+        background-color: #0c9076;
+        color: #FFFFFF;
+    }
+</style>
 <div class="pad-10">
-    <form method="post" action="?m=product&c=product&a=add" name="myform" id="myform">
-        <input type="hidden" name="product[id]" id="product_id" value="<?php echo $id; ?>">
-        <table class="table_form" width="100%" cellspacing="0">
-            <tbody>
-            <tr>
-                <th width="120"><strong>产品编号：</strong></th>
-                <td><input id="code" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $code; ?>" readonly="readonly"></td>
-            </tr>
-            <tr>
-                <th width="120"><strong>产品名称：</strong></th>
-                <td><input name="product[title]" id="title" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $title; ?>"></td>
-            </tr>
-            <tr>
-                <th><strong>系列：</strong></th>
-                <td>
-                    <select name="product[series_id]" id="series_id">
-                        <option value="">--请选择系列--</option>
-                        <?php foreach ($series as $serie) { ?>
-                            <option value="<?php echo $serie['id']; ?>"<?php echo $serie['id'] == $series_id ? ' selected="selected"' : ''; ?>><?php echo $serie['title']; ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th width="120"><strong>功能：</strong></th>
-                <td>
-                    <select name="product[functions_id]" id="functions_id" onchange="generate_code()">
-                        <option value="">--请选择功能--</option>
-                        <?php foreach ($functions as $item) { ?>
-                            <option value="<?php echo $item['id']; ?>"<?php echo $item['id'] == $functions_id ? ' selected="selected"' : ''; ?>><?php echo $item['title']; ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-            </tr>
-            <?php foreach ($product_props as $name => $prop) { ?>
-            <tr>
-                <th width="120"><strong><?php echo $prop['title']; ?>：</strong></th>
-                <td>
-                    <select name="product[<?php echo $name; ?>]" id="<?php echo $name; ?>" onchange="generate_code()">
-                        <option value="">--请选择<?php echo $prop['title']; ?>--</option>
-                        <?php
-                        foreach ($prop['options'] as $key => $option) {
-                            $selected = ($info[$name] !== null && $key == $info[$name]) ? ' selected="selected"' : '';
-                        ?>
-                        <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $key, ' ', $option; ?></option>
-                        <?php } ?>
-                    </select>
-                </td>
-            </tr>
-            <?php } ?>
-            <tr>
-                <th><strong>缩略图：</strong></th>
-                <td>
-                    <?php echo form::images('product[thumb]', 'thumb', $thumb, 'product', '', 40)?>
-                </td>
-            </tr>
-            <tr>
-                <th><strong>工程图1：</strong></th>
-                <td>
-                    <?php echo form::images('product[project_image_1]', 'project_image_1', $project_image_1, 'product', '', 40)?>
-                </td>
-            </tr>
-            <tr>
-                <th><strong>工程图2：</strong></th>
-                <td>
-                    <?php echo form::images('product[project_image_2]', 'project_image_2', $project_image_2, 'product', '', 40)?>
-                </td>
-            </tr>
-            <tr>
-                <th><strong>工程图3：</strong></th>
-                <td>
-                    <?php echo form::images('product[project_image_3]', 'project_image_3', $project_image_3, 'product', '', 40)?>
-                </td>
-            </tr>
-            <tr>
-                <th><strong>工程图4：</strong></th>
-                <td>
-                    <?php echo form::images('product[project_image_4]', 'project_image_4', $project_image_4, 'product', '', 40)?>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <div class="bk15"></div>
-        <input type="button" name="dosubmit" id="dosubmit" value="提交" class="button">
-    </form>
+    <div>
+        <ul class="add-nav">
+            <li data-index="1" class="select">添加</li>
+            <li data-index="2">导入</li>
+        </ul>
+    </div>
+    <div  class="form-tabs" id="form-1" style="display: block;">
+        <form method="post" action="?m=product&c=product&a=add" name="myform" id="myform">
+            <input type="hidden" name="product[id]" id="product_id" value="<?php echo $id; ?>">
+            <table class="table_form" width="100%" cellspacing="0">
+                <tbody>
+                <tr>
+                    <th width="120"><strong>产品编号：</strong></th>
+                    <td><input id="code" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $code; ?>" readonly="readonly"></td>
+                </tr>
+                <tr>
+                    <th width="120"><strong>产品名称：</strong></th>
+                    <td><input name="product[title]" id="title" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $title; ?>"></td>
+                </tr>
+                <tr>
+                    <th width="120"><strong>产品描述：</strong></th>
+                    <td>
+                        <textarea name="product[description]" id="description" style="width: 350px;height: 40px;"><?php echo $description; ?></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>系列：</strong></th>
+                    <td>
+                        <select name="product[series_id]" id="series_id">
+                            <option value="">--请选择系列--</option>
+                            <?php foreach ($series as $serie) { ?>
+                                <option value="<?php echo $serie['id']; ?>"<?php echo $serie['id'] == $series_id ? ' selected="selected"' : ''; ?>><?php echo $serie['title']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th width="120"><strong>功能：</strong></th>
+                    <td>
+                        <select name="product[functions_id]" id="functions_id" onchange="generate_code()">
+                            <option value="">--请选择功能--</option>
+                            <?php foreach ($functions as $item) { ?>
+                                <option value="<?php echo $item['id']; ?>"<?php echo $item['id'] == $functions_id ? ' selected="selected"' : ''; ?>><?php echo $item['title']; ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <?php foreach ($product_props as $name => $prop) { ?>
+                <tr>
+                    <th width="120"><strong><?php echo $prop['title']; ?>：</strong></th>
+                    <td>
+                        <select name="product[<?php echo $name; ?>]" id="<?php echo $name; ?>" onchange="generate_code()">
+                            <option value="">--请选择<?php echo $prop['title']; ?>--</option>
+                            <?php
+                            foreach ($prop['options'] as $key => $option) {
+                                $selected = ($info[$name] !== null && $key == $info[$name]) ? ' selected="selected"' : '';
+                            ?>
+                            <option value="<?php echo $key; ?>"<?php echo $selected; ?>><?php echo $key, ' ', $option; ?></option>
+                            <?php } ?>
+                        </select>
+                    </td>
+                </tr>
+                <?php } ?>
+                <tr>
+                    <th><strong>缩略图：</strong></th>
+                    <td>
+                        <?php echo form::images('product[thumb]', 'thumb', $thumb, 'product', '', 40)?>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>工程图1：</strong></th>
+                    <td>
+                        <?php echo form::images('product[project_image_1]', 'project_image_1', $project_image_1, 'product', '', 40)?>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>工程图2：</strong></th>
+                    <td>
+                        <?php echo form::images('product[project_image_2]', 'project_image_2', $project_image_2, 'product', '', 40)?>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>工程图3：</strong></th>
+                    <td>
+                        <?php echo form::images('product[project_image_3]', 'project_image_3', $project_image_3, 'product', '', 40)?>
+                    </td>
+                </tr>
+                <tr>
+                    <th><strong>工程图4：</strong></th>
+                    <td>
+                        <?php echo form::images('product[project_image_4]', 'project_image_4', $project_image_4, 'product', '', 40)?>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="bk15"></div>
+            <input type="button" name="dosubmit" id="dosubmit" value="提交" class="button">
+        </form>
+    </div>
+    <div class="form-tabs" id="form-2">
+        <form method="post" action="?m=product&c=product&a=import" name="myformimport" id="myformimport" enctype="multipart/form-data">
+            <table class="table_form" width="100%" cellspacing="0">
+                <tbody>
+                <tr>
+                    <th width="120"><strong>上传文件：</strong></th>
+                    <td><input id="file" name="file" type="file" /></td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="bk15"></div>
+            <input type="submit" name="doimport" id="doimport" value="导入" class="button">
+        </form>
+    </div>
 </div>
 </body>
 </html>
@@ -128,6 +178,16 @@ function generate_code() {
 
 $(document).ready(function(){
     generate_code();
+
+    // 表单切换
+    $('.add-nav').find('li').click(function () {
+        var index = $(this).attr('data-index');
+        $('.add-nav').find('li').removeClass('select');
+        $(this).addClass('select');
+
+        $('.form-tabs').hide();
+        $('#form-' + index).show();
+    });
 
     $('#series_id').change(function () {
         var series_id = $(this).val();

@@ -6,3 +6,4 @@ uploadfile
 composer.lock
 vendor
 usb_output
+modify.sql
