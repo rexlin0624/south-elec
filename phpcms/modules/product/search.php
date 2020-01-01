@@ -41,21 +41,25 @@ class search {
         $props = $this->db_linkage->product_props();
 
         $serials = $this->db_series_list->listinfo();
-        $functions = [];
+        $functions = $this->db_function_list->listinfo([], '', 1, 1000);
 
         $serial_id = (int)$_GET['serial_id'];
         $function_id = (int)$_GET['function_id'];
 
         // 根据$serial_id获取function list
         if (!empty($serial_id)) {
-            /*if (!empty($function_id)) {
-                $where = ['id' => $function_id];
-            } else {
-                $where = 'series_id LIKE \'%' . $serial_id . '%\'';
-            }*/
+            $sql = 'SELECT DISTINCT functions_id FROM `se_productions` WHERE series_id = ' . $serial_id;
+            $query = $this->db->query($sql);
+            $rows = $this->db->fetch_array();
+            $functions_ids = [];
+            foreach ($rows as $row) {
+                $functions_ids[] = $row['functions_id'];
+            }
 
-            $where = 'series_id LIKE \'%' . $serial_id . '%\'';
+            $where = 'id IN(' . implode(',', $functions_ids) . ')';
             $functions = $this->db_function_list->listinfo($where);
+
+            $serial = $this->db_series_list->get_one(['id' => $serial_id]);
         }
 
         $setting = $this->db_setting->get_one(['id' => 1]);
@@ -105,8 +109,7 @@ class search {
 
         // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{前圈/磁}{序列号}
         $this->_filter_params = $filter;
-        $code  = '';
-//        $code  = $serial['title'] . '-';
+        $code  = !empty($serial) ? ($serial['title'] . '-') : '';
         $code .= $this->_c('front_shape') . $this->_c('front_button_material') . $this->_c('front_button_shape') . $this->_c('front_button_color');
         $code .= '.' . $this->_c('switch_element') . $this->_c('light_style') . $this->_c('led_color') . $this->_c('led_voltage');
         $code .= '.' . $this->_c('front_magnetic');
