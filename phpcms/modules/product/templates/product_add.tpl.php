@@ -34,7 +34,7 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
     }
 </style>
 <div class="pad-10">
-    <div>
+    <div style="display: none;">
         <ul class="add-nav">
             <li data-index="1" class="select">添加</li>
             <li data-index="2">导入</li>

@@ -573,20 +573,6 @@ class product extends admin {
         ini_set('memory_limit', '-1');
         require(PC_PATH . 'libs/classes/Classes/PHPExcel/IOFactory.php');
 
-        $arr_ids = [
-            3360 => '前圈尺寸',
-            3368 => '前圈/按键材料',
-            3372 => '前圈/按键形状',
-            3379 => '前圈/按键颜色',
-            3388 => '开关元件',
-            3395 => '照明形式',
-            3400 => 'LED灯颜色',
-            3407 => 'LED灯电压',
-            3414 => '前圈/磁'
-        ];
-        $propids = implode(',', array_keys($arr_ids));
-        $linkages = $this->db_linkage->listinfo('keyid IN(' . $propids . ')', 'listorder ASC', 1, 1000);
-
         $filename = $_FILES["file"]["tmp_name"];
         $fileType = PHPExcel_IOFactory::identify($filename);
         $objReader = PHPExcel_IOFactory::createReader($fileType);
@@ -614,47 +600,6 @@ class product extends admin {
             if (!empty($row)) {
                 $data[] = $row;
             }
-        }
-
-        $items = [];
-        foreach ($data as $item) {
-            // 系列
-            $serial = $item[0];
-            // 功能
-            $function = $item[1];
-            // 描述
-            $description = $item[2];
-            // 产品名称
-            $title = $item[3];
-            // 前圈尺寸
-            $front_shape = $this->_get_property(3360, $item[4], $linkages);
-            // 前圈材质
-            $front_button_material = $this->_get_property(3368, $item[5], $linkages);
-            // 前圈/按键头型
-            $front_button_shape = $this->_get_property(3372, $item[6], $linkages);
-            // 前圈颜色
-            $front_button_color = $this->_get_property(3379, $item[7], $linkages);
-            // 开关元件
-            $switch_element = $this->_get_property(3388, $item[8], $linkages);
-            // 照明形式
-            $light_style = $this->_get_property(3395, $item[9], $linkages);
-            // LED颜色
-            $led_color = $this->_get_property(3400, $item[10], $linkages);
-            // LED电压
-            $led_voltage = $this->_get_property(3407, $item[11], $linkages);
-
-            $items[] = [
-                'title' => $title,
-                'description' => $description,
-                'front_shape' => $front_shape,
-                'front_button_material' => $front_button_material,
-                'front_button_shape' => $front_button_shape,
-                'front_button_color' => $front_button_color,
-                'switch_element' => $switch_element,
-                'light_style' => $light_style,
-                'led_color' => $led_color,
-                'led_voltage' => $led_voltage
-            ];
         }
     }
 }
