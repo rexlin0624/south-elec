@@ -8,7 +8,7 @@ pc_base::load_sys_func('dir');
 pc_base::load_sys_class('form', '', '');
 class index {
 	private $db, $db_setting, $db_market_setting, $db_function_setting, $db_series_setting;
-	private $db_market_list, $db_function_list, $db_series_list, $db_contact_setting;
+	private $db_market_list, $db_function_list, $db_series_list, $db_contact_setting, $db_linkage;
 
 	const MARKET = 1;
 	const SERIES = 2;
@@ -17,8 +17,6 @@ class index {
 	private $_filter_params = [];
 
 	function __construct() {
-        require_once __DIR__ . '/../../../product_props.php';
-
 		$this->db = pc_base::load_model('productions_model');
 		$this->db_setting = pc_base::load_model('productions_setting_model');
 
@@ -31,7 +29,9 @@ class index {
 		$this->db_series_list = pc_base::load_model('productions_series_list_model');
         $this->db_contact_setting = pc_base::load_model('productions_contact_setting_model');
 
-		$this->_product_props = $product_props;
+        $this->db_linkage = pc_base::load_model('linkage_model');
+
+		$this->_product_props = $this->db_linkage->product_props();;
 	}
 
 	//首页
@@ -85,13 +85,21 @@ class index {
                 $item = $this->db_market_list->get_one(['id' => $id]);
                 $title = $item['title'];
 
-                $where = 'market_id LIKE \'%,' . $id . ',%\'';
+                $where = 'id IN(' . $item['functions'] . ')';
                 $lists = $this->db_function_list->listinfo($where, '', 1, 1000);
             } elseif ($type == self::SERIES) {
                 $item = $this->db_series_list->get_one(['id' => $id]);
                 $title = $item['title'];
 
-                $where = 'series_id LIKE \'%,' . $id . ',%\'';
+                $sql = 'SELECT DISTINCT functions_id FROM `se_productions` WHERE series_id = ' . $id;
+                $query = $this->db->query($sql);
+                $rows = $this->db->fetch_array();
+                $functions_ids = [];
+                foreach ($rows as $row) {
+                    $functions_ids[] = $row['functions_id'];
+                }
+
+                $where = 'id IN(' . implode(',', $functions_ids) . ')';
                 $lists = $this->db_function_list->listinfo($where, '', 1, 1000);
             }
         }
