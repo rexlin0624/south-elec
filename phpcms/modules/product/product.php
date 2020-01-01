@@ -16,9 +16,6 @@ class product extends admin {
     public function __construct() {
         parent::__construct();
 
-        require_once __DIR__ . '/../../../product_props.php';
-        $this->_product_props = $product_props;
-
         $this->db_site = pc_base::load_model('site_model');
 
         $this->db_linkage = pc_base::load_model('linkage_model');
@@ -71,7 +68,7 @@ class product extends admin {
         $id = (int)$_GET['id'];
         $info = [];
 
-        $product_props = $this->_product_props;
+        $product_props = $this->db_linkage->product_props();
 
         if (isset($_POST['product'])) {
             $id = (int)$_POST['product']['id'];
@@ -147,8 +144,7 @@ class product extends admin {
         } else {
             $series = $this->db_series->listinfo([], '', 1, 100);
 
-//            $functions = $this->db_functions->listinfo([], '', 1, 10);
-            $functions = [];
+            $functions = $this->db_functions->listinfo([], '', 1, 100);
             $message = '';
         }
 

@@ -13,30 +13,30 @@ $arr_series_id = explode(',', $series_id);
 <div class="pad-10">
     <form method="post" action="?m=product&c=functions&a=add" name="myform" id="myform">
         <input type="hidden" name="functions[id]" value="<?php echo $id; ?>">
-        <input type="hidden" name="functions[market_id]" id="s_market_id" value="<?php echo $market_id; ?>">
-        <input type="hidden" name="functions[series_id]" id="s_series_id" value="<?php echo $series_id; ?>">
+<!--        <input type="hidden" name="functions[market_id]" id="s_market_id" value="--><?php //echo $market_id; ?><!--">-->
+<!--        <input type="hidden" name="functions[series_id]" id="s_series_id" value="--><?php //echo $series_id; ?><!--">-->
         <table class="table_form" width="100%" cellspacing="0">
             <tbody>
-            <tr>
+            <!--<tr>
                 <th width="80"><strong>市场：</strong></th>
                 <td>
-                    <select id="market_id" style="height: 150px; min-width: 80px; overflow: auto;" multiple>
-                        <?php foreach ($markets as $market) { ?>
-                        <option value="<?php echo $market['id']; ?>"<?php echo in_array($market['id'], $arr_market_id) ? ' selected="selected"' : ''; ?>><?php echo $market['title']; ?></option>
-                        <?php } ?>
+                    <select id="market_id">
+                        <?php /*foreach ($markets as $market) { */?>
+                        <option value="<?php /*echo $market['id']; */?>"<?php /*echo in_array($market['id'], $arr_market_id) ? ' selected="selected"' : ''; */?>><?php /*echo $market['title']; */?></option>
+                        <?php /*} */?>
                     </select>
                 </td>
             </tr>
             <tr>
                 <th width="80"><strong>系列：</strong></th>
                 <td>
-                    <select id="series_id" style="height: 80px; min-width: 80px; overflow: auto;" multiple>
-                        <?php foreach ($series as $item) { ?>
-                        <option value="<?php echo $item['id']; ?>"<?php echo in_array($item['id'], $arr_series_id) ? ' selected="selected"' : ''; ?>><?php echo $item['title']; ?></option>
-                        <?php } ?>
+                    <select id="series_id">
+                        <?php /*foreach ($series as $item) { */?>
+                        <option value="<?php /*echo $item['id']; */?>"<?php /*echo in_array($item['id'], $arr_series_id) ? ' selected="selected"' : ''; */?>><?php /*echo $item['title']; */?></option>
+                        <?php /*} */?>
                     </select>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <th width="80"><strong>标题：</strong></th>
                 <td><input name="functions[title]" id="title" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $title; ?>"></td>
@@ -50,7 +50,7 @@ $arr_series_id = explode(',', $series_id);
             </tbody>
         </table>
         <div class="bk15"></div>
-        <div style="color: #FF0000;font-size: 10px;">注：按住Ctrl可多选</div>
+<!--        <div style="color: #FF0000;font-size: 10px;">注：按住Ctrl可多选</div>-->
         <input type="button" name="dosubmit" id="dosubmit" value="提交" class="button">
     </form>
 </div>
@@ -72,14 +72,14 @@ $(document).ready(function(){
         var title = $.trim($('#title').val());
         var thumb = $.trim($('#thumb').val());
 
-        if (!$('#s_market_id').val()) {
+        /*if (!$('#s_market_id').val()) {
             alert('请选择市场');
             return false;
         }
         if (!$('#s_series_id').val()) {
             alert('请选择系列');
             return false;
-        }
+        }*/
 
         if (!title) {
             alert('请输入标题');

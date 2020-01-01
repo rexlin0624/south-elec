@@ -54,11 +54,11 @@ class linkage_model extends model {
                 'title' => 'LED灯电压',
                 'options' => []
             ],
-            3414 => [
+            /*3414 => [
                 'key' => 'front_magnetic',
                 'title' => '前圈/磁',
                 'options' => []
-            ]
+            ]*/
         ];
         $propids = implode(',', array_keys($arr_ids));
         $linkages = $this->listinfo('keyid IN(' . $propids . ')', 'listorder ASC', 1, 1000);

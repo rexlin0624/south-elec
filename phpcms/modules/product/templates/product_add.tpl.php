@@ -47,7 +47,7 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
                 <tbody>
                 <tr>
                     <th width="120"><strong>产品编号：</strong></th>
-                    <td><input id="code" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $code; ?>" readonly="readonly"></td>
+                    <td><input id="code" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $code; ?>"></td>
                 </tr>
                 <tr>
                     <th width="120"><strong>产品名称：</strong></th>
@@ -179,6 +179,39 @@ function generate_code() {
 $(document).ready(function(){
     generate_code();
 
+    // 根据输入的code填充表单
+    // Rule: {系列}-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}
+    $('#code').blur(function () {
+        if (!$(this).val()) {
+            return true;
+        }
+
+        var current_code = $(this).val();
+        current_code = current_code.split('-');
+
+        var series = current_code[0];
+        $('#series_id option').filter(function() { return $.trim( $(this).text() ) == series; }).attr('selected','selected');
+
+        var propers = current_code[1];
+
+        // 前圈尺寸
+        $('#front_shape').val(propers[0]);
+        // 前圈/按键材料
+        $('#front_button_material').val(propers[1]);
+        // 前圈/按键形状
+        $('#front_button_shape').val(propers[2]);
+        // 前圈/按键颜色
+        $('#front_button_color').val(propers[3]);
+        // 开关元件
+        $('#switch_element').val(propers[5]);
+        // 照明形式
+        $('#light_style').val(propers[6]);
+        // LED灯颜色
+        $('#led_color').val(propers[7]);
+        // LED灯电压
+        $('#led_voltage').val(propers[8]);
+    });
+
     // 表单切换
     $('.add-nav').find('li').click(function () {
         var index = $(this).attr('data-index');
@@ -189,7 +222,7 @@ $(document).ready(function(){
         $('#form-' + index).show();
     });
 
-    $('#series_id').change(function () {
+    /*$('#series_id').change(function () {
         var series_id = $(this).val();
         if (!series_id) {
             return true;
@@ -214,7 +247,7 @@ $(document).ready(function(){
             $('#functions_id').find('option:eq(0)').after(html.join(''));
         });
     });
-    $('#series_id').change();
+    $('#series_id').change();*/
 
     $('#dosubmit').click(function () {
         var title = $.trim($('#title').val());

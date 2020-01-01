@@ -5,17 +5,26 @@ pc_base::load_app_class('admin','admin',0);
 
 class market extends admin {
     private $db, $db_list;
+    private $db_functions_list;
 
     public function __construct() {
         parent::__construct();
 
         $this->db = pc_base::load_model('productions_market_model');
         $this->db_list = pc_base::load_model('productions_market_list_model');
+
+        $this->db_functions_list = pc_base::load_model('productions_functions_list_model');
     }
 
     public function init() {
         $page = 0;
-        $infos = $this->db_list->listinfo([], '', $page, 10);
+        $infos = $this->db_list->listinfo([], '', $page, 100);
+
+        $functions = $this->db_functions_list->listinfo([], '', $page, 100);
+        $map_functions = [];
+        foreach ($functions as $function) {
+            $map_functions[$function['id']] = $function['title'];
+        }
 
         include $this->admin_tpl('market_list');
     }
@@ -25,10 +34,13 @@ class market extends admin {
         $id = (int)$_GET['id'];
         $info = [];
 
+        $functions = $this->db_functions_list->listinfo();
+
         if (isset($_POST['market'])) {
             $id = (int)$_POST['market']['id'];
             unset($_POST['market']['id']);
             $market = $_POST['market'];
+            $market['functions'] = implode(',', $market['functions']);
 
             if ($id > 0) {
                 $this->db_list->update($market, ['id' => $id]);
