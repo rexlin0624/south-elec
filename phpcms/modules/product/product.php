@@ -309,7 +309,8 @@ class product extends admin {
                 $categories[] = $tmp;
 
                 // 生成对应的功能列表页面
-                $functions = $this->db_functions->listinfo(['market_id' => $item['id']], '', 1, 1000);
+                $fids = $item['functions'];
+                $functions = $this->db_functions->listinfo('id IN(' . $fids . ')', '', 1, 1000);
                 $market_functions_template = $market_category_template;
                 $arr_functions = [];
                 foreach ($functions as $item1) {
@@ -359,8 +360,17 @@ class product extends admin {
                 $tmp .= '</div>';
                 $categories[] = $tmp;
 
+                $sql = 'SELECT DISTINCT functions_id FROM `se_productions` WHERE series_id = ' . $item['id'];
+                $query = $this->db->query($sql);
+                $rows = $this->db->fetch_array();
+                $functions_ids = [];
+                foreach ($rows as $row) {
+                    $functions_ids[] = $row['functions_id'];
+                }
+
                 // 生成对应的功能列表页面
-                $series = $this->db_functions->listinfo(['series_id' => $item['id']], '', 1, 1000);
+                $where = 'id IN(' . implode(',', $functions_ids) . ')';
+                $series = $this->db_functions->listinfo($where, '', 1, 1000);
                 $series_functions_template = $series_category_template;
                 $arr_series = [];
                 foreach ($series as $item1) {
