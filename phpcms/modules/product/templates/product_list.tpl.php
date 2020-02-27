@@ -53,7 +53,7 @@ window.onload = function () {
 			continue;
 		}
 
-		$(pages[i]).attr('href', href.replace('www.hmie.com.cn/www.hmie.com.cn', 'www.hmie.com.cn'));
+		$(pages[i]).attr('href', href.replace('https://www.hmie.com.cn/www.hmie.com.cn', ''));
 	}
 }
 </script>
