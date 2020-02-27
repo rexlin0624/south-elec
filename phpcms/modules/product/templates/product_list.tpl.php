@@ -46,14 +46,14 @@ include $this->admin_tpl('header', 'admin');
 </html>
 <script type="text/javascript">
 window.onload = function () {
-	var pages = $('#page').find('a');
+	var pages = $('#pages').find('a');
 	for (var i = 0;i < pages.length;i++) {
 		var href = $(pages[i]).attr('href');
 		if (!href) {
 			continue;
 		}
-
-		$(pages[i]).attr('href', href.replace('https://www.hmie.com.cn/www.hmie.com.cn', ''));
+		var rep = href.split('index.php');
+		$(pages[i]).attr('href', '/index.php/' + rep[1]);
 	}
 }
 </script>
