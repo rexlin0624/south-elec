@@ -46,7 +46,7 @@ class product extends admin {
     }
 
     public function config_list() {
-		$page = int($_GET['page']);
+		$page = $_GET['page'] ? $_GET['page'] : 1;
 		$page = $page == 0 ? 1 : $page;
         $items = $this->db->listinfo([], '', $page, 10);
         $functions = $this->db_functions->listinfo([], '', 1, 10);
