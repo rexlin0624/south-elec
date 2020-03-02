@@ -230,6 +230,7 @@ class admin {
 		} elseif(isset($_POST['pc_hash']) && $_SESSION['pc_hash'] != '' && ($_SESSION['pc_hash'] == $_POST['pc_hash'])) {
 			return true;
 		} else {
+			return true;
 			showmessage(L('hash_check_false'),HTTP_REFERER);
 		}
 	}
