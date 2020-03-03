@@ -194,4 +194,17 @@ function download_pdfs() {
         gz.style.transform = 'none';
     })
 })()
+
+window.onload = function () {
+	var pages = $('.mWebPagination').find('a');
+	for (var i = 0;i < pages.length;i++) {
+		var href = $(pages[i]).attr('href');
+		if (!href) {
+			continue;
+		}
+
+		var rep = href.split('index.php');
+		$(pages[i]).attr('href', '/index.php/' + rep[1]);
+	}
+}
 </script>
