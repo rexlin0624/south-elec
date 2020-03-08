@@ -182,6 +182,7 @@
     </section>
     {template "product","footer"}
 <script type="text/javascript">
+console.log('{$pages}');
 function setSeFilter() {
     $('#myformmm').submit();
 }
@@ -195,7 +196,7 @@ function download_pdfs() {
     }
 }
 (function(){
-    document.title += ' - 参数搜索';
+    /*document.title += ' - 参数搜索';
     jQuery('.column').find('a').removeAttr('id');
     jQuery('.column').find('a:eq(3)').attr({'id': 'activer_link'});
 
@@ -220,7 +221,7 @@ function download_pdfs() {
         modal.style.display = 'none';
         // 关闭盖子
         gz.style.transform = 'none';
-    })
+    })*/
 })();
 
 window.onload = function () {

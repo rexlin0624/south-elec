@@ -16,7 +16,7 @@
             <div class="row">
                 {loop $lists $list}
                 <div class="column grid_2 column_margin">
-                    <a href="/index.php?m=product&c=index&a=lists&functions_id={$list['id']}" class="c_3x2">
+                    <a href="/index.php?m=product&c=index&a=lists&functions_id={$list['id']}&series_id={$id}" class="c_3x2">
                         {if $list['thumb']}
                         <div class="img_chapter">
                             <img src="{$list['thumb']}" width="230" height="60">
