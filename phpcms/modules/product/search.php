@@ -77,6 +77,7 @@ class search {
         }
 
         $filter = $_GET;
+        $filter['series_id'] = $filter['serial_id'];
 		unset($filter['page']);
         unset($filter['m']);
         unset($filter['c']);
