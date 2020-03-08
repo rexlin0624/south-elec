@@ -53,6 +53,10 @@ class search {
             $rows = $this->db->fetch_array();
             $functions_ids = [];
             foreach ($rows as $row) {
+                if (!$row['functions_id']) {
+                    continue;
+                }
+
                 $functions_ids[] = $row['functions_id'];
             }
 
