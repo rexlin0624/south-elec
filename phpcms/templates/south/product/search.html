@@ -225,7 +225,7 @@ function download_pdfs() {
 
 window.onload = function () {
        var pages = $('.mWebPagination').find('a');
-       for (var i = 0;i < pages.length;i) {
+       for (var i = 0;i < pages.length;i++) {
                var href = $(pages[i]).attr('href');
                if (!href) {
                        continue;
