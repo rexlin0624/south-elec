@@ -77,6 +77,7 @@ class search {
         }
 
         $filter = $_GET;
+		unset($filter['page']);
         unset($filter['m']);
         unset($filter['c']);
         unset($filter['a']);
