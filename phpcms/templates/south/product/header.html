@@ -23,12 +23,21 @@
         </div>
     </div>
 
+    <?php
+        $controller = $_GET['c'];
+        $action = $_GET['a'];
+        $type = $_GET['type'];
+        $isMarket = $controller == 'index' && $action == 'step' && $type == 1;
+        $isFunction = $controller == 'index' && $action == 'functions';
+        $isSeries = $controller == 'index' && $action == 'step' && $type == 2;
+        $isSearch = $controller == 'search';
+    ?>
     <div class="row">
         <div class="column grid_3"></div>
         <div class="column grid_5 float_right">
             <ul class="nav row">
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=step&type=1" id="activer_link">市场</a>
+                    <a href="/index.php?m=product&c=index&a=step&type=1"{if $isMarket} id="activer_link"{/if}>市场</a>
                     <ul class="nav2">
                         <div class="col">
                             {loop $market_list $market}
@@ -40,7 +49,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=functions" >功能</a>
+                    <a href="/index.php?m=product&c=index&a=functions"{if $isFunction} id="activer_link"{/if}>功能</a>
                     <ul class="nav2 small">
                         <div class="col">
                             {loop $function_list $function}
@@ -52,7 +61,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=step&type=2">系列</a>
+                    <a href="/index.php?m=product&c=index&a=step&type=2"{if $isSeries} id="activer_link"{/if}>系列</a>
                     <ul class="nav2 small">
                         <div class="col">
                             {loop $series_list $series}
@@ -64,7 +73,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=search&a=init">参数搜索</a>
+                    <a href="/index.php?m=product&c=search&a=init"{if $isSearch} id="activer_link"{/if}>参数搜索</a>
                     <ul class="nav2 small"></ul>
                 </li>
             </ul>
