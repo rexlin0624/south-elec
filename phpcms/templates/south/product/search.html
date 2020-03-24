@@ -33,17 +33,17 @@
                         <input type="hidden" name="c" value="search">
                         <input type="hidden" name="a" value="init">
                         <fieldset class="filter column grid_filter">
-                            <label>系列(<?php echo $props_total['front_shape']; ?>)</label>
+                            <label>系列(<?php echo count($serials); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>
-                                <?php foreach ($serials as $serial) { ?>
-                                <?php $selected = ($serial_id == $serial['id']) ? ' selected="selected"' : ''; ?>
-                                <option<?php echo $selected; ?> value="<?php echo $serial['id']; ?>"><?php echo $serial['title']; ?></option>
+                                <?php foreach ($serials as $sel) { ?>
+                                <?php $selected = ($serial_id == $sel['id']) ? ' selected="selected"' : ''; ?>
+                                <option<?php echo $selected; ?> value="<?php echo $sel['id']; ?>"><?php echo $sel['title']; ?></option>
                                 <?php } ?>
                             </select>
                         </fieldset>
                         <fieldset class="filter column grid_filter">
-                            <label>功能(<?php echo $props_total['front_shape']; ?>)</label>
+                            <label>功能(<?php echo count($functions); ?>)</label>
                             <select onchange="setSeFilter();" name="function_id" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>
                                 <?php foreach ($functions as $function) { ?>
@@ -134,7 +134,8 @@
                                                 <tbody>
                                                 <tr>
                                                     <td class="attribute" width="120">产品编码：</td>
-                                                    <td class="attribute_value"><?php echo $serial['title'] . $list['code']; ?></td>
+                                                    <?php $serialTitle = $serial['title'] ? $serial['title'] : $mapSerialIdTitle[$list['series_id']]; ?>
+                                                    <td class="attribute_value"><?php echo $serialTitle . $list['code']; ?></td>
                                                 </tr>
                                                 <?php foreach ($props as $key => $prop) { ?>
                                                 <tr>

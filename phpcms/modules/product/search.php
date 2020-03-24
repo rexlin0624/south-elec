@@ -43,6 +43,11 @@ class search {
         $serials = $this->db_series_list->listinfo();
         $functions = $this->db_function_list->listinfo([], '', 1, 1000);
 
+        $mapSerialIdTitle = [];
+        foreach ($serials as $item) {
+            $mapSerialIdTitle[$item['id']] = $item['title'];
+        }
+
         $serial_id = (int)$_GET['serial_id'];
         $function_id = (int)$_GET['function_id'];
 
