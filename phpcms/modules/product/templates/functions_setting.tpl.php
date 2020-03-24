@@ -4,7 +4,7 @@ include $this->admin_tpl('header', 'admin');
 ?>
 <div class="pad-10">
     <form method="post" action="?m=product&c=functions&a=setting" name="myform" id="myform">
-        <input type="hidden" name="series[id]" value="<?php echo !empty($info) ? $info['id'] : 0; ?>">
+        <input type="hidden" name="functions[id]" value="<?php echo !empty($info) ? $info['id'] : 0; ?>">
         <table class="table_form" width="100%" cellspacing="0">
             <tbody>
             <tr>
@@ -20,7 +20,7 @@ include $this->admin_tpl('header', 'admin');
                 <td>
                     <?php echo form::images('functions[thumb]', 'thumb', !empty($info) ? $info['thumb'] : '', 'functions', '', 40)?>
                     <br /><br />
-                    <img src="<?php echo !empty($info) ? $info['thumb'] : ''; ?>">
+                    <img id="thumb_preview" src="<?php echo !empty($info) ? $info['thumb'] : ''; ?>">
                 </td>
             </tr>
             </tbody>
@@ -33,6 +33,10 @@ include $this->admin_tpl('header', 'admin');
 </html>
 <script type="text/javascript">
 $(document).ready(function(){
+    $('#thumb').bind('input', function() {
+        console.log($(this).val());
+    });
+
     $('#dosubmit').click(function () {
         var title = $.trim($('#title').val());
         var description = $.trim($('#description').val());
