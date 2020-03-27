@@ -31,6 +31,13 @@ include $this->admin_tpl('header');?>
 <textarea name="info[description]" rows="2" cols="20" id="description" class="inputtext" style="height:45px;width:300px;"><?php echo $description?></textarea>
 </td>
 </tr>
+
+<tr>
+<td>描述</td>
+<td>
+<textarea name="info[info]" rows="2" cols="20" id="info" class="inputtext" style="height:45px;width:300px;"><?php echo $info?></textarea>
+</td>
+</tr>
 </table>
 
     <div class="bk15"></div>

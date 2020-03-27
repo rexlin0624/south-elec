@@ -21,18 +21,26 @@ if(isset($_GET['parentid'])) { ?>
   </tr>
   <?php } ?>
 <tr>
-<td><?php echo L('linkage_name')?></td>
+<td>名称</td>
 <td>
 <input type="text" name="info[name]" value="<?php echo $name?>" class="input-text" id="name" size="30"></input>
 </td>
 </tr>
 
 <tr>
-<td><?php echo L('linkage_desc')?></td>
+<td>代码</td>
 <td>
-<textarea name="info[description]" rows="2" cols="20" id="description" class="inputtext" style="height:45px;width:300px;"><?php echo $description?></textarea>
+<input type="text" name="info[description]" id="description" class="input-text" value="<?php echo $description?>"></input>
 </td>
 </tr>
+
+<tr>
+<td>描述</td>
+<td>
+<textarea name="info[info]" rows="2" cols="20" id="info" class="inputtext" style="height:45px;width:300px;"><?php echo $info?></textarea>
+</td>
+</tr>
+
 <?php
 if(isset($_GET['parentid'])) { ?>
 <input type="hidden" name="info[siteid]" value="<?php echo $this->_get_belong_siteid($keyid)?>" class="input-text" id="name" size="30"></input>
