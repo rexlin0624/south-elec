@@ -16,6 +16,39 @@ class search {
     private $_product_props = null;
     private $_filter_params = [];
 
+    private $_relactionIndex = [
+        // 系列
+        'serial_id' => 0,
+        // 前圈尺寸
+        'front_shape' => 1,
+        // 前圈/按键材料
+        'front_button_material' => 2,
+        // 前圈/按键形状
+        'front_button_shape' => 3,
+        // 前圈/按键颜色
+        'front_button_color' => 4,
+        // 开关元件
+        'switch_element' => 5,
+        // 照明形式
+        'light_style' => 6,
+        // 灯罩/LED灯颜色
+        'led_color' => 7,
+        // LED灯电压
+        'led_voltage' => 8,
+        // 其它
+        'others' => 9,
+        // 功能
+        'function_id' => 10,
+        // 安装尺寸
+        'install_size' => 11
+    ];
+
+    private $_seria4 = '6-1,2,3,4,A,B,D-0,1,2-1,2,3,A,B-1,2,3,4,5,6,7-0,1,2,3,4-1,2,3-0,1,2,3,4-0,1,2,3,4-C-0,1,2,4,6-A,B,C,D,E';
+    private $_seria5 = '7-1,2,3,4,A,B,D-1,2-1,2,3,A,B-1,2,3,4,5,6,7-1,2-1,2,3-0,1,2,3,4-0,1,2,3,4-C-1,2-A,B,C,D,E';
+    private $_seria6 = '8-0,1,2,3-0,1,2,3-0,1-1,2,3,4,5-0,1,2,3,4,5,6-0,1,2,3-0,1,2,3,4,7,8-0,1,2,3,4-n-0,1,2,3,4,5,6-E,F,G';
+
+    private $_relaction = [];
+
 	function __construct() {
         $this->db = pc_base::load_model('productions_model');
         $this->db_setting = pc_base::load_model('productions_setting_model');
@@ -30,10 +63,60 @@ class search {
         $this->db_function_list = pc_base::load_model('productions_functions_list_model');
         $this->db_series_list = pc_base::load_model('productions_series_list_model');
         $this->db_contact_setting = pc_base::load_model('productions_contact_setting_model');
-	}
+
+        $this->_relaction = [
+            $this->splitSerial($this->_seria4),
+            $this->splitSerial($this->_seria5),
+            $this->splitSerial($this->_seria6)
+        ];
+    }
+    
+    private function splitSerial($seria) {
+        $seria1 = explode('-', $seria);
+        $seria2 = [];
+        foreach ($seria1 as $item) {
+            $seria2[] = explode(',', $item);
+        }
+
+        return $seria2;
+    }
 
     private function _c($param) {
         return isset($this->_filter_params[$param]) ? $this->_filter_params[$param] : 'X';
+    }
+
+    /**
+     * 关系约束
+     */
+    private function relactionRestrict($property) {
+        $serial_id = $property['serial_id'];
+        $function_id = $property['function_id'];
+        $front_shape = $property['front_shape'];
+        $front_button_material = $property['front_button_material'];
+        $front_button_shape = $property['front_button_shape'];
+        $front_button_color = $property['front_button_color'];
+        $switch_element = $property['switch_element'];
+        $light_style = $property['light_style'];
+        $led_color = $property['led_color'];
+        $led_voltage = $property['led_voltage'];
+        $others = $property['others'];
+        $install_size = $property['install_size'];
+
+        $restrict = [];
+        if (!empty($serial_id)) {
+            foreach ($this->_relaction as $relactions) {
+                foreach ($relactions as $index => $relaction) {
+                    if ($index == 0) {
+                        if ($relaction[0] == $serial_id) {
+                            $restrict = $relactions;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $restrict;
     }
 
 	// 参数搜索页
@@ -50,6 +133,9 @@ class search {
 
         $serial_id = (int)$_GET['serial_id'];
         $function_id = (int)$_GET['function_id'];
+
+        $restrict = $this->relactionRestrict($_GET);
+        var_export($restrict);
 
         // 根据$serial_id获取function list
         if (!empty($serial_id)) {

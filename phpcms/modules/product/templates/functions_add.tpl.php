@@ -2,6 +2,7 @@
 defined('IN_ADMIN') or exit('No permission resources.');
 include $this->admin_tpl('header', 'admin');
 $id = isset($info['id']) ? $info['id'] : 0;
+$code = isset($info['code']) ? $info['code'] : '';
 $title = isset($info['title']) ? $info['title'] : '';
 $thumb = isset($info['thumb']) ? $info['thumb'] : '';
 $market_id = isset($info['market_id']) ? $info['market_id'] : '';
@@ -38,6 +39,10 @@ $arr_series_id = explode(',', $series_id);
                 </td>
             </tr>-->
             <tr>
+                <th width="80"><strong>代码：</strong></th>
+                <td><input name="functions[code]" id="code" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $code; ?>"></td>
+            </tr>
+            <tr>
                 <th width="80"><strong>标题：</strong></th>
                 <td><input name="functions[title]" id="title" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo $title; ?>"></td>
             </tr>
@@ -69,6 +74,7 @@ $(document).ready(function(){
     });
 
     $('#dosubmit').click(function () {
+        var code = $.trim($('#code').val());
         var title = $.trim($('#title').val());
         var thumb = $.trim($('#thumb').val());
 
@@ -81,6 +87,10 @@ $(document).ready(function(){
             return false;
         }*/
 
+        if (!code) {
+            alert('请输入代码');
+            return false;
+        }
         if (!title) {
             alert('请输入标题');
             return false;

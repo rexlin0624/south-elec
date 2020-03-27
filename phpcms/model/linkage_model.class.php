@@ -59,6 +59,16 @@ class linkage_model extends model {
                 'title' => '前圈/磁',
                 'options' => []
             ]*/
+            3425 => [
+                'key' => 'others',
+                'title' => '其它',
+                'options' => []
+            ],
+            3426 => [
+                'key' => 'install_size',
+                'title' => '安装尺寸',
+                'options' => []
+            ]
         ];
         $propids = implode(',', array_keys($arr_ids));
         $linkages = $this->listinfo('keyid IN(' . $propids . ')', 'listorder ASC', 1, 1000);
