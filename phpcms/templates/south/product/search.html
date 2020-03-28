@@ -53,20 +53,20 @@
                         <input type="hidden" name="c" value="search">
                         <input type="hidden" name="a" value="init">
                         <fieldset class="filter column grid_filter">
-                            <label>系列(<?php echo count($serials); ?>)</label>
+                            <label>系列(<?php echo count($restrictSerials); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>
-                                <?php foreach ($serials as $sel) { ?>
+                                <?php foreach ($restrictSerials as $sel) { ?>
                                 <?php $selected = ($serial_id == $sel['id']) ? ' selected="selected"' : ''; ?>
                                 <option<?php echo $selected; ?> value="<?php echo $sel['id']; ?>"><?php echo $sel['title']; ?></option>
                                 <?php } ?>
                             </select>
                         </fieldset>
                         <fieldset class="filter column grid_filter">
-                            <label>功能(<?php echo count($functions); ?>)</label>
+                            <label>功能(<?php echo count($restrictFunctions); ?>)</label>
                             <select onchange="setSeFilter();" name="function_id" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>
-                                <?php foreach ($functions as $function) { ?>
+                                <?php foreach ($restrictFunctions as $function) { ?>
                                 <?php $selected = ($function_id == $function['id']) ? ' selected="selected"' : ''; ?>
                                 <option<?php echo $selected; ?> value="<?php echo $function['id']; ?>"><?php echo $function['title']; ?></option>
                                 <?php } ?>
@@ -97,6 +97,7 @@
                                 <option value="-"></option>
                                 <?php
                                 foreach ($prop['options'] as $key => $option) {
+                                if (!empty($restrict) && !in_array($key, $restrict[$restrictIndex[$kk]])) { continue; }
                                 if ($key == 'Z') { continue; }
                                 $selected = ($filter[$kk] != '' && $filter[$kk] != "-" && $filter[$kk] == $key) ? ' selected="selected"' : '';
                                 ?>

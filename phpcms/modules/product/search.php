@@ -89,33 +89,24 @@ class search {
      * 关系约束
      */
     private function relactionRestrict($property) {
-        $serial_id = $property['serial_id'];
-        $function_id = $property['function_id'];
-        $front_shape = $property['front_shape'];
-        $front_button_material = $property['front_button_material'];
-        $front_button_shape = $property['front_button_shape'];
-        $front_button_color = $property['front_button_color'];
-        $switch_element = $property['switch_element'];
-        $light_style = $property['light_style'];
-        $led_color = $property['led_color'];
-        $led_voltage = $property['led_voltage'];
-        $others = $property['others'];
-        $install_size = $property['install_size'];
-
         $restrict = [];
-        if (!empty($serial_id)) {
-            foreach ($this->_relaction as $relactions) {
-                foreach ($relactions as $index => $relaction) {
-                    if ($index == 0) {
-                        if ($relaction[0] == $serial_id) {
-                            $restrict = $relactions;
-                            break;
+        foreach ($this->_relactionIndex as $prop => $rIndex) {
+            $propValue = isset($property[$prop]) ? $property[$prop] : -100;
+            if ($propValue != -100 && $propValue != '-') {
+                foreach ($this->_relaction as $relactions) {
+                    if (in_array($propValue, $relactions[$rIndex])) {
+                        foreach ($relactions as $idx => $items) {
+                            foreach ($items as $item) {
+                                if (!in_array($item, $restrict[$idx])) {
+                                    $restrict[$idx][] = $item;
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-
+        
         return $restrict;
     }
 
@@ -126,6 +117,11 @@ class search {
         $serials = $this->db_series_list->listinfo();
         $functions = $this->db_function_list->listinfo([], '', 1, 1000);
 
+        $mapFunctionCode = [];
+        foreach ($functions as $fun) {
+            $mapFunctionCode[$fun['id']] = $fun['code'];
+        }
+
         $mapSerialIdTitle = [];
         foreach ($serials as $item) {
             $mapSerialIdTitle[$item['id']] = $item['title'];
@@ -134,8 +130,38 @@ class search {
         $serial_id = (int)$_GET['serial_id'];
         $function_id = (int)$_GET['function_id'];
 
-        $restrict = $this->relactionRestrict($_GET);
-        var_export($restrict);
+        $propertyGET = $_GET;
+        $propertyGET['function_id'] = isset($mapFunctionCode[$function_id]) ? $mapFunctionCode[$function_id] : '';
+        $restrict = $this->relactionRestrict($propertyGET);
+        $restrictIndex = $this->_relactionIndex;
+
+        // restrict serials
+        if (!empty($restrict)) {
+            $restrictSerials = [];
+            foreach ($serials as $item) {
+                if (empty($serial_id) && !in_array($item['id'], $restrict[0])) {
+                    continue;
+                }
+
+                $restrictSerials[] = $item;
+            }
+        } else {
+            $restrictSerials = $serials;
+        }
+
+        // restrict functions
+        if (!empty($restrict)) {
+            $restrictFunctions = [];
+            foreach ($functions as $item) {
+                if (!in_array($item['id'], $restrict[10])) {
+                    continue;
+                }
+
+                $restrictFunctions[] = $item;
+            }
+        } else {
+            $restrictFunctions = $functions;
+        }
 
         // 根据$serial_id获取function list
         if (!empty($serial_id)) {
