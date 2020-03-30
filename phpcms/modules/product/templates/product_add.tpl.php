@@ -34,7 +34,7 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
     }
 </style>
 <div class="pad-10">
-    <div style="display: none;">
+    <div>
         <ul class="add-nav">
             <li data-index="1" class="select">添加</li>
             <li data-index="2">导入</li>
@@ -135,6 +135,7 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
     </div>
     <div class="form-tabs" id="form-2">
         <form method="post" action="?m=product&c=product&a=import" name="myformimport" id="myformimport" enctype="multipart/form-data">
+            <input type="hidden" name="pc_hash" value="<?php $_GET['pc_hash']; ?>" />
             <table class="table_form" width="100%" cellspacing="0">
                 <tbody>
                 <tr>
@@ -178,6 +179,11 @@ function generate_code() {
 
 $(document).ready(function(){
     generate_code();
+
+    $('#doimport').click(function(){
+        $(this).attr('disabled', 'disabled').val('正在导入...');
+        $('#myformimport').submit();
+    });
 
     // 根据输入的code填充表单
     // Rule: {系列}-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}

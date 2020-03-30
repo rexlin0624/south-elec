@@ -9,7 +9,7 @@ pc_base::load_app_class('admin','admin',0);
 
 class product extends admin {
     private $db_setting, $db, $db_market, $db_functions, $db_series, $db_linkage;
-    private $db_market_setting, $db_function_setting, $db_series_setting, $db_site, $db_contact_setting;
+    private $db_market_setting, $db_function_setting, $db_series_setting, $db_site, $db_contact_setting, $db_queue;
     private $_snappy;
     private $_product_props = null;
 
@@ -32,6 +32,8 @@ class product extends admin {
         $this->db_series_setting = pc_base::load_model('productions_series_model');
         $this->db_contact_setting = pc_base::load_model('productions_contact_setting_model');
 
+        $this->db_queue = pc_base::load_model('queues_model');
+
         $this->_snappy = new Pdf('/usr/local/bin/wkhtmltopdf');
     }
 
@@ -48,7 +50,7 @@ class product extends admin {
     public function config_list() {
 		$page = $_GET['page'] ? $_GET['page'] : 1;
 		$page = $page == 0 ? 1 : $page;
-        $items = $this->db->listinfo([], '', $page, 10);
+        $items = $this->db->listinfo([], 'id DESC', $page, 10);
         $functions = $this->db_functions->listinfo([], '', 1, 10);
 
         $map_func = [];
@@ -63,6 +65,64 @@ class product extends admin {
         }
 
         include $this->admin_tpl('product_list');
+    }
+
+    /**
+     * 生成PDF
+     */
+    public function toPdf($id, $setting, $product_props, $product = false) {
+        if (!$product) {
+            $product = $this->db->get_one(['id' => $id]);
+        }
+        $code = $product['code'];
+
+        $pdf_path = $this->get_pdf_path($id);
+        $pdf_content = $this->get_pdf_template();
+        $pdf_content = preg_replace('/{pdf_title}/', $setting['pdf_title'], $pdf_content);
+        $pdf_content = preg_replace('/{pdf_desc}/', $setting['pdf_desc'], $pdf_content);
+        $pdf_content = preg_replace('/{pdf_header_bgcolor}/', $setting['header_bgcolor'], $pdf_content);
+        $pdf_content = preg_replace('/{title}/', $code . ' - ' . $product['title'], $pdf_content);
+        $pdf_content = preg_replace('/{description}/', $product['description'], $pdf_content);
+        $pdf_content = preg_replace('/{thumb}/', 'http://' . $_SERVER['HTTP_HOST'] . $product['thumb'], $pdf_content);
+
+        // 工程图
+        $project_images = [];
+        for ($i = 1;$i <= 4;$i++) {
+            $img = $product['project_image_' . $i];
+            if (empty($img)) {
+                continue;
+            }
+
+            // 把eps转为png图片
+            if (!$product) {
+                $eps_path = PHPCMS_PATH . substr($img, 1, strlen($img));
+                $png_path = substr($eps_path, 0, -4) . '.png';
+                $image = new Imagick();
+                $image->setResolution(1200, 1200);
+                $image->readimage($eps_path);
+                $image->setBackgroundColor(new ImagickPixel('transparent'));
+                $image->setImageFormat('png');
+                $image->writeImage($png_path);
+            }
+
+            $url = 'http://' . $_SERVER['HTTP_HOST'] . substr($img, 0, -4) . '.png';
+            $project_images[] = '<div style="overflow: hidden;page-break-after: always;"></div><div><img src="' . $url . '" /></div>';
+        }
+        $pdf_content = preg_replace('/{project_images}/', implode('', $project_images), $pdf_content);
+
+        $prop_string = [];
+        foreach ($product_props as $key => $prop) {
+            $prop_string[] = '<li>' . $prop['title'] . '：' . $prop['options'][$product[$key]] . '</li>';
+        }
+        $pdf_content = preg_replace('/{props}/', implode('', $prop_string), $pdf_content);
+
+        // generate pdf
+        $this->_snappy->setOptions([
+            'margin-left' => 0,
+            'margin-top' => 0,
+            'margin-right' => 0,
+        ]);
+        $this->_snappy->generateFromHtml($pdf_content, $pdf_path, [], true);
     }
 
     public function add() {
@@ -80,7 +140,7 @@ class product extends admin {
             $function = $this->db_functions->get_one(['id' => $product['functions_id']]);
 
             // 产品编码组合
-            // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{前圈/磁}{序列号}
+            // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{其它}
             $series = $this->db_series->get_one(['id' => $function['series_id']]);
             $code  = $series['title'] . '-' . $product['front_shape'] . $product['front_button_material'] . $product['front_button_shape'] . $product['front_button_color'];
             $code .= '.' . $product['switch_element'] . $product['light_style'] . $product['led_color'] . $product['led_voltage'] . '.' . $product['front_magnetic'];
@@ -574,14 +634,55 @@ class product extends admin {
         return $prop_key;
     }
 
+    private function _unzip($extractTo) {
+        $zip = new ZipArchive();
+        $oldmask = umask(0);
+        mkdir($extractTo, 0777);
+        umask($oldmask);
+
+        // 解压zip
+        $filename = $_FILES["file"]["tmp_name"];
+        $flag = $zip->open($filename);
+        if($flag !== true){
+            echo "解压zip失败: {$flag}\n";
+            exit();
+        }
+        $zip->extractTo($extractTo);
+        $zip->close();
+    }
+
+    private function _ce($prop) {
+        return !empty($prop) ? $prop : '-';
+    }
+    /**
+     * 生成产品编码
+     * 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{其它}
+     */
+    private function _generateCode($row) {
+        return $row[0] . '-' . 
+            $this->_ce($row[1]) . $this->_ce($row[2]) . $this->_ce($row[3]) . $this->_ce($row[4]) . '.' . 
+            $this->_ce($row[5]) . $this->_ce($row[6]) . $this->_ce($row[7]) . $this->_ce($row[8]) . '.' .
+            $this->_ce($row[9]);
+    }
+
     /**
      * 导入
      */
     public function import() {
         ini_set('memory_limit', '-1');
-        require(PC_PATH . 'libs/classes/Classes/PHPExcel/IOFactory.php');
+        $time = time();
+        $pc_hash = $_POST['pc_hash'];
 
-        $filename = $_FILES["file"]["tmp_name"];
+        // 获取产品数据表中最大的产品ID
+        $product = $this->db->get_one('', 'id', 'id DESC');
+        $lastId = $product['id'] ? $product['id'] : 0;
+
+        $unzipPath = PHPCMS_PATH . 'uploadfile/zip/' . date('YmdHis') . mt_rand(100, 999) . '/';
+        $this->_unzip($unzipPath);
+        $filename = $unzipPath . 'data.xls';
+        $importPath = explode('uploadfile', $unzipPath)[1];
+        
+        require(PC_PATH . 'libs/classes/Classes/PHPExcel/IOFactory.php');
         $fileType = PHPExcel_IOFactory::identify($filename);
         $objReader = PHPExcel_IOFactory::createReader($fileType);
         $objPHPExcel = $objReader->load($filename);
@@ -591,23 +692,122 @@ class product extends admin {
         $highestColumn = $sheet->getHighestColumn();
         $highestColumnNum = PHPExcel_Cell::columnIndexFromString($highestColumn);
 
+        $functions = $this->db_functions->listinfo([], '', 1, 100);
+        $mapFunction = [];
+        foreach ($functions as $item) {
+            $mapFunction[$item['code']] = $item['title'];
+        }
+
+        $mapSeriesId = [
+            '4.0' => 6,
+            '5.0' => 7,
+            '6.0' => 8
+        ];
+
+        $mapIndexProp = [
+            0 => 'series_id',
+            1 => 'front_shape',
+            2 => 'front_button_material',
+            3 => 'front_button_shape',
+            4 => 'front_button_color',
+            5 => 'switch_element',
+            6 => 'light_style',
+            7 => 'led_color',
+            8 => 'led_voltage',
+            9 => 'others',
+            10 => 'functions_id',
+            11 => 'install_size',
+            12 => 'description',
+            21 => 'title',
+            23 => 'project_image_1',
+            24 => 'project_image_2',
+            25 => 'project_image_3',
+            26 => 'thumb'
+        ];
+
         $data = [];
-        for($i = 2; $i <= $highestRowNum; $i++) {
+        $values = [];
+        for($i = 3; $i <= $highestRowNum; $i++) {
             if ($i >= 10) {
                 break;
             }
 
+            $rowDef = [];
             $row = [];
+            $series = '';
+            // 遍历每一行数据
             for($j = 0; $j < $highestColumnNum; $j++) {
+                $idx = isset($mapIndexProp[$j]) ? $mapIndexProp[$j] : $j;
+                if (is_numeric($idx)) {
+                    continue;
+                }
                 $cellName = PHPExcel_Cell::stringFromColumnIndex($j) . $i;
                 $cellVal = $sheet->getCell($cellName)->getValue();
                 $encode = self::encode_cn($cellVal);
-                $row[] = $encode;
+                $rowDef[] = $encode;
+
+                if ($idx == 'series_id') {
+                    $series = $encode;
+                    $encode = $mapSeriesId[$encode];
+                }
+                if (empty($series)) {
+                    continue;
+                }
+                if ($idx == 'functions_id') {
+                    $encode = $mapFunction[$encode];
+                }
+
+                if (!empty($encode)) {                
+                    if ($idx == 'project_image_1') {
+                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+                    }
+                    if ($idx == 'project_image_2') {
+                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+                    }
+                    if ($idx == 'project_image_3') {
+                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+                    }
+                    if ($idx == 'thumb') {
+                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+                    }
+                }
+
+                $row[$idx] = $encode;
             }
 
             if (!empty($row)) {
                 $data[] = $row;
+                $code = $this->_generateCode($rowDef);
+                $values[] = '(\'' . $code . '\', \'' . implode('\',\'', $row) . '\', '. $time .')';
             }
         }
+        // echo '<pre>';
+        // var_export($data);
+        if (empty($data)) {
+            echo 'Excel数据为空！！！';
+            exit;
+        }
+
+        // echo '<pre>';
+        // var_export($data);
+        // 组装插入sql
+        $fields = '`code`,`' . implode('`,`', array_values($mapIndexProp)) . '`,`created_at`';
+        $sql = 'INSERT INTO se_productions (' . $fields . ') VALUES ' . implode(',', $values);
+        $this->db->query($sql);
+
+        // 生成pdf，插入队列中，运行bash脚本异步处理
+        // 获取生成的产品ID
+        $productIds = $this->db->listinfo('id > ' . $lastId, '', 1, 100000);
+        $product_props = $this->db_linkage->product_props();
+        $setting = $this->db_setting->get_one(['id' => 1]);
+        $values = [];
+        foreach ($productIds as $prod) {
+            $values[] = '(' . $prod['id'] . ', 0, ' . $time . ', ' . $time . ')';
+            // $this->toPdf($prod['id'], $setting, $product_props, $prod);
+        }
+        $sql = 'INSERT INTO se_queues(`product_id`, `status`, `created_at`, `updated_at`) VALUES ' . implode(',', $values);
+        $this->db_queue->query($sql);
+
+        echo '导入成功！<a href="/index.php?m=product&c=product&a=config_list&menuid=1604&pc_hash=' . $pc_hash . '">返回列表</a>';
     }
 }
