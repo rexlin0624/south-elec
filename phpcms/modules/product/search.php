@@ -69,6 +69,8 @@ class search {
             $this->splitSerial($this->_seria5),
             $this->splitSerial($this->_seria6)
         ];
+
+        // var_export($this->_relaction);
     }
     
     private function splitSerial($seria) {
@@ -88,12 +90,13 @@ class search {
     /**
      * 关系约束
      */
-    private function relactionRestrict($property) {
+    private function relactionRestrict_bak($property) {
         $restrict = [];
         foreach ($this->_relactionIndex as $prop => $rIndex) {
-            $propValue = isset($property[$prop]) ? $property[$prop] : -100;
+            $propValue = isset($property[$prop]) && !empty($property[$prop]) ? $property[$prop] : -100;
             if ($propValue != -100 && $propValue != '-') {
                 foreach ($this->_relaction as $relactions) {
+                    echo $prop, ' $propValue = ', $propValue, '<br />';
                     if (in_array($propValue, $relactions[$rIndex])) {
                         foreach ($relactions as $idx => $items) {
                             foreach ($items as $item) {
@@ -108,6 +111,46 @@ class search {
         }
         
         return $restrict;
+    }
+
+    private function _propRestrict($relactions, $prop, $index) {
+        $restricts = [];
+        foreach ($relactions as $relaction) {
+            if (in_array($prop, $relaction[$index])) {
+                $restricts[] = $relaction;
+            }
+        }
+        return $restricts;
+    }
+
+    /**
+     * 关系约束
+     */
+    private function relactionRestrict($property) {
+        $restricts = [];
+        foreach ($this->_relactionIndex as $prop => $rIndex) {
+            $propValue = isset($property[$prop]) && !empty($property[$prop]) ? $property[$prop] : -100;
+            if ($propValue != -100 && $propValue != '-') {
+                if (empty($restricts)) {
+                    $restricts = $this->_propRestrict($this->_relaction, $propValue, $rIndex);
+                } else {
+                    $restricts = $this->_propRestrict($restricts, $propValue, $rIndex);
+                }
+            }
+        }
+        
+        $unionRestricts = [];
+        foreach ($restricts as $restrict) {
+            foreach ($restrict as $idx => $items) {
+                foreach ($items as $item) {
+                    if (!in_array($item, $unionRestricts[$idx])) {
+                        $unionRestricts[$idx][] = $item;
+                    }
+                }
+            }
+        }
+        
+        return $unionRestricts;
     }
 
 	// 参数搜索页
@@ -136,6 +179,7 @@ class search {
         $restrictIndex = $this->_relactionIndex;
 
         // restrict serials
+        $restrictSerials = $serials;
         if (!empty($restrict)) {
             $restrictSerials = [];
             foreach ($serials as $item) {
@@ -145,11 +189,10 @@ class search {
 
                 $restrictSerials[] = $item;
             }
-        } else {
-            $restrictSerials = $serials;
         }
 
         // restrict functions
+        $restrictFunctions = $functions;
         if (!empty($restrict)) {
             $restrictFunctions = [];
             foreach ($functions as $item) {
@@ -159,8 +202,25 @@ class search {
 
                 $restrictFunctions[] = $item;
             }
-        } else {
-            $restrictFunctions = $functions;
+        }
+
+        // restrict props
+        $restrictProps = $props;
+        if (!empty($restrict)) {
+            $restrictProps = [];
+            foreach ($props as $kk => $prop) {
+                $options = [];
+                foreach ($prop['options'] as $key => $option) {
+                    if (!in_array($key, $restrict[$restrictIndex[$kk]])) {
+                        continue;
+                    }
+
+                    $options[$key] = $option;
+                }
+                $prop['options'] = $options;
+
+                $restrictProps[$kk] = $prop;
+            }
         }
 
         // 根据$serial_id获取function list

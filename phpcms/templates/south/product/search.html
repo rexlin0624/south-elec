@@ -73,12 +73,13 @@
                             </select>
                         </fieldset>
                         <div style="clear: both;"></div>
-                        <?php foreach ($props as $kk => $prop) { ?>
+                        <?php foreach ($restrictProps as $kk => $prop) { ?>
                         <fieldset class="filter column grid_filter">
                             <label>
                                 <?php echo $prop['title']; ?>
                                 (<?php
-                                    if (empty($filter)) {
+                                    // 这里为搜索结果总数
+                                    /*if (empty($filter)) {
                                         echo $props_total[$kk];
                                     } else {
                                         if (empty($condition)) {
@@ -90,15 +91,14 @@
                                                 echo 0;
                                             }
                                         }
-                                    }
+                                    }*/
+                                    echo count($prop['options']);
                                 ?>)
                             </label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
                                 <option value="-"></option>
                                 <?php
                                 foreach ($prop['options'] as $key => $option) {
-                                if (!empty($restrict) && !in_array($key, $restrict[$restrictIndex[$kk]])) { continue; }
-                                if ($key == 'Z') { continue; }
                                 $selected = ($filter[$kk] != '' && $filter[$kk] != "-" && $filter[$kk] == $key) ? ' selected="selected"' : '';
                                 ?>
                                 <option value="<?php echo $key; ?>"<?php echo $selected; ?>>

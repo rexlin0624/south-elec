@@ -80,6 +80,9 @@ class linkage_model extends model {
                 if ($linkage['keyid'] != $keyid) {
                     continue;
                 }
+                if ($linkage['description'] == 'Z') {
+                    continue;
+                }
 
                 $props['options'][$linkage['description']] = $linkage['name'];
             }
