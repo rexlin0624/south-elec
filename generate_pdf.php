@@ -38,8 +38,8 @@ $setting = $db_setting->get_one(['id' => 1]);
 $host = 'south.elec.local';
 
 $pdf_path = __DIR__ . '/caches/pdf/' . $productId . '.pdf';
-$pdf_path = __DIR__.'/phpcms/modules'.DIRECTORY_SEPARATOR.'product'.DIRECTORY_SEPARATOR.'pdf.template';
-$pdf_content = file_get_contents($pdf_path);
+$pdf_template = __DIR__.'/phpcms/modules'.DIRECTORY_SEPARATOR.'product'.DIRECTORY_SEPARATOR.'pdf.temp';
+$pdf_content = file_get_contents($pdf_template);
 $pdf_content = preg_replace('/{pdf_title}/', $setting['pdf_title'], $pdf_content);
 $pdf_content = preg_replace('/{pdf_desc}/', $setting['pdf_desc'], $pdf_content);
 $pdf_content = preg_replace('/{pdf_header_bgcolor}/', $setting['header_bgcolor'], $pdf_content);
