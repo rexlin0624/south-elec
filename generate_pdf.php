@@ -57,7 +57,8 @@ for ($i = 1;$i <= 4;$i++) {
 		continue;
 	}
 
-	$url = $host . substr($img, 0, -4) . '.png';
+	//$url = $host . substr($img, 0, -4) . '.png';
+	$url = $host . $img;
 	$project_images[] = '<div style="overflow: hidden;page-break-after: always;"></div><div><img src="' . $url . '" /></div>';
 }
 
