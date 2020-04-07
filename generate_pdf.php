@@ -14,6 +14,9 @@ $pdfkit = new Pdf('/usr/local/bin/wkhtmltopdf');
 
 // 获取空闲数量
 $totalFree = $db->getTotalFree();
+if ($totalFree == 0) {
+	die('No generate pdf queue.');
+}
 echo '$totalFree = ', $totalFree, chr(10), chr(13);
 
 // 获取是否在处理中
