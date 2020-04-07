@@ -729,7 +729,7 @@ class product extends admin {
         $values = [];
         for($i = 3; $i <= $highestRowNum; $i++) {
             if ($i >= 10) {
-                break;
+                // break;
             }
 
             $rowDef = [];
