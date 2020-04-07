@@ -28,7 +28,7 @@ if ($isProcessing) {
 
 // 若非处理中，则处理下一条PDF生成
 $row = $db->get_one('`status` = 0', 'id, product_id');
-// $db->markProcessing($row['id']);
+$db->markProcessing($row['id']);
 $productId = $row['product_id'];
 echo 'productId = ' , $productId , ' Processing...', chr(10), chr(13);
 
