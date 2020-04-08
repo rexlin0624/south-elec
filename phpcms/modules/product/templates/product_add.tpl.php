@@ -146,6 +146,18 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
             </table>
             <div class="bk15"></div>
             <input type="submit" name="doimport" id="doimport" value="导入" class="button">
+            <div style="color:#FF0000;font-size:12px;">
+            注：<br />
+            1.　Excel文件命名为：data.xls；<br />
+            2.　图片文件以系列命名，存放到对应系列文件夹中，如：4.0/xx.jpg、5.0/aa.jpg；<br />
+            3.　将图片文件和data.xls一起打包成zip压缩包，压缩命名无要求，该压缩包即可上传导入。<br />
+            <br />
+            压缩包内容示例：<br />
+            - 4.0/17A.jpg<br />
+            - 5.0/16B.png<br />
+            - 6.0/16C.jpg<br />
+            - data.xls
+            </div>
         </form>
     </div>
 </div>
