@@ -224,7 +224,7 @@ class search {
         }
 
         // 根据$serial_id获取function list
-        if (!empty($serial_id)) {
+        /* if (!empty($serial_id)) {
             $sql = 'SELECT DISTINCT functions_id FROM `se_productions` WHERE series_id = ' . $serial_id;
             $query = $this->db->query($sql);
             $rows = $this->db->fetch_array();
@@ -241,7 +241,7 @@ class search {
             $functions = $this->db_function_list->listinfo($where);
 
             $serial = $this->db_series_list->get_one(['id' => $serial_id]);
-        }
+        } */
 
         $setting = $this->db_setting->get_one(['id' => 1]);
         $contacts = $this->db_contact_setting->get_one(['id' => 1]);
