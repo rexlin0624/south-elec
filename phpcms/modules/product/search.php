@@ -16,6 +16,8 @@ class search {
     private $_product_props = null;
     private $_filter_params = [];
 
+    const EMPTY = -1000;
+
     private $_relactionIndex = [
         // 系列
         'serial_id' => 0,
@@ -84,7 +86,7 @@ class search {
     }
 
     private function _c($param) {
-        return isset($this->_filter_params[$param]) ? $this->_filter_params[$param] : 'X';
+        return isset($this->_filter_params[$param]) ? ($this->_filter_params[$param] == self::EMPTY ? '-' : $this->_filter_params[$param]) : 'X';
     }
 
     /**
@@ -130,7 +132,7 @@ class search {
         $restricts = [];
         foreach ($this->_relactionIndex as $prop => $rIndex) {
             $propValue = isset($property[$prop]) && !empty($property[$prop]) ? $property[$prop] : -100;
-            if ($propValue != -100 && $propValue != '-') {
+            if ($propValue != -100 && $propValue != self::EMPTY) {
                 if (empty($restricts)) {
                     $restricts = $this->_propRestrict($this->_relaction, $propValue, $rIndex);
                 } else {
@@ -155,6 +157,7 @@ class search {
 
 	// 参数搜索页
 	public function init() {
+        $empty = self::EMPTY;
         $props = $this->db_linkage->product_props();
 
         $serials = $this->db_series_list->listinfo();
@@ -224,8 +227,8 @@ class search {
         }
 
         // 根据$serial_id获取function list
-        /* if (!empty($serial_id)) {
-            $sql = 'SELECT DISTINCT functions_id FROM `se_productions` WHERE series_id = ' . $serial_id;
+        if (!empty($serial_id)) {
+            /* $sql = 'SELECT DISTINCT functions_id FROM `se_productions` WHERE series_id = ' . $serial_id;
             $query = $this->db->query($sql);
             $rows = $this->db->fetch_array();
             $functions_ids = [];
@@ -238,17 +241,17 @@ class search {
             }
 
             $where = 'id IN(' . implode(',', $functions_ids) . ')';
-            $functions = $this->db_function_list->listinfo($where);
+            $functions = $this->db_function_list->listinfo($where); */
 
             $serial = $this->db_series_list->get_one(['id' => $serial_id]);
-        } */
+        }
 
         $setting = $this->db_setting->get_one(['id' => 1]);
         $contacts = $this->db_contact_setting->get_one(['id' => 1]);
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
         $where = '1 = 1';
-        if (!empty($function_id)) {
+        if (!empty($function_id) && $function_id != self::EMPTY) {
             $where .= ' AND functions_id = ' . $function_id;
         }
         $props_total = [];
@@ -271,7 +274,7 @@ class search {
         $is_display_contact = 'none';
         if (!empty($filter)) {
             foreach ($filter as $field => $flt) {
-                if ($flt == '-') {
+                if ($flt == self::EMPTY) {
                     continue;
                 }
                 if ($flt == 'Z') {
@@ -283,7 +286,7 @@ class search {
             }
         }
         if (!empty($condition)) {
-            $where .= ' AND (' . implode(' OR ', $condition) . ')';
+            $where .= ' AND (' . implode(' AND ', $condition) . ')';
         }
 
         $contact_info = '联系电话：' . $contacts['telephone'] . '<br />QQ：' . $contacts['qq'] . '<br />微信：' . $contacts['wechat'] . '<br />邮箱：' . $contacts['email'];
