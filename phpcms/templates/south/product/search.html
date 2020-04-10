@@ -73,12 +73,12 @@
                                 <option value="{$empty}"></option>
                                 <?php foreach ($restrictFunctions as $function) { ?>
                                 <?php
-                                    if (!in_array($function['id'], $search['function_id'])) {
+                                    if (!in_array($function['code'], $search['function_id'])) {
                                         continue;
                                     }
                                 ?>
-                                <?php $selected = ($function_id == $function['id']) ? ' selected="selected"' : ''; ?>
-                                <option<?php echo $selected; ?> value="<?php echo $function['id']; ?>"><?php echo $function['title']; ?></option>
+                                <?php $selected = ($function_id == $function['code']) ? ' selected="selected"' : ''; ?>
+                                <option<?php echo $selected; ?> value="<?php echo $function['code']; ?>"><?php echo $function['title']; ?></option>
                                 <?php } ?>
                             </select>
                         </fieldset>
