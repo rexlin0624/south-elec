@@ -11,7 +11,36 @@ class index {
 	private $db_market_list, $db_function_list, $db_series_list, $db_contact_setting, $db_linkage;
 
 	const MARKET = 1;
-	const SERIES = 2;
+    const SERIES = 2;
+    
+    const EMPTY = -1000;
+
+    private $_relactionIndex = [
+        // 系列
+        'serial_id' => 0,
+        // 前圈尺寸
+        'front_shape' => 1,
+        // 前圈/按键材料
+        'front_button_material' => 2,
+        // 前圈/按键形状
+        'front_button_shape' => 3,
+        // 前圈/按键颜色
+        'front_button_color' => 4,
+        // 开关元件
+        'switch_element' => 5,
+        // 照明形式
+        'light_style' => 6,
+        // 灯罩/LED灯颜色
+        'led_color' => 7,
+        // LED灯电压
+        'led_voltage' => 8,
+        // 其它
+        'others' => 9,
+        // 功能
+        'function_id' => 10,
+        // 安装尺寸
+        'install_size' => 11
+    ];
 
 	private $_product_props = null;
 	private $_filter_params = [];
@@ -132,15 +161,23 @@ class index {
             $props_total[$k] = $this->db->count($ww);
         }
 
+        $serials = $this->db_series_list->listinfo();
+
         $series_info = $this->db_series_list->get_one(['id' => $series_id]);
         $se = $series_info['title'];
 
-        $filter = $_POST;
+        $filter = $_GET;
+        unset($filter['m']);
+        unset($filter['c']);
+        unset($filter['a']);
         $condition = [];
         $is_display_contact = 'none';
         if (!empty($filter)) {
             foreach ($filter as $field => $flt) {
-                if ($flt == '-') {
+                if ($flt == self::EMPTY) {
+                    continue;
+                }
+                if ($field == 'serial_id') {
                     continue;
                 }
                 if ($flt == 'Z') {
@@ -152,7 +189,7 @@ class index {
             }
         }
         if (!empty($condition)) {
-            $where .= ' AND (' . implode(' OR ', $condition) . ')';
+            $where .= ' AND (' . implode(' AND ', $condition) . ')';
         }
 
         $function_info = $this->db_function_list->get_one(['id' => $functions_id]);
@@ -162,6 +199,35 @@ class index {
         $total = $this->db->count($where);
         $lists = $this->db->listinfo($where, 'id DESC', $page, 10);
         $pages = $this->db->pages;
+
+        // filter production search props
+        $fields = implode(',', array_keys($this->_relactionIndex));
+        $fields = str_replace('serial_id', 'series_id', $fields);
+        $fields = str_replace('function_id', 'functions_id', $fields);
+        $sql = 'SELECT DISTINCT ' . $fields . ' FROM se_productions WHERE ' . $where;
+        $this->db->query($sql);
+        $rows = $this->db->fetch_array();
+        $search = [];
+        foreach ($rows as $row) {
+            foreach ($row as $sch => $val) {
+                if ($sch == 'series_id') {
+                    $sch = 'serial_id';
+                }
+                if ($sch == 'functions_id') {
+                    $sch = 'function_id';
+                }
+
+                if (in_array($val, $search[$sch])) {
+                    continue;
+                }
+                if (!isset($search[$sch])) {
+                    $search[$sch] = [];
+                }
+
+                $search[$sch][] = $val;
+            }
+        }
+        // var_export($search);
 
         // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{前圈/磁}{序列号}
         $this->_filter_params = $filter;

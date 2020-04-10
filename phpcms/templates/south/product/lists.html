@@ -28,13 +28,33 @@
             <div class="column grid_6 bg">
 
                 <div class="row">
-                    <form action="/index.php?m=product&c=index&a=lists&functions_id={$functions_id}" method="post" id="myformmm">
+                    <form action="/index.php?m=product&c=index&a=lists&functions_id={$functions_id}" method="get" id="myformmm">
+                        <input type="hidden" name="m" value="product">
+                        <input type="hidden" name="c" value="index">
+                        <input type="hidden" name="a" value="lists">
+                        <input type="hidden" name="functions_id" value="{$functions_id}">
+                        <!-- <fieldset class="filter column grid_filter" style="display: none;">
+                            <label>系列(<?php echo count($search['serial_id']); ?>)</label>
+                            <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
+                                <option value="{$empty}"></option>
+                                <?php foreach ($serials as $sel) { ?>
+                                <?php
+                                    if (!in_array($sel['id'], $search['serial_id'])) {
+                                        continue;
+                                    }
+                                ?>
+                                <?php $selected = ($serial_id == $sel['id']) ? ' selected="selected"' : ''; ?>
+                                <option<?php echo $selected; ?> value="<?php echo $sel['id']; ?>"><?php echo $sel['title']; ?></option>
+                                <?php } ?>
+                            </select>
+                        </fieldset>
+                        <div style="clear: both;"></div> -->
                         <?php foreach ($props as $kk => $prop) { ?>
                         <fieldset class="filter column grid_filter">
                             <label>
                                 <?php echo $prop['title']; ?>
                                 (<?php
-                                    if (empty($filter)) {
+                                    /*if (empty($filter)) {
                                         echo $props_total[$kk];
                                     } else {
                                         if (empty($condition)) {
@@ -46,14 +66,18 @@
                                                 echo 0;
                                             }
                                         }
-                                    }
+                                    }*/
+                                    echo count($search[$kk]);
                                 ?>)
                             </label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
-                                <option value="-"></option>
+                                <option value="-1000"></option>
                                 <?php
                                 foreach ($prop['options'] as $key => $option) {
-                                $selected = ($filter[$kk] != '' && $filter[$kk] != "-" && $filter[$kk] == $key) ? ' selected="selected"' : '';
+                                if (!in_array($key, $search[$kk])) {
+                                    continue;
+                                }
+                                $selected = ($filter[$kk] != '' && $filter[$kk] != "-1000" && $filter[$kk] == $key) ? ' selected="selected"' : '';
                                 ?>
                                 <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
                                     <?php echo $key,'  ',$option; ?>
@@ -64,7 +88,7 @@
                         <?php } ?>
                     </form>
                 </div>
-                <div class="row" id="current-selected-code">{$code}</div>
+                <div class="row" id="current-selected-code" style="display: none;">{$code}</div>
                 <hr>
                 <div class="row">
                     <div class="column">

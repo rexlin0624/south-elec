@@ -147,8 +147,8 @@ class search {
             $mapSerialIdTitle[$item['id']] = $item['title'];
         }
 
-        $serial_id = (int)$_GET['serial_id'];
-        $function_id = (int)$_GET['function_id'];
+        $serial_id = $_GET['serial_id'];
+        $function_id = $_GET['function_id'];
 
         $propertyGET = $_GET;
         $propertyGET['function_id'] = isset($mapFunctionCode[$function_id]) ? $mapFunctionCode[$function_id] : '';
@@ -225,7 +225,7 @@ class search {
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
         $where = '1 = 1';
-        if (!empty($function_id) && $function_id != self::EMPTY) {
+        if ($function_id != self::EMPTY) {
             $where .= ' AND functions_id = ' . $function_id;
         }
         $props_total = [];
