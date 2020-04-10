@@ -225,7 +225,7 @@ class search {
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
         $where = '1 = 1';
-        if ($function_id != self::EMPTY) {
+        if (isset($_GET['functions_id']) && $function_id != self::EMPTY) {
             $where .= ' AND functions_id = ' . $function_id;
         }
         $props_total = [];

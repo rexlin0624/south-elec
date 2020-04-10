@@ -15,13 +15,11 @@
             <h1 class="c_3x2_h1">{$title}</h1>
             <div class="row">
                 {loop $lists $list}
-                <div class="column grid_2 column_margin">
-                    <a href="/index.php?m=product&c=index&a=lists&functions_id={$list['id']}&series_id={$id}" class="c_3x2">
-                        {if $list['thumb']}
+                <div class="column grid_2 column_margin" style="margin-bottom: 20px;width: 30%;">
+                    <a href="/index.php?m=product&c=index&a=lists&functions_id={$list['code']}&series_id={$id}" class="c_3x2">
                         <div class="img_chapter">
                             <img src="{$list['thumb']}" width="230" height="60">
                         </div>
-                        {/if}
                         <span><h5>{$list['title']}</h5></span>
                     </a>
                 </div>

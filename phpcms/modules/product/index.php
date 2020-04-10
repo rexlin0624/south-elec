@@ -125,13 +125,10 @@ class index {
                 $rows = $this->db->fetch_array();
                 $functions_ids = [];
                 foreach ($rows as $row) {
-					if (empty($row['functions_id'])) {
-						continue;
-					}
                     $functions_ids[] = $row['functions_id'];
                 }
 
-                $where = 'id IN(' . implode(',', $functions_ids) . ')';
+                $where = '`code` IN(' . implode(',', $functions_ids) . ')';
                 $lists = $this->db_function_list->listinfo($where, '', 1, 1000);
             }
         }
@@ -152,7 +149,8 @@ class index {
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
         
-        $where = 'functions_id = ' . $functions_id;
+        // $where = 'functions_id = ' . $functions_id;
+        $where = '1 = 1';
         $function = $this->db_function_list->get_one(['id' => $functions_id]);
 
         $props_total = [];

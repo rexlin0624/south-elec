@@ -76,14 +76,18 @@
                             </a>
                         </div>
                     </div>
-                    <div class="column grid_2 product_details">
+                    <div class="column grid_2 product_details" style="width: 60%;">
                         <h3 style="font-weight: bold;margin-bottom: 20px;">参数说明</h3>
                         <table class="data">
                             <tbody>
+                            <tr style="line-height: 30px;">
+                                <td>产品编码：</td>
+                                <td class="left"><?php echo $item['code']; ?></td>
+                            </tr>
                             <?php foreach ($props as $key => $prop) { ?>
                             <tr style="line-height: 30px;">
-                                <td><?php echo $prop['title']; ?></td>
-                                <td class="right"><?php echo $prop['options'][$item[$key]]; ?></td>
+                                <td><?php echo $prop['title']; ?>：</td>
+                                <td class="left"><?php echo $prop['options'][$item[$key]]; ?></td>
                             </tr>
                             <?php } ?>
                             </tbody>
