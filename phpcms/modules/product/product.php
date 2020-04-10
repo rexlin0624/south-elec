@@ -754,7 +754,7 @@ class product extends admin {
                     continue;
                 }
                 if ($idx == 'functions_id') {
-                    $encode = $mapFunction[$encode];
+                    // $encode = $mapFunction[$encode];
                 }
 
                 if (!empty($encode)) {                
