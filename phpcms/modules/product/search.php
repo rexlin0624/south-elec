@@ -89,32 +89,6 @@ class search {
         return isset($this->_filter_params[$param]) ? ($this->_filter_params[$param] == self::EMPTY ? '-' : $this->_filter_params[$param]) : 'X';
     }
 
-    /**
-     * 关系约束
-     */
-    private function relactionRestrict_bak($property) {
-        $restrict = [];
-        foreach ($this->_relactionIndex as $prop => $rIndex) {
-            $propValue = isset($property[$prop]) && !empty($property[$prop]) ? $property[$prop] : -100;
-            if ($propValue != -100 && $propValue != '-') {
-                foreach ($this->_relaction as $relactions) {
-                    echo $prop, ' $propValue = ', $propValue, '<br />';
-                    if (in_array($propValue, $relactions[$rIndex])) {
-                        foreach ($relactions as $idx => $items) {
-                            foreach ($items as $item) {
-                                if (!in_array($item, $restrict[$idx])) {
-                                    $restrict[$idx][] = $item;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-        return $restrict;
-    }
-
     private function _propRestrict($relactions, $prop, $index) {
         $restricts = [];
         foreach ($relactions as $relaction) {
@@ -187,7 +161,7 @@ class search {
             $restrictSerials = [];
             foreach ($serials as $item) {
                 if (empty($serial_id) && !in_array($item['id'], $restrict[0])) {
-                    continue;
+                    // continue;
                 }
 
                 $restrictSerials[] = $item;
@@ -200,7 +174,7 @@ class search {
             $restrictFunctions = [];
             foreach ($functions as $item) {
                 if (!in_array($item['id'], $restrict[10])) {
-                    continue;
+                    // continue;
                 }
 
                 $restrictFunctions[] = $item;
@@ -215,7 +189,7 @@ class search {
                 $options = [];
                 foreach ($prop['options'] as $key => $option) {
                     if (!in_array($key, $restrict[$restrictIndex[$kk]])) {
-                        continue;
+                        // continue;
                     }
 
                     $options[$key] = $option;
@@ -294,6 +268,35 @@ class search {
         $total = $this->db->count($where);
         $lists = $this->db->listinfo($where, 'id DESC', $page, 10);
         $pages = $this->db->pages;
+
+        // filter production search props
+        $fields = implode(',', array_keys($this->_relactionIndex));
+        $fields = str_replace('serial_id', 'series_id', $fields);
+        $fields = str_replace('function_id', 'functions_id', $fields);
+        $sql = 'SELECT DISTINCT ' . $fields . ' FROM se_productions WHERE ' . $where;
+        $this->db->query($sql);
+        $rows = $this->db->fetch_array();
+        $search = [];
+        foreach ($rows as $row) {
+            foreach ($row as $sch => $val) {
+                if ($sch == 'series_id') {
+                    $sch = 'serial_id';
+                }
+                if ($sch == 'functions_id') {
+                    $sch = 'function_id';
+                }
+
+                if (!isset($search[$sch])) {
+                    $search[$sch] = [];
+                }
+                if (in_array($val, $search[$sch])) {
+                    continue;
+                }
+
+                $search[$sch][] = $val;
+            }
+        }
+        // var_dump($search);
 
         // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{前圈/磁}{序列号}
         $this->_filter_params = $filter;
