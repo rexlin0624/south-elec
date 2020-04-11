@@ -103,10 +103,10 @@ class index {
 
     public function functions() {
         $type = (int)$_GET['type'];
-        $id = (int)$_GET['id'];
+        $id = isset($_GET['id']) ? (int)$_GET['id'] : -1000;
         $setting = $this->db_setting->get_one(['id' => 1]);
 
-        if (empty($type) && empty($id)) {
+        if (empty($type) && $id == -1000) {
             $title = '功能';
             $lists = $this->db_function_list->listinfo([], '', 1, 1000);
         } else {
@@ -114,6 +114,7 @@ class index {
                 $item = $this->db_market_list->get_one(['id' => $id]);
                 $title = $item['title'];
 
+                $id = -1000;
                 $where = 'id IN(' . $item['functions'] . ')';
                 $lists = $this->db_function_list->listinfo($where, '', 1, 1000);
             } elseif ($type == self::SERIES) {
