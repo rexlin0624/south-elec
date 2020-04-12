@@ -28,11 +28,12 @@
             <div class="column grid_6 bg">
 
                 <div class="row">
-                    <form action="/index.php?m=product&c=index&a=lists&functions_id={$functions_id}" method="get" id="myformmm">
+                    <form action="/index.php?m=product&c=index&a=lists&functions_id={$functions_id}&series_id={$series_id}" method="get" id="myformmm">
                         <input type="hidden" name="m" value="product">
                         <input type="hidden" name="c" value="index">
                         <input type="hidden" name="a" value="lists">
                         <input type="hidden" name="functions_id" value="{$functions_id}">
+                        <input type="hidden" name="series_id" value="{$series_id}">
                         <!-- <fieldset class="filter column grid_filter" style="display: none;">
                             <label>系列(<?php echo count($search['serial_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
