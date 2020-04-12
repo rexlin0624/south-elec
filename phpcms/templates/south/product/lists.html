@@ -33,7 +33,9 @@
                         <input type="hidden" name="c" value="index">
                         <input type="hidden" name="a" value="lists">
                         <input type="hidden" name="functions_id" value="{$functions_id}">
+                        <?php if (isset($_GET['series_id'])) { ?>
                         <input type="hidden" name="series_id" value="{$series_id}">
+                        <?php } ?>
                         <!-- <fieldset class="filter column grid_filter" style="display: none;">
                             <label>系列(<?php echo count($search['serial_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
