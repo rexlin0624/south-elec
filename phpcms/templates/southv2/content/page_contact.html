@@ -1,0 +1,484 @@
+{template "content","top"}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!--10378-->
+            <div id="d3239eb9" class=" slickCarousel">
+                {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+                <div class="sliderBox">
+                    <div class="background-image-holder">
+                        <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
+                    </div>
+                </div>
+                {/loop}
+            </div>
+        </div>
+    </div>
+</div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="breadCrumbMenu">
+                <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+                {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row equalize">
+        <div class="col-sm-8">
+            <div class="well well-lg">
+                <div class="well same-height-left same-height-right" style="height: 1422px;">
+
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                    <link href="/statics/wForms/3.4/css/wforms-layout.css" rel="stylesheet" type="text/css">
+                    <!--[if IE 8]>
+                    <link href="/statics/wForms/3.4/css/wforms-layout-ie8.css" rel="stylesheet" type="text/css" />
+                    <![endif]-->
+                    <!--[if IE 7]>
+                    <link href="/statics/wForms/3.4/css/wforms-layout-ie7.css" rel="stylesheet" type="text/css" />
+                    <![endif]-->
+                    <!--[if IE 6]>
+                    <link href="/statics/wForms/3.4/css/wforms-layout-ie6.css" rel="stylesheet" type="text/css" />
+                    <![endif]-->
+
+                    <link href="/statics/wForms/3.4/css/wforms-jsonly.css" rel="stylesheet" title="This stylesheet activated by javascript" type="text/css">
+                    <script type="text/javascript" src="/statics/wForms/3.4/js/wforms.js"></script>
+                    <script type="text/javascript" src="/statics/wForms/3.4/js/wforms_custom_validation.js"></script>
+                    <script type="text/javascript" src="/statics/wForms/3.4/js/replace_variables.js"></script>
+                    <script type="text/javascript" src="/statics/wForms/3.4/js/wforms_prefill.js"></script>
+                    <script type="text/javascript" src="/statics/wForms/3.4/js/localization-zh_TW.js"></script>
+
+                    <!-- FORM: BODY SECTION -->
+                    <div class="wFormContainer">
+
+                        <h3 class="wFormTitle"><span>联系人</span></h3>
+                        <div class="wForm wFormWidth">
+                            <div class="codesection" id="code-"><script>
+                                function sf_date(){
+                                    var now = new Date();
+                                    var dy = now.getDate()+1;
+                                    if(dy < 10){
+                                        dy = String().concat("0", dy);
+                                    }
+                                    var mo= now.getMonth()+1;
+                                    if(mo < 10){
+                                        mo = String().concat("0", mo);
+                                    }
+                                    var yr = now.getFullYear();
+                                    var ind = "AM";
+                                    var hr = now.getHours();
+                                    var min = now.getMinutes();
+                                    if(min < 10){
+                                        min = String().concat("0", min);
+                                    }
+                                    return yr+"-"+mo+"-"+dy;
+                                }
+                            </script>
+
+                                <style type="text/css">
+                                    .supportInfo {
+                                        display: none;
+                                    }
+                                </style>
+
+                            </div>
+                            <form method="post" action="{APP_PATH}index.php?m=formguide&c=index&a=show&formid=25&siteid=1" class="labelsAbove hintsTooltip" name="myform" id="myform">
+                                <input type="hidden" id="tfa_Leadsource" name="tfa_Leadsource" value="WEB" class=""><input type="hidden" id="tfa_MarketingAction" name="tfa_MarketingAction" value="" class=""><input type="hidden" id="tfa_WEBSourceURL" name="tfa_WEBSourceURL" value="//www.eao.com/ehk/zh/company/enquiryform/enquiry.asp" class=""><input type="hidden" id="tfa_CurrentDate" name="tfa_CurrentDate" value="2019-05-12" class="formula=sf_date()"><input type="hidden" id="tfa_Language" name="tfa_Language" value="Chinese" class=""><div id="tfa_Salutation-D" class="oneField">
+                                <label class="preField" for="tfa_Salutation">稱謂 <span class="reqMark">*</span></label> <select id="tfa_Salutation" name="info[ly_type]" class="required"><option value="">請選擇...</option>
+                                <option value="先生" class="">先生</option>
+                                <option value="小姐" class="">小姐</option>
+                                <option value="女士" class="">女士</option></select> <br>
+                            </div>
+                                <div id="tfa_FirstName-D" class="oneField">
+                                    <label class="preField" for="contact">名稱</label> <input type="text" id="contact" name="info[contact]" value="" size="47" class=""> <br>
+                                </div>
+                                <div id="tfa_LastName-D" class="oneField">
+                                    <label class="preField" for="family_name">姓氏 <span class="reqMark">*</span></label> <input type="text" id="family_name" name="info[family_name]" value="" size="47" class="required"> <br>
+                                </div>
+                                <div id="tfa_Company-D" class="oneField">
+                                    <label class="preField" for="company">公司 <span class="reqMark">*</span></label> <input type="text" id="company" name="info[company]" value="" size="47" class="required"> <br>
+                                </div>
+                                <div id="tfa_Country1-D" class="oneField">
+                                    <label class="preField" for="country">國家 <span class="reqMark">*</span></label> <select id="country" name="info[country]" class="required"><option value="">請選擇...</option>
+                                    <option value="Austria" class="">Austria</option>
+                                    <option value="Belgium" class="">Belgium</option>
+                                    <option value="China" class="">China</option>
+                                    <option value="France" class="">France</option>
+                                    <option value="Germany" class="">Germany</option>
+                                    <option value="Italy" class="">Italy</option>
+                                    <option value="Japan" class="">Japan</option>
+                                    <option value="Netherlands" class="">Netherlands</option>
+                                    <option value="Sweden" class="">Sweden</option>
+                                    <option value="Switzerland" class="">Switzerland</option>
+                                    <option value="United Kingdom" class="">United Kingdom</option>
+                                    <option value="United States" class="">United States</option>
+                                    <option value="United Arab Emirates" class="">United Arab Emirates</option>
+                                    <option value="Albania" class="">Albania</option>
+                                    <option value="Afghanistan" class="">Afghanistan</option>
+                                    <option value="Algeria" class="">Algeria</option>
+                                    <option value="Angola" class="">Angola</option>
+                                    <option value="Argentina" class="">Argentina</option>
+                                    <option value="Armenia" class="">Armenia</option>
+                                    <option value="Australia" class="">Australia</option>
+                                    <option value="Azerbaijan" class="">Azerbaijan</option>
+                                    <option value="Bahamas" class="">Bahamas</option>
+                                    <option value="Bahrain" class="">Bahrain</option>
+                                    <option value="Bangladesh" class="">Bangladesh</option>
+                                    <option value="Barbados" class="">Barbados</option>
+                                    <option value="Belarus" class="">Belarus</option>
+                                    <option value="Belize" class="">Belize</option>
+                                    <option value="Benin" class="">Benin</option>
+                                    <option value="Bermuda" class="">Bermuda</option>
+                                    <option value="Bhutan" class="">Bhutan</option>
+                                    <option value="Bolivia" class="">Bolivia</option>
+                                    <option value="Bosnia and Herzegovina" class="">Bosnia and Herzegovina</option>
+                                    <option value="Botswana" class="">Botswana</option>
+                                    <option value="Brazil" class="">Brazil</option>
+                                    <option value="Brunei" class="">Brunei</option>
+                                    <option value="Bulgaria" class="">Bulgaria</option>
+                                    <option value="Burundi" class="">Burundi</option>
+                                    <option value="Cambodia" class="">Cambodia</option>
+                                    <option value="Cameroon" class="">Cameroon</option>
+                                    <option value="Canada" class="">Canada</option>
+                                    <option value="Chile" class="">Chile</option>
+                                    <option value="Colombia" class="">Colombia</option>
+                                    <option value="Comoros" class="">Comoros</option>
+                                    <option value="Congo" class="">Congo</option>
+                                    <option value="Cook Islands" class="">Cook Islands</option>
+                                    <option value="Costa Rica" class="">Costa Rica</option>
+                                    <option value="Côte d ' Ivoire" class="">Côte d ' Ivoire</option>
+                                    <option value="Croatia ( Hrvatska )" class="">Croatia ( Hrvatska )</option>
+                                    <option value="Cuba" class="">Cuba</option>
+                                    <option value="Cyprus" class="">Cyprus</option>
+                                    <option value="Czech Republic" class="">Czech Republic</option>
+                                    <option value="Congo ( DRC )" class="">Congo ( DRC )</option>
+                                    <option value="Denmark" class="">Denmark</option>
+                                    <option value="Djibouti" class="">Djibouti</option>
+                                    <option value="Dominica" class="">Dominica</option>
+                                    <option value="Dominican Republic" class="">Dominican Republic</option>
+                                    <option value="East Timor" class="">East Timor</option>
+                                    <option value="Ecuador" class="">Ecuador</option>
+                                    <option value="Egypt" class="">Egypt</option>
+                                    <option value="El Salvador" class="">El Salvador</option>
+                                    <option value="Equatorial Guinea" class="">Equatorial Guinea</option>
+                                    <option value="Eritrea" class="">Eritrea</option>
+                                    <option value="Estonia" class="">Estonia</option>
+                                    <option value="Ethiopia" class="">Ethiopia</option>
+                                    <option value="Finland" class="">Finland</option>
+                                    <option value="French Guiana" class="">French Guiana</option>
+                                    <option value="French Polynesia" class="">French Polynesia</option>
+                                    <option value="Gabon" class="">Gabon</option>
+                                    <option value="Gambia" class="">Gambia</option>
+                                    <option value="Georgia" class="">Georgia</option>
+                                    <option value="Ghana" class="">Ghana</option>
+                                    <option value="Gibraltar" class="">Gibraltar</option>
+                                    <option value="Greece" class="">Greece</option>
+                                    <option value="Greenland" class="">Greenland</option>
+                                    <option value="Grenada" class="">Grenada</option>
+                                    <option value="Guadeloupe" class="">Guadeloupe</option>
+                                    <option value="Guam" class="">Guam</option>
+                                    <option value="Guatemala" class="">Guatemala</option>
+                                    <option value="Guinea" class="">Guinea</option>
+                                    <option value="Guinea-Bissau" class="">Guinea-Bissau</option>
+                                    <option value="Guyana" class="">Guyana</option>
+                                    <option value="Honduras" class="">Honduras</option>
+                                    <option value="Hong Kong SAR" class="">Hong Kong SAR</option>
+                                    <option value="Hungary" class="">Hungary</option>
+                                    <option value="Iceland" class="">Iceland</option>
+                                    <option value="India" class="">India</option>
+                                    <option value="Indonesia" class="">Indonesia</option>
+                                    <option value="Iran" class="">Iran</option>
+                                    <option value="Iraq" class="">Iraq</option>
+                                    <option value="Ireland" class="">Ireland</option>
+                                    <option value="Israel" class="">Israel</option>
+                                    <option value="Jamaica" class="">Jamaica</option>
+                                    <option value="Jordan" class="">Jordan</option>
+                                    <option value="Kazakhstan" class="">Kazakhstan</option>
+                                    <option value="Kenya" class="">Kenya</option>
+                                    <option value="Korea" class="">Korea</option>
+                                    <option value="Kuwait" class="">Kuwait</option>
+                                    <option value="Kyrgyzstan" class="">Kyrgyzstan</option>
+                                    <option value="Laos" class="">Laos</option>
+                                    <option value="Latvia" class="">Latvia</option>
+                                    <option value="Lebanon" class="">Lebanon</option>
+                                    <option value="Lesotho" class="">Lesotho</option>
+                                    <option value="Liberia" class="">Liberia</option>
+                                    <option value="Libya" class="">Libya</option>
+                                    <option value="Liechtenstein" class="">Liechtenstein</option>
+                                    <option value="Lithuania" class="">Lithuania</option>
+                                    <option value="Luxembourg" class="">Luxembourg</option>
+                                    <option value="Macao SAR" class="">Macao SAR</option>
+                                    <option value="Macedonia, Former Yugoslav Republic of" class="">Macedonia, Former Yugoslav Republic of</option>
+                                    <option value="Madagascar" class="">Madagascar</option>
+                                    <option value="Malawi" class="">Malawi</option>
+                                    <option value="Malaysia" class="">Malaysia</option>
+                                    <option value="Mali" class="">Mali</option>
+                                    <option value="Malta" class="">Malta</option>
+                                    <option value="Martinique" class="">Martinique</option>
+                                    <option value="Mauritania" class="">Mauritania</option>
+                                    <option value="Mauritius" class="">Mauritius</option>
+                                    <option value="Mexico" class="">Mexico</option>
+                                    <option value="Moldova" class="">Moldova</option>
+                                    <option value="Monaco" class="">Monaco</option>
+                                    <option value="Mongolia" class="">Mongolia</option>
+                                    <option value="Morocco" class="">Morocco</option>
+                                    <option value="Mozambique" class="">Mozambique</option>
+                                    <option value="Myanmar" class="">Myanmar</option>
+                                    <option value="Namibia" class="">Namibia</option>
+                                    <option value="Nepal" class="">Nepal</option>
+                                    <option value="New Caledonia" class="">New Caledonia</option>
+                                    <option value="New Zealand" class="">New Zealand</option>
+                                    <option value="Nicaragua" class="">Nicaragua</option>
+                                    <option value="Niger" class="">Niger</option>
+                                    <option value="Nigeria" class="">Nigeria</option>
+                                    <option value="North Korea" class="">North Korea</option>
+                                    <option value="Norway" class="">Norway</option>
+                                    <option value="Oman" class="">Oman</option>
+                                    <option value="Pakistan" class="">Pakistan</option>
+                                    <option value="Panama" class="">Panama</option>
+                                    <option value="Paraguay" class="">Paraguay</option>
+                                    <option value="Peru" class="">Peru</option>
+                                    <option value="Philippines" class="">Philippines</option>
+                                    <option value="Poland" class="">Poland</option>
+                                    <option value="Portugal" class="">Portugal</option>
+                                    <option value="Puerto Rico" class="">Puerto Rico</option>
+                                    <option value="Qatar" class="">Qatar</option>
+                                    <option value="Reunion" class="">Reunion</option>
+                                    <option value="Romania" class="">Romania</option>
+                                    <option value="Russia" class="">Russia</option>
+                                    <option value="Rwanda" class="">Rwanda</option>
+                                    <option value="Samoa" class="">Samoa</option>
+                                    <option value="San Marino" class="">San Marino</option>
+                                    <option value="Saudi Arabia" class="">Saudi Arabia</option>
+                                    <option value="Senegal" class="">Senegal</option>
+                                    <option value="Serbia and Montenegro" class="">Serbia and Montenegro</option>
+                                    <option value="Sierra Leone" class="">Sierra Leone</option>
+                                    <option value="Singapore" class="">Singapore</option>
+                                    <option value="Slovakia" class="">Slovakia</option>
+                                    <option value="Slovenia" class="">Slovenia</option>
+                                    <option value="Somalia" class="">Somalia</option>
+                                    <option value="South Africa" class="">South Africa</option>
+                                    <option value="Spain" class="">Spain</option>
+                                    <option value="Sri Lanka" class="">Sri Lanka</option>
+                                    <option value="Sudan" class="">Sudan</option>
+                                    <option value="Suriname" class="">Suriname</option>
+                                    <option value="Syria" class="">Syria</option>
+                                    <option value="Taiwan" class="">Taiwan</option>
+                                    <option value="Tajikistan" class="">Tajikistan</option>
+                                    <option value="Tanzania" class="">Tanzania</option>
+                                    <option value="Thailand" class="">Thailand</option>
+                                    <option value="Togo" class="">Togo</option>
+                                    <option value="Tokelau" class="">Tokelau</option>
+                                    <option value="Tonga" class="">Tonga</option>
+                                    <option value="Trinidad and Tobago" class="">Trinidad and Tobago</option>
+                                    <option value="Tunisia" class="">Tunisia</option>
+                                    <option value="Turkey" class="">Turkey</option>
+                                    <option value="Turkmenistan" class="">Turkmenistan</option>
+                                    <option value="Uganda" class="">Uganda</option>
+                                    <option value="Ukraine" class="">Ukraine</option>
+                                    <option value="Uruguay" class="">Uruguay</option>
+                                    <option value="Uzbekistan" class="">Uzbekistan</option>
+                                    <option value="Venezuela" class="">Venezuela</option>
+                                    <option value="Viet Nam" class="">Viet Nam</option>
+                                    <option value="Yemen" class="">Yemen</option>
+                                    <option value="Zambia" class="">Zambia</option>
+                                    <option value="Zimbabwe" class="">Zimbabwe</option></select> <br>
+                                </div>
+                                <div id="tfa_Email-D" class="oneField">
+                                    <label class="preField" for="email">電郵 <span class="reqMark">*</span></label> <input type="text" id="email" name="info[email]" value="" size="47" class="validate-email required"> <br>
+                                </div>
+                                <div id="tfa_Preferredcontact-D" class="oneField">
+                                    <label class="preField">請與我聯絡</label>
+                                    <span id="tfa_Preferredcontact" class="choices">
+                                        <span class="oneChoice">
+                                            <input type="radio" value="電郵" class="" checked="" id="tfa_EMail1" name="info[contact_type]" rel=" wfHandled">
+                                            <label for="tfa_EMail1" class="postField">電郵</label>
+                                        </span>
+                                        <span class="oneChoice">
+                                            <input type="radio" value="電話" class="switch-c" id="tfa_Phone1" name="info[contact_type]" rel=" wfHandled">
+                                            <label for="tfa_Phone1" class="postField">電話</label>
+                                        </span>
+                                    </span><br>
+                                </div>
+                                <div id="tfa_Phone-D" class="offstate-c oneField">
+                                    <label class="preField" for="telephone">電話</label> <input type="text" id="telephone" name="info[telephone]" value="" size="47" class=""> <br>
+                                </div>
+                                <div id="tfa_3813623308145-D" class="oneField labelsAbove">
+                                    <label class="preField">聯絡原因 <span class="reqMark">*</span></label>
+                                    <span id="tfa_3813623308145" class="choices required">
+                                        <span class="oneChoice">
+                                            <input type="radio" value="普通查詢" class="" checked="" id="tfa_Generalcontact" name="info[reason]" rel=" wfHandled">
+                                            <label for="tfa_Generalcontact" class="postField">普通查詢</label>
+                                        </span>
+                                        <span class="oneChoice">
+                                            <input type="radio" value="查詢/訂單" class="switch-f" id="tfa_RequestOrder" name="info[reason]" rel=" wfHandled">
+                                            <label for="tfa_RequestOrder" class="postField">查詢/訂單</label>
+                                        </span>
+                                        <span class="oneChoice">
+                                            <input type="radio" value="媒體資料" class="switch-a" id="tfa_Information" name="info[reason]" rel=" wfHandled">
+                                            <label for="tfa_Information" class="postField">媒體資料</label>
+                                        </span>
+                                        <span class="oneChoice">
+                                            <input type="radio" value="技術支援" class="switch-d" id="tfa_Technicalsupport" name="info[reason]" rel=" wfHandled">
+                                            <label for="tfa_Technicalsupport" class="postField">技術支援</label>
+                                        </span>
+                                    </span> <br>
+                                </div>
+                                <div id="tfa_RequestOrder1" class="wfSection offstate-f">
+                                    <div id="tfa_6783669907935-D" class="oneField">
+                                        <label class="preField">查詢/訂單 <span class="reqMark">*</span></label>
+                                        <span id="tfa_6783669907935" class="choices required">
+                                            <span class="oneChoice">
+                                                <input type="radio" value="要求報價" class="" id="tfa_Requestforquotat" name="info[order_search]">
+                                                <label for="tfa_Requestforquotat" class="postField">要求報價</label>
+                                            </span>
+                                            <span class="oneChoice">
+                                                <input type="radio" value="訂單" class="" id="tfa_Order" name="info[order_search]">
+                                                <label for="tfa_Order" class="postField">訂單</label>
+                                            </span>
+                                        </span> <br>
+                                    </div>
+                                    <div id="tfa_Quantitypartnumb-D" class="oneField">
+                                        <label class="preField" for="number">數量 及 零件編號</label>
+                                        <textarea cols="35" rows="3" id="number" name="info[number]" class=""></textarea> <br>
+                                    </div>
+                                </div>
+                                <div id="tfa_Information1" class="wfSection offstate-a"><div id="tfa_Media-D" class="oneField">
+                                    <label class="preField">你想收到什麽資料 <span class="reqMark">*</span></label>
+                                    <span id="tfa_Media" class="choices required">
+                                        <span class="oneChoice">
+                                            <input type="checkbox" value="電郵" class="" id="tfa_ELetter" name="info[infomation][]">
+                                            <label for="tfa_ELetter" class="postField">電郵</label>
+                                        </span>
+                                        <span class="oneChoice">
+                                            <input type="checkbox" value="新聞發布" class="" id="tfa_PressReleases" name="info[infomation][]">
+                                            <label for="tfa_PressReleases" class="postField">新聞發布</label>
+                                        </span>
+                                        <span class="oneChoice"><input type="checkbox" value="InTouch" class="" id="tfa_InTouch" name="info[infomation][]">
+                                            <label for="tfa_InTouch" class="postField">InTouch</label>
+                                        </span>
+                                    </span> <br>
+                                </div></div>
+                                <div id="tfa_Technicalsupport1" class="wfSection offstate-d"><div id="tfa_PartNumbers-D" class="oneField">
+                                    <label class="preField" for="mach_number">型號</label> <textarea cols="35" rows="3" id="mach_number" name="info[mach_number]" class=""></textarea> <br>
+                                </div></div>
+                                <div id="tfa_Addressfields" class="wfSection offstate-f offstate-g">
+                                    <div id="tfa_Address1-D" class="oneField">
+                                        <label class="preField" for="address">地址 <span class="reqMark">*</span></label>
+                                        <input type="text" id="address" name="info[address]" value="" size="47" class="required"> <br>
+                                    </div>
+                                    <div id="tfa_Street2-D" class="oneField">
+                                        <label class="preField" for="address_2">地址 2</label>
+                                        <input type="text" id="address_2" name="info[address_2]" value="" size="47" class=""> <br>
+                                    </div>
+                                    <div id="tfa_ZIP-D" class="oneField">
+                                        <label class="preField" for="postcode">郵編 <span class="reqMark">*</span></label>
+                                        <input type="text" id="postcode" name="info[postcode]" value="" size="47" class="validate-alphanum required"> <br>
+                                    </div>
+                                    <div id="tfa_City-D" class="oneField">
+                                        <label class="preField" for="city">城市 <span class="reqMark">*</span></label>
+                                        <input type="text" id="city" name="info[city]" value="" size="47" class="required"> <br>
+                                    </div>
+                                    <div id="tfa_State-D" class="oneField">
+                                        <label class="preField" for="province">省市</label>
+                                        <input type="text" id="province" name="info[province]" value="" size="47" class=""> <br>
+                                    </div>
+                                </div>
+                                <div id="tfa_Description-D" class="oneField">
+                                    <label class="preField" for="content">訊息</label>
+                                    <textarea cols="35" rows="3" id="content" name="info[content]" class=""></textarea> <br>
+                                </div>
+                                <div><fieldset class="captcha">
+                                    <legend>Captcha</legend>
+                                    <p class="instructions">請輸入圖中顯示的驗證碼:</p>
+                                    <div class="oneField">
+                                        {form::checkcode()}
+                                        <label class="preField">验证码</label>
+                                        <input type="text" name="captcha" id="captcha"><br>
+                                    </div>
+                                    <div class="captchaHelp">(這有助防止系統將表格自動提交。如閣下未能確認圖片中的字母，請作出最合理的猜測。在下一個畫面中，您將有另一次機會)<br>点击图片重新生成验证码
+                                    </div>
+                                </fieldset></div>
+                                <div class="actions">
+                                    <input type="submit" class="primaryAction" id="submit-" name="dosubmit" value="傳送">
+                                </div>
+                            </form>
+                        </div>
+
+                        <p class="supportInfo">
+                            <a href="//www.tfaforms.com/forms/help/240645" target="new" style="font-size: 0.7em;">
+                                是否想透過此表格取得協助？    </a>
+
+                        </p>
+
+                    </div></div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="well well-lg">
+                <h3>联系我们</h3>
+                <div class="subNavigation">
+                    <ul class="nav navist">
+                        {pc:content action="category" catid="50" num="20" siteid="$siteid" order="listorder ASC"}
+                        {loop $data $r}
+                        <li class="item"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--TYPO3SEARCH_end-->
+{template "content","footer"}
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#tfa_Phone1').click(function () {
+        $('#tfa_Phone-D').removeClass('offstate-c');
+    });
+    $('#tfa_EMail1').click(function () {
+        $('#tfa_Phone-D').addClass('offstate-c');
+    });
+
+    // 聯絡原因
+    $('input[name="info[reason]"]').unbind('click').bind('click', function (evt) {
+        var id = $(this).attr('id');
+
+        // 普通查询
+        if (id === 'tfa_Generalcontact') {
+            $('#tfa_RequestOrder1').addClass('offstate-f');
+            $('#tfa_Addressfields').addClass('offstate-f').addClass('offstate-g');
+            $('#tfa_Information1').addClass('offstate-a');
+            $('#tfa_Technicalsupport1').addClass('offstate-d');
+        }
+        // 查詢/訂單
+        else if (id === 'tfa_RequestOrder') {
+            $('#tfa_RequestOrder1').removeClass('offstate-f');
+            $('#tfa_Addressfields').removeClass('offstate-f').removeClass('offstate-g');
+
+            $('#tfa_Information1').addClass('offstate-a');
+            $('#tfa_Technicalsupport1').addClass('offstate-d');
+        }
+        // 媒體資料
+        else if (id === 'tfa_Information') {
+            $('#tfa_RequestOrder1').addClass('offstate-f');
+            $('#tfa_Addressfields').addClass('offstate-f').addClass('offstate-g');
+            $('#tfa_Technicalsupport1').addClass('offstate-d');
+
+            $('#tfa_Information1').removeClass('offstate-a');
+        }
+        // 技術支援
+        else if (id === 'tfa_Technicalsupport') {
+            $('#tfa_RequestOrder1').addClass('offstate-f');
+            $('#tfa_Addressfields').addClass('offstate-f').addClass('offstate-g');
+            $('#tfa_Information1').addClass('offstate-a');
+
+            $('#tfa_Technicalsupport1').removeClass('offstate-d');
+        }
+    });
+});
+</script>

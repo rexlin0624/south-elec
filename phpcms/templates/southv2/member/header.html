@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+	<title></title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/statics/css/bootstrap.css">
+	<script src="/statics/js/jquery-3.2.1.min.js" ></script>
+	<script src="/statics/js/bootstrap.js" ></script>
+	<link rel = "Shortcut Icon" href=/statics/images/icon.ico>
+	<link rel = "stylesheet" href="/statics/css/user_main.css">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+<div class="user_header"></div>
+<div>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+						<span class="sr-only"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="{siteurl($siteid)}"><img src="/statics/images/logo-3.png" width="100" height="50"></a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class=""><a href="{siteurl($siteid)}">首页 <span class="sr-only">(current)</span></a></li>
+						<li class="dropdown">
+							<a href="/index.php?m=member&c=index">我的账户</a>
+						</li>
+					</ul>
+				</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</div>
+	</nav>
+</div>

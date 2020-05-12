@@ -1,0 +1,74 @@
+{template "content","top"}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!--10378-->
+            <div id="d3239eb9" class=" slickCarousel">
+                {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+                <div class="sliderBox">
+                    <div class="background-image-holder">
+                        <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
+                    </div>
+                </div>
+                {/loop}
+            </div>
+        </div>
+    </div>
+</div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="breadCrumbMenu">
+                <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+                {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row equalize">
+        <div class="col-sm-8">
+            <div class="well well-lg">
+                <div class="csc-header csc-header-n1">
+                    {$CATEGORYS[$catid]['description']}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="well well-lg">
+                <h3>{$catname}</h3>
+                <div class="subNavigation">
+                    <ul class="nav navist">
+                        {pc:content action="category" catid="$catid" num="20" siteid="$siteid" order="listorder ASC"}
+                        {loop $data $r}
+                        <li class="item"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container contentContainer" role="main">
+    <div class="row">
+        {loop $CATEGORYS $category}
+        {if $category[parentid] == 1}
+        <div class="col-md-4 col-sm-6">
+            <div class="well well-lg">
+                <div class="csc-header csc-header-n1">
+                    <h3 class="csc-firstHeader"><a href="{$category[url]}">{$category[catname]}</a></h3>
+                </div>
+                <div class="csc-textpic-text">
+                    <p> {str_cut(strip_tags($category[description]), 200)} &nbsp; </p>
+                    <p><a href="{$category[url]}" class="internal-link">阅读更多… </a></p>
+                </div>
+            </div>
+        </div>
+        {/if}
+        {/loop}
+    </div>
+</div>
+<!--TYPO3SEARCH_end-->
+{template "content","footer"}

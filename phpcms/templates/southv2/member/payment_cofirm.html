@@ -1,0 +1,41 @@
+{template 'member', 'header'}
+<style type="text/css">
+	.zfb-main{
+		min-height: 800px;
+		padding-top: 50px;
+	}
+	.zfb-img {
+		padding: 15px;
+	}
+	.zfb-main .title{
+		font-size: 24px;
+	}
+	#footer{
+		text-align: center;
+	}
+</style>
+<div id="memberArea" class="container zfb-main text-center">
+<!--{template 'member', 'left'}-->
+	<div class="col-auto">
+		<div class="col-1 ">
+			<div>
+				<img src="/statics/images/zfb-img.png" width="15%" class="zfb-img center-block">
+			</div>
+			<h5 class="title">订单创建成功，<span id="goto_pay" style="cursor: pointer;text-decoration: underline;">点击前往支付...</span></h5>
+			<div class="bk10"></div>
+			{$code}
+		</div>
+	</div>
+</div>
+</div>
+{template 'member', 'footer'}
+
+<script type="text/javascript">
+jQuery(document).ready(function () {
+    $('input[type="submit"]').css('display', 'none');
+
+    $('#goto_pay').click(function () {
+        $('form').submit();
+    });
+});
+</script>

@@ -1,0 +1,150 @@
+{template "content","top"}
+<div id="content4b6ff85a2c1815940517992147125a2c" data-id="4b6ff85a2c1815940517992147125a2c" class="layout-content content" type="content" style="" inplate="0">
+	<div id="rowf4c88911b6e8b912df915eb7f693dcfd" class="row pure-g  limit-row-width" data-id="f4c88911b6e8b912df915eb7f693dcfd" type="row" style="padding-top: 2%; padding-left: 1%; padding-bottom: 4%;" inplate="0">
+	  <div class="pure-g row-inner">
+		  <div id="cell9929b8dfa865285372c164ff2cffb5db" class="cell pure-u-1 pure-u-md-1-4" data-id="9929b8dfa865285372c164ff2cffb5db" type="cell" inplate="0" style="">
+		<div id="block094ddbe2556c2799e5bfe68d01e6a9ea" data-id="094ddbe2556c2799e5bfe68d01e6a9ea" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+	<div id="block_content_094ddbe2556c2799e5bfe68d01e6a9ea" class="block_content content_title " style="padding-top: 2%; padding-bottom: 2%; background-color: rgb(2, 178, 181);">
+	  
+	
+	 <p class=""><span style="line-height:1.6;"><span style="color:#FFFFFF;"><span style="font-size:22px;">新闻资讯</span></span></span></p>
+  
+  <p class=""><span style="line-height:1.6;"><span style="font-size:18px;"><span style="color:#FFFFFF;">NEWS</span></span></span></p>
+	</div>
+  </div>  <div id="block0379d23be0a2c1db6ee021553e00481e" data-id="0379d23be0a2c1db6ee021553e00481e" type="article_category" class="block_layer " inplate="0" lock="false">
+	<div id="block_content_0379d23be0a2c1db6ee021553e00481e" class="block_content content_article_category " style="">
+	  <div class="article_category nav mode-horizontal drop-down nav-style-4 size-normal color-none" data-param="{&quot;cate_link&quot;:&quot;13126&quot;,&quot;__hash__&quot;:&quot;4992eebc3de71f95f7133a5f034f17d7_10c8100927831af4074e270f9dafa934&quot;}">
+	  <ul>
+		{pc:content action="category" catid="97" num="25" siteid="$siteid" order="listorder ASC"}
+		{loop $data $r}
+		<li class="">
+			<a href="{$r[url]}" data-name="{$r[catname]}">{$r[catname]}</a>
+		</li>
+		{/loop}
+		{/pc}
+		</ul>
+		<script type="text/javascript">
+		$(function () {
+		  var
+			currentCtn = $('#block0379d23be0a2c1db6ee021553e00481e'),
+			navbar = currentCtn.find('.nav'),
+			currentClass = 'current';
+		  if (!window.EDIT_MODE) {
+			Base.plugin.load('articleNavbar', function () {
+			  var
+				className = $.trim(navbar.attr('class')),
+				styleClassReg = /collapse-\w+/,
+				collapseMode = className.match(styleClassReg) ? className.match(styleClassReg)[0] : 'collapse-default',
+				cateParam = $.parseJSON('{"cate_link":"13126","__hash__":"4992eebc3de71f95f7133a5f034f17d7_10c8100927831af4074e270f9dafa934"}'),
+				isScrollMode = ~className.indexOf('mode-scroll');
+			  // check site mode, 
+			  // and fix collapseMode
+			  if ($(window).width() <= Base.siteInfo.padWidth) {
+				collapseMode = 'collapse-click';
+			  }
+			  // add default collapse for old format
+			  navbar.addClass(collapseMode);
+			  switch (collapseMode) {
+				case 'collapse-default':
+				  // hover(pc)
+				  navbar.find('>ul>li')
+					.on('mouseenter.nav', function () {
+					  var _this = $(this);
+					  _this.siblings().removeClass(currentClass).end().addClass(currentClass);
+					})
+					.on('mouseleave.nav', function () {
+					  $(this).removeClass(currentClass);
+					});
+				  break;
+				case 'collapse-expand':
+				  break;
+				case 'collapse-click':
+				  navbar.find('li a')
+					.on('click.nav', function (e) {
+					  var _this = $(this);
+					  if (_this.next('ul').length && !isScrollMode) {
+						e.preventDefault();
+					  }
+					  _this.parent().siblings().removeClass(currentClass).end().toggleClass(currentClass);
+					});
+				  break;
+			  }
+			  // set target
+			  if (cateParam.cate_target === '_blank') {
+				navbar.find('a').attr('target', '_blank');
+			  }
+			});
+		  } else {
+			if (navbar.find('>ul>li').length > 1) {
+			  // for customer style => current item
+			  if (!navbar.find('.' + currentClass).length) {
+				navbar.find('li').eq(0).children('a').addClass(currentClass);
+			  }
+			}
+		  }
+		});
+	  </script>
+	  </div>  </div>
+  </div>  <div id="block45deddffe0a2ea653186f057d1734a30" data-id="45deddffe0a2ea653186f057d1734a30" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
+	<div id="block_content_45deddffe0a2ea653186f057d1734a30" class="block_content content_image " style="margin-top: 1%; margin-bottom: 1%; padding-right: 40px; padding-left: 40px;">
+	  
+	 <img id="block-image_45deddffe0a2ea653186f057d1734a30" src="https://responsive-img.4000253533.com/Upload/9a881027-c3ef-4dd5-b63a-2bf9df9487ab/5e0ece8f8d013.jpg" type="zoom" class="" style="" alt="" title="">
+	</div>
+  </div>  <div id="block89ea52b1dd33de350a656efeba1ed5fb" data-id="89ea52b1dd33de350a656efeba1ed5fb" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+	<div id="block_content_89ea52b1dd33de350a656efeba1ed5fb" class="block_content content_title " style="padding-top: 2%; padding-bottom: 2%; background-color: rgb(2, 178, 181);">
+	  
+	
+	 <p class=""><span style="line-height:1.6;"><span style="color:#FFFFFF;"><span style="font-size:22px;">联系我们</span></span></span></p>
+  
+  <p class=""><span style="line-height:1.6;"><span style="font-size:18px;"><span style="color:#FFFFFF;">CONTACT US</span></span></span></p>
+	</div>
+  </div>  <div id="blockf0475e841901f54f67a081517c5284d8" data-id="f0475e841901f54f67a081517c5284d8" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+	<div id="block_content_f0475e841901f54f67a081517c5284d8" class="block_content content_title " style="padding-top: 3%; position: relative;">
+	  
+	
+	 <p helvetica="" neue="" style="margin: 0px; padding: 0px; word-wrap: break-word; font-size: 12px; font-family: "><span style="font-size:18px; margin:0px; padding:0px; word-wrap:break-word"><strong style="font-weight:700"><span style="color:rgb(99, 99, 99); margin:0px; padding:0px; word-wrap:break-word"><span style="line-height:1.8; margin:0px; padding:0px; word-wrap:break-word">华南电子技术有限公司</span></span></strong></span></p>
+  
+  <p helvetica="" neue="" style="margin: 0px; padding: 0px; word-wrap: break-word; font-size: 12px; font-family: ">&nbsp;</p>
+  
+  <p helvetica="" neue="" style="margin: 0px; padding: 0px; word-wrap: break-word; font-size: 12px; text-align: left;"><span style="color:rgb(105, 105, 105); margin:0px; padding:0px; word-wrap:break-word"><span style="line-height:1.8; margin:0px; padding:0px; word-wrap:break-word"><span style="font-size:14px; margin:0px; padding:0px; word-wrap:break-word">地址：广州市黄埔区 科学城南翔一路62号&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;B栋3楼</span></span></span></p>
+  
+  <p helvetica="" neue="" style="margin: 0px; padding: 0px; word-wrap: break-word; font-size: 12px; text-align: left;"><span style="color:rgb(105, 105, 105); margin:0px; padding:0px; word-wrap:break-word"><span style="line-height:1.8; margin:0px; padding:0px; word-wrap:break-word"><span style="font-size:14px; margin:0px; padding:0px; word-wrap:break-word">电话：020-32290226</span></span></span></p>
+  
+  <p helvetica="" neue="" style="margin: 0px; padding: 0px; word-wrap: break-word; font-size: 12px; text-align: left;"><span style="color:rgb(105, 105, 105); margin:0px; padding:0px; word-wrap:break-word"><span style="line-height:1.8; margin:0px; padding:0px; word-wrap:break-word"><span style="font-size:14px; margin:0px; padding:0px; word-wrap:break-word">传真：020-32290392</span></span></span></p>
+  
+  <p helvetica="" neue="" style="margin: 0px; padding: 0px; word-wrap: break-word; font-size: 12px; text-align: left;"><span style="color:rgb(105, 105, 105); margin:0px; padding:0px; word-wrap:break-word"><span style="line-height:1.8; margin:0px; padding:0px; word-wrap:break-word"><span style="font-size:14px; margin:0px; padding:0px; word-wrap:break-word">邮箱：</span></span></span>info@southchina.com.cn</p>
+	</div>
+  </div></div><div id="cell30c06a4f7080b54c6a757357cf235945" class="cell pure-u-1 pure-u-md-3-4" data-id="30c06a4f7080b54c6a757357cf235945" type="cell" inplate="0" style="padding-right: 0px; padding-left: 0px;">
+		<div id="block45ef6687486df6f786c0a229dcfb0eef" data-id="45ef6687486df6f786c0a229dcfb0eef" type="article_detail" class="block_layer " inplate="0" lock="false">
+	<div id="block_content_45ef6687486df6f786c0a229dcfb0eef" class="block_content content_article_detail " style="padding-top: 10%; padding-right: 0%; padding-left: 0%;">
+	  <div class="article_detail title-position-center title-size-16 title-color-black nav-position-right nav-display-block">
+	<h1 class="title">{$title}</h1>
+	  <div class="info">
+		<span class="source">来源: 本站</span>      <span class="author">作者: hmie</span>      <span class="createtime">发布时间: {$inputtime}</span>
+		<span class="viewtime">浏览次数: <span id="hits"></span></span>
+	  </div>
+		  <div class="content">
+			  {$content}
+  		  </div>
+	  <div class="pre_next">
+		<p>上一篇:
+			<a href="{$previous_page[url]}">{$previous_page[title]}</a>     </p>
+		<p>下一篇:
+			<a href="{$next_page[url]}">{$next_page[title]}</a> </p>
+	  </div>
+	  </div>  </div>
+  </div></div>    </div>
+  </div></div><div id="footer8ce3af66c51a3e53f173e51343bd220a" data-id="8ce3af66c51a3e53f173e51343bd220a" class="layout-content footer" type="footer" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%; margin-bottom: 0%; background-color: rgb(0, 0, 0);" inplate="1">
+	<div id="row9c8fffefdccd99f002c48f4f103f067a" class="row pure-g   limit-row-width" data-id="9c8fffefdccd99f002c48f4f103f067a" type="row" style="" inplate="1">
+	  <div class="pure-g row-inner">
+		  <div id="cell2566b4c618afe954c7e42218fce8c252" class="cell pure-u-1" data-id="2566b4c618afe954c7e42218fce8c252" type="cell" inplate="1" style="padding-top: 1%;">
+		<div id="block1d2d899fc866c5766194560ae3770b28" data-id="1d2d899fc866c5766194560ae3770b28" type="title" class="block_layer anim anim-pause" inplate="1" lock="false">
+	<div id="block_content_1d2d899fc866c5766194560ae3770b28" class="block_content content_title " style="position: relative;">
+	  
+	
+			
+	</div>
+  </div></div>    </div>
+  </div>
+{template "content","footer"}
+<script language="JavaScript" src="{APP_PATH}api.php?op=count&id={$id}&modelid={$modelid}"></script>

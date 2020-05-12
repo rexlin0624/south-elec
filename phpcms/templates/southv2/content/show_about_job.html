@@ -1,0 +1,60 @@
+{template "content","top"}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!--10378-->
+            <div id="d3239eb9" class=" slickCarousel">
+                {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+                <div class="sliderBox">
+                    <div class="background-image-holder">
+                        <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
+                    </div>
+                </div>
+                {/loop}
+            </div>
+        </div>
+    </div>
+</div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="breadCrumbMenu">
+                <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+                {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row equalize">
+        <div class="col-sm-8">
+            <div class="well well-lg">
+                <!--10379-->
+                <div class="csc-header csc-header-n1">
+                    {$description}
+                    <br /><br />
+                    <h1>{$title}</h1>
+                    <h3>{$title_en}</h3>
+                    <br /><br />
+                    {$content}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="well well-lg">
+                <h3>{$title}</h3>
+                <div class="subNavigation">
+                    <ul class="nav navist">
+                        {pc:content action="category" catid="$CATEGORYS[$catid][parentid]" num="20" siteid="$siteid" order="listorder ASC"}
+                        {loop $data $r}
+                        <li class="item{if $r[catid] == $catid} current{/if}"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
+                        {/loop}
+                        {/pc}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{template "content","footer"}

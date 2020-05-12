@@ -217,6 +217,32 @@ function default_list() {
             </tr>
         </table>
     </fieldset>
+<div class="bk15"></div>
+    <fieldset>
+        <legend>联系我们配置</legend>
+        <table width="100%"  class="table_form">
+            <tr>
+                <th width="80">公司全称：</th>
+                <td class="y-bg"><input type="text" class="input-text" name="setting[company_name]" id="company_name" style="width: 90%;" value="<?php echo $setting['company_name']; ?>" /></td>
+            </tr>
+            <tr>
+                <th>地址：</th>
+                <td class="y-bg"><input type="text" class="input-text" name="setting[address]" id="address" style="width: 90%;" value="<?php echo $setting['address']; ?>" /></td>
+            </tr>
+            <tr>
+                <th>电话：</th>
+                <td class="y-bg"><input type="text" class="input-text" name="setting[telephone]" id="telephone" style="width: 90%;" value="<?php echo $setting['telephone']; ?>" /></td>
+            </tr>
+            <tr>
+                <th>传真：</th>
+                <td class="y-bg"><input type="text" class="input-text" name="setting[fax]" id="fax" style="width: 90%;" value="<?php echo $setting['fax']; ?>" /></td>
+            </tr>
+            <tr>
+                <th>邮箱：</th>
+                <td class="y-bg"><input type="text" class="input-text" name="setting[email]" id="email" style="width: 90%;" value="<?php echo $setting['email']; ?>" /></td>
+            </tr>
+        </table>
+    </fieldset>
     <div class="bk15"></div>
     <input type="submit" class="dialog" id="dosubmit" name="dosubmit" value="<?php echo L('submit')?>" />
 </div>

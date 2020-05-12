@@ -1,0 +1,171 @@
+{template "content","top"}
+<div class="content-layout form-horizontal" id="design" lab="0" initlab="0">
+  <div class="design group draggable_area design_main" id="web_design_main">
+    <div id="public_set">
+      <div class="modulebox box_webset" id="com_9"></div>
+    </div>
+    <div id="page_set">
+      <div class="hide"></div>
+    </div>
+    <div id="member_lan">
+      <div class="modulebox box_member" id="com_7">
+        <style>#com_7{z-index: 1;}
+        #member_com_7{}
+        </style>
+      </div>
+    </div>
+    {template "content","header"}
+    <div id="Web_Main_Head">
+      <div id="web_top_float" class="web_hide_float" style=""></div>
+    </div>
+    <div id="design_edu_main" class="group web_Column">
+      <div id="box_web_float" class="group box_web_main"></div>
+      <div class="modulebox box_banner" id="com_218">
+        <div class="view" id="banner_com_218" style="height: 421px;" data-bwidth="1903" data-bheight="421">
+          <div class="style_view" id="style_view_com_218">
+            <style> </style>
+          </div>
+          <a class="bannerDiv " style="background-image: url('{$CATEGORYS[$CAT[parentid]][image]}');" href="javascript:void(0)" target=""></a>
+        </div>
+        <style id="com_218_style">#com_218{z-index: 1; position: relative; height: 421px;}#banner_com_218{height: 421px;}</style>
+      </div>
+      <div class="modulebox box_freeColumn box_web_main" id="com_369">
+        <div class="view clearfix" id="freeColumn_com_369" style="min-height: 744px;" data-bwidth="1200" data-bheight="744">
+          <div class="style_view" id="style_view_com_369">
+            <style>#freeColumn_com_369 {margin-left:0px;margin-top:45px;margin-right:0px;margin-bottom:0px;}
+            </style>
+          </div>
+          <div class="kenfor-column hasSub has_size_com_369 free_sort skin_model_view" style="min-height: 744px;">
+            <div class="modulebox box_moreColumn box_web_main" id="com_370">
+              <div class="view" id="moreColumn_com_370" style="min-height: 398px;" data-bwidth="1200" data-bheight="398">
+                <div class="style_view" id="style_view_com_370">
+                  <style> </style>
+                </div>
+                <div class="container-fluid no-padding clearfix has_size_com_370" style="min-height: 398px;">
+                  <table style="width:100%" border="0" cellpadding="0" cellspacing="0" class="moreColumn_tab">
+                    <tbody>
+                    <tr>
+                      <td class="moreColumnTxt normal_padding  ui-resizable ui-resizable-autohide" style="width: 226px;" width="226">
+                        {template "content","nav_left"}
+                      </td>
+                      <td class="moreColumnTxt" style="">
+                        <div class="no-padding kenfor-column hasSub has_size_com_370" style="min-height: 398px;">
+                          <div class="modulebox box_disProducts box_web_main" id="com_023">
+                            <style>#com_023{z-index: 1;}
+                            #disProducts_com_023{}
+                            #disProducts_com_023 .bigImgShow p,#disProducts_com_023 .bigImgShow{width:calc(600px - 2px);height:calc(600px - 2px);}
+                            #disProducts_com_023 .picShow {width:600px;}
+
+
+                            #disProducts_com_023 .bigImgShow {border:none;}
+
+                            </style>
+                            <div class="view" id="disProducts_com_023" style="padding-top: 0px;">
+                              <div class="style_view"><style>#disProducts_com_023 {padding-left:0px;padding-top:20px;padding-right:0px;padding-bottom:0px;}
+                              #disProducts_com_023 .skin_model_view .descShow ul li{font-size:16px;}
+                              #disProducts_com_023 .skin_model_view .descShow ul li{font-family:微软雅黑;}
+                              #disProducts_com_023 .skin_model_view .descShow .hd{background-color:#f2f2f2;}
+                              #disProducts_com_023 .skin_model_view .descShow{border-color:#00449e;}
+                              #disProducts_com_023 .skin_model_view .descShow ul li{color:#363636;}
+                              #disProducts_com_023 .skin_model_view .descShow ul li.on{color:#ffffff;}
+                              #disProducts_com_023 .skin_model_view .descShow ul li{background-color:#ffffff;}
+                              #disProducts_com_023 .skin_model_view .descShow ul li.on{background-color:#00449e;}
+                              </style></div>
+
+                              <div class="skin_model_view disProducts_com_023_view disStyleBox6"  id="disp_com_023">
+                                <!-- productsDetail.html-->
+                                <div class="mainShow ">
+
+                                  <div class="picShow" style="width: auto;">
+                                    <div class="bigImgShow" style="width: auto;height: auto;">
+                                      <div class="album fl">
+                                        <ul>
+                                          <li>
+                                            {loop $product_images $image}
+                                            <a href="{$image[url]}" target="_blank" rel="clearbox[gallery=Image,]">
+                                              <img alt="{$image[alt]}" src="{$image[url]}" class="bigImg" style="width: 100px;height: 130px;">
+                                            </a>
+                                            {/loop}
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="paraShow">
+                                    <div class="paraShowTitle">{$title}</div>
+                                    <div class="paraShowList_price" style="display:none">
+                                    </div>
+                                    <div class="paraShowMore">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="descShow">
+                                  <div class="hd">
+                                    <ul>
+                                      <li  class="on">
+                                        产品介绍
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <div style="border: 1px solid #ddd;padding: 5px;">
+                                    {$content}
+                                  </div>
+                                </div>
+                                <div class="article_page article_page1">
+                                  <div class="article_page_pre"><a href="{$previous_page[url]}" id="infoPre_url" class="langText" data-lang="article_infoPre">上一页</a></div>
+                                  <div class="article_page_next"><a href="{$next_page[url]}" id="infoNext_url" class="langText" data-lang="article_infoNext">下一页</a></div>
+                                </div>
+                                <div class="bottom_botton" style="display: none;">[<a class="langText" data-lang="article_closeWin" href="javascript:window.close();"> 关闭窗口</a>]　　　[<a class="langText" data-lang="article_printPage" href="javascript:window.print();"> 打印本页</a> ]</div>
+                                <script>
+                                    //  var global = require("kenfor/global");
+                                    // var isShop=global.getIsShop();
+                                    $('#com_023 .buycar a').on('click', webUtil.addCar);
+                                    webUtil.setImageFit("#disp_com_023 .imgList li a");
+                                    var modelstyle="disStyleBox6";
+                                    if(modelstyle=="disStyleBox1"){
+                                        var temp=parseInt(("600px".replace("px","")-50)/90);
+                                        var autoPage=false;
+                                        var effect="top";
+                                    }else{
+                                        var temp=parseInt(("600px".replace("px","")-50)/90);
+                                        var autoPage=true;
+                                        var effect="left";
+                                    }
+                                    webUtil.setDisProSlide("com_023","disProducts_com_023_view",temp,autoPage,effect);
+                                </script>
+
+                              </div>
+                            </div>
+
+                          </div>
+                        </div> </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <style>#moreColumn_com_370 .normal_padding{padding-right:35px;}
+
+              #moreColumn_com_370 .ui-resizable-e {width: 35px;}
+              </style>
+              <script>
+                  var mdId = "com_370";
+                  var temp = "moreColumn";
+                  var colWidth = "35";
+                  webUtil.setMoreColumn(mdId,temp,colWidth);
+              </script>
+              <style id="com_370_style">#com_370{position: relative; z-index: 1; min-height: 398px;}#moreColumn_com_370{min-height: 398px;}</style>
+            </div>
+          </div>
+        </div>
+        <style id="com_369_style">#com_369{position: relative; z-index: 1; min-height: 789px;}#freeColumn_com_369{min-height: 744px;}</style>
+      </div>
+    </div>
+    {template "content","footer"}
+  </div>
+  <div style="position: absolute; opacity: 0.2; z-index: 499; display: none; width: 158px; height: 301px; left: 943px; top: 398px;"></div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="/statics/yibo/clearbox/clearbox.js"></script>

@@ -1,0 +1,80 @@
+{template "content","top"}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <!--10378-->
+      <div id="d3239eb9" class=" slickCarousel">
+        {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+        <div class="sliderBox">
+          <div class="background-image-holder">
+            <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
+          </div>
+        </div>
+        {/loop}
+      </div>
+    </div>
+  </div>
+</div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="breadCrumbMenu">
+        <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+        {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row equalize">
+    <div class="col-sm-8">
+      <div class="well well-lg">
+        <!--10379-->
+        <div class="csc-header csc-header-n1">
+          {$description}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="well well-lg">
+        <h3>{$catname}</h3>
+        <div class="subNavigation">
+          <ul class="nav navist">
+            {pc:content action="category" catid="$CATEGORYS[$catid][parentid]" num="20" siteid="$siteid" order="listorder ASC"}
+            {loop $data $r}
+            <li class="item{if $r[catid] == $catid} current{/if}"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
+            {/loop}
+            {/pc}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container contentContainer" role="main">
+  <div class="row">
+    {pc:content action="lists" catid="$catid" num="25" order="id ASC" page="$page" moreinfo="1"}
+    {php $length = count($data);$md = 12 / $length;}
+    {loop $data $r}
+    <div class="col-md-{$md} ">
+      <div class="well">
+        <div class="csc-textpic csc-textpic-left csc-textpic-above">
+        <div class="csc-textpic-imagewrap" data-csc-images="1" data-csc-cols="2">
+          <figure class="csc-textpic-image csc-textpic-last">
+            <img src="{$r[thumb]}" height="180" class="img-responsive" alt="">
+          </figure>
+        </div>
+        <div class="csc-textpic-text"><h3>{$r[title]}</h3>
+        <p>{$r[company_name]}<br />{$r[address]}</p></div></div>
+        <!--24900--><hr />
+        <!--24901-->{$r[content]}
+      </div>
+
+    </div>
+    {/loop}
+    {/pc}
+  </div>
+
+</div>
+{template "content","footer"}

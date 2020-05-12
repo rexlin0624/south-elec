@@ -1,0 +1,299 @@
+<div id="row4d6a48ecb8926638d7a9bd3a4d55ac70" class="row pure-g   limit-row-width" data-id="4d6a48ecb8926638d7a9bd3a4d55ac70" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="1">
+    <div class="pure-g row-inner">
+        <div id="cell74957e90e26b4f6c42e37c0541036287" class="cell pure-u-1 pure-u-md-1-4" data-id="74957e90e26b4f6c42e37c0541036287" type="cell" inplate="1" style="">
+    </div><div id="celld1316df7b35ee1ab452ab546c7554164" class="cell pure-u-1 pure-u-md-1-2" data-id="d1316df7b35ee1ab452ab546c7554164" type="cell" inplate="1" style="">
+      <div id="block9b2a9d739e5f4413efa52fae7fe0e6f1" data-id="9b2a9d739e5f4413efa52fae7fe0e6f1" type="navbar" class="block_layer use-burger" inplate="1" lock="false">
+  <div id="block_content_9b2a9d739e5f4413efa52fae7fe0e6f1" class="block_content content_navbar " style="background-color: rgb(0, 0, 0);">
+    <!--导航条-->
+<div class="nav mode-vertical drop-down nav-style-4 size-normal color-none" data-param="[]">
+  <button class="toggle" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+    <ul>
+        {pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
+        {loop $data $r}
+        <li class="custom dropmenu per-4">
+            <a href="{$r[url]}" target="" class="" data-name="{$r[catname]}">
+              <span>{$r[catname]}</span>
+              <span class="summary"></span>
+            </a>
+            {php if ($r[catid] == 97) { continue; } }
+            <ul>
+              {if $r[catid] == 96}
+              <li class="custom ">
+                <a href="/index.php?m=content&c=index&a=lists&catid=101" target="" class="" data-name="目录下载">
+                  <span>目录下载</span>
+                  <span class="summary"></span>
+                </a>
+              </li>
+              {else}
+              {pc:content action="category" catid="$r[catid]" num="20" siteid="$siteid" order="listorder ASC" return="data2"}
+              {loop $data2 $r2}
+              <li class="custom ">
+                <a href="{$r2[url]}" target="" class="" data-name="{$r2[catname]}">
+                  <span>{$r2[catname]}</span>
+                  <span class="summary"></span>
+                </a>
+              </li>
+              {/loop}
+              {/pc}
+              {/if}
+          </ul>
+        </li>
+        {/loop}
+        {/pc}
+    </ul>
+    <script type="text/javascript">
+    $(function () {
+      Base.plugin.load('navbar', function () {
+        var currentCtn = $('#block9b2a9d739e5f4413efa52fae7fe0e6f1'),
+          navbar = currentCtn.find('.nav'),
+          uls = navbar.children('ul'),
+          currentClass = 'current',
+          ul = navbar.children('ul'),
+          dropMenu = uls.children('.dropmenu'),
+          dropMenuLists = dropMenu.find('ul li'),
+          TRANSPARENT = 'rgba(0, 0, 0, 0)',
+          origCtnBg = currentCtn.css('backgroundColor'),
+          win = $(window),
+          beautyBackgroundColor = '',
+          fontColor = ul.children('li').children('a').children('span').css('color'),
+          colorReverse = function (rgb) {
+            return [255 - rgb[1], 255 - rgb[2], 255 - rgb[3]];
+          },
+          isInHeader = function () {
+            return currentCtn.parents('[type=header]').length
+          },
+          beauty = function () {
+            // beauty navbar in mobile
+            if (Base.siteInfo.isMobile) {
+              if (navbar.hasClass('no-burger')) {
+                // clean canvas padding.
+                Base.siteInfo.canvasArea.addClass('no-burger-nav');
+              } else {
+                // use main nav item link fst
+                beautyBackgroundColor = ul.children('li').children('a').css('background-color');
+                if (beautyBackgroundColor === TRANSPARENT) {
+                  // use main nav item  sec
+                  beautyBackgroundColor = ul.children('li').css('background-color');
+                  if (beautyBackgroundColor === TRANSPARENT) {
+                    // use main nav item 3rd
+                    beautyBackgroundColor = ul.css('background-color');
+                    if (beautyBackgroundColor === TRANSPARENT) {
+                      // use layer background
+                      beautyBackgroundColor = currentCtn.find('.block_content').css('background-color');
+                      if (beautyBackgroundColor === TRANSPARENT) {
+                        // default #fff
+                        // beautyBackgroundColor = '#fff';
+                        var rgb = fontColor.match(/(\d+),.*?(\d+),.*?(\d+)/);
+                        if (rgb.length) {
+                          beautyBackgroundColor = 'rgb(' + colorReverse(rgb).join(',') + ')';
+                        }
+                      }
+                    }
+                  }
+                }
+                if (window.EDIT_MODE) {
+                  Base.css.setStyleSheet('#block9b2a9d739e5f4413efa52fae7fe0e6f1', '.block_content', {
+                    'background-color': beautyBackgroundColor
+                  });
+                  Base.css.setStyleSheet('#block9b2a9d739e5f4413efa52fae7fe0e6f1', '.toggle span', {
+                    'background-color': fontColor
+                  })
+                } else {
+                  // old sites
+                  currentCtn.find('.block_content').css({
+                    backgroundColor: beautyBackgroundColor
+                  });
+                  navbar.find('.toggle span').css({
+                    backgroundColor: fontColor
+                  });
+                }
+              }
+            }
+          };
+        navbar.find('.toggle').on('click', function (e) {
+          e.preventDefault();
+          if (currentCtn.hasClass)
+            currentCtn.toggleClass('nav-burger-open');
+        });
+        navbar.on('click', 'li a', function (e) {
+          var _this = $(this),
+            subNav = _this.siblings('ul');
+          if (subNav.length) {
+            if (Base.siteInfo.isMobile) {
+              e.preventDefault();
+            }
+            _this.parent().siblings().removeClass(currentClass).end().addClass(currentClass);
+          }
+        });
+        // hook fix event
+        if (isInHeader()) {
+          if (!Base.siteInfo.isMobile && navbar.hasClass('navbar-fixed')) {
+            var
+              navbarRow = navbar.closest('.row'),
+              navbarRowHeight = navbarRow.outerHeight(true),
+              navbarRowOffsetTop = navbarRow.offset().top,
+              $navbarRowPlaceholder = $('<div class="row-placeholder"/>').height(navbarRowHeight),
+              fixed = false;
+            // prevent bxslider above the nav, but not inited,
+            // then, offset will be wrong.
+            win.on('load.fixNavbarOffset', function () {
+              navbarRowOffsetTop = navbarRow.offset().top;
+            });
+            win.on('scroll.9b2a9d739e5f4413efa52fae7fe0e6f1', function () {
+              if (win.scrollTop() > navbarRowOffsetTop) { // maybe 0
+                if (fixed) return;
+                navbarRow.addClass('fixed-top');
+                navbarRow.after($navbarRowPlaceholder);
+                fixed = true;
+              } else {
+                if (!fixed) return;
+                // restore
+                navbarRow.removeClass('fixed-top');
+                $navbarRowPlaceholder = $navbarRowPlaceholder.detach();
+                fixed = false;
+              }
+            });
+          }
+          win.on('resize.9b2a9d739e5f4413efa52fae7fe0e6f1', Base.core.throttle(function () {
+            Base.siteInfo.isMobile = win.width() <= Base.siteInfo.mobileWidth ? true : false;
+            beauty();
+          }, 100)).trigger('resize.9b2a9d739e5f4413efa52fae7fe0e6f1');
+        }
+
+        // for customer style => current item
+        if (window.EDIT_MODE && !navbar.find('.' + currentClass).length) {
+          navbar.find('li').eq(0).children('a').addClass(currentClass);
+        }
+
+        // submenu current
+        navbar.on('init', function () {
+          var
+            $currentNav = navbar.find('.' + currentClass),
+            $subNavItem = $currentNav.parents('.dropmenu').last();
+          if ($subNavItem.length) {
+            $subNavItem.children('a').addClass(currentClass);
+          }
+        }).trigger('init');
+      });
+    });
+  </script>
+</div>  </div>
+</div></div><div id="cell43c420cf5343047a81a632b6192a030f" class="cell pure-u-1 pure-u-md-1-4" data-id="43c420cf5343047a81a632b6192a030f" type="cell" inplate="1" style="">
+    </div>    </div>
+</div><div id="row292a1b1744a473d28bd1558e1403791f" class="row pure-g   limit-row-width" data-id="292a1b1744a473d28bd1558e1403791f" type="row" style="" inplate="1">
+    <div class="pure-g row-inner">
+        <div id="cell5708f9d455a0c3640c9b3b7c68b93041" class="cell pure-u-1" data-id="5708f9d455a0c3640c9b3b7c68b93041" type="cell" inplate="1" style="padding-left: 1%; padding-right: 1%;">
+      <div id="block723505380950b5038561f9ba4c12abfd" data-id="723505380950b5038561f9ba4c12abfd" type="title" class="block_layer anim anim-pause" inplate="1" lock="false">
+  <div id="block_content_723505380950b5038561f9ba4c12abfd" class="block_content content_title " style="padding-bottom: 1%; position: relative;">
+    
+  
+   <p><span style="line-height:2"><span style="font-size:16px"><span style="color:#FFFFFF">电话：</span></span></span><span style="color:#FFFFFF"><span style="font-size:16px"><span style="font-family:宋体; text-align:left"><span style="background-color:#000000">020-83793353</span></span></span></span></p>
+
+<p>&nbsp;</p>
+
+<p><span style="line-height:2"><span style="font-size:14px"><span style="color:#FFFFFF">Copyright ©2004-2019&nbsp;版权所有 © 华南电子技术有限公司&nbsp;未经许可 严禁复制 &nbsp; <a href="http://www.beian.miit.gov.cn/"><span style="background-color:#000000">&nbsp;</span></a></span></span></span><a href="http://www.beian.miit.gov.cn/"><span style="color:#FFFFFF"><span style="font-family:宋体; font-size:13.3333px"><span style="background-color:#000000">粤ICP备17114591号</span></span></span></a><span style="line-height:2"><span style="font-size:14px"><span style="color:#FFFFFF"> All Reserved</span></span></span></p>
+  </div>
+</div></div>    </div>
+</div></div>  </div>
+  <div id="footer-nav" class="hide">
+      <ul>
+        <li class="">
+            <a href="78168.html" data-linktype="page" data-link='{"link_page":"78168","target":""}'>
+              <div class="icon">
+                                  <i class="iconfont"></i>              </div>
+              <div class="txt">首页</div>
+            </a>
+          </li><li class="">
+            <a href="" data-linktype="back" data-link=''>
+              <div class="icon">
+                                  <i class="iconfont"></i>              </div>
+              <div class="txt">返回</div>
+            </a>
+          </li><li class="">
+            <a href="" data-linktype="telephone" data-link=''>
+              <div class="icon">
+                                  <i class="iconfont"></i>              </div>
+              <div class="txt">电话咨询</div>
+            </a>
+          </li>      </ul>
+      <script type="text/javascript">
+        $(function () {
+          Base.plugin.load('footerNav', function () {
+            var
+              footerNav = $('#footer-nav'),
+              navItem = footerNav.find('li'),
+              itemWidth = Math.floor(100 / navItem.length) + '%',
+              specialLinkBehavior = {
+                forward: function () {
+                  window.history.forward();
+                },
+                back: function () {
+                  window.history.back();
+                }
+              },
+              specialLinkTpl = {
+                telephone: 'tel:<%link%>',
+                customer_service: 'http://wpa.qq.com/msgrd?v=3&uin=<%link%>&site=qq&menu=yes'
+              },
+              displayTypeClassMap = {
+                '1': 'nav-type-icon',
+                '3': 'nav-type-text',
+                '2': ''
+              },
+              activeBgColor = '',
+              activeTextColor = '';
+
+            // set width
+            navItem.css('width', itemWidth);
+            // set background color
+            footerNav.css('background', '#000000');
+            // set font color
+            navItem.find('a').css('color', '#FFFFFF');
+            // set current item bg/text
+            navItem
+              .filter('.current')
+              .css('background', activeBgColor)
+              .find('.txt')
+              .css('color', activeTextColor);
+            // set links
+            footerNav.find('a').each(function () {
+              var _this = $(this),
+                linkType = _this.attr('data-linktype'),
+                link = _this.attr('data-link');
+              if (linkType in specialLinkTpl) {
+                _this.attr({
+                  target: '_blank',
+                  href: Base.dom.template(specialLinkTpl[linkType], {
+                    link: link
+                  })
+                });
+              }
+            });
+            // type
+            footerNav
+              // set nav type
+              .addClass(displayTypeClassMap['1'])
+              // show
+              .removeClass('hide');
+            // fix bottom
+            Base.siteInfo.canvasArea.addClass('has-footer-nav');
+
+            // events
+            footerNav.on('click', 'a', function (e) {
+              var linkType = $(this).attr('data-linktype');
+              if (linkType in specialLinkBehavior) {
+                e.preventDefault();
+                specialLinkBehavior[linkType]();
+              }
+            });
+          });
+        });
+      </script>
+    </div></div>
+</body>
+
+</html>

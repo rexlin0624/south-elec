@@ -1,0 +1,55 @@
+<!-- 按钮 -->
+{template "content","header"}
+<link rel="stylesheet" href="/statics/css/button.min.css" />
+<!--/header-->
+<div id="inner-page">
+  <div class="top-center" style="background-color: #fff;background-image: url('{$CATEGORYS[$catid]['image']}');">
+    </div>
+      <div class="container">
+        <div class="col-md-12">
+          <ol class="breadcrumb" style="text-align: right;">
+            <li><a target="_blank" href="{siteurl($siteid)}">首页</a></li>
+            <li><a target="_blank" href="{$CATEGORYS[$catid]['url']}">{$CATEGORYS[$catid]['catname']}</a></li>
+          </ol>
+        </div>
+        <ul class="portfolio-filter text-center">
+          <li><a class="btn btn-default active" href="#" data-filter="*">全部</a></li>
+          {loop getBox('goods_type',14) $k $v}
+          <li><a class="btn btn-default" href="#" data-filter=".{$k}"> {$v}</a></li>
+          {/loop}
+        </ul>
+    <div class="row">
+      <div class="portfolio-items">
+        {pc:content action="lists" catid="10" num="25" siteid="$siteid" order="listorder ASC" moreinfo="1"}
+        {loop $data $r}
+        <div class="portfolio-item {$r[goods_type]} col-xs-12 col-sm-4 col-md-4">
+          <a target="_blank" href="{$r['url']}">
+            <div class="recent-work-wrap"> <img class="img-responsive" src="{$r['thumb']}" alt="">
+              <div class="overlay">
+                  <div class="recent-work-inner">
+                    <h3>{$r['title']}</h3>
+                    <p>{$r['description']}</p>
+                    <!-- <a class="preview" href="{$r['thumb']}" rel="prettyPhoto"><i class="fa fa-search"></i> View</a> -->
+                    <!-- <a class="preview" href="{$r['url']}"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>了解更多</a> -->
+                  </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {/loop}
+        {/pc}
+      </div>
+    </div>
+  </div>
+</div>
+<!--/#portfolio-item-->
+<section id="get-started">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2>想加入我们这个大家庭吗？</h2>
+        <a target="_blank" href="http://www.reakky.com/index.php?m=content&c=index&a=lists&catid=15" class="btn btn-primary">联系我们</a> </div>
+    </div>
+  </div>
+</section>
+{template "content","footer"}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>广州丽电电子科技有限责任公司</title>
+	<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../../../../statics/css/bootstrap.css" rel="stylesheet">
+	<script type="text/javascript" src="../../../../statics/js/jquery-3.2.1.min.js" ></script>
+	<link rel="stylesheet" href="../../../../statics/css/form_css/css/style.css"> <!-- Resource style -->
+	<link rel="stylesheet" href="../../../../statics/css/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../../../../statics/css/form_date/styles.css" media="all">
+	<script src="../../../../statics/css/form_css/js/modernizr.js"></script> <!-- Modernizr -->
+	<script type="text/javascript" src="../../../../statics/js/moment.js"></script>
+    <link rel="shortcut icon" href="../../../../statics/images/icon.ico" /> 
+
+	<style type="text/css">
+		.ruby{
+			font-size: 1.2rem;
+			color: #e2e2e2;
+		}
+		.ruby rt{
+			font-size: 2rem;
+		}
+		a:hover{
+			text-decoration: none;
+		}
+		.user{
+			font-size: 1.8rem;
+			padding: 15px;
+			background-color:#000;
+			color: #e3e3e3;
+			border: 1px solid rgb(200,200,200);
+		}
+		.user a{
+			color: #fff;
+		}
+		.box{
+		    position:fixed;
+		    right:25px;
+		    bottom: 70px;
+		    height:36px;
+		    width: 50px;    
+		    text-align:center;
+		    padding-top:20px;    
+		    /*background-color: lightblue;*/
+		    border-radius: 20%;
+		    overflow: hidden;
+		    z-index: 999;
+		}
+		.box:hover:before{
+		    top:50%
+		}
+		.box:hover .box-in{
+		    visibility: hidden;
+		}
+		.box:before{
+		    position: absolute;
+		    top: -60%;
+		    left: 50%;
+		    transform: translate(-50%,-50%);
+		    content:'回到顶部';
+		    width: 40px;
+		    color:#fff;
+		    font-weight:bold;
+
+		}    
+		.box-in{
+		    visibility: visible;
+		    display:inline-block;
+		    height:20px;
+		    width: 20px;
+		    border: 3px solid black;
+		    border-color: white transparent transparent white;
+		    transform:rotate(45deg);
+		}
+		.select{
+			text-align: center;
+		}
+		.picker-switch ul{
+			-webkit-padding-start: 0px;
+		}
+		 .swiper-container {
+	        width: 100%;
+	        height: auto;
+	        margin-left: auto;
+	        margin-right: auto;
+	        margin-top: 20px;
+	        margin-bottom: 20px;
+	    }
+	    .swiper-slide {
+	        text-align: center;
+	        font-size: 18px;
+	        background: #fff;
+
+	        /* Center slide text vertically */
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: -webkit-flex;
+	        display: flex;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        -webkit-justify-content: center;
+	        justify-content: center;
+	        -webkit-box-align: center;
+	        -ms-flex-align: center;
+	        -webkit-align-items: center;
+	        align-items: center;
+	    }
+		.vertical-alignment-helper {
+		    display:table;
+		    height: 100%;
+		    width: 90%;
+		    margin:0 auto;
+		    /*pointer-events:none;*/
+		}
+		.vertical-align-center {
+		    display: table-cell;
+		    vertical-align: middle;
+		    /*pointer-events:none;*/
+		}
+		.footer-bottom{
+			margin-top: 2em;
+		}
+	</style>
+</head>
+<body>
+	
+	<section class="container">
+		<h2 class="modal-title text-center" style="padding-bottom: 15px;margin-top: 30px;" id="myModalLabel">终身质保</h2>
+		<form class="cd-form floating-labels">
+			<fieldset style="min-width: 100%;">
+				<div class="icon-1 col-md-6 ">
+					<label class="cd-label">搜索关键字</label>
+                    <input class="" type="text" name="cd-name" id="nickname" required />
+			    </div> 
+				
+			</fieldset>
+			<fieldset class="text-center">
+				<input  type="submit" value="提交查询">
+			</fieldset>
+		</form>
+		<div id="box" class="box">
+		    <div class="box-in"></div>
+		</div> 
+		<div class="row">
+			<div class="col-md-12">
+		        <table class="table table-striped">
+		          <thead>
+		            <tr>
+		              <th>投保人</th>
+		              <th>投保时间</th>
+		              <th>投保人电话</th>
+		              <th>投保型号</th>
+		            </tr>
+		          </thead>
+		          <tbody>
+		            <tr>
+		              <th>陈先生</th>
+		              <td>2018年01月01日</td>
+		              <td>1234567890</td>
+		              <td>P900</td>
+		            </tr>
+		            <tr>
+		              <th>陈先生</th>
+		              <td>2018年01月01日</td>
+		              <td>1234567890</td>
+		              <td>P900</td>
+		            </tr>
+		            <tr>
+		              <th>陈先生</th>
+		              <td>2018年01月01日</td>
+		              <td>1234567890</td>
+		              <td>P900</td>
+		            </tr>
+		            <tr>
+		              <th>陈先生</th>
+		              <td>2018年01月01日</td>
+		              <td>1234567890</td>
+		              <td>P900</td>
+		            </tr>
+		          </tbody>
+		        </table>
+		     </div>
+		</div>
+	</section>
+	<footer class="container footer-bottom">
+		<div class="row">
+			<div class="col-xs-12 user text-center">
+			<span>广州市天河区大观中路新塘大街横岗头9号鑫盛工业园D305号</span>
+			<span>copyright ©2016 广州丽电电子科技有限责任公司</span>
+			<span>020-37808896</span>
+			</div>
+		</div>
+	</footer>
+
+	  
+</body>
+
+
+	<script src="../../../../statics/js/distpicker.data-2.js"></script> 
+	<script src="../../../../statics/js/distpicker.data-3.js"></script> 
+	<script src="../../../../statics/js/distpicker.data.js"></script>
+	<script src="../../../../statics/js/distpicker.js"></script>
+	<script src="../../../../statics/js/autopicker.js"></script>
+	<script src="../../../../statics/js/select_main.js"></script>
+	<script type="text/javascript" src="../../../../statics/js/bootstrap.min.js"></script> 
+	<script src="../../../../statics/js/swiper.min.js"></script>
+	<script src="../../../../statics/css/form_css/js/main.js"></script> 
+
+		
+
+
+	</script>
+</html>

@@ -1,0 +1,16 @@
+{template "content","top"}
+<div class="container">
+    <div class="row equalize">
+        <div class="col-sm-8">
+            <div class="well well-lg same-height-left" style="height: 224px;">
+                <div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">{$title}</h1></div>
+                {$content}
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            {template "content","product_config"}
+        </div>
+    </div>
+</div>
+{template "content","footer"}

@@ -43,6 +43,12 @@ function closeParent() {
 		<img src="statics/images/icon/bold.png" width="10" height="10" onclick="input_font_bold()" style="cursor:hand"/> <span id="title_colorpanel" style="position:absolute; z-index:200" class="colorpanel"></span>  </td>
     </tr>
 <tr>
+      <th width="80">  英文标题 </th>
+      <td><input type="text" name="info[title_en]" id="title_en" value="<?php echo $title_en?>" size="50"></td>
+    </tr>
+
+<tr>
+<tr>
       <th width="80"> <?php echo L('keywords');?>	  </th>
       <td><input type="text" name="info[keywords]" id="keywords" value="<?php echo $keywords?>" size="50">  <?php echo L('explode_keywords');?></td>
     </tr>
