@@ -100,8 +100,9 @@
     <ul>
         {pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
         {loop $data $r}
+        {php $navUrl = str_replace('v2/', '', $r['url']);}
         <li data-id="{$r[id]}" class="custom dropmenu per-4">
-          <a href="{$r[url]}" target="" class="" data-name="{$r[catname]}">
+          <a href="{$navUrl}" target="" class="" data-name="{$r[catname]}">
             <span>{$r[catname]}</span>
             <span class="summary"></span>
           </a>
@@ -116,8 +117,9 @@
             {else}
             {pc:content action="category" catid="$r[catid]" num="20" siteid="$siteid" order="listorder ASC" return="data2"}
             {loop $data2 $r2}
+            {php $navUrl2 = str_replace('v2/', '', $r2['url']);}
             <li data-id="{$r2[id]}" class="custom ">
-              <a href="{$r2[url]}" target="" class="" data-name="{$r2[catname]}">
+              <a href="{$navUrl2}" target="" class="" data-name="{$r2[catname]}">
                 <span>{$r2[catname]}</span>
                 <span class="summary"></span>
               </a>
