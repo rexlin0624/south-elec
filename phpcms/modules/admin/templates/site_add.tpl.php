@@ -199,7 +199,7 @@ function default_list() {
                             filebrowserUploadUrl : '/index.php?m=attachment&c=attachments&a=upload&module=&catid=&dosubmit=1',
                             toolbar :
                                 [
-                                    ['Source'],['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink' ],['Maximize'],    //这是工具列表
+                                    ['Source'],['Bold', 'Italic', '-', 'NumberedList', 'BulletedList', '-', 'Link', 'Unlink', 'align' ],['Maximize'],    //这是工具列表
                                 ]
                         });
                     </script>
