@@ -1,73 +1,195 @@
 {template "content","top"}
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12">
-            <!--10378-->
-            <div id="d3239eb9" class=" slickCarousel">
-                {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
-                <div class="sliderBox">
-                    <div class="background-image-holder">
-                        <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
-                    </div>
-                </div>
-                {/loop}
-            </div>
-        </div>
+<div id="content4b6ff85a2c1815940517992147125a2c" data-id="4b6ff85a2c1815940517992147125a2c" class="layout-content content" type="content" style="" inplate="0">
+  <div id="rowf4c88911b6e8b912df915eb7f693dcfd" class="row pure-g  limit-row-width" data-id="f4c88911b6e8b912df915eb7f693dcfd" type="row" style="padding-top: 2%; padding-left: 1%; padding-bottom: 4%;" inplate="0">
+    <div class="pure-g row-inner">
+        <div id="cell9929b8dfa865285372c164ff2cffb5db" class="cell pure-u-1 pure-u-md-1-4" data-id="9929b8dfa865285372c164ff2cffb5db" type="cell" inplate="0" style="">
+      <div id="block094ddbe2556c2799e5bfe68d01e6a9ea" data-id="094ddbe2556c2799e5bfe68d01e6a9ea" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+  <div id="block_content_094ddbe2556c2799e5bfe68d01e6a9ea" class="block_content content_title " style="padding-top: 2%; padding-bottom: 2%; position: relative; background-color: rgb(2, 178, 181);">
+    
+  
+   <p><span style="line-height:1.6;"><span style="color:#FFFFFF;"><span style="font-size:22px;">新闻资讯</span></span></span></p>
+
+<p><span style="line-height:1.6;"><span style="font-size:18px;"><span style="color:#FFFFFF;">NEWS</span></span></span></p>
+  </div>
+</div>  <div id="block0379d23be0a2c1db6ee021553e00481e" data-id="0379d23be0a2c1db6ee021553e00481e" type="article_category" class="block_layer " inplate="0" lock="false">
+  <div id="block_content_0379d23be0a2c1db6ee021553e00481e" class="block_content content_article_category " style="">
+    <div class="article_category nav mode-horizontal drop-down nav-style-4 size-normal color-none" data-param="{&quot;cate_link&quot;:&quot;13126&quot;,&quot;__hash__&quot;:&quot;1f6970c0dc0ab0e1c9032bbc6698a68a_6548d1ea71e4358187dd07f1ae0d26cf&quot;}">
+    <ul>
+      {pc:content action="category" catid="97" num="25" siteid="$siteid" order="listorder ASC"}
+      {loop $data $r}
+      <li class="">
+          <a href="{$r[url]}" data-name="{$r[catname]}">{$r[catname]}</a>
+      </li>
+      {/loop}
+      {/pc}
+      </ul>    <script type="text/javascript">
+      $(function () {
+        var
+          currentCtn = $('#block0379d23be0a2c1db6ee021553e00481e'),
+          navbar = currentCtn.find('.nav'),
+          currentClass = 'current';
+        if (!window.EDIT_MODE) {
+          Base.plugin.load('articleNavbar', function () {
+            var
+              className = $.trim(navbar.attr('class')),
+              styleClassReg = /collapse-\w+/,
+              collapseMode = className.match(styleClassReg) ? className.match(styleClassReg)[0] : 'collapse-default',
+              cateParam = $.parseJSON('{"cate_link":"13126","__hash__":"1f6970c0dc0ab0e1c9032bbc6698a68a_6548d1ea71e4358187dd07f1ae0d26cf"}'),
+              isScrollMode = ~className.indexOf('mode-scroll');
+            // check site mode, 
+            // and fix collapseMode
+            if ($(window).width() <= Base.siteInfo.padWidth) {
+              collapseMode = 'collapse-click';
+            }
+            // add default collapse for old format
+            navbar.addClass(collapseMode);
+            switch (collapseMode) {
+              case 'collapse-default':
+                // hover(pc)
+                navbar.find('>ul>li')
+                  .on('mouseenter.nav', function () {
+                    var _this = $(this);
+                    _this.siblings().removeClass(currentClass).end().addClass(currentClass);
+                  })
+                  .on('mouseleave.nav', function () {
+                    $(this).removeClass(currentClass);
+                  });
+                break;
+              case 'collapse-expand':
+                break;
+              case 'collapse-click':
+                navbar.find('li a')
+                  .on('click.nav', function (e) {
+                    var _this = $(this);
+                    if (_this.next('ul').length && !isScrollMode) {
+                      e.preventDefault();
+                    }
+                    _this.parent().siblings().removeClass(currentClass).end().toggleClass(currentClass);
+                  });
+                break;
+            }
+            // set target
+            if (cateParam.cate_target === '_blank') {
+              navbar.find('a').attr('target', '_blank');
+            }
+          });
+        } else {
+          if (navbar.find('>ul>li').length > 1) {
+            // for customer style => current item
+            if (!navbar.find('.' + currentClass).length) {
+              navbar.find('li').eq(0).children('a').addClass(currentClass);
+            }
+          }
+        }
+      });
+    </script>
+    </div>  </div>
+</div>  <div id="block45deddffe0a2ea653186f057d1734a30" data-id="45deddffe0a2ea653186f057d1734a30" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
+  <div id="block_content_45deddffe0a2ea653186f057d1734a30" class="block_content content_image " style="margin-top: 1%; margin-bottom: 1%; padding-right: 40px; padding-left: 40px;">
+    
+   <img id="block-image_45deddffe0a2ea653186f057d1734a30" src="https://responsive-img.4000253533.com/Upload/9a881027-c3ef-4dd5-b63a-2bf9df9487ab/5e0d64adb1684.jpg" type="zoom" class="" style="" alt="" title="">
+  </div>
+</div>  <div id="block89ea52b1dd33de350a656efeba1ed5fb" data-id="89ea52b1dd33de350a656efeba1ed5fb" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+  <div id="block_content_89ea52b1dd33de350a656efeba1ed5fb" class="block_content content_title " style="padding-top: 2%; padding-bottom: 2%; background-color: rgb(2, 178, 181);">
+    
+  
+   <p class=""><span style="line-height:1.6;"><span style="color:#FFFFFF;"><span style="font-size:22px;">联系我们</span></span></span></p>
+
+<p class=""><span style="line-height:1.6;"><span style="font-size:18px;"><span style="color:#FFFFFF;" class="">CONTACT US</span></span></span></p>
+  </div>
+</div>  
+{template "content","contact_us_common"}
+</div><div id="cell30c06a4f7080b54c6a757357cf235945" class="cell pure-u-1 pure-u-md-3-4" data-id="30c06a4f7080b54c6a757357cf235945" type="cell" inplate="0" style="padding-right: 2%; padding-left: 2%;">
+      <div id="blockad8b1d9cdd77ac2ca97836fccfc8e332" data-id="ad8b1d9cdd77ac2ca97836fccfc8e332" type="article_list" class="block_layer " inplate="0" lock="false">
+  <div id="block_content_ad8b1d9cdd77ac2ca97836fccfc8e332" class="block_content content_article_list " style="padding-left: 0%; padding-right: 0%;">
+    <div class="article_list color-default article-list-1 noThumb noCategory size-normal page-color-default page-size-12 page-style-3 page-pos-center" data-param='{&quot;row_num&quot;:&quot;5&quot;,&quot;show_page&quot;:&quot;1&quot;,&quot;page_style&quot;:&quot;page-style-3&quot;,&quot;page_pos&quot;:&quot;page-pos-center&quot;,&quot;page_size&quot;:&quot;page-size-12&quot;,&quot;page_color&quot;:&quot;page-color-default&quot;,&quot;detail_link&quot;:&quot;13401&quot;,&quot;cate_link&quot;:&quot;13126&quot;,&quot;__hash__&quot;:&quot;1ec4318ffb2d729465f67af8f079ab86_1216ab0901a0b10e1625007895672140&quot;}'>
+      {pc:content action="lists" catid="$catid" num="100" order="id DESC" page="$page" moreinfo="1"}
+      {loop $data $r}
+      <div class="inner">
+      <dl>
+        <dt class="thumb">
+            <a href="{$r['url']}">
+              <img src="{$r['thumb']}" title="{$r[title]}" />
+            </a>
+        </dt>
+        <dd class="info">
+          <h3>
+            <span class="category">[<a href="/index.php?m=content&c=index&a=lists&catid=98">公司新闻</a>]</span>
+            <a href="{$r['url']}" class="title" title="{$r[title]}">
+              {$r[title]}<i class="iconfont ico-sticky">&#xeb3e;</i>
+            </a>
+          </h3>
+          <p class="time" data-year="{date('Y',$r[inputtime])}" data-month="{date('m',$r[inputtime])}" data-date="{date('d',$r[inputtime])}"><span>{date('Y-m-d',$r[inputtime])}</span></p>
+          <div class="abstract"></div>
+          <p class="more"><a href="{$r['url']}">查看详情</a></p>
+        </dd>
+      </dl>
     </div>
+    {/loop}
+    {/pc}
+    <div class="pagination"><ul><li><span>1 条 1/1 页</span></li>     </ul></div>    </div>
+<script>
+  $(function () {
+    Base.plugin.load('articleSlider', ['https://static.site.2003001.com/Public/js/plugins/bxSlider/jquery.bxslider.min.js'], function () {
+      Base.register('article.loadSlider', function () {
+        return function (blockSN) {
+          var
+            blockSN = blockSN.replace(/^block/g, ''),
+            articleList = $('#block' + blockSN + ' .article_list'),
+            articleListInner = articleList.children('.inner');
+          if (articleList.hasClass('mode-slider')) {
+            articleListInner.bxSlider({
+              slideSelector: 'dl',
+              maxSlides: 4,
+              slideWidth: 250,
+              slideMargin: 20,
+              shrinkItems: true,
+              adaptiveHeight: true,
+              auto: true,
+              autoHover: true
+            });
+          }
+        }
+      });
+      // init
+      Base.article.loadSlider('ad8b1d9cdd77ac2ca97836fccfc8e332');
+    });
+    if (!window.EDIT_MODE) {
+      Base.plugin.load('articleList', function () {
+        var
+          blockSN = 'ad8b1d9cdd77ac2ca97836fccfc8e332'.replace(/^block/g, ''),
+          currentCtn = $('#block' + blockSN),
+          articleList = currentCtn.find('.article_list'),
+          listParam = $.parseJSON('{"row_num":"5","show_page":"1","page_style":"page-style-3","page_pos":"page-pos-center","page_size":"page-size-12","page_color":"page-color-default","detail_link":"13401","cate_link":"13126","__hash__":"1ec4318ffb2d729465f67af8f079ab86_1216ab0901a0b10e1625007895672140"}');
+        if (listParam.cate_target === '_blank') {
+          articleList.find('.category a').attr('target', '_blank');
+        }
+        if (listParam.detail_target === '_blank') {
+          articleList.find('.thumb a').attr('target', '_blank');
+          articleList.find('a.title').attr('target', '_blank');
+        }
+
+        if (articleList.hasClass('article-list-7')) {
+          articleList.on('click', '.info', function (e) {
+            var $this = $(this);
+            $this.siblings('.thumb').children('a').get(0).click();
+          })
+        }
+      });
+    }
+  });
+</script>  </div>
+</div></div>    </div>
+</div></div><div id="footer8ce3af66c51a3e53f173e51343bd220a" data-id="8ce3af66c51a3e53f173e51343bd220a" class="layout-content footer" type="footer" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%; margin-bottom: 0%; background-color: rgb(0, 0, 0);" inplate="1">
+  <div id="row9c8fffefdccd99f002c48f4f103f067a" class="row pure-g   limit-row-width" data-id="9c8fffefdccd99f002c48f4f103f067a" type="row" style="" inplate="1">
+    <div class="pure-g row-inner">
+        <div id="cell2566b4c618afe954c7e42218fce8c252" class="cell pure-u-1" data-id="2566b4c618afe954c7e42218fce8c252" type="cell" inplate="1" style="padding-top: 1%;">
+      <div id="block1d2d899fc866c5766194560ae3770b28" data-id="1d2d899fc866c5766194560ae3770b28" type="title" class="block_layer anim anim-pause" inplate="1" lock="false">
+  <div id="block_content_1d2d899fc866c5766194560ae3770b28" class="block_content content_title " style="position: relative;">
+    
+  
+          
+  </div>
+</div></div>    </div>
 </div>
-<!--TYPO3SEARCH_begin-->
-<div class="container bc-content">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="breadCrumbMenu">
-                <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
-                {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row equalize">
-        <div class="col-sm-8">
-            <div class="well well-lg">
-                <div class="csc-header csc-header-n1">
-                    {$CATEGORYS[$catid]['description']}
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="well well-lg">
-                <h3>{$catname}</h3>
-                <div class="subNavigation">
-                    <ul class="nav navist">
-                        {pc:content action="category" catid="$catid" num="20" siteid="$siteid" order="listorder ASC"}
-                        {loop $data $r}
-                        <li class="item"><a href="{$r[url]}" title="{$r[catname]}">{$r[catname]}</a></li>
-                        {/loop}
-                        {/pc}
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container contentContainer" role="main">
-    <div class="row">
-        {loop $CATEGORYS $category}
-        {if $category[parentid] == 48}
-        <div class="col-md-4 col-sm-6">
-            <div class="well well-lg">
-                <div class="csc-header csc-header-n1">
-                    <h3 class="csc-firstHeader"><a href="{$category[url]}">{$category[catname]}</a></h3></div>
-                <div class="csc-textpic-text">
-                    <p> {strip_tags($category[description])} &nbsp; </p>
-                    <p><a href="{$category[url]}" class="internal-link">阅读更多… </a></p>
-                </div>
-            </div>
-        </div>
-        {/if}
-        {/loop}
-    </div>
-</div>
-<!--TYPO3SEARCH_end-->
 {template "content","footer"}
