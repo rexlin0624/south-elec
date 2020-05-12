@@ -188,8 +188,13 @@
     <div class="pure-g row-inner">
         <div id="cell5708f9d455a0c3640c9b3b7c68b93041" class="cell pure-u-1" data-id="5708f9d455a0c3640c9b3b7c68b93041" type="cell" inplate="1" style="padding-left: 1%; padding-right: 1%;">
       <div id="block723505380950b5038561f9ba4c12abfd" data-id="723505380950b5038561f9ba4c12abfd" type="title" class="block_layer anim anim-pause" inplate="1" lock="false">
-  <div id="block_content_723505380950b5038561f9ba4c12abfd" class="block_content content_title " style="padding-bottom: 1%; position: relative;">
-    {$site}
+  <div id="block_content_723505380950b5038561f9ba4c12abfd" class="block_content content_title " style="padding-bottom: 1%; position: relative;color: #FFFFFF;">
+    {pc:get sql="SELECT * from se_site where siteid = 3" num="1" return="data" }
+    {loop $data $r}
+    {php $setting = json_decode($r['setting'], true);}
+    {/loop}
+    {/pc}
+    {$setting['info']}
   </div>
 </div></div>    </div>
 </div></div>  </div>
