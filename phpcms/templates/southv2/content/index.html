@@ -135,7 +135,7 @@
   </div></div>    </div>
   </div>
   {php $subcatid=[];}
-  {loop subcat(96) $k $v}
+  {loop subcat(96, null, '0', 3) $k $v}
   {php $subcatid[] = $k;}
   {/loop}
   {php $subcatid  = implode(',', $subcatid);}
