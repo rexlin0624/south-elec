@@ -9,6 +9,7 @@
  //PHPCMS根目录
 
 define('PHPCMS_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
+$_GET['siteid'] = 3;
 
 
 include PHPCMS_PATH.'/phpcms/base.php';
