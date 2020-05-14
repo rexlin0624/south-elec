@@ -17,8 +17,9 @@
     <ul>
       {pc:content action="category" catid="97" num="25" siteid="$siteid" order="listorder ASC"}
       {loop $data $r}
+      {php $navUrl = str_replace('v2/', '', $r['url']);}
       <li class="">
-          <a href="{$r[url]}" data-name="{$r[catname]}">{$r[catname]}</a>
+          <a href="{$navUrl}" data-name="{$r[catname]}">{$r[catname]}</a>
       </li>
       {/loop}
       {/pc}
