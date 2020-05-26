@@ -185,6 +185,10 @@ function default_list() {
                 <td class="y-bg"><?php echo form::images('setting[logo]', 'image', '', 'content');?></td>
             </tr>
             <tr>
+                <th width="80">首页LOGO：</th>
+                <td class="y-bg"><?php echo form::images('setting[index_logo]', 'index-image', '', 'content');?></td>
+            </tr>
+            <tr>
                 <th>Copyright：</th>
                 <td class="y-bg"><input type="text" class="input-text" name="copyright" id="copyright" style="width: 90%;" /></td>
             </tr>

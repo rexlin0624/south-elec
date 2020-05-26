@@ -1,4 +1,9 @@
 {template "content","top"}
+{pc:get sql="SELECT * from se_site where siteid = 3" num="1" return="data" }
+{loop $data $r}
+{php $setting = json_decode($r['setting'], true);}
+{/loop}
+{/pc}
 <div id="contentb6168d3fdcf21c19f3e5e8e1117aa4db" data-id="b6168d3fdcf21c19f3e5e8e1117aa4db" class="layout-content content" type="content" style="" inplate="0">
     <div id="row597392442ed1629b69a56a4adc1d4f7e" class="row pure-g   limit-row-width" data-id="597392442ed1629b69a56a4adc1d4f7e" type="row" style="padding-top: 2%; padding-bottom: 1%;" inplate="0">
       <div class="pure-g row-inner">
@@ -13,7 +18,7 @@
     <span style="font-size:20px">
       <span style="line-height:1.6">
         <span style="color:#393939">
-          <img alt="" src="https://responsive-img.4000253533.com/Upload/9a881027-c3ef-4dd5-b63a-2bf9df9487ab/5e17f9cb414ff.png" style="height:50px; width:200px">
+          <img alt="" src="{$setting['index_logo']}" style="height:50px; width:200px">
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
         </span>
       </span>
