@@ -171,8 +171,8 @@
   </div>  </div>
   </div>  <div id="block45deddffe0a2ea653186f057d1734a30" data-id="45deddffe0a2ea653186f057d1734a30" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
     <div id="block_content_45deddffe0a2ea653186f057d1734a30" class="block_content content_image " style="margin-top: 1%; margin-bottom: 1%; opacity: 1; border-top: 0px solid rgb(255, 255, 255); border-radius: 0px;">
-      
-     <img id="block-image_45deddffe0a2ea653186f057d1734a30" src="https://responsive-img.4000253533.com/Upload/9a881027-c3ef-4dd5-b63a-2bf9df9487ab/5e0d649c52f45.jpg" type="zoom" class="" style="" alt="" title="">
+     {php $catpics=json_decode($CATEGORYS[92]['catpics'], true)}
+     <img id="block-image_45deddffe0a2ea653186f057d1734a30" src="{$catpics[0]['url']}" type="zoom" class="" style="" alt="" title="">
     </div>
   </div>  <div id="block89ea52b1dd33de350a656efeba1ed5fb" data-id="89ea52b1dd33de350a656efeba1ed5fb" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
     <div id="block_content_89ea52b1dd33de350a656efeba1ed5fb" class="block_content content_title " style="padding-top: 2%; padding-bottom: 2%; background-color: rgb(2, 178, 181); position: relative;">
@@ -200,8 +200,11 @@
     </div>
   </div>  <div id="blockbf35c74801abb68cfb14e56d60feda7e" data-id="bf35c74801abb68cfb14e56d60feda7e" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
     <div id="block_content_bf35c74801abb68cfb14e56d60feda7e" class="block_content content_image " style="padding-right: 2%; padding-left: 2%; padding-top: 4%;">
-      
-     <img id="block-image_bf35c74801abb68cfb14e56d60feda7e" src="https://responsive-img.4000253533.com/Upload/9a881027-c3ef-4dd5-b63a-2bf9df9487ab/5e12dfeddab3d.jpg" type="zoom" class="" style="" alt="" title="">
+      {pc:link action="type_list" typeid="88" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+      {loop $pic_link $v}
+     <img src="{$v[logo]}" type="zoom" class="" style="" alt="" title="">
+     {/loop}
+      {/pc}
     </div>
   </div></div>    </div>
   </div></div><div id="footer8ce3af66c51a3e53f173e51343bd220a" data-id="8ce3af66c51a3e53f173e51343bd220a" class="layout-content footer" type="footer" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%; margin-bottom: 0%; background-color: rgb(0, 0, 0);" inplate="1">
