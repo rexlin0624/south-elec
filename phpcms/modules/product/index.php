@@ -166,6 +166,7 @@ class index {
         $se = $series_info['title'];
 
         $filter = $_GET;
+        unset($field['siteid']);
         unset($filter['m']);
         unset($filter['c']);
         unset($filter['a']);
