@@ -226,8 +226,11 @@
           <div id="cell82e59d8d37ac51352e38166c25713101" class="cell pure-u-1 pure-u-md-1-2" data-id="82e59d8d37ac51352e38166c25713101" type="cell" inplate="0" style="">
         <div id="block902d962d611764dc02357e7a7d2c00e5" data-id="902d962d611764dc02357e7a7d2c00e5" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
     <div id="block_content_902d962d611764dc02357e7a7d2c00e5" class="block_content content_image " style="padding: 0% 100px 0% 97px;">
-      
-     <img title="" id="block-image_902d962d611764dc02357e7a7d2c00e5" style="" alt="" src="https://responsive-img.4000253533.com/Upload/9a881027-c3ef-4dd5-b63a-2bf9df9487ab/5e0ece8f8d013.jpg" type="zoom">
+    {pc:link action="type_list" typeid="90" siteid="$siteid" linktype="1" order="listorder ASC" num="1" return="pic_link"}
+    {loop $pic_link $v}
+     <img title="" id="block-image_902d962d611764dc02357e7a7d2c00e5" style="" alt="" src="{$v['logo']}" type="zoom">
+     {/loop}
+     {/pc}
     </div>
   </div></div><div id="cell03e4759ceea734659abbe507e1e2c5eb" class="cell pure-u-1 pure-u-md-1-2" data-id="03e4759ceea734659abbe507e1e2c5eb" type="cell" inplate="0" style="padding-left: 1%; padding-right: 1%;">
         <div id="blockb3b0db835113f55642d3f0e2126fa246" data-id="b3b0db835113f55642d3f0e2126fa246" type="article_list" class="block_layer " inplate="0" lock="false">
