@@ -244,6 +244,7 @@ class search {
         unset($filter['a']);
         unset($filter['serial_id']);
         unset($filter['function_id']);
+		unset($filter['siteid']);
         $condition = [];
         $is_display_contact = 'none';
         if (!empty($filter)) {
