@@ -105,7 +105,7 @@ class search {
     private function relactionRestrict($property) {
         $restricts = [];
         foreach ($this->_relactionIndex as $prop => $rIndex) {
-            $propValue = isset($property[$prop]) && !empty($property[$prop]) ? $property[$prop] : -100;
+            $propValue = (isset($property[$prop]) && $property[$prop] != '') ? $property[$prop] : -100;
             if ($propValue != -100 && $propValue != self::EMPTY) {
                 if (empty($restricts)) {
                     $restricts = $this->_propRestrict($this->_relaction, $propValue, $rIndex);

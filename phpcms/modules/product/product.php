@@ -652,7 +652,7 @@ class product extends admin {
     }
 
     private function _ce($prop) {
-        return !empty($prop) ? $prop : '-';
+        return $prop != '' ? $prop : '-';
     }
     /**
      * 生成产品编码
