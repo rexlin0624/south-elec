@@ -23,21 +23,21 @@
   </div>
   
 </div>
-<div class="inner" style="letter-spacing: normal !important;padding: 20px;">
+<div class="inner" style="letter-spacing: normal !important;padding: 20px;width: 100%;padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;max-width: 1170px;">
   {pc:content action="lists" catid="$catid" num="101" order="id DESC" page="$page" moreinfo="1"}
   {loop $data $r}
-  <dl style="clear: both;margin-bottom: 10px;">
-      <dt class="thumb" style="float: left;">
+  <dl style="clear: both;margin-bottom: 5rem;display: flex;flex-wrap: wrap;margin-right: -15px;margin-left: -15px;">
+      <dt class="thumb" style="float: left;margin-left: 16.66667%;flex: 0 0 25%;max-width: 25%;">
           <a href="{$r['url']}">
-          <img src="{$r['thumb']}" alt="{$r[title]}" style="height: 120px !important;" />
+          <img src="{$r['thumb']}" alt="{$r[title]}" style="height: 175px !important;" />
           </a>
       </dt>
-      <dd class="info" style="float: left;height: 120px;">
+      <dd class="info" style="float: left;height: 120px;flex: 0 0 58.33333%;max-width: 58.33333%;">
           <h3>
               <span class="category">{$r[title]}</span>
           </h3>
           {php $pdfFile=json_decode($r[pdf_file], true)}
-          <div class="download"><a target="_blank" href="{$pdfFile[0]['fileurl']}">下载</a></div>
+          <div class="download" style="margin-top: 2rem;"><a target="_blank" href="{$pdfFile[0]['fileurl']}">下载</a></div>
           <div class="spec"></div>
       </dd>
   </dl>
