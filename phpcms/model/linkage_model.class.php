@@ -61,7 +61,7 @@ class linkage_model extends model {
             ]*/
             3433 => [
                 'key' => 'others',
-                'title' => '其它',
+                'title' => '军标',
                 'options' => []
             ],
             3436 => [
