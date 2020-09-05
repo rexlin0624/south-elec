@@ -705,31 +705,29 @@ class product extends admin {
         ];
 
         $mapIndexProp = [
-            0 => 'series_id',
-            1 => 'front_shape',
-            2 => 'front_button_material',
-            3 => 'front_button_shape',
-            4 => 'front_button_color',
-            5 => 'switch_element',
-            6 => 'light_style',
-            7 => 'led_color',
-            8 => 'led_voltage',
-            9 => 'others',
-            10 => 'functions_id',
-            11 => 'install_size',
-            12 => 'description',
-            21 => 'title',
-            23 => 'project_image_1',
-            24 => 'project_image_2',
-            25 => 'project_image_3',
-            26 => 'thumb'
+            0 => 'series_id',                   // A-系列
+            1 => 'front_shape',                 // B-前圈尺寸
+            2 => 'front_button_material',       // C-前圈/按键材料
+            3 => 'front_button_shape',          // D-前圈/按键形状
+            4 => 'front_button_color',          // E-前圈/按键颜色
+            5 => 'switch_element',              // F-开关元件
+            6 => 'light_style',                 // G-照明形式
+            7 => 'led_color',                   // H-灯罩/LED灯颜色
+            8 => 'led_voltage',                 // I-LED灯电压
+            9 => 'military_standard',           // J-军标
+            10 => 'functions_id',               // K-功能
+            11 => 'install_size',               // L-安装尺寸
+            12 => 'description',                // M-描述
+            21 => 'title',                      // V-功能标题
+            23 => 'project_image_1',            // X-产品尺寸图
+            24 => 'thumb'                       // Y-产品图
         ];
 
         $data = [];
         $values = [];
         for($i = 3; $i <= $highestRowNum; $i++) {
-            if ($i >= 10) {
-                // break;
+            if ($i >= 5) {
+//                 break;
             }
 
             $rowDef = [];
@@ -759,16 +757,16 @@ class product extends admin {
 
                 if (!empty($encode)) {                
                     if ($idx == 'project_image_1') {
-                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode;
                     }
-                    if ($idx == 'project_image_2') {
-                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
-                    }
-                    if ($idx == 'project_image_3') {
-                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
-                    }
+//                    if ($idx == 'project_image_2') {
+//                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+//                    }
+//                    if ($idx == 'project_image_3') {
+//                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+//                    }
                     if ($idx == 'thumb') {
-                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode . '.jpg';
+                        $encode = '/uploadfile' . $importPath . $series . '/' . $encode;
                     }
                 }
 

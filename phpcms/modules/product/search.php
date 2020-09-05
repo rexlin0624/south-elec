@@ -114,7 +114,7 @@ class search {
                 }
             }
         }
-        
+
         $unionRestricts = [];
         foreach ($restricts as $restrict) {
             foreach ($restrict as $idx => $items) {
