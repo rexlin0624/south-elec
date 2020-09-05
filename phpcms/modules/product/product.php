@@ -681,7 +681,7 @@ class product extends admin {
         $this->_unzip($unzipPath);
         $filename = $unzipPath . 'data.xls';
         $importPath = explode('uploadfile', $unzipPath)[1];
-        
+
         require(PC_PATH . 'libs/classes/Classes/PHPExcel/IOFactory.php');
         $fileType = PHPExcel_IOFactory::identify($filename);
         $objReader = PHPExcel_IOFactory::createReader($fileType);
@@ -740,7 +740,7 @@ class product extends admin {
                     continue;
                 }
                 $cellName = PHPExcel_Cell::stringFromColumnIndex($j) . $i;
-                $cellVal = $sheet->getCell($cellName)->getValue();
+                $cellVal = $sheet->getCell($cellName)->getFormattedValue();
                 $encode = self::encode_cn($cellVal);
                 $rowDef[] = $encode;
 
