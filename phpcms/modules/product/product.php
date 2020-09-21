@@ -55,7 +55,7 @@ class product extends admin {
 
         $map_func = [];
         foreach ($functions as $function) {
-            $map_func[$function['id']] = $function['title'];
+            $map_func[$function['code']] = $function['title'];
         }
 
         $infos = [];
@@ -672,6 +672,7 @@ class product extends admin {
         ini_set('memory_limit', '-1');
         $time = time();
         $pc_hash = $_POST['pc_hash'];
+        $arrUnique = [];
 
         // 获取产品数据表中最大的产品ID
         $product = $this->db->get_one('', 'id', 'id DESC');
@@ -745,17 +746,17 @@ class product extends admin {
                 $rowDef[] = $encode;
 
                 if ($idx == 'series_id') {
-                    $series = $encode;
+                    $series = number_format($encode, 1);
                     $encode = $mapSeriesId[$encode];
                 }
                 if (empty($series)) {
                     continue;
                 }
                 if ($idx == 'functions_id') {
-                    // $encode = $mapFunction[$encode];
+//                     $encode = $mapFunction[$encode];
                 }
 
-                if (!empty($encode)) {                
+                if (!empty($encode)) {
                     if ($idx == 'project_image_1') {
                         $encode = '/uploadfile' . $importPath . $series . '/' . $encode;
                     }
@@ -768,6 +769,16 @@ class product extends admin {
                     if ($idx == 'thumb') {
                         $encode = '/uploadfile' . $importPath . $series . '/' . $encode;
                     }
+
+                    /*if (in_array($idx, ['project_image_1', 'thumb'])) {
+                        if (!file_exists(PHPCMS_PATH . substr($encode, 1))) {
+                            if (in_array($encode, $arrUnique)) {
+                                continue;
+                            }
+                            echo $encode, ' not exists.<br />';
+                            $arrUnique[] = $encode;
+                        }
+                    }*/
                 }
 
                 $row[$idx] = $encode;
@@ -779,6 +790,7 @@ class product extends admin {
                 $values[] = '(\'' . $code . '\', \'' . implode('\',\'', $row) . '\', '. $time .')';
             }
         }
+//        exit;
         // echo '<pre>';
         // var_export($data);
         if (empty($data)) {
@@ -786,8 +798,9 @@ class product extends admin {
             exit;
         }
 
-        // echo '<pre>';
-        // var_export($data);
+//         echo '<pre>';
+//         var_export($data);
+//         exit;
         // 组装插入sql
         $fields = '`code`,`' . implode('`,`', array_values($mapIndexProp)) . '`,`created_at`';
         $sql = 'INSERT INTO se_productions (' . $fields . ') VALUES ' . implode(',', $values);
