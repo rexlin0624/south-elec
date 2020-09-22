@@ -38,7 +38,7 @@ class search {
         // LED灯电压
         'led_voltage' => 8,
         // 其它
-        'others' => 9,
+        'military_standard' => 9,
         // 功能
         'function_id' => 10,
         // 安装尺寸
@@ -199,6 +199,7 @@ class search {
                 $restrictProps[$kk] = $prop;
             }
         }
+//        var_dump($restrictProps);exit;
 
         // 根据$serial_id获取function list
         if (!empty($serial_id)) {
@@ -297,7 +298,8 @@ class search {
                 $search[$sch][] = $val;
             }
         }
-        // var_dump($search);
+//        var_dump($search);
+//        exit;
 
         // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{前圈/磁}{序列号}
         $this->_filter_params = $filter;

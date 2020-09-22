@@ -60,7 +60,7 @@ class linkage_model extends model {
                 'options' => []
             ]*/
             3433 => [
-                'key' => 'others',
+                'key' => 'military_standard',
                 'title' => '军标',
                 'options' => []
             ],
