@@ -31,7 +31,8 @@ if ($isProcessing) {
 }
 
 // 若非处理中，则处理下一条PDF生成
-$row = $db->get_one('`status` = 0', 'id, product_id');
+$row = $db->get_one('`status` = 0', 'id, product_id', 'id DESC');
+//$row = $db->get_one('`id` = 31173', 'id, product_id', 'id DESC');
 if (!$isDebug) {
     $db->markProcessing($row['id']);
 }

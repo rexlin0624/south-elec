@@ -109,7 +109,7 @@
         <div class="separator"></div>
         <div class="product-background"></div>
         <div class="product-images">
-            <img src="{product_images}" />
+            <img src="{product_images}" style="max-height: 20cm;" />
         </div>
     </div>
 </body>
