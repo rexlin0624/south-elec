@@ -656,13 +656,37 @@ class product extends admin {
     }
     /**
      * 生成产品编码
-     * 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{其它}
+     * 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{军标}
+     * @param {Array} $row
      */
     private function _generateCode($row) {
-        return $row[0] . '-' . 
-            $this->_ce($row[1]) . $this->_ce($row[2]) . $this->_ce($row[3]) . $this->_ce($row[4]) . '.' . 
-            $this->_ce($row[5]) . $this->_ce($row[6]) . $this->_ce($row[7]) . $this->_ce($row[8]) . '.' .
-            $this->_ce($row[9]);
+        // 系列
+        $code = sprintf("%.1f", $row[0]);
+        // 前圈尺寸
+        $code .= $this->_ce($row[1]);
+        // 前圈/按键材料
+        $code .= $this->_ce($row[2]);
+        // 前圈/按键形状
+        $code .= $this->_ce($row[3]);
+        // 前圈/按键颜色
+        $code .= $this->_ce($row[4]);
+        // 开关元件
+        $code .= '.';
+        $code .= $this->_ce($row[5]);
+        // 照明形式
+        $code .= $this->_ce($row[6]);
+        // LED灯颜色
+        $code .= $this->_ce($row[7]);
+        // LED灯电压
+        $code .= $this->_ce($row[8]);
+        // 军标
+        $military_standard = $this->_ce($row[9]);
+        if ($military_standard != '-') {
+            $code .= '.';
+            $code .= $this->_ce($row[9]);
+        }
+
+        return $code;
     }
 
     /**

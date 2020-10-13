@@ -176,7 +176,7 @@
                                                 <?php foreach ($props as $key => $prop) { ?>
                                                 <tr>
                                                     <td class="attribute" width="120"><?php echo $prop['title']; ?>:</td>
-                                                    <td class="attribute_value"><?php echo $prop['options'][$list[$key]]; ?></td>
+                                                    <td class="attribute_value"><?php echo !empty($prop['options'][$list[$key]]) ? $prop['options'][$list[$key]] : '-'; ?></td>
                                                 </tr>
                                                 <?php } ?>
                                                 </tbody>

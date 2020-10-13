@@ -37,7 +37,7 @@ class search {
         'led_color' => 7,
         // LED灯电压
         'led_voltage' => 8,
-        // 其它
+        // 军标
         'military_standard' => 9,
         // 功能
         'function_id' => 10,
@@ -221,11 +221,28 @@ class search {
             $serial = $this->db_series_list->get_one(['id' => $serial_id]);
         }
 
+        $filter = $_GET;
+        if (!empty($filter['serial_id'])) {
+            $filter['series_id'] = $filter['serial_id'];
+        }
+        unset($filter['page']);
+        unset($filter['m']);
+        unset($filter['c']);
+        unset($filter['a']);
+        unset($filter['serial_id']);
+        unset($filter['function_id']);
+        unset($filter['siteid']);
+
         $setting = $this->db_setting->get_one(['id' => 1]);
         $contacts = $this->db_contact_setting->get_one(['id' => 1]);
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
-        $where = '1 = 1';
+        if (isset($filter['military_standard']) && $filter['military_standard'] == 'G') {
+            $where = '1 = 1';
+        } else {
+            $where = '1 = 1 AND military_standard != "G"';
+        }
+//        $where = '1 = 1';
         if (isset($_GET['functions_id']) && $function_id != self::EMPTY) {
             $where .= ' AND functions_id = ' . $function_id;
         }
@@ -235,17 +252,6 @@ class search {
             $props_total[$k] = $this->db->count($ww);
         }
 
-        $filter = $_GET;
-        if (!empty($filter['serial_id'])) {
-            $filter['series_id'] = $filter['serial_id'];
-        }
-		unset($filter['page']);
-        unset($filter['m']);
-        unset($filter['c']);
-        unset($filter['a']);
-        unset($filter['serial_id']);
-        unset($filter['function_id']);
-		unset($filter['siteid']);
         $condition = [];
         $is_display_contact = 'none';
         if (!empty($filter)) {
@@ -257,6 +263,10 @@ class search {
                     $is_display_contact = 'block';
                     continue;
                 }
+
+//                if ($field == 'military_standard' && $flt == 'G') {
+//                    continue;
+//                }
 
                 $condition[] = $field . ' = "' . $flt . '"';
             }
@@ -298,6 +308,9 @@ class search {
                 $search[$sch][] = $val;
             }
         }
+        if (!in_array('G', $search['military_standard'])) {
+            $search['military_standard'][] = 'G';
+        }
 //        var_dump($search);
 //        exit;
 
@@ -306,7 +319,9 @@ class search {
         $code  = !empty($serial) ? ($serial['title'] . '-') : '';
         $code .= $this->_c('front_shape') . $this->_c('front_button_material') . $this->_c('front_button_shape') . $this->_c('front_button_color');
         $code .= '.' . $this->_c('switch_element') . $this->_c('light_style') . $this->_c('led_color') . $this->_c('led_voltage');
-        $code .= '.' . $this->_c('front_magnetic');
+
+        //
+        $code .= '.' . $this->_c('military_standard');
 
 		include template('product', 'search');
 	}

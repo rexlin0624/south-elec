@@ -50,7 +50,7 @@ $host = 'http://south.china';
 
 $thumb = 'data:image/jpeg;base64,' . base64_encode(file_get_contents(__DIR__ . $product['thumb']));
 
-$pdf_path = __DIR__ . '/caches/pdf/' . $productId . '.pdf';
+$pdf_path = __DIR__ . '/caches/pdf/' . $code . '.pdf';
 $pdf_template = __DIR__.'/phpcms/modules'.DIRECTORY_SEPARATOR.'product'.DIRECTORY_SEPARATOR.'pdf.template';
 $pdf_content = file_get_contents($pdf_template);
 $pdf_content = preg_replace('/{pdf_background_base64}/', file_get_contents(__DIR__ . '/pdf_background.base64'), $pdf_content);

@@ -41,7 +41,6 @@
     .product-info > ul {
         list-style-type: none;
         text-align: left;
-        font-weight: bold;
     }
     .product-info > ul > li {
         line-height: 26px;
