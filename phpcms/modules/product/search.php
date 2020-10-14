@@ -225,6 +225,8 @@ class search {
         if (!empty($filter['serial_id'])) {
             $filter['series_id'] = $filter['serial_id'];
         }
+        $product_code = $filter['product_code'];
+
         unset($filter['page']);
         unset($filter['m']);
         unset($filter['c']);
@@ -232,17 +234,22 @@ class search {
         unset($filter['serial_id']);
         unset($filter['function_id']);
         unset($filter['siteid']);
+        unset($filter['product_code']);
 
         $setting = $this->db_setting->get_one(['id' => 1]);
         $contacts = $this->db_contact_setting->get_one(['id' => 1]);
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
-        if (isset($filter['military_standard']) && $filter['military_standard'] == 'G') {
+        /*if (isset($filter['military_standard']) && $filter['military_standard'] == 'G') {
             $where = '1 = 1';
         } else {
             $where = '1 = 1 AND military_standard != "G"';
+        }*/
+        $where = '1 = 1';
+        if (!empty($product_code)) {
+            $where .= ' AND `code` LIKE \'%' . $product_code . '%\'';
         }
-//        $where = '1 = 1';
+
         if (isset($_GET['functions_id']) && $function_id != self::EMPTY) {
             $where .= ' AND functions_id = ' . $function_id;
         }

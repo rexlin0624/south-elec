@@ -6,7 +6,7 @@ define('PHPCMS_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 require_once __DIR__ . '/vendor/autoload.php';
 use Knp\Snappy\Pdf;
 
-include PHPCMS_PATH.'phpcms/base.php';
+include PHPCMS_PATH.'phpcms/console.php';
 $db = pc_base::load_model('queues_model');
 $db_product = pc_base::load_model('productions_model');
 $db_linkage = pc_base::load_model('linkage_model');
@@ -32,7 +32,7 @@ if ($isProcessing) {
 
 // 若非处理中，则处理下一条PDF生成
 $row = $db->get_one('`status` = 0', 'id, product_id', 'id DESC');
-//$row = $db->get_one('`id` = 31173', 'id, product_id', 'id DESC');
+$row = $db->get_one('`id` = 33774', 'id, product_id', 'id DESC');
 if (!$isDebug) {
     $db->markProcessing($row['id']);
 }
@@ -120,13 +120,15 @@ $pdf_content = preg_replace('/{logo}/', $logo, $pdf_content);
 
 // bottom
 $bottom = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_bottom.base64');
+//$pdf_content = preg_replace('/{bottom_images}/', $bottom, $pdf_content);
 
 // 产品图底纹
 $product_bg = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_product_bg.base64');
 $pdf_content = preg_replace('/{product_background}/', $product_bg, $pdf_content);
 
 if ($isDebug) {
-    echo $pdf_content;
+    echo '$pdf_path =', $pdf_path,chr(10),chr(13);
+//    echo $pdf_content;
     //exit;
 }
 
