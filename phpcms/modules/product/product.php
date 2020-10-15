@@ -562,7 +562,7 @@ class product extends admin {
      * 下载离线版本
      */
     public function download_offline() {
-        $filename = trim($_GET['file']) . '.zip';
+        $filename = '华南电子网_离线版.zip';
         $file_path = CACHE_PATH . 'offline/' . $filename;
         $fileHandle = fopen($file_path,"rb");
 
@@ -697,6 +697,8 @@ class product extends admin {
         $time = time();
         $pc_hash = $_POST['pc_hash'];
         $arrUnique = [];
+
+        $product_props = $this->db_linkage->product_props();
 
         // 获取产品数据表中最大的产品ID
         $product = $this->db->get_one('', 'id', 'id DESC');
@@ -833,7 +835,6 @@ class product extends admin {
         // 生成pdf，插入队列中，运行bash脚本异步处理
         // 获取生成的产品ID
         $productIds = $this->db->listinfo('id > ' . $lastId, '', 1, 100000);
-        $product_props = $this->db_linkage->product_props();
         $setting = $this->db_setting->get_one(['id' => 1]);
         $values = [];
         foreach ($productIds as $prod) {

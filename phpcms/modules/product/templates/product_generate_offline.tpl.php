@@ -10,7 +10,8 @@ include $this->admin_tpl('header', 'admin');
 <script type="text/javascript">
 $(document).ready(function(){
     $('#generate_offline').click(function () {
-        $.ajax({
+        location.href = '?m=product&c=product&a=download_offline&pc_hash=<?php echo $_GET['pc_hash']; ?>';
+        /*$.ajax({
             type: 'POST',
             url: '?m=product&c=product&a=generate_offline&pc_hash=<?php echo $_GET['pc_hash']; ?>',
             data: {generate: 1},
@@ -24,7 +25,7 @@ $(document).ready(function(){
                 // redirect to download url
                 location.href = '?m=product&c=product&a=download_offline&file=' + response + '&pc_hash=<?php echo $_GET['pc_hash']; ?>';
             }
-        });
+        });*/
     });
 });
 </script>

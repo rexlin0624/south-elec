@@ -292,11 +292,11 @@ $(document).ready(function(){
         };
 
         <?php
-            foreach ($product_props as $name => $prop) {
-                echo 'var ',$name,' = $.trim($("#',$name,'").val());',"\r\n";
-                echo 'if (!',$name,') { alert("请选择',$prop['title'],'"); return false; }',"\r\n";
-                echo 'data["',$name,'"] = ',$name,';';
-            }
+//            foreach ($product_props as $name => $prop) {
+//                echo 'var ',$name,' = $.trim($("#',$name,'").val());',"\r\n";
+//                echo 'if (!',$name,') { alert("请选择',$prop['title'],'"); return false; }',"\r\n";
+//                echo 'data["',$name,'"] = ',$name,';';
+//            }
         ?>
 
         $.ajax({

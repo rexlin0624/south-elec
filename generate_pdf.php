@@ -15,6 +15,12 @@ $pdfkit = new Pdf('/usr/local/bin/wkhtmltopdf');
 
 $isDebug = false;
 
+$mapSerialTitle = [
+    6 => '4.0',
+    7 => '5.0',
+    8 => '6.0',
+];
+
 // 获取空闲数量
 $totalFree = $db->getTotalFree();
 if ($totalFree == 0) {
@@ -32,7 +38,7 @@ if ($isProcessing) {
 
 // 若非处理中，则处理下一条PDF生成
 $row = $db->get_one('`status` = 0', 'id, product_id', 'id DESC');
-$row = $db->get_one('`id` = 33774', 'id, product_id', 'id DESC');
+//$row = $db->get_one('`id` = 33774', 'id, product_id', 'id DESC');
 if (!$isDebug) {
     $db->markProcessing($row['id']);
 }
@@ -44,6 +50,7 @@ if (!$isDebug) {
 $product = $db_product->get_one(['id' => $productId]);
 $code = $product['code'];
 $product_props = $db_linkage->product_props();
+$props = $product_props[$mapSerialTitle[$product['series_id']]];
 $setting = $db_setting->get_one(['id' => 1]);
 $host = 'http://south.china';
 //$host = 'https://www.hmie.com.cn';
@@ -75,40 +82,40 @@ for ($i = 1;$i <= 4;$i++) {
 $pdf_content = preg_replace('/{project_images}/', implode('', $project_images), $pdf_content);
 
 $prop_string = [];
-foreach ($product_props as $key => $prop) {
+foreach ($props as $key => $prop) {
 	$prop_string[] = '<li>' . $prop['title'] . '：' . $prop['options'][$product[$key]] . '</li>';
 }
 //$pdf_content = preg_replace('/{props}/', implode('', $prop_string), $pdf_content);
 
 // 前圈尺寸
-$pdf_content = preg_replace('/{front_shape}/', $product_props['front_shape']['options'][$product['front_shape']], $pdf_content);
+$pdf_content = preg_replace('/{front_shape}/', $props['front_shape']['options'][$product['front_shape']], $pdf_content);
 
 // 前圈/按键材料
-$pdf_content = preg_replace('/{front_button_material}/', $product_props['front_button_material']['options'][$product['front_button_material']], $pdf_content);
+$pdf_content = preg_replace('/{front_button_material}/', $props['front_button_material']['options'][$product['front_button_material']], $pdf_content);
 
 // 前圈/按键形状
-$pdf_content = preg_replace('/{front_button_shape}/', $product_props['front_button_shape']['options'][$product['front_button_shape']], $pdf_content);
+$pdf_content = preg_replace('/{front_button_shape}/', $props['front_button_shape']['options'][$product['front_button_shape']], $pdf_content);
 
 // 前圈/按键颜色
-$pdf_content = preg_replace('/{front_button_color}/', $product_props['front_button_color']['options'][$product['front_button_color']], $pdf_content);
+$pdf_content = preg_replace('/{front_button_color}/', $props['front_button_color']['options'][$product['front_button_color']], $pdf_content);
 
 // 开关元件
-$pdf_content = preg_replace('/{switch_element}/', $product_props['switch_element']['options'][$product['switch_element']], $pdf_content);
+$pdf_content = preg_replace('/{switch_element}/', $props['switch_element']['options'][$product['switch_element']], $pdf_content);
 
 // 照明形式
-$pdf_content = preg_replace('/{light_style}/', $product_props['light_style']['options'][$product['light_style']], $pdf_content);
+$pdf_content = preg_replace('/{light_style}/', $props['light_style']['options'][$product['light_style']], $pdf_content);
 
 // 灯罩/LED灯颜色
-$pdf_content = preg_replace('/{led_color}/', $product_props['led_color']['options'][$product['led_color']], $pdf_content);
+$pdf_content = preg_replace('/{led_color}/', $props['led_color']['options'][$product['led_color']], $pdf_content);
 
 // LED灯电压
-$pdf_content = preg_replace('/{led_voltage}/', $product_props['led_voltage']['options'][$product['led_voltage']], $pdf_content);
+$pdf_content = preg_replace('/{led_voltage}/', $props['led_voltage']['options'][$product['led_voltage']], $pdf_content);
 
 // 军标
-$pdf_content = preg_replace('/{military_standard}/', $product_props['military_standard']['options'][$product['military_standard']], $pdf_content);
+$pdf_content = preg_replace('/{military_standard}/', $props['military_standard']['options'][$product['military_standard']], $pdf_content);
 
 // 安装尺寸
-$pdf_content = preg_replace('/{install_size}/', $product_props['install_size']['options'][$product['install_size']], $pdf_content);
+$pdf_content = preg_replace('/{install_size}/', $props['install_size']['options'][$product['install_size']], $pdf_content);
 
 // 产品尺寸图
 $product_images = 'data:image/jpeg;base64,' . base64_encode(file_get_contents(__DIR__ . $product['project_image_1']));

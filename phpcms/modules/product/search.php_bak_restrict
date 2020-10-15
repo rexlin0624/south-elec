@@ -133,7 +133,6 @@ class search {
 	public function init() {
         $empty = self::EMPTY;
         $props = $this->db_linkage->product_props();
-        $series_id = 0;
 
         $serials = $this->db_series_list->listinfo();
         $functions = $this->db_function_list->listinfo([], '', 1, 1000);
@@ -224,7 +223,6 @@ class search {
 
         $filter = $_GET;
         if (!empty($filter['serial_id'])) {
-            $series_id = $filter['serial_id'];
             $filter['series_id'] = $filter['serial_id'];
         }
         $product_code = $filter['product_code'];

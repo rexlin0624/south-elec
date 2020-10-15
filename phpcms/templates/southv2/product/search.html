@@ -53,66 +53,38 @@
                         <input type="hidden" name="c" value="search">
                         <input type="hidden" name="a" value="init">
                         <fieldset class="filter column grid_filter">
-                            <label>系列(<?php echo count($search['serial_id']); ?>)</label>
+                            <label>系列(<?php echo count($serials); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
                                 <option value="{$empty}"></option>
-                                <?php foreach ($restrictSerials as $sel) { ?>
-                                <?php
-                                    if (!in_array($sel['id'], $search['serial_id'])) {
-                                        continue;
-                                    }
-                                ?>
-                                <?php $selected = ($serial_id == $sel['id']) ? ' selected="selected"' : ''; ?>
-                                <option<?php echo $selected; ?> value="<?php echo $sel['id']; ?>"><?php echo $sel['title']; ?></option>
+                                <?php foreach ($serials as $serial) { ?>
+                                <?php $selected = ($serial_id == $serial['id']) ? ' selected="selected"' : ''; ?>
+                                <option<?php echo $selected; ?> value="<?php echo $serial['id']; ?>"><?php echo $serial['title']; ?></option>
                                 <?php } ?>
                             </select>
                         </fieldset>
                         <fieldset class="filter column grid_filter">
-                            <label>功能(<?php echo count($search['function_id']); ?>)</label>
+                            <label>功能(<?php echo count($functions); ?>)</label>
                             <select onchange="setSeFilter();" name="function_id" class="prodFinder" style="display: inline-block;">
                                 <option value="{$empty}"></option>
-                                <?php foreach ($restrictFunctions as $function) { ?>
-                                <?php
-                                    if (!in_array($function['code'], $search['function_id'])) {
-                                        continue;
-                                    }
-                                ?>
+                                <?php foreach ($functions as $function) { ?>
                                 <?php $selected = ($function_id == $function['code']) ? ' selected="selected"' : ''; ?>
                                 <option<?php echo $selected; ?> value="<?php echo $function['code']; ?>"><?php echo $function['title']; ?></option>
                                 <?php } ?>
                             </select>
                         </fieldset>
-                        <div style="clear: both;"></div>
-                        <?php foreach ($restrictProps as $kk => $prop) { ?>
                         <fieldset class="filter column grid_filter">
-                            <label>
-                                <?php echo $prop['title']; ?>
-                                (<?php
-                                    // 这里为搜索结果总数
-                                    /*if (empty($filter)) {
-                                        echo $props_total[$kk];
-                                    } else {
-                                        if (empty($condition)) {
-                                            echo $props_total[$kk];
-                                        } else {
-                                            if (isset($filter[$kk]) && $filter[$kk] != '-') {
-                                                echo $props_total[$kk];
-                                            } else {
-                                                echo 0;
-                                            }
-                                        }
-                                    }*/
-                                    //echo count($prop['options']);
-                                    echo count($search[$kk]);
-                                ?>)
-                            </label>
+                            <label>产品编码</label>
+                            <input type="text" name="product_code" id="product_code" style="margin-top: 5px;" value="<?php echo $product_code; ?>" />
+                        </fieldset>
+                        <div style="clear: both;"></div>
+                        <?php if ($series_id > 0) { ?>
+                        <?php foreach ($props[$mapSerialIdTitle[$series_id]] as $kk => $prop) { ?>
+                        <fieldset class="filter column grid_filter">
+                            <label><?php echo $prop['title'], '(' . count($prop['options']) . ')'; ?></label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
                                 <option value="{$empty}"></option>
                                 <?php
                                 foreach ($prop['options'] as $key => $option) {
-                                if (!in_array($key, $search[$kk])) {
-                                    continue;
-                                }
                                 $selected = ($filter[$kk] != '' && $filter[$kk] != "-1000" && $filter[$kk] == $key) ? ' selected="selected"' : '';
                                 ?>
                                 <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
@@ -122,10 +94,7 @@
                             </select>
                         </fieldset>
                         <?php } ?>
-                        <fieldset class="filter column grid_filter">
-                            <label>产品编码</label>
-                            <input type="text" name="product_code" id="product_code" style="margin-top: 5px;" value="<?php echo $product_code; ?>" />
-                        </fieldset>
+                        <?php } ?>
                     </form>
                 </div>
                 <div class="row" id="current-selected-code">{$code}</div>

@@ -5,7 +5,7 @@
 ini_set('memory_limit', -1);
 define('SYS_TIME', time());
 define('PHPCMS_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
-include PHPCMS_PATH.'phpcms/base.php';
+include PHPCMS_PATH.'phpcms/console.php';
 pc_base::load_sys_func('dir');
 $db_site = pc_base::load_model('site_model');
 $db_setting = pc_base::load_model('productions_setting_model');
@@ -20,6 +20,18 @@ $db = pc_base::load_model('productions_model');
 $db_linkage = pc_base::load_model('linkage_model');
 $_product_props = $db_linkage->product_props();
 
+/**
+ * 图片转换为base64
+ * @param $image
+ * @return string
+ */
+function image2base64($image) {
+    $exp = explode('.', $image);
+    $type = $exp[count($exp) - 1];
+
+    return $logo = 'data:image/' . $type . ';base64,' . base64_encode(file_get_contents(PHPCMS_PATH . $image));
+}
+
 echo 'generating offline...',chr(10),chr(13);
 
 $zip_name = '华南电子网_离线版';
@@ -29,14 +41,16 @@ $output_path = CACHE_PATH . 'offline/' . $zip_name . DIRECTORY_SEPARATOR;
 if (!is_dir($output_path)) {
     mkdir($output_path);
 }
+$zip_path = CACHE_PATH . 'offline/' . $zip_name . '.zip';
+if (file_exists($zip_path)) {
+    @unlink($zip_path);
+}
 
 /*
  * 复制JS和CSS文件
  */
 echo '复制JS和CSS文件',chr(10),chr(13);
 dir_copy($usb_template_path . 'statics', $output_path . 'statics');
-//dir_copy(PHPCMS_PATH . 'uploadfile', $output_path . 'uploadfile');
-
 
 $setting = $db_setting->get_one(['id' => 1]);
 $index_template = file_get_contents($usb_template_path . 'index.html');
@@ -49,6 +63,7 @@ echo '复制网站LOGO',chr(10),chr(13);
 $site = $db_site->get_one(['siteid' => 1]);
 $settings = string2array($site['setting']);
 $logo = substr($settings['logo'], 1, strlen($settings['logo']));
+$logo = image2base64($logo);
 $index_template = preg_replace('/{logo}/', $logo, $index_template);
 echo '复制网站LOGO ok....................',chr(10),chr(13);
 
@@ -62,12 +77,14 @@ $index_template = preg_replace('/{setting_content}/', $setting['description'], $
 echo '市场',chr(10),chr(13);
 $market_setting = $db_market_setting->get_one(['id' => 1]);
 $market_list = $db_market->listinfo([], '', 1, 100);
-$market_menus = [];
-foreach ($market_list as $item) {
-    $market_menus[] = '<li><a href="functions-1-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
-}
+//$market_menus = [];
+//foreach ($market_list as $item) {
+//    $market_menus[] = '<li><a href="functions-1-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
+//}
 $market_thumb = substr($market_setting['thumb'], 1, strlen($market_setting['thumb']));
-$index_template = preg_replace('/{market_menus}/', implode('', $market_menus), $index_template);
+$market_thumb = image2base64($market_thumb);
+//$index_template = preg_replace('/{market_menus}/', implode('', $market_menus), $index_template);
+$index_template = preg_replace('/{market_menus}/', '', $index_template);
 $index_template = preg_replace('/{market_thumb}/', $market_thumb, $index_template);
 $index_template = preg_replace('/{market_title}/', $market_setting['title'], $index_template);
 $index_template = preg_replace('/{market_description}/', $market_setting['description'], $index_template);
@@ -77,12 +94,14 @@ echo '市场 ok....................',chr(10),chr(13);
 echo '功能',chr(10),chr(13);
 $function_setting = $db_function_setting->get_one(['id' => 1]);
 $function_list = $db_functions->listinfo([], '', 1, 100);
-$function_menus = [];
-foreach ($function_list as $item) {
-    $function_menus[] = '<li><a href="functions-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
-}
+//$function_menus = [];
+//foreach ($function_list as $item) {
+//    $function_menus[] = '<li><a href="functions-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
+//}
 $thumb = substr($function_setting['thumb'], 1, strlen($function_setting['thumb']));
-$index_template = preg_replace('/{function_menus}/', implode('', $function_menus), $index_template);
+$thumb = image2base64($thumb);
+//$index_template = preg_replace('/{function_menus}/', implode('', $function_menus), $index_template);
+$index_template = preg_replace('/{function_menus}/', '', $index_template);
 $index_template = preg_replace('/{function_thumb}/', $thumb, $index_template);
 $index_template = preg_replace('/{function_title}/', $function_setting['title'], $index_template);
 $index_template = preg_replace('/{function_description}/', $function_setting['description'], $index_template);
@@ -92,12 +111,15 @@ echo '功能 ok....................',chr(10),chr(13);
 echo '系列',chr(10),chr(13);
 $series_setting = $db_series_setting->get_one(['id' => 1]);
 $list = $db_series->listinfo([], '', 1, 100);
-$series_menus = [];
-foreach ($list as $item) {
-    $series_menus[] = '<li><a href="functions-2-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
-}
+$series_list = $list;
+//$series_menus = [];
+//foreach ($list as $item) {
+//    $series_menus[] = '<li><a href="functions-2-' . $item['id'] . '.html"></a>' . $item['title'] . '</li>';
+//}
 $thumb = substr($series_setting['thumb'], 1, strlen($series_setting['thumb']));
-$index_template = preg_replace('/{series_menus}/', implode('', $series_menus), $index_template);
+$thumb = image2base64($thumb);
+//$index_template = preg_replace('/{series_menus}/', implode('', $series_menus), $index_template);
+$index_template = preg_replace('/{series_menus}/', '', $index_template);
 $index_template = preg_replace('/{series_thumb}/', $thumb, $index_template);
 $index_template = preg_replace('/{series_title}/', $series_setting['title'], $index_template);
 $index_template = preg_replace('/{series_description}/', $series_setting['description'], $index_template);
@@ -183,6 +205,11 @@ $series_category_template = $category_template;
 $series_category_template = preg_replace('/{category_title}/', '系列', $series_category_template);
 $categories = [];
 foreach ($list as $item) {
+    // 只生成6.0
+    if ($item['id'] != 8) {
+        continue;
+    }
+
     $tmp  = '<div class="column grid_2 column_margin">';
     $tmp .= '<a href="functions-2-' . $item['id'] . '.html" class="c_3x2">';
     $tmp .= '<span><h5>' . $item['title'] . '</h5></span>';
@@ -224,10 +251,21 @@ echo '系列 ok....................',chr(10),chr(13);
  */
 echo '把所有产品数据生成到一个JS变量中，并独立生成JS文件',chr(10),chr(13);
 $products = $db->listinfo([], 'id DESC', 1, 1000000);
-$js_list_template = file_get_contents($usb_template_path . 'list.js');
+
+// 图片base64处理
+//$productData = [];
+//foreach ($products as $item) {
+//    $item['thumb'] = image2base64($item['thumb']);
+//    $item['project_image_1'] = image2base64($item['project_image_1']);
+//
+//    $productData[] = $item;
+//}
+
+$js_list_template = file_get_contents($usb_template_path . 'product.js');
 $js_list_template = preg_replace('/{products}/', json_encode($products), $js_list_template);
 $js_list_template = preg_replace('/{properties}/', json_encode($_product_props), $js_list_template);
-file_put_contents($output_path . 'list.js', $js_list_template);
+file_put_contents($output_path . 'product.js', $js_list_template);
+file_put_contents($output_path . 'list.js', file_get_contents($usb_template_path . 'list.js'));
 echo '把所有产品数据生成到一个JS变量中，并独立生成JS文件 ok....................',chr(10),chr(13);
 
 /*
@@ -285,6 +323,7 @@ $show_template = preg_replace('/{series_menus}/', implode('', $series_menus), $s
 foreach ($products as $product) {
     $show_template_tmp = $show_template;
     $product_id = $product['id'];
+    $pdf_name = $product['code'];
 
     // 产品属性
     $show_props = [];
@@ -311,22 +350,60 @@ foreach ($products as $product) {
         $project_images[] = '<a href="' . $proj_img . '" target="_blank">工程图' . $p . ' (eps)</a>';
     }
     $show_template_tmp = preg_replace('/{project_images}/', implode('', $project_images), $show_template_tmp);
-    $show_template_tmp = preg_replace('/{pdf_name}/', $product_id, $show_template_tmp);
+    $show_template_tmp = preg_replace('/{pdf_name}/', $pdf_name, $show_template_tmp);
 
     file_put_contents($output_path . 'show-' . $product_id . '.html', $show_template_tmp);
 }
 echo '产品配置器详情页 ok....................',chr(10),chr(13);
 
+// 参数搜索
+echo '参数搜索页',chr(10),chr(13);
+$search_template = file_get_contents($usb_template_path . 'search.html');
+$search_template = preg_replace('/{setting_title}/', $setting['title'], $search_template);
+$search_template = preg_replace('/{logo}/', $logo, $search_template);
+$search_template = preg_replace('/{setting_content}/', $setting['description'], $search_template);
+$search_template = preg_replace('/{market_menus}/', implode('', $market_menus), $search_template);
+$search_template = preg_replace('/{function_menus}/', implode('', $function_menus), $search_template);
+$search_template = preg_replace('/{series_menus}/', implode('', $series_menus), $search_template);
+$search_template = preg_replace('/{contact-enginer-info}/', $contact_info, $search_template);
+//$search_filter = [];
+//foreach ($_product_props as $kk => $props) {
+//    $tmp  = '<fieldset class="filter column grid_filter product-prop-filter">';
+//    $tmp .= '<label>' . $props['title'] . '(' . count($props['options']) . ')</label>';
+//    $tmp .= '<select onchange="setSeFilter();" name="' . $kk . '" id="' . $kk . '" class="prodFinder" style="display: inline-block;">';
+//    $tmp .= '<option value="-"></option>';
+//    foreach ($props['options'] as $key => $option) {
+//        $tmp .= '<option value="' . $key . '">' . ($key . '  ' . $option) . '</option>';
+//    }
+//    $tmp .= '</select>';
+//    $tmp .= '</fieldset>';
+//
+//    $search_filter[] = $tmp;
+//}
+//$search_template = preg_replace('/{search_filter}/', implode('', $search_filter), $search_template);
+$search_series_select = '';
+foreach ($series_list as $item) {
+    $search_series_select .= '<option value="' . $item['id'] . '">' . $item['title'] . '</option>';
+}
+$search_template = preg_replace('/{search_series_select}/', $search_series_select, $search_template);
+$search_function_select = '';
+foreach ($function_list as $item) {
+    $search_series_select .= '<option value="' . $item['id'] . '">' . $item['title'] . '</option>';
+}
+$search_template = preg_replace('/{search_function_select}/', $search_function_select, $search_template);
+file_put_contents($output_path . 'search.html', $search_template);
+echo '参数搜索页 ok....................',chr(10),chr(13);
+
 // 复制PDF到USB版本目录下
 echo '复制PDF到USB版本目录下',chr(10),chr(13);
 dir_copy(CACHE_PATH . 'pdf', $output_path . 'pdf');
+dir_copy(PHPCMS_PATH . 'uploadfile', $output_path . 'uploadfile');
 echo '产品配置器详情页 ok....................',chr(10),chr(13);
 
 /*
  * zip offline
  */
 echo 'zip offline',chr(10),chr(13);
-$zip_path = CACHE_PATH . 'offline/' . $zip_name . '.zip';
 dir_zip($output_path, $zip_path, $output_path);
 echo 'zip offline ok....................',chr(10),chr(13);
 

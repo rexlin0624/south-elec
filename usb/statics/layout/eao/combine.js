@@ -1188,3 +1188,8 @@ function show3D(partId, partNumber) {
         });
     }
 }
+
+var $nav = $('.nav');
+$nav.find('a:eq(0)').attr('href', 'functions-1.html');
+$nav.find('a:eq(1)').attr('href', 'functions.html');
+$nav.find('a:eq(2)').attr('href', 'functions-2.html');

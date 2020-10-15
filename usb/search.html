@@ -3,7 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>产品配置器</title>
+    <title>产品配置器-参数搜索</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="description" content="">
     <meta name="keywords" content="">
@@ -53,7 +53,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="search.html">参数搜索</a>
+                    <a href="#">参数搜索</a>
                 </li>
             </ul>
         </div>
@@ -82,8 +82,26 @@
             <div class="content grid_6">
                 <h1 class="c_3x2_h1">产品列表</h1>
                 <div class="column grid_6 bg">
-                    <div class="row">
-                        {list_filter}
+                    <div class="row" id="search-form">
+                        <fieldset class="filter column grid_filter">
+                            <label>系列（3）</label>
+                            <select onchange="setSeFilter(1);" name="serial_id" id="serial_id" class="prodFinder" style="display: inline-block;">
+                                <option value="-"></option>
+                                {search_series_select}
+                            </select>
+                        </fieldset>
+                        <fieldset class="filter column grid_filter">
+                            <label>功能（7）</label>
+                            <select onchange="setSeFilter();" name="function_id" id="function_id" class="prodFinder" style="display: inline-block;">
+                                <option value="-"></option>
+                                {search_function_select}
+                            </select>
+                        </fieldset>
+                        <fieldset class="filter column grid_filter">
+                            <label>产品编码</label>
+                            <input type="text" name="product_code" id="product_code" style="margin-top: 5px;" />
+                        </fieldset>
+                        <div style="clear: both;"></div>
                     </div>
                     <div class="row" id="current-selected-code"></div>
                     <hr>
@@ -92,7 +110,10 @@
                             <h6>查找到 <span id="total_record">0</span> 条记录</h6></div>
                         <div class="column float_right">
                             <ul class="mWebPagination">
-                                <li></li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="prevPage()">上一页</a>
+                                    <a href="javascript:void(0);" onclick="nextPage()">下一页</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -129,6 +150,7 @@
 </body>
 </html>
 <script type="text/javascript" src="statics/layout/eao/combine.js"></script>
+<script type="text/javascript" src="product.js"></script>
 <script type="text/javascript" src="list.js"></script>
 <script type="text/javascript">
 (function(){
@@ -154,5 +176,15 @@
         // 关闭盖子
         gz.style.transform = 'none';
     })
-})()
+})();
+
+window.onload = function() {
+    setSeFilter();
+
+    $('#product_code').keyup(function(event) {
+        if(event.keyCode === 13){
+            setSeFilter();
+        }
+    });
+};
 </script>
