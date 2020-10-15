@@ -252,7 +252,7 @@ class search {
             $where .= ' AND `code` LIKE \'%' . $product_code . '%\'';
         }
 
-        if (isset($_GET['functions_id']) && $function_id != self::EMPTY) {
+        if (isset($_GET['function_id']) && $function_id != self::EMPTY) {
             $where .= ' AND functions_id = ' . $function_id;
         }
         $props_total = [];
