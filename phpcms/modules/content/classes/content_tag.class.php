@@ -255,7 +255,7 @@ class content_tag {
 			foreach ($pos_arr as $info) {
 				$key = $info['catid'].'-'.$info['id'];
 				$array[$key] = string2array($info['data']);
-				$array[$key]['url'] = go($info['catid'],$info['id']);
+				$array[$key]['url'] = gotoUrl($info['catid'],$info['id']);
 				$array[$key]['id'] = $info['id'];
 				$array[$key]['catid'] = $info['catid'];
 				$array[$key]['listorder'] = $info['listorder'];

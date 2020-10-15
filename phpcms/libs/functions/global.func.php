@@ -1460,7 +1460,7 @@ function subcat($parentid = NULL, $type = NULL,$self = '0', $siteid = '') {
  * @param $id      文章ID
  * @param $allurl  是否以绝对路径返回
  */
-function go($catid,$id, $allurl = 0) {
+function gotoUrl($catid,$id, $allurl = 0) {
 	static $category;
 	if(empty($category)) {
 		$siteids = getcache('category_content','commons');

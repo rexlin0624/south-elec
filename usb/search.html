@@ -11,6 +11,14 @@
     <script type="text/javascript" src="statics/layout/eao/script/selectivizr.js"></script>
     <link rel="stylesheet" type="text/css" href="statics/layout/eao/combine.css"/>
     <link rel="stylesheet" type="text/css" href="modal.css" />
+    <style type="text/css">
+        .lskdjflksjdflk {
+            list-style-type:  none;
+        }
+        .lskdjflksjdflk li {
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body>
@@ -97,13 +105,16 @@
                                 {search_function_select}
                             </select>
                         </fieldset>
-                        <fieldset class="filter column grid_filter">
-                            <label>产品编码</label>
-                            <input type="text" name="product_code" id="product_code" style="margin-top: 5px;" />
-                        </fieldset>
                         <div style="clear: both;"></div>
                     </div>
-                    <div class="row" id="current-selected-code"></div>
+                    <ul class="lskdjflksjdflk">
+                        <li id="current-selected-code" style="margin-left: 22px;"></li>
+                        <li style="margin-left: 10px;">
+                            <input type="text" name="product_code" id="product_code" />
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="button" value="搜索" id="btnSearchCode" onclick="setSeFilter()" />
+                        </li>
+                    </ul>
                     <hr>
                     <div class="row">
                         <div class="column">

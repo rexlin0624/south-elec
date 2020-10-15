@@ -292,7 +292,7 @@ $list_template = preg_replace('/{market_menus}/', implode('', $market_menus), $l
 $list_template = preg_replace('/{function_menus}/', implode('', $function_menus), $list_template);
 $list_template = preg_replace('/{series_menus}/', implode('', $series_menus), $list_template);
 $list_template = preg_replace('/{contact-enginer-info}/', $contact_info, $list_template);
-$list_filter = [];
+/*$list_filter = [];
 foreach ($_product_props as $kk => $props) {
     $tmp  = '<fieldset class="filter column grid_filter">';
     $tmp .= '<label>' . $props['title'] . '(' . count($props['options']) . ')</label>';
@@ -305,8 +305,9 @@ foreach ($_product_props as $kk => $props) {
     $tmp .= '</fieldset>';
 
     $list_filter[] = $tmp;
-}
-$list_template = preg_replace('/{list_filter}/', implode('', $list_filter), $list_template);
+}*/
+//$list_template = preg_replace('/{list_filter}/', implode('', $list_filter), $list_template);
+$list_template = preg_replace('/{list_filter}/', '', $list_template);
 file_put_contents($output_path . 'list.html', $list_template);
 echo '产品配置器列表页 ok....................',chr(10),chr(13);
 

@@ -46,7 +46,7 @@ class comment_api {
 		}
 		
 		if ($r) {
-			return array('title'=>$r['title'], 'url'=>go($catid, $contentid, 1), 'allow_comment'=>(isset($data_info['allow_comment']) ? $data_info['allow_comment'] : 1));
+			return array('title'=>$r['title'], 'url'=>gotoUrl($catid, $contentid, 1), 'allow_comment'=>(isset($data_info['allow_comment']) ? $data_info['allow_comment'] : 1));
 		} else {
 			return false;
 		}

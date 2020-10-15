@@ -191,7 +191,7 @@ class content extends foreground {
 			$arr_checkid = explode('-',$_v['checkid']);
 			$_v['id'] = $arr_checkid[1];
 			$_v['modelid'] = $arr_checkid[2];
-			$_v['url'] = $_v['status']==99 ? go($_v['catid'],$_v['id']) : APP_PATH.'index.php?m=content&c=index&a=show&catid='.$_v['catid'].'&id='.$_v['id'];
+			$_v['url'] = $_v['status']==99 ? gotoUrl($_v['catid'],$_v['id']) : APP_PATH.'index.php?m=content&c=index&a=show&catid='.$_v['catid'].'&id='.$_v['id'];
 			if(!isset($setting[$_v['catid']])) $setting[$_v['catid']] = string2array($CATEGORYS[$_v['catid']]['setting']);
 			$workflowid = $setting[$_v['catid']]['workflowid'];
 			$_v['flag'] = $workflows[$workflowid]['flag'];

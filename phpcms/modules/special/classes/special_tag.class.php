@@ -123,7 +123,7 @@ class special_tag {
 			foreach($result as $k => $r) {
 				if ($r['curl']) {
 					$content_arr = explode('|', $r['curl']);
-					$r['url'] = go($content_arr['1'], $content_arr['0']);
+					$r['url'] = gotoUrl($content_arr['1'], $content_arr['0']);
 				}
 				$res[$k] = $r;
 			}

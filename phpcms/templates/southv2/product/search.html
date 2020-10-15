@@ -72,10 +72,6 @@
                                 <?php } ?>
                             </select>
                         </fieldset>
-                        <fieldset class="filter column grid_filter">
-                            <label>产品编码</label>
-                            <input type="text" name="product_code" id="product_code" style="margin-top: 5px;" value="<?php echo $product_code; ?>" />
-                        </fieldset>
                         <div style="clear: both;"></div>
                         <?php if ($series_id > 0) { ?>
                         <?php foreach ($props[$mapSerialIdTitle[$series_id]] as $kk => $prop) { ?>
@@ -95,9 +91,15 @@
                         </fieldset>
                         <?php } ?>
                         <?php } ?>
-                    </form>
-                </div>
-                <div class="row" id="current-selected-code">{$code}</div>
+                    </div>
+                    <div class="row" id="current-selected-code">
+                        {$code}
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" name="product_code" id="product_code" placeholder="请输入编码" style="margin-top: 5px;border: 1px solid #767676;height: 20px;" value="<?php echo $product_code; ?>" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="button" value="搜索" id="btnSearchCode" onclick="setSeFilter()" />
+                    </div>
+                </form>
                 <hr>
                 <div class="row">
                     <div class="column">

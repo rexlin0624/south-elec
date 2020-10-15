@@ -161,7 +161,7 @@ class position extends admin {
 				$r['id'] = $_v['id'];
 				$r['listorder'] = $_v['listorder'];
 				$r['catid'] = $_v['catid'];
-				$r['url'] = go($_v['catid'], $_v['id']);
+				$r['url'] = gotoUrl($_v['catid'], $_v['id']);
 				$key = $r['modelid'].'-'.$r['id'];
 				$infos[$key] = $r;
 				
