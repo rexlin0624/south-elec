@@ -1,4 +1,10 @@
 {template "product","header"}
+<?php
+    $g_path = 'g';
+    if (isset($_GET['g']) && $_GET['g'] == 0) {
+        $g_path = 'ng';
+    }
+?>
 <div class="row">
     <div class="column grid_2 column_margin">
         <div class="box">
@@ -43,7 +49,7 @@
                                 <?php }} ?>
 
                                 <br />
-                                <a target="_blank" href="caches/pdf/g/<?php echo $item['code']; ?>.pdf">PDF下载</a>
+                                <a target="_blank" href="caches/pdf/<?php echo $g_path; ?>/<?php echo $item['code']; ?>.pdf">PDF下载</a>
                             </div>
                             <div class="column grid_1 caption detail_pic">
 
