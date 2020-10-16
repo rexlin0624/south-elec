@@ -13,7 +13,7 @@ $db_linkage = pc_base::load_model('linkage_model');
 $db_setting = pc_base::load_model('productions_setting_model');
 $pdfkit = new Pdf('/usr/local/bin/wkhtmltopdf');
 
-$isDebug = false;
+$isDebug = true;
 
 $mapSerialTitle = [
     6 => '4.0',
@@ -37,13 +37,13 @@ if ($isProcessing) {
 }
 
 // 若非处理中，则处理下一条PDF生成
-$row = $db->get_one('`status` = 0', 'id, product_id', 'id DESC');
+$row = $db->get_one('`status` = 3', 'id, product_id', 'id DESC');
 //$row = $db->get_one('`id` = 33774', 'id, product_id', 'id DESC');
 if (!$isDebug) {
     $db->markProcessing($row['id']);
 }
 $productId = $row['product_id'];
-if (!$isDebug) {
+if ($isDebug) {
     echo 'productId = ', $productId, ' Processing...', chr(10), chr(13);
 }
 
@@ -58,14 +58,17 @@ if ($isDebug) {
     $host = 'https://www.hmie.com.cn';
 }
 
+$pdf_name = str_replace('J', '-', $code);
+$title_code = str_replace('J', '-', $code);
+
 $thumb = 'data:image/jpeg;base64,' . base64_encode(file_get_contents(__DIR__ . $product['thumb']));
 
-$pdf_path = __DIR__ . '/caches/pdf/g/' . $code . '.pdf';
+$pdf_path = __DIR__ . '/caches/pdf/ng/' . $pdf_name . '.pdf';
 $pdf_template = __DIR__.'/phpcms/modules'.DIRECTORY_SEPARATOR.'product'.DIRECTORY_SEPARATOR.'pdf.template';
 $pdf_content = file_get_contents($pdf_template);
 $pdf_content = preg_replace('/{pdf_background_base64}/', file_get_contents(__DIR__ . '/pdf_background.base64'), $pdf_content);
 $pdf_content = preg_replace('/{pdf_header_bgcolor}/', $setting['header_bgcolor'], $pdf_content);
-$pdf_content = preg_replace('/{title}/', $product['title'] . '：' . $code, $pdf_content);
+$pdf_content = preg_replace('/{title}/', $product['title'] . '：' . $title_code, $pdf_content);
 $pdf_content = preg_replace('/{description}/', $product['description'], $pdf_content);
 $pdf_content = preg_replace('/{thumb}/', $thumb, $pdf_content);
 
@@ -86,7 +89,11 @@ $pdf_content = preg_replace('/{project_images}/', implode('', $project_images), 
 
 $prop_string = [];
 foreach ($props as $key => $prop) {
-	$prop_string[] = '<li>' . $prop['title'] . '：' . $prop['options'][$product[$key]] . '</li>';
+    $propValue = $prop['options'][$product[$key]];
+    if ($key === 'military_standard') {
+        $propValue = '-';
+    }
+	$prop_string[] = '<li>' . $prop['title'] . '：' . $propValue . '</li>';
 }
 //$pdf_content = preg_replace('/{props}/', implode('', $prop_string), $pdf_content);
 
@@ -115,7 +122,7 @@ $pdf_content = preg_replace('/{led_color}/', $props['led_color']['options'][$pro
 $pdf_content = preg_replace('/{led_voltage}/', $props['led_voltage']['options'][$product['led_voltage']], $pdf_content);
 
 // 军标
-$pdf_content = preg_replace('/{military_standard}/', $props['military_standard']['options'][$product['military_standard']], $pdf_content);
+$pdf_content = preg_replace('/{military_standard}/', '-', $pdf_content);
 
 // 安装尺寸
 $pdf_content = preg_replace('/{install_size}/', $props['install_size']['options'][$product['install_size']], $pdf_content);

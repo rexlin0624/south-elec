@@ -13,6 +13,10 @@ class queues_model extends model {
 		return $this->count('`status` = 0');
 	}
 
+    public function getTotalNoJ() {
+        return $this->count('`status` = 3');
+    }
+
 	public function getProcessing() {
 		return $this->count('`status` = 1') > 0;
 	}
