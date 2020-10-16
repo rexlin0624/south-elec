@@ -290,7 +290,7 @@ class search {
         foreach ($products as $product) {
             // 当选择军标的时候
             if (!$is_military_standard) {
-                $product['code'] = str_replace('G', '-', $product['code']);
+                $product['code'] = str_replace('J', '-', $product['code']);
                 $product['military_standard'] = '-';
             }
 
