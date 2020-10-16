@@ -228,6 +228,10 @@ class search {
             $filter['series_id'] = $filter['serial_id'];
         }
         $product_code = $filter['product_code'];
+        $is_military_standard = false;
+        if (isset($filter['military_standard']) && $filter['military_standard'] != $empty) {
+            $is_military_standard = true;
+        }
 
         unset($filter['page']);
         unset($filter['m']);
@@ -273,6 +277,11 @@ class search {
                     continue;
                 }
 
+                // 军标不参与搜索
+                if ($field == 'military_standard') {
+                    continue;
+                }
+
 //                if ($field == 'military_standard' && $flt == 'G') {
 //                    continue;
 //                }
@@ -287,8 +296,19 @@ class search {
         $contact_info = '联系电话：' . $contacts['telephone'] . '<br />QQ：' . $contacts['qq'] . '<br />微信：' . $contacts['wechat'] . '<br />邮箱：' . $contacts['email'];
 
         $total = $this->db->count($where);
-        $lists = $this->db->listinfo($where, 'id DESC', $page, 10);
+        $products = $this->db->listinfo($where, 'id DESC', $page, 10);
         $pages = $this->db->pages;
+
+        $lists = [];
+        foreach ($products as $product) {
+            // 当选择军标的时候
+            if (!$is_military_standard) {
+                $product['code'] = str_replace('G', '-', $product['code']);
+                $product['military_standard'] = '-';
+            }
+
+            $lists[] = $product;
+        }
 
         // filter production search props
         $fields = implode(',', array_keys($this->_relactionIndex));
