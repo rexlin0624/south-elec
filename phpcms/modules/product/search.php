@@ -18,6 +18,12 @@ class search {
 
     const EMPTY = -1000;
 
+    private static $_map_series_id_title = [
+        6 => '4.0',
+        7 => '5.0',
+        8 => '6.0',
+    ];
+
     private $_relactionIndex = [
         // 系列
         'serial_id' => 0,
@@ -133,7 +139,8 @@ class search {
 	public function init() {
         $empty = self::EMPTY;
         $props = $this->db_linkage->product_props();
-        $series_id = 0;
+        $series_id = isset($_GET['serial_id']) ? (int)$_GET['serial_id'] : 0;
+        $series_title = self::$_map_series_id_title[$series_id];
 
         $serials = $this->db_series_list->listinfo();
         $functions = $this->db_function_list->listinfo([], '', 1, 1000);
@@ -183,10 +190,10 @@ class search {
         }
 
         // restrict props
-        $restrictProps = $props;
+        $restrictProps = $props[$series_title];
         if (!empty($restrict)) {
             $restrictProps = [];
-            foreach ($props as $kk => $prop) {
+            foreach ($props[$series_title] as $kk => $prop) {
                 $options = [];
                 foreach ($prop['options'] as $key => $option) {
                     if (!in_array($key, $restrict[$restrictIndex[$kk]])) {
@@ -204,21 +211,6 @@ class search {
 
         // 根据$serial_id获取function list
         if (!empty($serial_id)) {
-            /* $sql = 'SELECT DISTINCT functions_id FROM `se_productions` WHERE series_id = ' . $serial_id;
-            $query = $this->db->query($sql);
-            $rows = $this->db->fetch_array();
-            $functions_ids = [];
-            foreach ($rows as $row) {
-                if (!$row['functions_id']) {
-                    continue;
-                }
-
-                $functions_ids[] = $row['functions_id'];
-            }
-
-            $where = 'id IN(' . implode(',', $functions_ids) . ')';
-            $functions = $this->db_function_list->listinfo($where); */
-
             $serial = $this->db_series_list->get_one(['id' => $serial_id]);
         }
 
@@ -246,11 +238,6 @@ class search {
         $contacts = $this->db_contact_setting->get_one(['id' => 1]);
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
-        /*if (isset($filter['military_standard']) && $filter['military_standard'] == 'G') {
-            $where = '1 = 1';
-        } else {
-            $where = '1 = 1 AND military_standard != "G"';
-        }*/
         $where = '1 = 1';
         if (!empty($product_code)) {
             $where .= ' AND `code` LIKE \'%' . $product_code . '%\'';
@@ -337,9 +324,9 @@ class search {
                 $search[$sch][] = $val;
             }
         }
-        if (!in_array('G', $search['military_standard'])) {
-            $search['military_standard'][] = 'G';
-        }
+//        if (!in_array('J', $search['military_standard'])) {
+//            $search['military_standard'][] = 'J';
+//        }
 //        var_dump($search);
 //        exit;
 

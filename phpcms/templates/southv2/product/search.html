@@ -53,20 +53,30 @@
                         <input type="hidden" name="c" value="search">
                         <input type="hidden" name="a" value="init">
                         <fieldset class="filter column grid_filter">
-                            <label>系列(<?php echo count($serials); ?>)</label>
+                            <label>系列(<?php echo count($search['serial_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
                                 <option value="{$empty}"></option>
                                 <?php foreach ($serials as $serial) { ?>
+                                <?php
+                                    if (!in_array($serial['id'], $search['serial_id'])) {
+                                        continue;
+                                    }
+                                ?>
                                 <?php $selected = ($serial_id == $serial['id']) ? ' selected="selected"' : ''; ?>
                                 <option<?php echo $selected; ?> value="<?php echo $serial['id']; ?>"><?php echo $serial['title']; ?></option>
                                 <?php } ?>
                             </select>
                         </fieldset>
                         <fieldset class="filter column grid_filter">
-                            <label>功能(<?php echo count($functions); ?>)</label>
+                            <label>功能(<?php echo count($search['function_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="function_id" class="prodFinder" style="display: inline-block;">
                                 <option value="{$empty}"></option>
                                 <?php foreach ($functions as $function) { ?>
+                                <?php
+                                    if (!in_array($function['code'], $search['function_id'])) {
+                                        continue;
+                                    }
+                                ?>
                                 <?php $selected = ($function_id == $function['code']) ? ' selected="selected"' : ''; ?>
                                 <option<?php echo $selected; ?> value="<?php echo $function['code']; ?>"><?php echo $function['title']; ?></option>
                                 <?php } ?>
@@ -74,13 +84,16 @@
                         </fieldset>
                         <div style="clear: both;"></div>
                         <?php if ($series_id > 0) { ?>
-                        <?php foreach ($props[$mapSerialIdTitle[$series_id]] as $kk => $prop) { ?>
+                        <?php foreach ($restrictProps as $kk => $prop) { ?>
                         <fieldset class="filter column grid_filter">
-                            <label><?php echo $prop['title'], '(' . count($prop['options']) . ')'; ?></label>
+                            <label><?php echo $prop['title'], '(' . count($search[$kk]) . ')'; ?></label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
                                 <option value="{$empty}"></option>
                                 <?php
                                 foreach ($prop['options'] as $key => $option) {
+                                if (!in_array($key, $search[$kk])) {
+                                    continue;
+                                }
                                 $selected = ($filter[$kk] != '' && $filter[$kk] != "-1000" && $filter[$kk] == $key) ? ' selected="selected"' : '';
                                 ?>
                                 <option value="<?php echo $key; ?>"<?php echo $selected; ?>>

@@ -37,7 +37,7 @@
         <div class="column grid_5 float_right">
             <ul class="nav row">
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=step&type=1"{if $isMarket} id="activer_link"{/if}>市场</a>
+                    <a style="display: none;" href="/index.php?m=product&c=index&a=step&type=1"{if $isMarket} id="activer_link"{/if}>市场</a>
                     <ul class="nav2">
                         <div class="col">
                             {loop $market_list $market}
@@ -49,7 +49,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=functions"{if $isFunction} id="activer_link"{/if}>功能</a>
+                    <a style="display: none;" href="/index.php?m=product&c=index&a=functions"{if $isFunction} id="activer_link"{/if}>功能</a>
                     <ul class="nav2 small">
                         <div class="col">
                             {loop $function_list $function}
@@ -61,7 +61,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=step&type=2"{if $isSeries} id="activer_link"{/if}>系列</a>
+                    <a style="display: none;" href="/index.php?m=product&c=index&a=step&type=2"{if $isSeries} id="activer_link"{/if}>系列</a>
                     <ul class="nav2 small">
                         <div class="col">
                             {loop $series_list $series}
