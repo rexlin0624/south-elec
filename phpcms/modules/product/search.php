@@ -336,8 +336,12 @@ class search {
         $code .= $this->_c('front_shape') . $this->_c('front_button_material') . $this->_c('front_button_shape') . $this->_c('front_button_color');
         $code .= '.' . $this->_c('switch_element') . $this->_c('light_style') . $this->_c('led_color') . $this->_c('led_voltage');
 
-        //
-        $code .= '.' . $this->_c('military_standard');
+        // 军标
+        if ($is_military_standard) {
+            $code .= '.J';
+        } else {
+            $code .= '.-';
+        }
 
 		include template('product', 'search');
 	}
