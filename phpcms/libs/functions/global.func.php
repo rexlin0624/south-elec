@@ -487,11 +487,12 @@ function template($module = 'content', $template = 'index', $style = '') {
 	$module = str_replace('/', DIRECTORY_SEPARATOR, $module);
 	if(!empty($style) && preg_match('/([a-z0-9\-_]+)/is',$style)) {
 	} elseif (empty($style) && !defined('STYLE')) {
-		if(defined('SITEID')) {
-			$siteid = SITEID;
-		} else {
-			$siteid = param::get_cookie('siteid');
-		}
+//		if(defined('SITEID')) {
+//			$siteid = SITEID;
+//		} else {
+//			$siteid = param::get_cookie('siteid');
+//		}
+        $siteid = 3;
 		if (!$siteid) $siteid = 1;
 		$sitelist = getcache('sitelist','commons');
 		if(!empty($siteid)) {
