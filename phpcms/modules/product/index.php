@@ -15,6 +15,12 @@ class index {
     
     const EMPTY = -1000;
 
+    private static $_map_series_id_title = [
+        6 => '4.0',
+        7 => '5.0',
+        8 => '6.0',
+    ];
+
     private $_relactionIndex = [
         // 系列
         'serial_id' => 0,
@@ -34,8 +40,8 @@ class index {
         'led_color' => 7,
         // LED灯电压
         'led_voltage' => 8,
-        // 其它
-        'others' => 9,
+        // 军标
+        'military_standard' => 9,
         // 功能
         'function_id' => 10,
         // 安装尺寸
@@ -245,6 +251,8 @@ class index {
         $props = $this->_product_props;
 
         $item = $this->db->get_one(['id' => $id]);
+
+        $series_title = self::$_map_series_id_title[$item['series_id']];
 
         include template('product', 'show');
     }

@@ -148,7 +148,7 @@
                                                     <?php $serialTitle = $serial['title'] ? $serial['title'] : $mapSerialIdTitle[$list['series_id']]; ?>
                                                     <td class="attribute_value"><?php echo $list['code']; ?></td>
                                                 </tr>
-                                                <?php foreach ($props as $key => $prop) { ?>
+                                                <?php foreach ($props[$serialTitle] as $key => $prop) {  ?>
                                                 <tr>
                                                     <td class="attribute" width="120"><?php echo $prop['title']; ?>:</td>
                                                     <td class="attribute_value"><?php echo !empty($prop['options'][$list[$key]]) ? $prop['options'][$list[$key]] : '-'; ?></td>
@@ -236,15 +236,15 @@ function download_pdfs() {
 })();
 
 window.onload = function () {
-       var pages = $('.mWebPagination').find('a');
-       for (var i = 0;i < pages.length;i++) {
-               var href = $(pages[i]).attr('href');
-               if (!href) {
-                       continue;
-               }
-
-               var rep = href.split('index.php');
-               $(pages[i]).attr('href', '/index.php/' + rep[1]);
+   var pages = $('.mWebPagination').find('a');
+   for (var i = 0;i < pages.length;i++) {
+       var href = $(pages[i]).attr('href');
+       if (!href) {
+           continue;
        }
+
+       var rep = href.split('index.php');
+       $(pages[i]).attr('href', '/index.php/' + rep[1]);
+   }
 }
 </script>

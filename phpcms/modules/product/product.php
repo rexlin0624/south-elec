@@ -816,6 +816,7 @@ class product extends admin {
                 $values[] = '(\'' . $code . '\', \'' . implode('\',\'', $row) . '\', '. $time .')';
             }
         }
+//        var_dump($values);exit;
 //        exit;
         // echo '<pre>';
         // var_export($data);

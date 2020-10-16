@@ -84,7 +84,7 @@
                                 <td>产品编码：</td>
                                 <td class="left"><?php echo $item['code']; ?></td>
                             </tr>
-                            <?php foreach ($props as $key => $prop) { ?>
+                            <?php foreach ($props[$series_title] as $key => $prop) { ?>
                             <tr style="line-height: 30px;">
                                 <td><?php echo $prop['title']; ?>：</td>
                                 <td class="left"><?php echo $prop['options'][$item[$key]]; ?></td>
