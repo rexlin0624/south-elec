@@ -52,7 +52,7 @@
                             </select>
                         </fieldset>
                         <div style="clear: both;"></div> -->
-                        <?php foreach ($props as $kk => $prop) { ?>
+                        <?php foreach ($props[$se] as $kk => $prop) { ?>
                         <fieldset class="filter column grid_filter">
                             <label>
                                 <?php echo $prop['title']; ?>
@@ -139,10 +139,9 @@
                                                     <td class="attribute" width="120">产品编码：</td>
                                                     <td class="attribute_value">
                                                         <?php echo substr($list['code'], 0, 1) == '-' ? $se . $list['code'] : $list['code']; ?>
-                                                            
                                                     </td>
                                                 </tr>
-                                                <?php foreach ($props as $key => $prop) { ?>
+                                                <?php foreach ($props[$se] as $key => $prop) { ?>
                                                 <tr>
                                                     <td class="attribute" width="120"><?php echo $prop['title']; ?>:</td>
                                                     <td class="attribute_value"><?php echo $prop['options'][$list[$key]]; ?></td>
