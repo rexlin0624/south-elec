@@ -8,3 +8,5 @@ vendor
 usb_output
 modify.sql
 product.php.bak
+generate_offline.sh
+html

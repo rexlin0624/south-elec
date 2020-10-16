@@ -13,7 +13,7 @@ $db_linkage = pc_base::load_model('linkage_model');
 $db_setting = pc_base::load_model('productions_setting_model');
 $pdfkit = new Pdf('/usr/local/bin/wkhtmltopdf');
 
-$isDebug = true;
+$isDebug = false;
 
 $mapSerialTitle = [
     6 => '4.0',
@@ -22,7 +22,7 @@ $mapSerialTitle = [
 ];
 
 // 获取空闲数量
-$totalFree = $db->getTotalFree();
+$totalFree = $db->getTotalNoJ();
 if ($totalFree == 0) {
 	die('No generate pdf queue.' . chr(10) . chr(13));
 }
