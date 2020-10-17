@@ -20,6 +20,12 @@ $db = pc_base::load_model('productions_model');
 $db_linkage = pc_base::load_model('linkage_model');
 $_product_props = $db_linkage->product_props();
 
+$_map_series_title = [
+    6 => '4.0',
+    7 => '5.0',
+    8 => '6.0',
+];
+
 /**
  * 图片转换为base64
  * @param $image
@@ -38,9 +44,10 @@ $zip_name = '华南电子网_离线版';
 
 $usb_template_path = PHPCMS_PATH . 'usb' . DIRECTORY_SEPARATOR;
 $output_path = CACHE_PATH . 'offline/' . $zip_name . DIRECTORY_SEPARATOR;
-if (!is_dir($output_path)) {
-    mkdir($output_path);
+if (is_dir($output_path)) {
+    rmdir($output_path);
 }
+mkdir($output_path);
 $zip_path = CACHE_PATH . 'offline/' . $zip_name . '.zip';
 if (file_exists($zip_path)) {
     @unlink($zip_path);
@@ -317,6 +324,7 @@ echo '产品配置器列表页 ok....................',chr(10),chr(13);
 echo '产品配置器详情页',chr(10),chr(13);
 $show_template = file_get_contents($usb_template_path . 'show.html');
 $show_template = preg_replace('/{setting_title}/', $setting['title'], $show_template);
+$show_template = preg_replace('/{logo}/', $logo, $show_template);
 $show_template = preg_replace('/{setting_content}/', $setting['description'], $show_template);
 $show_template = preg_replace('/{market_menus}/', implode('', $market_menus), $show_template);
 $show_template = preg_replace('/{function_menus}/', implode('', $function_menus), $show_template);
@@ -328,7 +336,7 @@ foreach ($products as $product) {
 
     // 产品属性
     $show_props = [];
-    foreach ($_product_props as $kk => $props) {
+    foreach ($_product_props[$_map_series_title[$product['series_id']]] as $kk => $props) {
         $tmp  = '<tr style="line-height: 30px;">';
         $tmp .= '<td>' . $props['title'] . '</td>';
         $tmp .= '<td class="right">' . $props['options'][$product[$kk]] . '</td>';
@@ -355,6 +363,7 @@ foreach ($products as $product) {
 
     file_put_contents($output_path . 'show-' . $product_id . '.html', $show_template_tmp);
 }
+file_put_contents($output_path . 'show.js', file_get_contents($usb_template_path . 'show.js'));
 echo '产品配置器详情页 ok....................',chr(10),chr(13);
 
 // 参数搜索

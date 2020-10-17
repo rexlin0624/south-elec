@@ -7,6 +7,7 @@ var series_5 = '7-1,2,3,4,A,B,D-1,2-1,2,3,A,B-1,2,3,4,5,6,7-1,2-1,2,3-0,1,2,3,4-
 var series_6 = '8-0,1,2,3-0,1,2,3-0,1-1,2,3,4,5-0,1,2,3,4,5,6-0,1,2,3-0,1,2,3,4,7,8-0,1,2,3,4-n-0,1,2,3,4,5,6-E,F,G';
 
 var _relaction = [];
+var searchRestrict = {};
 
 function pageInit() {
     _relaction.push(splitSerial(series_4));
@@ -140,6 +141,10 @@ function nextPage() {
 
 function prevPage() {
     PAGE -= 1;
+    if (PAGE <= 0) {
+        alert('已经是第一页');
+        return false;
+    }
     setSeFilter();
 }
 
@@ -162,13 +167,19 @@ function changeSearch() {
         prop = product_props[key];
 
         html.push('<fieldset class="filter column grid_filter product-prop-filter">');
-        html.push('<label>' + prop['title'] + '（' + Object.keys(prop['options']).length + '）</label>');
-        html.push('<select onchange="setSeFilter();" name="' + key + '" id="' + key + '" class="prodFinder" style="display: inline-block;">');
+        html.push('<label>' + prop['title'] + '（<span id="' + key + '-count">' + Object.keys(prop['options']).length + '</span>）</label>');
+        html.push('<select onchange="setSeFilter();" name="' + key + '" id="' + key + '" class="prodFinder sel-product-prop" style="display: inline-block;">');
         html.push('<option value="-"></option>');
         for (opt in prop['options']) {
             if (!prop['options'].hasOwnProperty(opt)) {
                 continue;
             }
+
+            // 联动
+            if (searchRestrict[key].indexOf(opt) === -1) {
+                continue;
+            }
+
             option = prop['options'][opt];
             html.push('<option value="' + opt + '">' + opt + ' ' + option + '</option>');
         }
@@ -177,6 +188,53 @@ function changeSearch() {
     }
 
     $('#search-form').append(html.join(''));
+}
+
+function searchRestrictCondition(products) {
+    searchRestrict = [];
+    var ii, jj, tmp, val;
+    for (ii = 0;ii < products.length;ii++) {
+        tmp = products[ii];
+        for (jj in tmp) {
+            if (!tmp.hasOwnProperty(jj)) {
+                continue;
+            }
+            if (Object.keys(relationIndex).indexOf(jj) === -1) {
+                continue;
+            }
+            val = $.trim(tmp[jj]);
+            if (val === '') {
+                continue;
+            }
+
+            if (!searchRestrict[jj]) {
+                searchRestrict[jj] = [];
+            }
+            if (searchRestrict[jj].indexOf(val) !== -1) {
+                continue;
+            }
+
+            searchRestrict[jj].push(val);
+        }
+    }
+    console.log('searchRestrict =>>>>>>>>>>>>>>>>>>>>', searchRestrict);
+
+    for (var prop in searchRestrict) {
+        if (!searchRestrict.hasOwnProperty(prop)) {
+            continue;
+        }
+
+        $('#' + prop).find('option').each(function() {
+            if ($(this).val() === '-') {
+                return true;
+            }
+
+            if (searchRestrict[prop].indexOf($(this).val()) === -1) {
+                $(this).remove();
+            }
+        });
+        $('#' + prop + '-count').html(searchRestrict[prop].length);
+    }
 }
 
 function setSeFilter(type) {
@@ -212,7 +270,9 @@ function setSeFilter(type) {
     }
     filters['series_id'] = series_id;
     filters['functions_id'] = $('#functions_id').val();
-    console.log('filters =>>>>>', filters);
+
+    var is_military_standard = filters['military_standard'] === 'J';
+    delete filters['military_standard'];
 
     var template = [
         '<tr>',
@@ -266,6 +326,9 @@ function setSeFilter(type) {
     var products = items.filter(function (item) { return eval(fn_condition(myfilter, item)); });
     var total = products.length;
 
+    // 查询联动
+    searchRestrictCondition(products);
+
     var start = (PAGE - 1) * PAGE_SIZE;
     var end = start + PAGE_SIZE;
     products = products.slice(start, end);
@@ -288,7 +351,7 @@ function setSeFilter(type) {
         filters['led_color'] ? filters['led_color'] : 'X',
         filters['led_voltage'] ? filters['led_voltage'] : 'X',
         '.',
-        filters['military_standard'] ? filters['military_standard'] : 'X'
+        is_military_standard ? 'J' : '-'
     ].join('');
     document.getElementById('current-selected-code').innerHTML = selected_code;
 
@@ -299,13 +362,17 @@ function setSeFilter(type) {
 
         replace = {
             '{index}': index,
-            '{url}': 'show-' + item['id'] + '.html',
+            '{url}': 'show-' + item['id'] + '.html?g=' + (is_military_standard ? 1 : 0),
             '{thumb}': item['thumb'].slice(1),
             '{title}': item['title'],
-            '{code}': item['code']
+            '{code}': item['code'].replace('J', '-')
         };
         for (j = 0;j < props.length;j++) {
             propValue = product_props[props[j]]['options'][item[props[j]]];
+            if (props[j] === 'military_standard') {
+                propValue = is_military_standard ? propValue : '-';
+            }
+
             replace['{' + props[j] + '}'] = propValue ? propValue : '-';
         }
         html.push(template.allReplace(replace));
