@@ -389,7 +389,7 @@ foreach ($series_list as $item) {
 $search_template = preg_replace('/{search_series_select}/', $search_series_select, $search_template);
 $search_function_select = '';
 foreach ($function_list as $item) {
-    $search_function_select .= '<option value="' . $item['id'] . '">' . $item['title'] . '</option>';
+    $search_function_select .= '<option value="' . $item['code'] . '">' . $item['title'] . '</option>';
 }
 $search_template = preg_replace('/{search_function_select}/', $search_function_select, $search_template);
 file_put_contents($output_path . 'search.html', $search_template);

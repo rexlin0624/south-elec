@@ -2,6 +2,114 @@ var ARR_PDF_IDS = [];
 var PAGE = 1;
 var PAGE_SIZE = 10;
 
+var series_4 = '6-1,2,3,4,A,B,D-0,1,2-1,2,3,A,B-1,2,3,4,5,6,7-0,1,2,3,4-1,2,3-0,1,2,3,4-0,1,2,3,4-C-0,1,2,4,6-A,B,C,D,E';
+var series_5 = '7-1,2,3,4,A,B,D-1,2-1,2,3,A,B-1,2,3,4,5,6,7-1,2-1,2,3-0,1,2,3,4-0,1,2,3,4-C-1,2-A,B,C,D,E';
+var series_6 = '8-0,1,2,3-0,1,2,3-0,1-1,2,3,4,5-0,1,2,3,4,5,6-0,1,2,3-0,1,2,3,4,7,8-0,1,2,3,4-n-0,1,2,3,4,5,6-E,F,G';
+
+var _relaction = [];
+
+function pageInit() {
+    _relaction.push(splitSerial(series_4));
+    _relaction.push(splitSerial(series_5));
+    _relaction.push(splitSerial(series_6));
+}
+
+function splitSerial(series) {
+    var series1 = series.split('-');
+    var series2 = [];
+
+    var item;
+    for (var i = 0;i < series1.length;i++) {
+        item = series1[i];
+        series2.push(item.split(','));
+    }
+
+    return series2;
+}
+
+var relationIndex = {
+    // 系列
+    'series_id': 0,
+    // 前圈尺寸
+    'front_shape': 1,
+    // 前圈/按键材料
+    'front_button_material': 2,
+    // 前圈/按键形状
+    'front_button_shape': 3,
+    // 前圈/按键颜色
+    'front_button_color': 4,
+    // 开关元件
+    'switch_element': 5,
+    // 照明形式
+    'light_style': 6,
+    // 灯罩/LED灯颜色
+    'led_color': 7,
+    // LED灯电压
+    'led_voltage': 8,
+    // 军标
+    'military_standard': 9,
+    // 功能
+    'functions_id': 10,
+    // 安装尺寸
+    'install_size': 11
+};
+
+function propRestrict(relations, prop, index) {
+    var restricts = [];
+    var relation;
+    for (var i = 0;i < relations.length;i++) {
+        relation = relations[i];
+        if (relation[index].indexOf(prop) !== -1) {
+            restricts.push(relation);
+        }
+    }
+
+    return restricts;
+}
+
+function relactionRestrict(property) {
+    var restricts = [];
+    var propValue, rIndex;
+    for (var prop in relationIndex) {
+        if (!relationIndex.hasOwnProperty(prop)) {
+            continue;
+        }
+        rIndex = relationIndex[prop];
+
+        propValue = property[prop] ? property[prop] : -100;
+        console.log('propValue =>>>>>', propValue);
+        if (propValue !== -100 && propValue !== -1000) {
+            if (restricts.length === 0) {
+                restricts = propRestrict(_relaction, propValue, rIndex);
+            } else {
+                restricts = propRestrict(restricts, propValue, rIndex);
+            }
+        }
+    }
+    console.log('restricts =>>>', restricts);
+
+    var unionRestricts = {};
+    var i, j, idx, restrict, items, item;
+    for (i = 0;i < restricts.length;i++) {
+        restrict = restricts[i];
+        for (j = 0;j < restrict.length;j++) {
+            idx = j;
+            if (!unionRestricts[idx]) {
+                unionRestricts[idx] = [];
+            }
+            items = restrict[j];
+
+            for (item in items) {
+                if (unionRestricts[idx].indexOf(item) !== -1) {
+                    unionRestricts[idx].push(item);
+                }
+            }
+        }
+    }
+
+    return unionRestricts;
+}
+
 String.prototype.allReplace = function(obj) {
     var retStr = this;
     for (var x in obj) {
@@ -103,40 +211,42 @@ function setSeFilter(type) {
         filters['code'] = $.trim($('#product_code').val());
     }
     filters['series_id'] = series_id;
+    filters['functions_id'] = $('#functions_id').val();
+    console.log('filters =>>>>>', filters);
 
     var template = [
         '<tr>',
-            '<td>',
-                '<div class="product_list_row">',
-                    '<table>',
-                        '<tbody>',
-                            '<tr>',
-                                '<td class="product_counter"><span>{index}</span></td>',
-                                '<td><a href="{url}"><img src="{thumb}" style="height: 100px;" alt="{title}" title="{title}" /></a></td>',
-                                '<td class="clickable" rel="{url}" target="self">',
-                                    '<a href="{url}"><em>{title}</em></a>',
-                                    '<table class="attrList">',
-                                        '<tbody>',
-                                            '<tr>',
-                                                '<td class="attribute" width="120">产品编码：</td>',
-                                                '<td class="attribute_value">{code}</td>',
-                                            '</tr>',
-                                            temp_props.join(''),
-                                        '</tbody>',
-                                    '</table>',
-                                '</td>',
-                            '</tr>',
-                        '</tbody>',
-                    '</table>',
-                '</div>',
-            '</td>',
+        '<td>',
+        '<div class="product_list_row">',
+        '<table>',
+        '<tbody>',
+        '<tr>',
+        '<td class="product_counter"><span>{index}</span></td>',
+        '<td><a href="{url}"><img src="{thumb}" style="height: 100px;" alt="{title}" title="{title}" /></a></td>',
+        '<td class="clickable" rel="{url}" target="self">',
+        '<a href="{url}"><em>{title}</em></a>',
+        '<table class="attrList">',
+        '<tbody>',
+        '<tr>',
+        '<td class="attribute" width="120">产品编码：</td>',
+        '<td class="attribute_value">{code}</td>',
+        '</tr>',
+        temp_props.join(''),
+        '</tbody>',
+        '</table>',
+        '</td>',
+        '</tr>',
+        '</tbody>',
+        '</table>',
+        '</div>',
+        '</td>',
         '</tr>'
     ].join('');
 
     var items = PRODUCTS;
 
     // filter item
-    var fn_condition = new Function('filters', 'item', 'if (Object.keys(filters).length === 0) { return true; } var condition = [];for (var filter in filters) { condition.push("item[\'" + filter + "\'] === \'" + filters[filter] + "\'"); } return condition.join(" && ");');
+    var fn_condition = new Function('filters', 'item', 'if (Object.keys(filters).length === 0) { return true; } var condition = [];for (var filter in filters) { if (filter === "code") { condition.push("item[\'code\'].indexOf(\'" + filters[filter] + "\') !== -1"); } else { condition.push("item[\'" + filter + "\'] === \'" + filters[filter] + "\'"); }} return condition.join(" && ");');
     var myfilter = {};
     var is_show_contact = false;
     for (var filter in filters) {
@@ -153,18 +263,18 @@ function setSeFilter(type) {
 
         myfilter[filter] = filters[filter];
     }
-    items = items.filter(function (item) { return eval(fn_condition(myfilter, item)); });
-    var total = items.length;
+    var products = items.filter(function (item) { return eval(fn_condition(myfilter, item)); });
+    var total = products.length;
 
     var start = (PAGE - 1) * PAGE_SIZE;
     var end = start + PAGE_SIZE;
-    items = items.slice(start, end);
+    products = products.slice(start, end);
 
-    if (is_show_contact) {
-        $('#show-contact-engineer').show();
-    } else {
-        $('#show-contact-engineer').hide();
-    }
+    // if (is_show_contact) {
+    //     $('#show-contact-engineer').show();
+    // } else {
+    //     $('#show-contact-engineer').hide();
+    // }
 
     // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{军标}{序列号}
     var selected_code = [
@@ -184,8 +294,8 @@ function setSeFilter(type) {
 
     var html = [], item = {}, index = 1, replace = {}, j, propValue;
     ARR_PDF_IDS = [];
-    for (var i = 0;i < items.length;i++) {
-        item = items[i];
+    for (var i = 0;i < products.length;i++) {
+        item = products[i];
 
         replace = {
             '{index}': index,

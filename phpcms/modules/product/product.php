@@ -750,6 +750,8 @@ class product extends admin {
             24 => 'thumb'                       // Y-产品图
         ];
 
+        $isCheckImageExists = true;
+
         $data = [];
         $values = [];
         for($i = 3; $i <= $highestRowNum; $i++) {
@@ -796,7 +798,7 @@ class product extends admin {
                         $encode = '/uploadfile' . $importPath . $series . '/' . $encode;
                     }
 
-                    /*if (in_array($idx, ['project_image_1', 'thumb'])) {
+                    if ($isCheckImageExists && in_array($idx, ['project_image_1', 'thumb'])) {
                         if (!file_exists(PHPCMS_PATH . substr($encode, 1))) {
                             if (in_array($encode, $arrUnique)) {
                                 continue;
@@ -804,7 +806,7 @@ class product extends admin {
                             echo $encode, ' not exists.<br />';
                             $arrUnique[] = $encode;
                         }
-                    }*/
+                    }
                 }
 
                 $row[$idx] = $encode;
@@ -815,6 +817,10 @@ class product extends admin {
                 $code = $this->_generateCode($rowDef);
                 $values[] = '(\'' . $code . '\', \'' . implode('\',\'', $row) . '\', '. $time .')';
             }
+        }
+
+        if (count($arrUnique) > 0) {
+            exit;
         }
 //        var_dump($values);exit;
 //        exit;
