@@ -86,6 +86,7 @@
                         {list_filter}
                     </div>
                     <div class="row" id="current-selected-code"></div>
+                    <input type="hidden" name="functions_id" id="functions_id">
                     <hr>
                     <div class="row">
                         <div class="column">
@@ -156,4 +157,13 @@
         gz.style.transform = 'none';
     })
 })()
+
+window.onload = function() {
+    var functions_id = getUrlParameter('fid');
+    $('#functions_id').val(functions_id);
+    var series_id = MAP_FUNCTIONS_SERIES[functions_id];
+    changeSearch(series_id);
+
+    setSeFilter();
+};
 </script>

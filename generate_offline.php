@@ -171,7 +171,7 @@ foreach ($market_list as $item) {
     foreach ($functions as $item1) {
         $thumb = substr($item1['thumb'], 1, strlen($item1['thumb']));
         $tmp  = '<div class="column grid_2 column_margin">';
-        $tmp .= '<a href="list.html?fid=' . $item1['id'] . '" class="c_3x2">';
+        $tmp .= '<a href="list.html?fid=' . $item1['code'] . '" class="c_3x2">';
         $tmp .= '<div class="img_chapter">';
         $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item1['title'] . '</h5>';
         $tmp .= '</span>';
@@ -268,10 +268,19 @@ $products = $db->listinfo([], 'id DESC', 1, 1000000);
 //    $productData[] = $item;
 //}
 
-$js_list_template = file_get_contents($usb_template_path . 'product.js');
-$js_list_template = preg_replace('/{products}/', json_encode($products), $js_list_template);
-$js_list_template = preg_replace('/{properties}/', json_encode($_product_props), $js_list_template);
-file_put_contents($output_path . 'product.js', $js_list_template);
+$sqlfs = 'SELECT DISTINCT functions_id, series_id FROM se_productions WHERE functions_id IN(SELECT `code` FROM se_productions_function_list)';
+$query = $db->query($sqlfs);
+$rows = $db->fetch_array();
+$map_functions_series = [];
+foreach ($rows as $row) {
+    $map_functions_series[$row['functions_id']] = $row['series_id'];
+}
+
+$js_product_template = file_get_contents($usb_template_path . 'product.js');
+$js_product_template = preg_replace('/{products}/', json_encode($products), $js_product_template);
+$js_product_template = preg_replace('/{properties}/', json_encode($_product_props), $js_product_template);
+$js_product_template = preg_replace('/{map_functions_series}/', json_encode($map_functions_series), $js_product_template);
+file_put_contents($output_path . 'product.js', $js_product_template);
 file_put_contents($output_path . 'list.js', file_get_contents($usb_template_path . 'list.js'));
 echo '把所有产品数据生成到一个JS变量中，并独立生成JS文件 ok....................',chr(10),chr(13);
 

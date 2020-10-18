@@ -6,6 +6,12 @@ var series_4 = '6-1,2,3,4,A,B,D-0,1,2-1,2,3,A,B-1,2,3,4,5,6,7-0,1,2,3,4-1,2,3-0,
 var series_5 = '7-1,2,3,4,A,B,D-1,2-1,2,3,A,B-1,2,3,4,5,6,7-1,2-1,2,3-0,1,2,3,4-0,1,2,3,4-C-1,2-A,B,C,D,E';
 var series_6 = '8-0,1,2,3-0,1,2,3-0,1-1,2,3,4,5-0,1,2,3,4,5,6-0,1,2,3-0,1,2,3,4,7,8-0,1,2,3,4-n-0,1,2,3,4,5,6-E,F,G';
 
+var map_series_title = {
+    6: '4.0',
+    7: '5.0',
+    8: '6.0'
+};
+
 var _relaction = [];
 var searchRestrict = {};
 
@@ -78,7 +84,6 @@ function relactionRestrict(property) {
         rIndex = relationIndex[prop];
 
         propValue = property[prop] ? property[prop] : -100;
-        console.log('propValue =>>>>>', propValue);
         if (propValue !== -100 && propValue !== -1000) {
             if (restricts.length === 0) {
                 restricts = propRestrict(_relaction, propValue, rIndex);
@@ -87,7 +92,6 @@ function relactionRestrict(property) {
             }
         }
     }
-    console.log('restricts =>>>', restricts);
 
     var unionRestricts = {};
     var i, j, idx, restrict, items, item;
@@ -130,10 +134,6 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
-window.onload = function () {
-    console.log(getUrlParameter('fid'));
-};
-
 function nextPage() {
     PAGE += 1;
     setSeFilter();
@@ -148,15 +148,15 @@ function prevPage() {
     setSeFilter();
 }
 
-function changeSearch() {
+function changeSearch(series_id) {
     $('#search-form').find('.product-prop-filter').remove();
 
-    var series_id = $('#serial_id').val();
+    series_id = series_id ? series_id : $('#serial_id').val();
     if (!series_id) {
         return true;
     }
 
-    var series_key = $('#serial_id').find('option[selected]').text();
+    var series_key = map_series_title[series_id];
     var product_props = PROPERTIES[series_key];
 
     var html = [], prop, opt, option;
@@ -176,7 +176,7 @@ function changeSearch() {
             }
 
             // 联动
-            if (searchRestrict[key].indexOf(opt) === -1) {
+            if (searchRestrict[key] && searchRestrict[key].indexOf(opt) === -1) {
                 continue;
             }
 
@@ -217,7 +217,6 @@ function searchRestrictCondition(products) {
             searchRestrict[jj].push(val);
         }
     }
-    console.log('searchRestrict =>>>>>>>>>>>>>>>>>>>>', searchRestrict);
 
     for (var prop in searchRestrict) {
         if (!searchRestrict.hasOwnProperty(prop)) {
