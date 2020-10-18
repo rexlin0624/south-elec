@@ -254,6 +254,11 @@ class index {
 
         $series_title = self::$_map_series_id_title[$item['series_id']];
 
+        $g = (int)$_GET['g'];
+        if ($g == 0) {
+            $item['code'] = str_replace('J', '-', $item['code']);
+        }
+
         include template('product', 'show');
     }
 
