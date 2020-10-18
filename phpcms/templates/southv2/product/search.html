@@ -165,7 +165,11 @@
                                                 <?php foreach ($props[$serialTitle] as $key => $prop) {  ?>
                                                 <tr>
                                                     <td class="attribute" width="120"><?php echo $prop['title']; ?>:</td>
+                                                    <?php if ($key == 'military_standard') { ?>
+                                                    <td class="attribute_value"><?php echo $is_g ? '国军标' : ''; ?></td>
+                                                    <?php } else { ?>
                                                     <td class="attribute_value"><?php echo !empty($prop['options'][$list[$key]]) ? $prop['options'][$list[$key]] : '-'; ?></td>
+                                                    <?php } ?>
                                                 </tr>
                                                 <?php } ?>
                                                 </tbody>
