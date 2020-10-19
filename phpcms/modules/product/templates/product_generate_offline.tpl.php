@@ -10,7 +10,8 @@ include $this->admin_tpl('header', 'admin');
 <script type="text/javascript">
 $(document).ready(function(){
     $('#generate_offline').click(function () {
-        location.href = '?m=product&c=product&a=download_offline&pc_hash=<?php echo $_GET['pc_hash']; ?>';
+        //location.href = '?m=product&c=product&a=download_offline&pc_hash=<?php //echo $_GET['pc_hash']; ?>//';
+        location.href = '/caches/offline/华南电子网_离线版.zip';
         /*$.ajax({
             type: 'POST',
             url: '?m=product&c=product&a=generate_offline&pc_hash=<?php echo $_GET['pc_hash']; ?>',
