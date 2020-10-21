@@ -1808,7 +1808,7 @@ function get_vid($contentid = 0, $catid = 0, $isspecial = 0) {
  * 检查手机号是否符合规定
  *
  * @param STRING $username 要检查的用户名
- * @return 	TRUE or FALSE
+ * @return 	true or false
  */
 function is_phone($phone) {
     $strlen = strlen($phone);
@@ -1816,5 +1816,22 @@ function is_phone($phone) {
         return false;
     }
     return true;
+}
+
+/**
+ * 产品编码格式化
+ * @param string $code                     产品编码
+ * @param boolean $is_military_standard    是否军标
+ */
+function product_code_format($code, $is_military_standard) {
+    $military_standard_code = 'J';
+    $code_prefix = substr($code, 0, 12);
+
+    $code_formatted = $code_prefix;
+    if ($is_military_standard) {
+        $code_formatted .= '.' . $military_standard_code;
+    }
+
+    return $code_formatted;
 }
 ?>

@@ -57,14 +57,14 @@
                             <label>系列(<?php echo count($search['serial_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
                                 <option value="{$empty}"></option>
-                                <?php foreach ($serials as $serial) { ?>
+                                <?php foreach ($serials as $sitem) { ?>
                                 <?php
-                                    if (!in_array($serial['id'], $search['serial_id'])) {
+                                    if (!in_array($sitem['id'], $search['serial_id'])) {
                                         continue;
                                     }
                                 ?>
-                                <?php $selected = ($serial_id == $serial['id']) ? ' selected="selected"' : ''; ?>
-                                <option<?php echo $selected; ?> value="<?php echo $serial['id']; ?>"><?php echo $serial['title']; ?></option>
+                                <?php $selected = ($serial_id == $sitem['id']) ? ' selected="selected"' : ''; ?>
+                                <option<?php echo $selected; ?> value="<?php echo $sitem['id']; ?>"><?php echo $sitem['title']; ?></option>
                                 <?php } ?>
                             </select>
                         </fieldset>
