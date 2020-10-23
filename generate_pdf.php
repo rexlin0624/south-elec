@@ -6,7 +6,7 @@ define('PHPCMS_PATH', dirname(__FILE__).DIRECTORY_SEPARATOR);
 require_once __DIR__ . '/vendor/autoload.php';
 use Knp\Snappy\Pdf;
 
-include PHPCMS_PATH.'phpcms/console.php';
+include PHPCMS_PATH.'phpcms/base.php';
 $db = pc_base::load_model('queues_model');
 $db_product = pc_base::load_model('productions_model');
 $db_linkage = pc_base::load_model('linkage_model');
@@ -49,6 +49,8 @@ if (!$isDebug) {
 
 $product = $db_product->get_one(['id' => $productId]);
 $code = $product['code'];
+$code_noj = product_code_format($code);
+$code_j = product_code_format($code, true);
 $product_props = $db_linkage->product_props();
 $props = $product_props[$mapSerialTitle[$product['series_id']]];
 $setting = $db_setting->get_one(['id' => 1]);
@@ -60,12 +62,13 @@ if ($isDebug) {
 
 $thumb = 'data:image/jpeg;base64,' . base64_encode(file_get_contents(__DIR__ . $product['thumb']));
 
-$pdf_path = __DIR__ . '/caches/pdf/g/' . $code . '.pdf';
+$pdf_path = __DIR__ . '/caches/pdf/g/' . $code_j . '.pdf';
+$pdf_path_noj = __DIR__ . '/caches/pdf/ng/' . $code_noj . '.pdf';
 $pdf_template = __DIR__.'/phpcms/modules'.DIRECTORY_SEPARATOR.'product'.DIRECTORY_SEPARATOR.'pdf.template';
 $pdf_content = file_get_contents($pdf_template);
 $pdf_content = preg_replace('/{pdf_background_base64}/', file_get_contents(__DIR__ . '/pdf_background.base64'), $pdf_content);
 $pdf_content = preg_replace('/{pdf_header_bgcolor}/', $setting['header_bgcolor'], $pdf_content);
-$pdf_content = preg_replace('/{title}/', $product['title'] . '：' . $code, $pdf_content);
+//$pdf_content = preg_replace('/{title}/', $product['title'] . '：' . $code, $pdf_content);
 $pdf_content = preg_replace('/{description}/', $product['description'], $pdf_content);
 $pdf_content = preg_replace('/{thumb}/', $thumb, $pdf_content);
 
@@ -115,7 +118,9 @@ $pdf_content = preg_replace('/{led_color}/', $props['led_color']['options'][$pro
 $pdf_content = preg_replace('/{led_voltage}/', $props['led_voltage']['options'][$product['led_voltage']], $pdf_content);
 
 // 军标
-$pdf_content = preg_replace('/{military_standard}/', $props['military_standard']['options'][$product['military_standard']], $pdf_content);
+$military_standard = $props['military_standard']['options'][$product['military_standard']];
+$military_standard = $military_standard ? $military_standard : '-';
+$pdf_content = preg_replace('/{military_standard}/', $military_standard, $pdf_content);
 
 // 安装尺寸
 $pdf_content = preg_replace('/{install_size}/', $props['install_size']['options'][$product['install_size']], $pdf_content);
@@ -136,8 +141,13 @@ $bottom = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_bottom.ba
 $product_bg = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_product_bg.base64');
 $pdf_content = preg_replace('/{product_background}/', $product_bg, $pdf_content);
 
+$pdf_j_content = preg_replace('/{title}/', $product['title'] . '：' . $code_j, $pdf_content);
+
+$pdf_noj_content = preg_replace('/{title}/', $product['title'] . '：' . $code_noj, $pdf_content);
+
 if ($isDebug) {
     echo '$pdf_path =', $pdf_path,chr(10),chr(13);
+    echo '$pdf_path_noj =', $pdf_path_noj,chr(10),chr(13);
 //    echo $pdf_content;
     //exit;
 }
@@ -154,7 +164,8 @@ $pdfkit->setOptions([
 //    'page-width' => '210mm',
 //    'page-height' => '297mm',
 ]);
-$pdfkit->generateFromHtml($pdf_content, $pdf_path, [], true);
+$pdfkit->generateFromHtml($pdf_j_content, $pdf_path, [], true);
+$pdfkit->generateFromHtml($pdf_noj_content, $pdf_path_noj, [], true);
 
 if (!$isDebug) {
     echo 'Finish...', chr(10), chr(13);

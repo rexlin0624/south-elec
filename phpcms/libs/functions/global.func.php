@@ -1823,7 +1823,7 @@ function is_phone($phone) {
  * @param string $code                     产品编码
  * @param boolean $is_military_standard    是否军标
  */
-function product_code_format($code, $is_military_standard) {
+function product_code_format($code, $is_military_standard = false) {
     $military_standard_code = 'J';
     $code_prefix = substr($code, 0, 12);
 

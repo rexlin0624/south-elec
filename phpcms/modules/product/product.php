@@ -775,7 +775,7 @@ class product extends admin {
 
                 if ($idx == 'series_id') {
                     $series = number_format($encode, 1);
-                    $encode = $mapSeriesId[$encode];
+                    $encode = $mapSeriesId[$series];
                 }
                 if (empty($series)) {
                     continue;

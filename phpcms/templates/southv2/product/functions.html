@@ -16,7 +16,7 @@
             <div class="row">
                 {loop $lists $list}
                 <div class="column grid_2 column_margin" style="margin-bottom: 20px;width: 30%;">
-                    <a href="/index.php?m=product&c=index&a=lists&functions_id={$list['code']}{if $id != -1000}&series_id={$id}{/if}" class="c_3x2">
+                    <a href="/index.php?m=product&c=search&a=init&function_id={$list['code']}{if $id != -1000}&serial_id={$id}{/if}" class="c_3x2">
                         <div class="img_chapter">
                             <img src="{$list['thumb']}" width="230" height="60">
                         </div>

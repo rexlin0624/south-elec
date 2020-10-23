@@ -148,6 +148,7 @@ class index {
     }
 
     public function lists() {
+        $empty = self::EMPTY;
         $functions_id = (int)$_GET['functions_id'];
         $series_id = (int)$_GET['series_id'];
         $setting = $this->db_setting->get_one(['id' => 1]);
@@ -158,7 +159,7 @@ class index {
         
         // $where = 'functions_id = ' . $functions_id;
         $where = '1 = 1';
-        $function = $this->db_function_list->get_one(['id' => $functions_id]);
+        $function = $this->db_function_list->get_one(['code' => $functions_id]);
 
         $props_total = [];
         foreach ($props as $k => $v) {
@@ -167,6 +168,11 @@ class index {
         }
 
         $serials = $this->db_series_list->listinfo();
+
+        $is_military_standard = false;
+        if (isset($_GET['military_standard']) && $_GET['military_standard'] != $empty) {
+            $is_military_standard = true;
+        }
 
         $series_info = $this->db_series_list->get_one(['id' => $series_id]);
         $se = $series_info['title'];
@@ -240,7 +246,8 @@ class index {
         $code  = $se . '-';
         $code .= $this->_c('front_shape') . $this->_c('front_button_material') . $this->_c('front_button_shape') . $this->_c('front_button_color');
         $code .= '.' . $this->_c('switch_element') . $this->_c('light_style') . $this->_c('led_color') . $this->_c('led_voltage');
-        $code .= '.' . $this->_c('front_magnetic');
+//        $code .= '.' . $this->_c('front_magnetic');
+        $code = product_code_format($code, $is_military_standard);
 
         include template('product', 'lists');
     }

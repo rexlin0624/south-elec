@@ -210,7 +210,7 @@ class search {
 //        var_dump($restrictProps);exit;
 
         // 根据$serial_id获取function list
-        if (!empty($serial_id)) {
+        if (!empty($serial_id) && $series_id != $empty) {
             $serial = $this->db_series_list->get_one(['id' => $serial_id]);
         }
 
