@@ -333,12 +333,13 @@ class search {
 
         // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{军标}{序列号}
         $this->_filter_params = $filter;
-        $code  = !empty($serial) ? ($serial['title'] . '-') : '';
+        $code  = !empty($serial) ? ($serial['title']) : '';
         $code .= $this->_c('front_shape') . $this->_c('front_button_material') . $this->_c('front_button_shape') . $this->_c('front_button_color');
         $code .= '.' . $this->_c('switch_element') . $this->_c('light_style') . $this->_c('led_color') . $this->_c('led_voltage');
 
         // 军标
         $code = product_code_format($code, $is_military_standard);
+        echo $code;
 
 		include template('product', 'search');
 	}
