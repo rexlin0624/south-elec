@@ -288,9 +288,10 @@ class search {
 
         $lists = [];
         foreach ($products as $product) {
+            $product['code'] = product_code_format($product['code'], $is_military_standard);
+
             // 当选择军标的时候
             if (!$is_military_standard) {
-                $product['code'] = product_code_format($product['code'], $is_military_standard);
                 $product['military_standard'] = '-';
             }
 
@@ -339,7 +340,6 @@ class search {
 
         // 军标
         $code = product_code_format($code, $is_military_standard);
-        echo $code;
 
 		include template('product', 'search');
 	}
