@@ -75,7 +75,11 @@
                         <fieldset class="filter column grid_filter">
                             <label>功能(<?php echo count($search['function_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="function_id" class="prodFinder" style="display: inline-block;">
+                                <?php if ($function_id == $empty || $function_id == 0) { ?>
                                 <option value="{$empty}"></option>
+                                <?php } else { ?>
+                                <option value="{$empty}">返回</option>
+                                <?php } ?>
                                 <?php foreach ($functions as $function) { ?>
                                 <?php
                                     if (!in_array($function['code'], $search['function_id'])) {
@@ -93,7 +97,11 @@
                         <fieldset class="filter column grid_filter">
                             <label><?php echo $prop['title'], '(' . count($search[$kk]) . ')'; ?></label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
+                                <?php if ($filter[$kk] == $empty) { ?>
                                 <option value="{$empty}"></option>
+                                <?php } else { ?>
+                                <option value="{$empty}">返回</option>
+                                <?php } ?>
                                 <?php
                                 foreach ($prop['options'] as $key => $option) {
                                 if (!in_array($key, $search[$kk])) {
