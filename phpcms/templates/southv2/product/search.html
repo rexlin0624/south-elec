@@ -56,7 +56,7 @@
                         <fieldset class="filter column grid_filter">
                             <label>系列(<?php echo count($search['serial_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
-                                <option value="{$empty}"></option>
+                                <option value="{$empty}">返回</option>
                                 <?php foreach ($serials as $sitem) { ?>
                                 <?php
                                     if (!in_array($sitem['id'], $search['serial_id'])) {

@@ -428,6 +428,7 @@ function dir_zip_offline($fromDir, $toDir, $subDir, $otherDir = '') {
             $zip->addFile($list, $zip_file);
             if (strpos($list, '/pdf/') !== false) {
                 $newName = str_replace(CACHE_PATH, '', $list);
+//                echo '$list = ', $list, ';;$newName = ', $newName, chr(10), chr(13);
                 $zip->renameName($list, $newName);
             }
         }
