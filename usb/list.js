@@ -237,15 +237,8 @@ function searchRestrictCondition(products) {
 }
 
 function setSeFilter(type) {
-    var series_id, series_key;
-    if (!$('#serial_id').val()) {
-        series_id = 8;
-        series_key = '6.0';
-        $('#serial_id').val(series_id);
-    } else {
-        series_id = $('#serial_id').val();
-        series_key = $('#serial_id').find('option[selected]').text();
-    }
+    var series_id = $('#serial_id').val();
+    var series_key = $('#serial_id').find('option[selected]').text();
 
     if (type === 1) {
         changeSearch();
@@ -348,28 +341,33 @@ function setSeFilter(type) {
         filters['switch_element'] ? filters['switch_element'] : 'X',
         filters['light_style'] ? filters['light_style'] : 'X',
         filters['led_color'] ? filters['led_color'] : 'X',
-        filters['led_voltage'] ? filters['led_voltage'] : 'X',
-        '.',
-        is_military_standard ? 'J' : '-'
+        filters['led_voltage'] ? filters['led_voltage'] : 'X'
     ].join('');
+    if (!is_military_standard) {
+        selected_code = selected_code.substr(0, 12);
+    }
     document.getElementById('current-selected-code').innerHTML = selected_code;
 
-    var html = [], item = {}, index = 1, replace = {}, j, propValue;
+    var html = [], item = {}, index = 1, replace = {}, j, propValue, productCode;
     ARR_PDF_IDS = [];
     for (var i = 0;i < products.length;i++) {
         item = products[i];
+        productCode = item['code'].substr(0, 12);
+        if (is_military_standard) {
+            productCode = productCode + '.J';
+        }
 
         replace = {
             '{index}': index,
-            '{url}': 'show-' + item['id'] + '.html?g=' + (is_military_standard ? 1 : 0),
+            '{url}': 'show.html?g=' + (is_military_standard ? 1 : 0) + '&id=' + item['id'],
             '{thumb}': item['thumb'].slice(1),
             '{title}': item['title'],
-            '{code}': item['code'].replace('J', '-')
+            '{code}': productCode
         };
         for (j = 0;j < props.length;j++) {
             propValue = product_props[props[j]]['options'][item[props[j]]];
             if (props[j] === 'military_standard') {
-                propValue = is_military_standard ? propValue : '-';
+                propValue = is_military_standard ? '国军标' : '-';
             }
 
             replace['{' + props[j] + '}'] = propValue ? propValue : '-';

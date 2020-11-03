@@ -67,27 +67,25 @@
         </div>
         <div class="column">
             <div class="content grid_6">
-                <h1 class="c_3x2_h1">{title}</h1>
+                <h1 class="c_3x2_h1" id="title"></h1>
                 <div class="bg">
                     <div class="row">
                         <div class="column grid_2">
-                            <a rel="zoom" href="{thumb}" class="modalImg" title="{title}">
-                                <img src="{thumb}" height="162" alt="{title}" title="">
+                            <a rel="zoom" id="thumb_a" class="modalImg">
+                                <img id="thumb" height="162" title="">
                             </a>
                             <br>
                             <p class="info">样品仅供参考</p>
                             <br>
                             <div class="downloads">
                                 <h3>下载</h3>
-                                <a href="pdf/{pdf_name}.pdf" target="_blank">PDF下载</a>
+                                <a id="pdf_download" target="_blank">PDF下载</a>
                             </div>
                         </div>
                         <div class="column grid_2 product_details">
                             <h3 style="font-weight: bold;margin-bottom: 20px;">参数说明</h3>
                             <table class="data">
-                                <tbody>
-                                {props_list}
-                                </tbody>
+                                <tbody id="property"></tbody>
                             </table>
                         </div>
                     </div>

@@ -338,41 +338,16 @@ $show_template = preg_replace('/{setting_content}/', $setting['description'], $s
 $show_template = preg_replace('/{market_menus}/', implode('', $market_menus), $show_template);
 $show_template = preg_replace('/{function_menus}/', implode('', $function_menus), $show_template);
 $show_template = preg_replace('/{series_menus}/', implode('', $series_menus), $show_template);
-foreach ($products as $product) {
-    $show_template_tmp = $show_template;
-    $product_id = $product['id'];
-    $pdf_name = $product['code'];
+file_put_contents($output_path . 'show.html', $show_template);
 
-    // 产品属性
-    $show_props = [];
-    foreach ($_product_props[$_map_series_title[$product['series_id']]] as $kk => $props) {
-        $tmp  = '<tr style="line-height: 30px;">';
-        $tmp .= '<td>' . $props['title'] . '</td>';
-        $tmp .= '<td class="right">' . $props['options'][$product[$kk]] . '</td>';
-        $tmp .= '</tr>';
-
-        $show_props[] = $tmp;
-    }
-    $show_template_tmp = preg_replace('/{title}/', $product['title'], $show_template_tmp);
-    $show_template_tmp = preg_replace('/{thumb}/', substr($product['thumb'], 1, strlen($product['thumb'])), $show_template_tmp);
-    $show_template_tmp = preg_replace('/{props_list}/', implode('', $show_props), $show_template_tmp);
-
-    // 工程图
-    $project_images = [];
-    for ($p = 1;$p <= 4;$p++) {
-        $proj_img = $product['project_image_' . $p];
-        if (empty($proj_img)) {
-            continue;
-        }
-        $proj_img = substr($proj_img, 1, strlen($proj_img));
-        $project_images[] = '<a href="' . $proj_img . '" target="_blank">工程图' . $p . ' (eps)</a>';
-    }
-    $show_template_tmp = preg_replace('/{project_images}/', implode('', $project_images), $show_template_tmp);
-    $show_template_tmp = preg_replace('/{pdf_name}/', $pdf_name, $show_template_tmp);
-
-    file_put_contents($output_path . 'show-' . $product_id . '.html', $show_template_tmp);
+$showjs_template = file_get_contents($usb_template_path . 'show.js');
+$showProducts = [];
+foreach ($products as $item) {
+    $showProducts[$item['id']] = $item;
 }
-file_put_contents($output_path . 'show.js', file_get_contents($usb_template_path . 'show.js'));
+$showjs_template = preg_replace('/{products}/', json_encode($showProducts), $showjs_template);
+$showjs_template = preg_replace('/{properties}/', json_encode($_product_props), $showjs_template);
+file_put_contents($output_path . 'show.js', $showjs_template);
 echo '产品配置器详情页 ok....................',chr(10),chr(13);
 
 // 参数搜索
@@ -414,16 +389,54 @@ file_put_contents($output_path . 'search.html', $search_template);
 echo '参数搜索页 ok....................',chr(10),chr(13);
 
 // 复制PDF到USB版本目录下
-echo '复制PDF到USB版本目录下',chr(10),chr(13);
-dir_copy(CACHE_PATH . 'pdf', $output_path . 'pdf');
+//echo '复制PDF到USB版本目录下',chr(10),chr(13);
+//dir_copy(CACHE_PATH . 'pdf', $output_path . 'pdf');
 dir_copy(PHPCMS_PATH . 'uploadfile', $output_path . 'uploadfile');
-echo '产品配置器详情页 ok....................',chr(10),chr(13);
+//echo '产品配置器详情页 ok....................',chr(10),chr(13);
 
 /*
  * zip offline
  */
+/**
+ * 压缩目录及目录下的所有文件
+ *
+ * @param   string  $fromDir    目录绝对路径
+ * @param   string  $toDir      压缩文件存放路径
+ * @param   string  $subDir     压缩文件上层目录
+ * @param   string  $otherDir   其它目录
+ * @return	bool	如果成功则返回 TRUE，失败则返回 FALSE
+ */
+function dir_zip_offline($fromDir, $toDir, $subDir, $otherDir = '') {
+    $zip = new ZipArchive();
+    if (!$zip->open($toDir, ZipArchive::CREATE)) {
+        return false;
+    }
+
+    $dir_list = dir_list($fromDir);
+    if (!empty($otherDir)) {
+        $otherDirs = dir_list($otherDir);
+        foreach ($otherDirs as $od) {
+            $dir_list[] = $od;
+        }
+    }
+    foreach ($dir_list as $list) {
+        $zip_file = str_replace($subDir, '', $list);
+
+        if (is_dir($list)) {
+            $zip->addEmptyDir($zip_file);
+        } else {
+            $zip->addFile($list, $zip_file);
+            if (strpos($list, '/pdf/') !== false) {
+                $newName = str_replace(CACHE_PATH, '', $list);
+                $zip->renameName($list, $newName);
+            }
+        }
+    }
+
+    return $zip->close();
+}
 echo 'zip offline',chr(10),chr(13);
-dir_zip($output_path, $zip_path, $output_path);
+dir_zip_offline($output_path, $zip_path, $output_path, CACHE_PATH . 'pdf');
 echo 'zip offline ok....................',chr(10),chr(13);
 
 echo 'ok',chr(10),chr(13);
