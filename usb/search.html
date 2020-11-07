@@ -190,7 +190,16 @@
 })();
 
 window.onload = function() {
-    $('#serial_id').val(6).change();
+    var series_id = getUrlParameter('series_id');
+    var function_id = getUrlParameter('function_id');
+    if (series_id) {
+        $('#serial_id').val(series_id).change();
+    } else {
+        $('#serial_id').val(6).change();
+    }
+    if (function_id) {
+        $('#functions_id').val(function_id).change();
+    }
     setSeFilter();
 
     $('#product_code').keyup(function(event) {

@@ -171,7 +171,7 @@ foreach ($market_list as $item) {
     foreach ($functions as $item1) {
         $thumb = substr($item1['thumb'], 1, strlen($item1['thumb']));
         $tmp  = '<div class="column grid_2 column_margin">';
-        $tmp .= '<a href="list.html?fid=' . $item1['code'] . '" class="c_3x2">';
+        $tmp .= '<a href="search.html?function_id=' . $item1['code'] . '" class="c_3x2">';
         $tmp .= '<div class="img_chapter">';
         $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item1['title'] . '</h5>';
         $tmp .= '</span>';
@@ -194,7 +194,7 @@ $categories = [];
 foreach ($function_list as $item) {
     $thumb = substr($item['thumb'], 1, strlen($item['thumb']));
     $tmp  = '<div class="column grid_2 column_margin">';
-    $tmp .= '<a href="list.html?fid=' . $item['id'] . '" class="c_3x2">';
+    $tmp .= '<a href="search.html?function_id=' . $item['id'] . '" class="c_3x2">';
     $tmp .= '<div class="img_chapter">';
     $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item['title'] . '</h5>';
     $tmp .= '</span>';
@@ -212,11 +212,6 @@ $series_category_template = $category_template;
 $series_category_template = preg_replace('/{category_title}/', '系列', $series_category_template);
 $categories = [];
 foreach ($list as $item) {
-    // 只生成6.0
-    if ($item['id'] != 8) {
-        continue;
-    }
-
     $tmp  = '<div class="column grid_2 column_margin">';
     $tmp .= '<a href="functions-2-' . $item['id'] . '.html" class="c_3x2">';
     $tmp .= '<span><h5>' . $item['title'] . '</h5></span>';
@@ -233,16 +228,20 @@ foreach ($list as $item) {
     }
 
     // 生成对应的功能列表页面
-    $where = 'id IN(' . implode(',', $functions_ids) . ')';
+    $where = 'code IN(' . implode(',', $functions_ids) . ')';
     $series = $db_functions->listinfo($where, '', 1, 1000);
     $series_functions_template = $series_category_template;
     $arr_series = [];
     foreach ($series as $item1) {
-        $tmp  = '<div class="column grid_2 column_margin">';
-        $tmp .= '<a href="list.html?fid=' . $item1['id'] . '" class="c_3x2">';
-        $tmp .= '<span><h5>' . $item1['title'] . '</h5>';
-        $tmp .= '</span>';
-        $tmp .= '</a>';
+        $thumb = substr($item1['thumb'], 1, strlen($item1['thumb']));
+
+        $tmp  = '<div class="column grid_2 column_margin" style="margin-bottom: 20px;width: 30%;">';
+        $tmp .=     '<a href="search.html?function_id=' . $item1['id'] . '&series_id=' . $item['id'] . '" class="c_3x2">';
+        $tmp .=         '<div class="img_chapter">';
+        $tmp .=             '<img src="' . $thumb . '" width="230" height="60">';
+        $tmp .=         '</div>';
+        $tmp .=         '<span><h5>' . $item1['title'] . '</h5</span>';
+        $tmp .=     '</a>';
         $tmp .= '</div>';
         $arr_series[] = $tmp;
     }
@@ -400,11 +399,11 @@ dir_copy(PHPCMS_PATH . 'uploadfile', $output_path . 'uploadfile');
 /**
  * 压缩目录及目录下的所有文件
  *
- * @param   string  $fromDir    目录绝对路径
- * @param   string  $toDir      压缩文件存放路径
- * @param   string  $subDir     压缩文件上层目录
- * @param   string  $otherDir   其它目录
- * @return	bool	如果成功则返回 TRUE，失败则返回 FALSE
+ * @param   {string}  $fromDir    目录绝对路径
+ * @param   {string}  $toDir      压缩文件存放路径
+ * @param   {string}  $subDir     压缩文件上层目录
+ * @param   {string}  $otherDir   其它目录
+ * @return    {bool}	如果成功则返回 TRUE，失败则返回 FALSE
  */
 function dir_zip_offline($fromDir, $toDir, $subDir, $otherDir = '') {
     $zip = new ZipArchive();
@@ -436,8 +435,10 @@ function dir_zip_offline($fromDir, $toDir, $subDir, $otherDir = '') {
 
     return $zip->close();
 }
+
 echo 'zip offline',chr(10),chr(13);
-dir_zip_offline($output_path, $zip_path, $output_path, CACHE_PATH . 'pdf');
+$otherDir = CACHE_PATH . 'pdf';
+dir_zip_offline($output_path, $zip_path, $output_path, $otherDir);
 echo 'zip offline ok....................',chr(10),chr(13);
 
 echo 'ok',chr(10),chr(13);
