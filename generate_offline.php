@@ -194,7 +194,7 @@ $categories = [];
 foreach ($function_list as $item) {
     $thumb = substr($item['thumb'], 1, strlen($item['thumb']));
     $tmp  = '<div class="column grid_2 column_margin">';
-    $tmp .= '<a href="search.html?function_id=' . $item['id'] . '" class="c_3x2">';
+    $tmp .= '<a href="search.html?function_id=' . $item['code'] . '" class="c_3x2">';
     $tmp .= '<div class="img_chapter">';
     $tmp .= '<img src="' . $thumb . '" width="230" height="60"></div><span><h5>' . $item['title'] . '</h5>';
     $tmp .= '</span>';
@@ -236,7 +236,7 @@ foreach ($list as $item) {
         $thumb = substr($item1['thumb'], 1, strlen($item1['thumb']));
 
         $tmp  = '<div class="column grid_2 column_margin" style="margin-bottom: 20px;width: 30%;">';
-        $tmp .=     '<a href="search.html?function_id=' . $item1['id'] . '&series_id=' . $item['id'] . '" class="c_3x2">';
+        $tmp .=     '<a href="search.html?function_id=' . $item1['code'] . '&series_id=' . $item['id'] . '" class="c_3x2">';
         $tmp .=         '<div class="img_chapter">';
         $tmp .=             '<img src="' . $thumb . '" width="230" height="60">';
         $tmp .=         '</div>';

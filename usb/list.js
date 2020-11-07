@@ -266,6 +266,18 @@ function setSeFilter(type) {
     var is_military_standard = filters['military_standard'] === 'J';
     delete filters['military_standard'];
 
+    // 添加返回
+    $.each(filters, function(k, v) {
+        if (k == 'series_id') {
+            return true;
+        }
+        if (v == '-') {
+            $('#' + k).find('option:eq(0)').text('');
+            return true;
+        }
+        $('#' + k).find('option:eq(0)').text('返回');
+    });
+
     var template = [
         '<tr>',
         '<td>',
