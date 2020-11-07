@@ -93,7 +93,13 @@
                             <?php foreach ($props[$series_title] as $key => $prop) { ?>
                             <tr style="line-height: 30px;">
                                 <td><?php echo $prop['title']; ?>：</td>
-                                <td class="left"><?php echo $prop['options'][$item[$key]]; ?></td>
+                                <?php
+                                    $propValue = $prop['options'][$item[$key]];
+                                    if ($key == 'military_standard') {
+                                        $propValue = $g == 1 ? $propValue : '-';
+                                    }
+                                ?>
+                                <td class="left"><?php echo $propValue; ?></td>
                             </tr>
                             <?php } ?>
                             </tbody>
