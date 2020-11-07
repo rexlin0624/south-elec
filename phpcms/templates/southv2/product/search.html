@@ -97,7 +97,7 @@
                         <fieldset class="filter column grid_filter">
                             <label><?php echo $prop['title'], '(' . count($search[$kk]) . ')'; ?></label>
                             <select onchange="setSeFilter();" name="<?php echo $kk; ?>" class="prodFinder" style="display: inline-block;">
-                                <?php if ($filter[$kk] == $empty) { ?>
+                                <?php if ($filter[$kk] == $empty || $filter[$kk] == '') { ?>
                                 <option value="{$empty}"></option>
                                 <?php } else { ?>
                                 <option value="{$empty}">返回</option>
@@ -107,7 +107,7 @@
                                 if (!in_array($key, $search[$kk])) {
                                     continue;
                                 }
-                                $selected = ($filter[$kk] != '' && $filter[$kk] != "-1000" && $filter[$kk] == $key) ? ' selected="selected"' : '';
+                                $selected = ($filter[$kk] != '' && $filter[$kk] != $empty && $filter[$kk] == $key) ? ' selected="selected"' : '';
                                 ?>
                                 <option value="<?php echo $key; ?>"<?php echo $selected; ?>>
                                     <?php echo $key,'  ',$option; ?>
