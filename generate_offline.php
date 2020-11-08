@@ -279,6 +279,7 @@ $js_product_template = file_get_contents($usb_template_path . 'product.js');
 $js_product_template = preg_replace('/{products}/', json_encode($products), $js_product_template);
 $js_product_template = preg_replace('/{properties}/', json_encode($_product_props), $js_product_template);
 $js_product_template = preg_replace('/{map_functions_series}/', json_encode($map_functions_series), $js_product_template);
+$js_product_template = preg_replace('/{functions_list}/', json_encode($function_list), $js_product_template);
 file_put_contents($output_path . 'product.js', $js_product_template);
 file_put_contents($output_path . 'list.js', file_get_contents($usb_template_path . 'list.js'));
 echo '把所有产品数据生成到一个JS变量中，并独立生成JS文件 ok....................',chr(10),chr(13);

@@ -12,6 +12,9 @@ var map_series_title = {
     8: '6.0'
 };
 
+var filters = {};
+var all_functions = [];
+
 var _relaction = [];
 var searchRestrict = {};
 
@@ -190,19 +193,38 @@ function changeSearch(series_id) {
     $('#search-form').append(html.join(''));
 }
 
+function getFunctionValueByCode(code) {
+    var functions = FUNCTIONS_LIST;
+    var func;
+    for (var i = 0;i < functions.length;i++) {
+        if (code == functions[i].code) {
+            func = functions[i].title;
+            break;
+        }
+    }
+
+    return func;
+}
+
 function searchRestrictCondition(products) {
     searchRestrict = [];
-    var ii, jj, tmp, val;
+    var ii, jj, product, val, functions = [];
     for (ii = 0;ii < products.length;ii++) {
-        tmp = products[ii];
-        for (jj in tmp) {
-            if (!tmp.hasOwnProperty(jj)) {
+        product = products[ii];
+        for (jj in product) {
+            if (!product.hasOwnProperty(jj)) {
                 continue;
             }
+            if (jj == 'functions_id') {
+                if (functions.indexOf(product[jj]) == -1) {
+                    functions.push(product[jj]);
+                }
+            }
+
             if (Object.keys(relationIndex).indexOf(jj) === -1) {
                 continue;
             }
-            val = $.trim(tmp[jj]);
+            val = $.trim(product[jj]);
             if (val === '') {
                 continue;
             }
@@ -218,20 +240,40 @@ function searchRestrictCondition(products) {
         }
     }
 
+    var series_key = $('#serial_id').find('option[selected]').text();
+    var properties = PROPERTIES[series_key];
+
+    // restrict functions
+    var html_f = [], f, selected_f;
+    for (f = 0;f < functions.length;f++) {
+        selected_f = filters['functions_id'] == functions[f] ? ' selected="selected"' : '';
+        html_f.push('<option', selected_f ,' value="', functions[f] ,'">', getFunctionValueByCode(functions[f]) ,'</option>');
+    }
+    $('#functions_id').find('option:gt(0)').remove();
+    $('#functions_id').append(html_f.join(''));
+    $('#functions_id-count').html(functions.length);
+
+    // restrict property
+    var html = [];
     for (var prop in searchRestrict) {
         if (!searchRestrict.hasOwnProperty(prop)) {
             continue;
         }
+        if (['series_id', 'functions_id'].indexOf(prop) != -1) {
+            continue;
+        }
 
-        $('#' + prop).find('option').each(function() {
-            if ($(this).val() === '-') {
+        html = [];
+        $.each(properties[prop].options, function(p, v) {
+            if (searchRestrict[prop].indexOf(p) === -1) {
                 return true;
             }
+            var selected = filters[prop] != '-' ? ' selected="selected"' : '';
 
-            if (searchRestrict[prop].indexOf($(this).val()) === -1) {
-                $(this).remove();
-            }
+            html.push('<option', selected ,' value="', p ,'">', v ,'</option>');
         });
+        $('#' + prop).find('option:gt(0)').remove();
+        $('#' + prop).append(html.join(''));
         $('#' + prop + '-count').html(searchRestrict[prop].length);
     }
 }
@@ -244,8 +286,8 @@ function setSeFilter(type) {
         changeSearch();
     }
 
+    filters = {};
     var product_props = PROPERTIES[series_key];
-    var filters = {};
     var temp_props = [], prop = {}, props = [];
     for (var key in product_props) {
         if (!product_props.hasOwnProperty(key)) {
@@ -263,9 +305,6 @@ function setSeFilter(type) {
     filters['series_id'] = series_id;
     filters['functions_id'] = $('#functions_id').val();
 
-    var is_military_standard = filters['military_standard'] === 'J';
-    delete filters['military_standard'];
-
     // 添加返回
     $.each(filters, function(k, v) {
         if (k == 'series_id') {
@@ -277,6 +316,9 @@ function setSeFilter(type) {
         }
         $('#' + k).find('option:eq(0)').text('返回');
     });
+
+    var is_military_standard = filters['military_standard'] === 'J';
+    delete filters['military_standard'];
 
     var template = [
         '<tr>',
