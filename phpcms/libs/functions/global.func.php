@@ -492,7 +492,7 @@ function template($module = 'content', $template = 'index', $style = '') {
 //		} else {
 //			$siteid = param::get_cookie('siteid');
 //		}
-        $siteid = 3;
+        $siteid = (int)$_GET['siteid'];
 		if (!$siteid) $siteid = 1;
 		$sitelist = getcache('sitelist','commons');
 		if(!empty($siteid)) {
