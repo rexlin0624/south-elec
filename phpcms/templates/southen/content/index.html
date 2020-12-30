@@ -1,5 +1,5 @@
 {template "content","top"}
-{pc:get sql="SELECT * from se_site where siteid = 3" num="1" return="data" }
+{pc:get sql="SELECT * from se_site where siteid = 4" num="1" return="data" }
 {loop $data $r}
 {php $setting = json_decode($r['setting'], true);}
 {/loop}
@@ -28,7 +28,7 @@
         <span style="color:#393939">中国总代理：&nbsp; &nbsp;&nbsp;</span>
       </span>
     </span>
-    {pc:link action="type_list" typeid="86" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+    {pc:link action="type_list" typeid="92" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
     {loop $pic_link $v}
     <a href="{$v['url']}" target="_blank">
       <img alt="" src="{$v['logo']}" style="color:rgb(57, 57, 57); font-size:14px; height:96px; width:300px; word-spacing:normal">
@@ -42,7 +42,7 @@
   </div></div>    </div>
   </div><div id="rowa62b33ba5e12de41f566bb87ae59527a" class="row  limit-row-width" data-id="a62b33ba5e12de41f566bb87ae59527a" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="0">
     <div class="pure-g row-inner">
-      {pc:link action="type_list" typeid="87" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+      {pc:link action="type_list" typeid="93" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
       {loop $pic_link $v}
       <div id="cellc9b8abfc089f70b9d0cfa785e4022932" class="cell pure-u-1-2 pure-u-md-1-2 pure-u-lg-1-4" data-id="c9b8abfc089f70b9d0cfa785e4022932" type="cell" inplate="0" style="padding: 1%;">
         <div id="block86ef05072b7f42412db169a88366a3ff" data-id="86ef05072b7f42412db169a88366a3ff" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
@@ -75,28 +75,31 @@
     <div id="block_content_1da017a15fc7c13a93f84ac4df4af2dd" class="block_content content_customer_service " style="">
       <div class="customer-service fixed customer-service-style-2 color-blue" data-param="{&quot;cs&quot;:[{&quot;cs_type&quot;:&quot;qq&quot;,&quot;cs_number&quot;:&quot;709732171&quot;,&quot;cs_text&quot;:&quot;\u5ba2\u670d\u4e00&quot;}],&quot;time&quot;:[{&quot;day_start&quot;:&quot;0&quot;,&quot;day_end&quot;:&quot;4&quot;,&quot;time_start&quot;:&quot;18&quot;,&quot;time_end&quot;:&quot;36&quot;}],&quot;contact&quot;:[{&quot;contact_name&quot;:&quot;\u9648\u5148\u751f&quot;,&quot;contact_content&quot;:&quot;020-83793353&quot;}],&quot;wechat&quot;:[]}" data-pending>
     <div class="toggle">
-      在线咨询  </div>
+      Service  </div>
     <div class="inner">
       <ul class="list-cs">
           <li class="cs">
               <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=709732171&amp;site=qq&amp;menu=yes">
                     <span class="ico"><img border="0" src="https://pub.idqqimg.com/qconn/wpa/button/button_121.gif" alt="点击这里给我发消息" title="点击这里给我发消息" /></span>
-                    <span>客服一</span>
-                  </a>          </li>      </ul>    <ul class="list-time">
+                    <span>Service </span>
+                  </a>          </li>      </ul>
+        <ul class="list-time">
           <li class="title">
             <i class="iconfont">&#xe62c;</i>
-            <span>工作时间</span>
+            <span>Service Time</span>
           </li>
           <li class="time">
-              <span class="tit">周一 至 周五</span>
+              <span class="tit">Monday to Friday</span>
               <span class="cont">9:00 - 18:00</span>
-            </li>      </ul>    <ul class="list-contact">
+            </li>
+        </ul>
+        <ul class="list-contact">
           <li class="title">
             <i class="iconfont">&#xe62d;</i>
-            <span>联系方式</span>
+            <span>Contact</span>
           </li>
           <li class="contact">
-              <span class="tit">陈先生</span>
+              <span class="tit">Mr. Chen</span>
               <span class="cont">020-83793353</span>
             </li>      </ul>      </div>
   </div>
@@ -203,7 +206,7 @@
     </div>
   </div>  <div id="blockc960d6cc30121b679ea807e2e6ffc443" data-id="c960d6cc30121b679ea807e2e6ffc443" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
     <div id="block_content_c960d6cc30121b679ea807e2e6ffc443" class="block_content content_title " style="padding: 1% 0% 4%; position: relative;text-align:left;">
-      {pc:get sql="SELECT * from se_page where catid = 93" num="1" return="data" }
+      {pc:get sql="SELECT * from se_page where catid = 109" num="1" return="data" }
       {loop $data $r}
       {$r['content']}
       {/loop}
@@ -212,7 +215,7 @@
   </div>  <div id="block9d4bc475285fe16a5d3f85b75aa8f903" data-id="9d4bc475285fe16a5d3f85b75aa8f903" type="button" class="block_layer " inplate="0" lock="false">
     <div id="block_content_9d4bc475285fe16a5d3f85b75aa8f903" class="block_content content_button " style="">
       
-              <a class="button size-small button-style-6 color-none" id="block-button_f068b7e50d76037c17288d00c3a17ca4" style="padding-top: 2%;" href="/index.php?m=content&c=index&a=lists&catid=93" target="" data-linktype="page" data-link='{"link_page":"12916","target":""}'>查看更多</a>
+              <a class="button size-small button-style-6 color-none" id="block-button_f068b7e50d76037c17288d00c3a17ca4" style="padding-top: 2%;" href="/index.php?m=content&c=index&a=lists&catid=93" target="" data-linktype="page" data-link='{"link_page":"12916","target":""}'>MORE</a>
     </div>
   </div></div><div id="cell91a572fdb9b33f74dd94467b04316272" class="cell  pure-u-lg-1-2 pure-u-sm-1-2 pure-u-1-1" data-id="91a572fdb9b33f74dd94467b04316272" type="cell" inplate="0" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; background-size: auto;">
         <div id="block1786f59707407b6f06c3908a1ad02b4e" data-id="1786f59707407b6f06c3908a1ad02b4e" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
@@ -226,7 +229,7 @@
           <div id="cell82e59d8d37ac51352e38166c25713101" class="cell pure-u-1 pure-u-md-1-2" data-id="82e59d8d37ac51352e38166c25713101" type="cell" inplate="0" style="">
         <div id="block902d962d611764dc02357e7a7d2c00e5" data-id="902d962d611764dc02357e7a7d2c00e5" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
     <div id="block_content_902d962d611764dc02357e7a7d2c00e5" class="block_content content_image " style="padding: 0% 100px 0% 97px;">
-    {pc:link action="type_list" typeid="90" siteid="$siteid" linktype="1" order="listorder ASC" num="1" return="pic_link"}
+    {pc:link action="type_list" typeid="95" siteid="$siteid" linktype="1" order="listorder ASC" num="1" return="pic_link"}
     {loop $pic_link $v}
      <img title="" id="block-image_902d962d611764dc02357e7a7d2c00e5" style="" alt="" src="{$v['logo']}" type="zoom">
      {/loop}
@@ -236,7 +239,7 @@
         <div id="blockb3b0db835113f55642d3f0e2126fa246" data-id="b3b0db835113f55642d3f0e2126fa246" type="article_list" class="block_layer " inplate="0" lock="false">
     <div id="block_content_b3b0db835113f55642d3f0e2126fa246" class="block_content content_article_list " style="padding-right: 1%; padding-left: 1%;">
       <div class="article_list color-default article-list-1 noThumb noCategory size-normal" data-param='{&quot;row_num&quot;:&quot;4&quot;,&quot;show_page&quot;:&quot;0&quot;,&quot;detail_link&quot;:&quot;13401&quot;,&quot;cate_link&quot;:&quot;13126&quot;,&quot;__hash__&quot;:&quot;77505057e2279cb8c972db9059210057_60f6334c00cb861c59bf84be8bc666b6&quot;}'>
-    {pc:content action="lists" catid="98" num="10" order="id DESC" page="$page" moreinfo="1"}
+    {pc:content action="lists" catid="118" num="10" order="id DESC" page="$page" moreinfo="1"}
     {loop $data $r}
     <div class="inner">
       <dl>
