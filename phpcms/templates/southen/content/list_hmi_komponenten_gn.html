@@ -1,0 +1,80 @@
+{template "content","top"}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <!--10378-->
+            <div id="d3239eb9" class=" slickCarousel">
+                {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+                <div class="sliderBox">
+                    <div class="background-image-holder">
+                        <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
+                    </div>
+                </div>
+                {/loop}
+            </div>
+        </div>
+    </div>
+</div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="breadCrumbMenu">
+                <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+                {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row equalize">
+        <div class="col-sm-8">
+            <div class="well well-lg same-height-left" style="height: 224px;">
+                <div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">功能</h1></div>
+                {$description}
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            {template "content","product_config"}
+        </div>
+    </div>
+</div>
+<div class="container contentContainer" role="main">
+    <?php $i=0; ?>
+    {pc:content action="lists" catid="$catid" num="100" order="id ASC" page="$page"}
+    <div class="row">
+        {loop $data $r}
+        <?php $i++; ?>
+        <div class="col-md-2 ">
+            <div class="well well-sm hasLink same-height-left" style="height: 194px;">
+                <div class="csc-header csc-header-n1">
+                    <h3 class="csc-firstHeader">
+                        <a href="{$r[url]}">{$r[title]}</a>
+                    </h3>
+                </div>
+                <div class="csc-textpic csc-textpic-center csc-textpic-above">
+                    <div class="csc-textpic-imagewrap" data-csc-images="1" data-csc-cols="1">
+                        <div class="csc-textpic-center-outer">
+                            <div class="csc-textpic-center-inner">
+                                <figure class="csc-textpic-image csc-textpic-last">
+                                    <a href="{$r[url]}" title="{$r[title]}">
+                                        <img src="{$r[thumb]}" width="225" height="180" class="img-responsive" alt="{$r[title]}">
+                                    </a>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php
+            if ($i % 6 == 0) {
+                echo '</div><div class="row">';
+            }
+        ?>
+        {/loop}
+    </div>
+    {/pc}
+</div>
+{template "content","footer"}

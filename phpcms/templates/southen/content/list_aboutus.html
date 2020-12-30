@@ -1,0 +1,171 @@
+{template "content","top"}
+<div class="content-layout form-horizontal" id="design" lab="0" initlab="0">
+  <div class="design group draggable_area design_main" id="web_design_main">
+    <div id="public_set">
+      <div class="modulebox box_webset" id="com_9"></div>
+    </div>
+    <div id="page_set">
+      <div class="hide"></div>
+    </div>
+    <div id="member_lan">
+      <div class="modulebox box_member" id="com_7">
+        <style>#com_7{z-index: 1;}
+        #member_com_7{}
+        </style>
+      </div>
+    </div>
+    {template "content","header"}
+    <div id="Web_Main_Head">
+      <div id="web_top_float" class="web_hide_float" style=""></div>
+    </div>
+    <div id="design_edu_main" class="group web_Column">
+      <div id="box_web_float" class="group box_web_main"></div>
+      <div class="modulebox box_banner" id="com_176">
+        <div class="view" id="banner_com_176" style="height: 421px;" data-bwidth="1903" data-bheight="421">
+          <div class="style_view" id="style_view_com_176">
+            <style> </style>
+          </div>
+          <a class="bannerDiv " style="background-image: url('{$CATEGORYS[$CAT[parentid]][image]}');" href="javascript:void(0)" target=""></a>
+        </div>
+        <style id="com_176_style">#com_176.modulebox{z-index: 1; position: relative; height: 421px;}#banner_com_176{height: 421px;}</style>
+      </div>
+      <div class="modulebox box_freeColumn box_web_main" id="com_212">
+        <div class="view clearfix" id="freeColumn_com_212" style="min-height: 744px;" data-bwidth="1200" data-bheight="744">
+          <div class="style_view" id="style_view_com_212">
+            <style>#freeColumn_com_212 {margin-left:0px;margin-top:45px;margin-right:0px;margin-bottom:0px;}
+            </style>
+          </div>
+          <div class="kenfor-column hasSub has_size_com_212 free_sort skin_model_view" style="min-height: 744px;">
+            <div class="modulebox box_moreColumn box_web_main" id="com_213">
+              <div class="view" id="moreColumn_com_213" style="min-height: 398px;" data-bwidth="1200" data-bheight="398">
+                <div class="style_view" id="style_view_com_213">
+                  <style> </style>
+                </div>
+                <div class="container-fluid no-padding clearfix has_size_com_213" style="min-height: 398px;">
+                  <table style="width:100%" border="0" cellpadding="0" cellspacing="0" class="moreColumn_tab">
+                    <tbody>
+                    <tr>
+                      <td class="moreColumnTxt normal_padding  ui-resizable ui-resizable-autohide" style="width: 226px;" width="226">
+                        {template "content","nav_left"}
+                      </td>
+                      <td class="moreColumnTxt" style="">
+                        <div class="no-padding kenfor-column hasSub has_size_com_213" style="min-height: 398px;">
+                          <div class="modulebox box_location box_web_main" id="com_216">
+                            <style>#com_216{position: relative; min-height: 47px; z-index: 1;}
+                            #location_com_216{min-height: 47px;}
+                            </style>
+                            <div class="view" id="location_com_216">
+                              <div class="style_view"><style>#location_com_216 .skin_model_view .location_title_left {font-size:16px;}
+                              #location_com_216 .skin_model_view .location_title_left {color:#00449e;}
+                              #location_com_216 .skin_model_view .location_title_left {font-weight:bold;}
+                              #location_com_216 .skin_model_view {border-bottom-color:#bdbdbd;}
+                              #location_com_216 .skin_model_view {border-bottom-width:1px;}
+                              #location_com_216 .skin_model_view {border-bottom-style:solid;}
+                              </style></div>
+                              <div class="skin_model_view">
+                                <div class="location_title clear_float">
+                                  <div class="location_style1">    <div class="location_title_left" style="text-align:left">{$catname}</div>
+                                    <div class="location_title_right" style="text-align:left">
+                                      {catpos($catid)}列表
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="modulebox box_products box_web_main" id="com_217">
+                            <style>#com_217{min-height: 150px; z-index: 1;}
+                            #products_com_217{min-height: 150px;}
+                            #products_com_217 .effects2 .productImgForm_c .productEffects span{
+                              border:1pxpx solid #bd1e1e;
+                            }
+                            </style>
+                            <div class="view" id="products_com_217">
+                              <div class="style_view"><style>#products_com_217 {opacity:1;}
+                              #products_com_217 .skin_model_view .productTitleForm{font-size:14px;}
+                              #products_com_217 .skin_model_view .productTitleForm{line-height:2.5;}
+                              #products_com_217 .skin_model_view .productTitleForm{color:#363636;}
+                              #products_com_217 .skin_model_view .imgDiv:hover .productTitleForm{color:#ffffff;}
+                              #products_com_217 .skin_model_view .productTitleForm{ background-color:transparent;}
+                              #products_com_217 .skin_model_view .imgDiv:hover .productTitleForm{ background-color:#004094;}
+                              #products_com_217 .productImgForm {width:300px;}
+                              #products_com_217 .productImgForm {height:240px;}
+                              #products_com_217 .imgDiv {margin-top:10px;}
+                              #products_com_217 .imgDiv {margin-bottom:20px;}
+                              #products_com_217 .imgDiv .productImgForm{border-color:#d1d1d1;}
+                              #products_com_217 .imgDiv .productImgForm{border-width:1px;}
+                              #products_com_217 .imgDiv .productImgForm{border-style:solid;}
+                              </style></div>
+
+                              <div class="skin_model_view  productsBox products_com_217_view">
+                                <!-- productsList.html -->
+                                <div class="pro_form_mainDiv productStyleBox1">
+                                  <div class="hd"> <a class="prev public_prev" href="javascript:void(0);"></a> <a class="next public_next" href="javascript:void(0);"></a></div>
+                                  <div class="bd pro_form_div">
+                                    <ul id="proList_com_217" data-boxw="974" data-listw="324.6666666667" data-boxm="0" class="picList effects6 parameter1">
+                                      {pc:content action="lists" catid="$catid" num="25" order="id DESC" page="$page"}
+                                      {loop $data $r}
+                                      <li class="imgDiv imgDiv3">
+                                        <div class="productImgForm_c">
+                                          <a href="{$r[url]}" class="productEffects" target="_blank"><span></span></a>
+                                          <a href="{$r[url]}" class="productImgForm" data-pwidth="300" data-pheight="240" style="width:300px; height:240px;" target="_blank">
+                                          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2P4zwAAAgEBAOIxSPwAAAAASUVORK5CYII=" data-src="{$r[thumb]}"></a>
+                                        </div>
+                                        <div class="productDetailForm1" data-href="{$r[url]}" data-target="_blank"><div class="productDetailForm2"><div class="productDetailForm">
+                                          <a href="{$r[url]}" target="_blank" class="productTitleForm">{$r[title]}</a>
+                                          <div class="productDetail">
+                                          </div>
+                                          <div class="productShopCart productShopCartDisplay0"><b></b>
+                                            <a href="javascript:void(0)" class="langText" data-lang="products_buy" data-src="{$r[thumb]}" data-id="2899604365821312">购买</a>
+                                          </div>
+                                        </div>
+                                      </li>
+                                      {/loop}
+                                      {/pc}
+                                    </ul>
+                                  </div>
+                                </div>
+                                <div class="page_style_dh">
+                                  <div class="page_style_dh">{$pages}</div>
+                                </div>
+                                <script>
+                                    $('#com_217 .productShopCart a').on('click', webUtil.addCar);
+                                    webUtil.setProductModel("com_217","products","productStyleBox1","3","parameter1","1","50");
+                                    webUtil.lazyloadList("#products_com_217 img.lazy",".productImgForm");
+                                </script>
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div> </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <style>#moreColumn_com_213 .normal_padding{padding-right:35px;}
+
+              #moreColumn_com_213 .ui-resizable-e {width: 35px;}
+              </style>
+              <script>
+                  var mdId = "com_213";
+                  var temp = "moreColumn";
+                  var colWidth = "35";
+                  webUtil.setMoreColumn(mdId,temp,colWidth);
+              </script>
+              <style id="com_213_style">#com_213{position: relative; z-index: 1; min-height: 398px;}#moreColumn_com_213{min-height: 398px;}</style>
+            </div>
+          </div>
+        </div>
+        <style id="com_212_style">#com_212{position: relative; z-index: 1; min-height: 789px;}#freeColumn_com_212{min-height: 744px;}</style>
+      </div>
+    </div>
+    {template "content","footer"}
+  </div>
+  <div style="position: absolute; opacity: 0.2; z-index: 499; display: none; width: 158px; height: 301px; left: 943px; top: 398px;"></div>
+</div>
+</div>
+</body>
+</html>

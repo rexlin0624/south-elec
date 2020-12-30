@@ -1,0 +1,87 @@
+{template "content","top"}
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <!--10378-->
+      <div id="d3239eb9" class=" slickCarousel">
+        {loop string2array($CATEGORYS[$catid][catpics]) $vimages}
+        <div class="sliderBox">
+          <div class="background-image-holder">
+            <img alt="{$vimages['alt']}" src="{$vimages['url']}" width="1260" height="335" />
+          </div>
+        </div>
+        {/loop}
+      </div>
+    </div>
+  </div>
+</div>
+<!--TYPO3SEARCH_begin-->
+<div class="container bc-content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="breadCrumbMenu">
+        <a href="{siteurl($siteid)}">{$SEO['site_title']}</a><span class="breadCrumbTrenner">&nbsp;</span>
+        {catpos($catid, '<span class="breadCrumbTrenner">&nbsp;</span>')}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row equalize">
+    <div class="col-sm-8">
+      <div class="well well-lg">
+        <!--10379-->
+        <div class="csc-header csc-header-n1">
+          {$description}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="well well-lg same-height-right" style="height: 311px;">
+        {$approve}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container contentContainer" role="main">
+  <div class="row">
+    <div class="col-md-8 ">
+      <div class="well well-lg same-height-left" style="height: 441px;"> <!--10261--><div class="csc-header csc-header-n1"><h1 class="csc-firstHeader">工作</h1></div>
+        <div class="news jobs">
+          <div class="row">
+            <table class="table table-condensed table-striped">
+              <tbody>
+              {pc:content action="lists" catid="$catid" num="20" order="id DESC" page="$page"}
+              {loop $data $r}
+              <tr>
+                <td>
+                  <a href="{$r[url]}">
+                    <h2 class="h3">{$r[title]}</h2>
+                  </a>
+                  <ul class="list list-inline">
+                    <li>
+                      <span class="news-list-category">{$r[title_en]}</span>
+                    </li>
+                    <li>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+              {/loop}
+              {/pc}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 ">
+      <div class="well well-lg same-height-right" style="height: 441px;">
+        {$expert}
+      </div>
+    </div>
+  </div>
+
+</div>
+{template "content","footer"}

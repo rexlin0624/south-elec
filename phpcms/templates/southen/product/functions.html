@@ -1,0 +1,32 @@
+{template "product","header"}
+<div class="row">
+    <div class="column grid_2 column_margin">
+        <div class="box">
+            <span class="boxheader"><h3>{$setting['title']}</h3></span>
+            <div class="boxcontent">
+                <div id="basketContentDynamic">
+                    <p>{$setting['description']}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="content grid_6">
+            <h1 class="c_3x2_h1">{$title}</h1>
+            <div class="row">
+                {loop $lists $list}
+                <div class="column grid_2 column_margin" style="margin-bottom: 20px;width: 30%;">
+                    <a href="/index.php?m=product&c=search&a=init&function_id={$list['code']}{if $id != -1000}&serial_id={$id}{/if}" class="c_3x2">
+                        <div class="img_chapter">
+                            <img src="{$list['thumb']}" width="230" height="60">
+                        </div>
+                        <span><h5>{$list['title']}</h5></span>
+                    </a>
+                </div>
+                {/loop}
+            </div>
+            <br>
+            <div class="row content"></div>
+        </div>
+    </div>
+{template "product","footer"}

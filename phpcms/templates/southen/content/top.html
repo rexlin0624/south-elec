@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+{pc:get sql="SELECT * from se_site where siteid = 3" num="1" return="data" }
+{loop $data $r}
+{php $setting = json_decode($r['setting'], true);}
+{/loop}
+{/pc}
+<head>
+  <meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+<meta name="title" content="{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}">
+<meta name="description" content="{$SEO['description']}">
+<meta name="keywords" content="{$SEO['keyword']}">
+<meta name="author" content="{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="https://static.site.2003001.com/Public/css/default.css?v=20200422" />
+<script type="text/javascript" src="https://static.site.2003001.com/Public/js/lib/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	(function () {
+		window.publicPath = 'https://static.site.2003001.com/Public';
+		window.jsPath = 'https://static.site.2003001.com/Public/js';
+		window.listAjaxURL = '/front/home/refresh.html';
+		window.getPluginWidgetURL = '/front/plugin/show.html';
+		window.domainHost = '//site.2003001.com';
+	})();
+</script>
+    <!-- <script src="https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver"></script> -->
+    <!-- <script src="https://unpkg.com/quicklink@1.0.0/dist/quicklink.umd.js"></script> -->
+    <script type="text/javascript" src="https://static.site.2003001.com/Public/js/default.min.js?v=20200422"></script>
+    <!-- <script>$(()=>{$(window).on('load', quicklink)})</script> --><!-- plate -->
+    <style id="style-custom-plate" class="style-custom">#block9b2a9d739e5f4413efa52fae7fe0e6f1 .content_navbar .nav ul .custom a{font-size:14px;color:rgb(255, 255, 255)}
+#block9b2a9d739e5f4413efa52fae7fe0e6f1 .content_navbar .nav ul .custom a:hover{font-size:14px;color:rgb(255, 255, 255)}
+#block9b2a9d739e5f4413efa52fae7fe0e6f1 .content_navbar .nav ul .custom ul .custom a{background-color:rgb(0, 0, 0)}
+#block9b2a9d739e5f4413efa52fae7fe0e6f1 .block_content{background-color:rgb(0,0,0)}
+#block9b2a9d739e5f4413efa52fae7fe0e6f1 .toggle span{background-color:rgb(255, 255, 255)}
+#block9a71491b51a181bf12f119aefa86461b .content_image img{width:25.9516%;padding-top:0%;padding-bottom:0%;padding-right:0px;padding-left:0px;margin-right:58.34%;border-bottom-color:rgb(255, 255, 255);border-bottom-style:solid;border-bottom-width:12px}
+#block6435822a2a7da3ecc90a08b75e9d413e .content_navbar .nav ul .custom a{font-size:16px;color:rgb(67, 67, 67);border-radius:0px;padding-top:14px;padding-bottom:14px;text-shadow:rgb(0, 0, 0) 0px 0px 0px}
+#block6435822a2a7da3ecc90a08b75e9d413e .content_navbar .nav ul .custom a:hover{font-size:16px;color:rgb(255, 255, 255);background-color:rgb(40, 178, 178);border-radius:0px;padding-top:14px;padding-bottom:14px}
+#block6435822a2a7da3ecc90a08b75e9d413e .block_content{background-color:rgb(0,0,0)}
+#block6435822a2a7da3ecc90a08b75e9d413e .toggle span{background-color:rgb(255, 255, 255)}
+#block6435822a2a7da3ecc90a08b75e9d413e .content_navbar .nav ul .custom.current .current{text-shadow:rgb(67, 67, 67) 0px 0px 0px;font-family:'Microsoft YaHei', 微软雅黑;color:rgb(102, 102, 102)}
+#block6435822a2a7da3ecc90a08b75e9d413e .content_navbar .nav ul .custom a span{text-shadow:rgb(67, 67, 67) 0px 0px 0px;color:rgb(102, 102, 102)}
+#block6435822a2a7da3ecc90a08b75e9d413e .content_navbar .nav ul .custom.current ul .custom a span{ color:rgb(67, 67, 67) }
+#block6435822a2a7da3ecc90a08b75e9d413e .content_navbar .nav ul .custom.current .current span{text-shadow:rgb(102, 102, 102) 0px 0px 0px}
+#block9a71491b51a181bf12f119aefa86461b .content_image a{text-align:right;-webkit-box-shadow:0px 1px 0px 0px;box-shadow:0px 1px 0px 0px;width:78.4314%;margin-top:-5px;margin-right:-73.5%;margin-bottom:19px;color:rgba(0, 0, 0, 0);margin-left:36.48%}
+#block9a71491b51a181bf12f119aefa86461b .content_image a img{border-bottom-style:solid;border-bottom-width:0px;border-bottom-color:transparent}</style>
+    <style id="style-custom-plate-pad" class="style-custom" media="(max-width: 64em)"></style>
+    <style id="style-custom-plate-mobile" class="style-custom" media="(max-width: 35.5em)">#block6435822a2a7da3ecc90a08b75e9d413e .block_content{background-color:rgb(153,153,153)}
+#block6435822a2a7da3ecc90a08b75e9d413e .toggle span{background-color:rgb(102, 102, 102)}
+#block9b2a9d739e5f4413efa52fae7fe0e6f1 .block_content{background-color:rgb(0,0,0)}
+#block9b2a9d739e5f4413efa52fae7fe0e6f1 .toggle span{background-color:rgb(255, 255, 255)}
+#block9a71491b51a181bf12f119aefa86461b .content_image a img{width:12.6984%;text-align:left}
+#block9a71491b51a181bf12f119aefa86461b .content_image a{text-align:center}</style>
+    <!-- page -->
+    <style id="style-custom" class="style-custom">#blockf068b7e50d76037c17288d00c3a17ca4 .content_button .button{font-size:14px;font-weight:400;border-top-style:solid;border-top-width:1px;border-right-style:solid;border-right-width:1px;border-bottom-style:solid;border-bottom-width:1px;border-left-style:solid;border-left-width:1px;padding-top:14px;padding-bottom:14px;padding-right:10px;padding-left:10px;width:132px;font-family:'Microsoft YaHei', 微软雅黑}
+#block9d4bc475285fe16a5d3f85b75aa8f903 .content_button .button{font-size:14px;font-weight:400;border-top-style:solid;border-top-width:1px;border-right-style:solid;border-right-width:1px;border-bottom-style:solid;border-bottom-width:1px;border-left-style:solid;border-left-width:1px;padding-top:10px;padding-bottom:10px;padding-right:10px;padding-left:10px;width:120px;font-family:'Microsoft YaHei', 微软雅黑}
+#blockb3b0db835113f55642d3f0e2126fa246 .content_article_list .article_list dl .info h3 .title{font-size:14px;line-height:20px;color:rgb(90, 47, 2);font-weight:400}
+#blockb3b0db835113f55642d3f0e2126fa246 .content_article_list .article_list dl .info .abstract{font-size:14px;line-height:24px;color:rgb(153, 153, 153);white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+#block126ef895b811a6d90c0d9ce9d0dbf340 .content_button .button{font-size:14px;font-weight:400;border-top-style:solid;border-top-width:1px;border-right-style:solid;border-right-width:1px;border-bottom-style:solid;border-bottom-width:1px;border-left-style:solid;border-left-width:1px;padding-top:14px;padding-bottom:14px;padding-right:10px;padding-left:10px;width:132px;font-family:'Microsoft YaHei', 微软雅黑}
+#blockf068b7e50d76037c17288d00c3a17ca4 .content_button .button:hover{font-family:'Microsoft YaHei', 微软雅黑;color:rgb(255, 255, 255);background-color:rgb(40, 178, 178);border-top-color:rgb(40, 178, 178);border-right-color:rgb(40, 178, 178);border-bottom-color:rgb(40, 178, 178);border-left-color:rgb(40, 178, 178)}
+#block9d4bc475285fe16a5d3f85b75aa8f903 .content_button .button:hover{font-family:'Microsoft YaHei', 微软雅黑;color:rgb(255, 255, 255);background-color:rgb(40, 178, 178);border-top-color:rgb(40, 178, 178);border-right-color:rgb(40, 178, 178);border-bottom-color:rgb(40, 178, 178);border-left-color:rgb(40, 178, 178)}
+#blockb3b0db835113f55642d3f0e2126fa246 .content_article_list .article_list dl .info .time{padding-top:2px;padding-bottom:2px;font-family:'Microsoft YaHei', 微软雅黑;color:rgb(40, 178, 178)}
+#blockb3b0db835113f55642d3f0e2126fa246 .content_article_list .article_list dl{margin-bottom:0px;padding-bottom:2px;border-bottom-style:dotted}
+#block126ef895b811a6d90c0d9ce9d0dbf340 .content_button .button:hover{font-family:'Microsoft YaHei', 微软雅黑;color:rgb(255, 255, 255);background-color:rgb(40, 178, 178);border-top-color:rgb(40, 178, 178);border-right-color:rgb(40, 178, 178);border-bottom-color:rgb(40, 178, 178);border-left-color:rgb(40, 178, 178)}
+#block3dde8f2f83f3ca8fcd2557bf6d740054.anim{-webkit-animation-name:fadeInDown;animation-name:fadeInDown;-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-delay:0s;animation-delay:0s;-webkit-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-iteration-count:1;animation-iteration-count:1}
+#block7f3bdc626ef12ffa096dc9bf4f0b44a9.anim{-webkit-animation-name:fadeInDown;animation-name:fadeInDown;-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-delay:0s;animation-delay:0s;-webkit-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-iteration-count:1;animation-iteration-count:1}
+#block1d5824d6226e331dcd6fbb4e4c0fe227.anim{-webkit-animation-name:fadeInUpBig;animation-name:fadeInUpBig;-webkit-animation-duration:1s;animation-duration:1s;-webkit-animation-delay:0s;animation-delay:0s;-webkit-animation-timing-function:ease;animation-timing-function:ease;-webkit-animation-iteration-count:1;animation-iteration-count:1}
+#block1786f59707407b6f06c3908a1ad02b4e .content_image img{width:72.2022%;height:300px}</style>
+    <style id="style-custom-pad" class="style-custom" media="(max-width: 64em)"></style>
+    <style id="style-custom-mobile" class="style-custom" media="(max-width: 35.5em)"></style>
+    <style id="css-code"></style>
+    <meta name="__hash__" content="b35fa0ac1943d0817120cbc2a5fe61ab_af9d7ebd8c2d52c3f0c86645415c6f24" />
+  </head>
+
+<body class="body  ">
+  <input type="hidden" name="page_id" id="input-pageid" value="78145" />
+<input type="hidden" name="is_plate" id="input-isplate" value="0" />
+<input type="hidden" name="disable_copy" id="input-disable-copy" value="0" />
+
+<div id="container">
+  <div id="canvas-area" data-pl="1" style="background-color:rgb(255, 255, 255);background-image:none;background-attachment:scroll;background-repeat:repeat;background-position:0% 0%;background-size:auto">
+    <div id="headereebc5577b45dc722dbc0ae4ebbdc7e17" data-id="eebc5577b45dc722dbc0ae4ebbdc7e17" class="layout-content header" type="header" style="padding-top: 1%; padding-bottom: 1%;" inplate="1">
+  <div id="row3f31ba0a8982d2da1ad6fc9a753fffca" class="row" data-id="3f31ba0a8982d2da1ad6fc9a753fffca" type="row" style="" inplate="1">
+    <div class="pure-g row-inner">
+        <div id="cell8372f9821d14754b0a4d703240105780" class="cell pure-u-1 pure-u-md-1-3" data-id="8372f9821d14754b0a4d703240105780" type="cell" inplate="1" style="">
+      <div id="block9a71491b51a181bf12f119aefa86461b" data-id="9a71491b51a181bf12f119aefa86461b" type="image" class="block_layer anim anim-pause" inplate="1" lock="false">
+  <div id="block_content_9a71491b51a181bf12f119aefa86461b" class="block_content content_image " style="padding: 0% 0px; margin-top: 0px; opacity: 1; margin-left: 0%; border-top-style: solid; border-top-width: 0px; border-radius: 0px; text-align: center; background-attachment: fixed; background-position: 50% 50%; background-color: rgb(255, 255, 255);">
+   <a href="/index.php" target="" data-linktype="page" data-link='{"link_page":"10696","target":""}'><img title="" id="block-image_9a71491b51a181bf12f119aefa86461b" style="" alt="" src="{$setting['logo']}" type="zoom"></a>
+  </div>
+</div></div><div id="cellb531123b421526f50a2295b6623dcf80" class="cell pure-u-1 pure-u-md-2-3" data-id="b531123b421526f50a2295b6623dcf80" type="cell" inplate="1" style="padding: 0% 0px 0% 29px; background-attachment: fixed; background-color: rgb(255, 255, 255); background-position: 50% 50%;">
+      <div id="block6435822a2a7da3ecc90a08b75e9d413e" data-id="6435822a2a7da3ecc90a08b75e9d413e" type="navbar" class="block_layer use-burger" inplate="1" lock="false">
+  <div id="block_content_6435822a2a7da3ecc90a08b75e9d413e" class="block_content content_navbar " style="padding: 4.95% 100px 0% 0px; background-color: rgba(0, 0, 0, 0); opacity: 1; margin-right: 0%; margin-left: 0%; margin-bottom: 9px; text-align: center;">
+    <!--导航条-->
+<div class="nav mode-vertical drop-down navbar-fixed nav-style-4 size-large color-black" data-param="{&quot;nav_id&quot;:&quot;0&quot;,&quot;show_next&quot;:&quot;1&quot;,&quot;__hash__&quot;:&quot;79e4510f47c23c5f371d0734d68e18d4_910b0accfc4eee6fa23527e841608944&quot;}">
+  <button class="toggle" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+    <ul>
+        {pc:content action="category" catid="0" num="25" siteid="$siteid" order="listorder ASC"}
+        {loop $data $r}
+        {php $navUrl = str_replace('v2/', '', $r['url']);}
+        <li data-id="{$r[id]}" class="custom dropmenu per-4">
+          <a href="{$navUrl}" target="" class="" data-name="{$r[catname]}">
+            <span>{$r[catname]}</span>
+            <span class="summary"></span>
+          </a>
+          <ul>
+            {if $r[catid] == 96}
+            <li class="custom ">
+              <a href="/index.php?m=product&c=index&a=init" target="" class="" data-name="产品配置器">
+                <span>产品配置器</span>
+                <span class="summary"></span>
+              </a>
+            </li>
+            <li class="custom ">
+              <a href="/index.php?m=content&c=index&a=lists&catid=101" target="" class="" data-name="目录下载">
+                <span>目录下载</span>
+                <span class="summary"></span>
+              </a>
+            </li>
+            {else}
+            {pc:content action="category" catid="$r[catid]" num="20" siteid="$siteid" order="listorder ASC" return="data2"}
+            {loop $data2 $r2}
+            {php $navUrl2 = str_replace('v2/', '', $r2['url']);}
+            <li data-id="{$r2[id]}" class="custom ">
+              <a href="{$navUrl2}" target="" class="" data-name="{$r2[catname]}">
+                <span>{$r2[catname]}</span>
+                <span class="summary"></span>
+              </a>
+            </li>
+            {/loop}
+            {/pc}
+            {/if}
+          </ul>
+        </li>
+        {/loop}
+        {/pc}
+      </ul>
+    <script type="text/javascript">
+    $(function () {
+      Base.plugin.load('navbar', function () {
+        var currentCtn = $('#block6435822a2a7da3ecc90a08b75e9d413e'),
+          navbar = currentCtn.find('.nav'),
+          uls = navbar.children('ul'),
+          currentClass = 'current',
+          ul = navbar.children('ul'),
+          dropMenu = uls.children('.dropmenu'),
+          dropMenuLists = dropMenu.find('ul li'),
+          TRANSPARENT = 'rgba(0, 0, 0, 0)',
+          origCtnBg = currentCtn.css('backgroundColor'),
+          win = $(window),
+          beautyBackgroundColor = '',
+          fontColor = ul.children('li').children('a').children('span').css('color'),
+          colorReverse = function (rgb) {
+            return [255 - rgb[1], 255 - rgb[2], 255 - rgb[3]];
+          },
+          isInHeader = function () {
+            return currentCtn.parents('[type=header]').length
+          },
+          beauty = function () {
+            // beauty navbar in mobile
+            if (Base.siteInfo.isMobile) {
+              if (navbar.hasClass('no-burger')) {
+                // clean canvas padding.
+                Base.siteInfo.canvasArea.addClass('no-burger-nav');
+              } else {
+                // use main nav item link fst
+                beautyBackgroundColor = ul.children('li').children('a').css('background-color');
+                if (beautyBackgroundColor === TRANSPARENT) {
+                  // use main nav item  sec
+                  beautyBackgroundColor = ul.children('li').css('background-color');
+                  if (beautyBackgroundColor === TRANSPARENT) {
+                    // use main nav item 3rd
+                    beautyBackgroundColor = ul.css('background-color');
+                    if (beautyBackgroundColor === TRANSPARENT) {
+                      // use layer background
+                      beautyBackgroundColor = currentCtn.find('.block_content').css('background-color');
+                      if (beautyBackgroundColor === TRANSPARENT) {
+                        // default #fff
+                        // beautyBackgroundColor = '#fff';
+                        var rgb = fontColor.match(/(\d+),.*?(\d+),.*?(\d+)/);
+                        if (rgb.length) {
+                          beautyBackgroundColor = 'rgb(' + colorReverse(rgb).join(',') + ')';
+                        }
+                      }
+                    }
+                  }
+                }
+                if (window.EDIT_MODE) {
+                  Base.css.setStyleSheet('#block6435822a2a7da3ecc90a08b75e9d413e', '.block_content', {
+                    'background-color': beautyBackgroundColor
+                  });
+                  Base.css.setStyleSheet('#block6435822a2a7da3ecc90a08b75e9d413e', '.toggle span', {
+                    'background-color': fontColor
+                  })
+                } else {
+                  // old sites
+                  currentCtn.find('.block_content').css({
+                    backgroundColor: beautyBackgroundColor
+                  });
+                  navbar.find('.toggle span').css({
+                    backgroundColor: fontColor
+                  });
+                }
+              }
+            }
+          };
+        navbar.find('.toggle').on('click', function (e) {
+          e.preventDefault();
+          if (currentCtn.hasClass)
+            currentCtn.toggleClass('nav-burger-open');
+        });
+        navbar.on('click', 'li a', function (e) {
+          var _this = $(this),
+            subNav = _this.siblings('ul');
+          if (subNav.length) {
+            if (Base.siteInfo.isMobile) {
+              e.preventDefault();
+            }
+            _this.parent().siblings().removeClass(currentClass).end().addClass(currentClass);
+          }
+        });
+        // hook fix event
+        if (isInHeader()) {
+          if (!Base.siteInfo.isMobile && navbar.hasClass('navbar-fixed')) {
+            var
+              navbarRow = navbar.closest('.row'),
+              navbarRowHeight = navbarRow.outerHeight(true),
+              navbarRowOffsetTop = navbarRow.offset().top,
+              $navbarRowPlaceholder = $('<div class="row-placeholder"/>').height(navbarRowHeight),
+              fixed = false;
+            // prevent bxslider above the nav, but not inited,
+            // then, offset will be wrong.
+            win.on('load.fixNavbarOffset', function () {
+              navbarRowOffsetTop = navbarRow.offset().top;
+            });
+            win.on('scroll.6435822a2a7da3ecc90a08b75e9d413e', function () {
+              if (win.scrollTop() > navbarRowOffsetTop) { // maybe 0
+                if (fixed) return;
+                navbarRow.addClass('fixed-top');
+                navbarRow.after($navbarRowPlaceholder);
+                fixed = true;
+              } else {
+                if (!fixed) return;
+                // restore
+                navbarRow.removeClass('fixed-top');
+                $navbarRowPlaceholder = $navbarRowPlaceholder.detach();
+                fixed = false;
+              }
+            });
+          }
+          win.on('resize.6435822a2a7da3ecc90a08b75e9d413e', Base.core.throttle(function () {
+            Base.siteInfo.isMobile = win.width() <= Base.siteInfo.mobileWidth ? true : false;
+            beauty();
+          }, 100)).trigger('resize.6435822a2a7da3ecc90a08b75e9d413e');
+        }
+
+        // for customer style => current item
+        if (window.EDIT_MODE && !navbar.find('.' + currentClass).length) {
+          navbar.find('li').eq(0).children('a').addClass(currentClass);
+        }
+
+        // submenu current
+        navbar.on('init', function () {
+          var
+            $currentNav = navbar.find('.' + currentClass),
+            $subNavItem = $currentNav.parents('.dropmenu').last();
+          if ($subNavItem.length) {
+            $subNavItem.children('a').addClass(currentClass);
+          }
+        }).trigger('init');
+      });
+    });
+  </script>
+</div>  </div>
+</div></div>    </div>
+</div><div id="row5e9c471a4e6e17b7fdc13653d4dc8904" class="row" data-id="5e9c471a4e6e17b7fdc13653d4dc8904" type="row" style="" inplate="1">
+    <div class="pure-g row-inner">
+        <div id="celld391bb57178130ca8479f9ac3dece6f9" class="cell pure-u-1 pure-u-md-1-3" data-id="d391bb57178130ca8479f9ac3dece6f9" type="cell" inplate="1" style="">
+    </div><div id="cellbe020bf6f2a2a1f9a99f7cdfa803b979" class="cell pure-u-1 pure-u-md-2-3" data-id="be020bf6f2a2a1f9a99f7cdfa803b979" type="cell" inplate="1" style="">
+    </div>    </div>
+</div><div id="rowa4e9cb0ec51042c220bf3e42050954b3" class="row pure-g" data-id="a4e9cb0ec51042c220bf3e42050954b3" type="row" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%;" inplate="1">
+    <div class="pure-g row-inner">
+        <div id="cellcf30182d2290bc4e7b0427fcef6490e4" class="cell pure-u-1" data-id="cf30182d2290bc4e7b0427fcef6490e4" type="cell" inplate="1" style="">
+      <div id="blocka773a840000e5706fb9a493c07086f6d" data-id="a773a840000e5706fb9a493c07086f6d" type="image_slider" class="block_layer " inplate="1" lock="false">
+  <div id="block_content_a773a840000e5706fb9a493c07086f6d" class="block_content content_image_slider " style="padding-top: 0%; padding-right: 2px; padding-bottom: 0%; background-repeat: repeat-y; background-size: cover;">
+    <?php
+      $links=[
+        'option' => [
+          'autoPlay' => 5000,
+          'captions' => false,
+          'items' => 1,
+          'left_text' => '<',
+          'mouseDrag' => false,
+          'navigation' => true,
+          'owlItemWidth' => 1257,
+          'pagination' => false,
+          'paginationNumbers' => false,
+          'paginationSpeed' => 800,
+          'rewindSpeed' => 1000,
+          'right_text' => '>',
+          'scrollPerPage' => false,
+          'slideSpeed' => 600,
+          'slide_margin' => 0,
+          'stopOnHover' => true,
+          'transitionStyle' => "fade"
+        ],
+        'thumb' => []
+      ];
+    ?>
+    {pc:link action="type_list" typeid="84" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+    {loop $pic_link $v}
+    <?php
+      $links['thumb'][] = [
+        'beyond' => 'beyond',
+        'existing_width' => '',
+        'link' => json_encode(['out_url' => $v['url'], 'target' => '_blank']),
+        'linkname' => $v['name'],
+        'linktype' => 'out_url',
+        'src' => $v['logo'],
+        'target' => '_blank',
+        'title' => '',
+        'url' => $v['url'],
+        'width' => 1225
+      ];
+    ?>
+    {/loop}
+    {/pc}
+    <?php $params = json_encode($links); ?>
+    <div id="block-image_slider_a773a840000e5706fb9a493c07086f6d" class="image-slider" data-param='<?php echo $params; ?>'>
+  <div class="owl-carousel">
+    {pc:link action="type_list" typeid="84" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+    {loop $pic_link $v}
+    <div class="item">
+      <a href="{$v['url']}" target="_blank">
+        <img src="{$v[logo]}" title="" alt="">
+        <span></span>
+      </a>
+    </div>
+    {/loop}
+    {/pc}
+  </div>
+    <script type="text/javascript">
+    $(function () {
+      // add spy hook for correct layers offset.
+      var sliderLoaded = Base.hooks.add('spy');
+      // load dependencies
+      Base.plugin.load('imageSlider', ['https://static.site.2003001.com/Public/js/plugins/imageSlider/owl.carousel.min.js', 'https://static.site.2003001.com/Public/js/plugins/imageSlider/imageslider.init.min.js'], function () {
+        var imageSlider = $('#block-image_slider_a773a840000e5706fb9a493c07086f6d'),
+          sliderItemTpl = Base.imageSlider.template,
+          defaultParam = Base.imageSlider.defaultParam,
+          owlCarousel = imageSlider.find('.owl-carousel'),
+          param = null;
+        if (imageSlider.attr('data-param') === '[]') {
+          // default
+          imageSlider.attr('data-param', JSON.stringify(defaultParam));
+          param = defaultParam;
+        }
+        // init dom by data param
+        if (!param) {
+          param = $.parseJSON(imageSlider.attr('data-param'));
+        }
+        if (!imageSlider.find('.item').length) {
+          // drop
+          for (var i = 0, l = param.thumb.length; i < l; i++) {
+            owlCarousel.append($(Base.dom.template(sliderItemTpl, param.thumb[i])));
+          }
+        }
+
+        if (param.option.autoPlay <= 0) {
+          param.option.autoPlay = false
+        }
+        var _owlWidth = owlCarousel.width();
+        for (i = 0; i < param.thumb.length; i++) {
+          var _thisImg = $('img[src="' + param.thumb[i].src + '"]', owlCarousel);
+          if (_owlWidth / param.option.items > param.thumb[i].width) {
+            _thisImg.addClass('beyond');
+          } else {
+            _thisImg.addClass('no-beyond');
+          }
+        }
+
+        var autoPlay = param.option.autoPlay <= 0 ? false : param.option.autoPlay,
+          transitionStyle = param.option.transitionStyle == "false" ? false : param.option.transitionStyle,
+          leftText = param.option.left_text == "" ? "<" : param.option.left_text,
+          rightText = param.option.right_text == "" ? ">" : param.option.right_text,
+          responsive = true;
+        owlCarousel.owlCarousel({
+          responsive: responsive,
+          items: param.option.items, //显示数
+          autoPlay: autoPlay, //默认false  值int
+          rewindSpeed: param.option.rewindSpeed, //倒带时间
+          navigationText: [leftText, rightText],
+          slideSpeed: param.option.slideSpeed, //滚动速度
+          paginationSpeed: param.option.paginationSpeed, //页码速度
+          stopOnHover: param.option.stopOnHover, //鼠标悬停暂停
+          navigation: param.option.navigation, //创建上一个和下一个
+          scrollPerPage: param.option.scrollPerPage, //滚动时按页滚动
+          pagination: param.option.pagination, //创建分页
+          paginationNumbers: param.option.paginationNumbers, //分页为数字
+          transitionStyle: transitionStyle, //css3的切换样式，默认为false
+          touchDrag: false,
+          mouseDrag: param.option.mouseDrag, //鼠标移动翻页
+          captions: param.option.captions, //标题
+          autoHeight: false,
+          itemsCustom: [
+            [0, param.option.items],
+            [450, param.option.items],
+            [600, param.option.items],
+            [700, param.option.items],
+            [1000, param.option.items],
+            [1200, param.option.items],
+            [1400, param.option.items],
+            [1600, param.option.items]
+          ],
+          afterInit: function () {
+            sliderLoaded.resolve();
+          }
+          /*afterUpdate: function(e) {
+              var _this = $(e),
+                  _tab = _this.parents('.content_tab'),
+                  _tabPanel = _this.parents('.tab-panel');
+              if (_tab.length) { 
+                  var _tabHeight = _tab.height(),
+                      _thisHeight = _this.height();
+                  _tab.height(_tabHeight + _thisHeight); 
+              }
+          }*/
+        });
+        var img = owlCarousel.find('img');
+        if (param.option.captions === true) {
+          var span = owlCarousel.find('.item').find('span');
+          for (i = 0; i < img.length; i++) {
+            //span.eq(i).width(img.eq(i).width());
+            span.eq(i).css('display', 'block');
+          }
+        }
+
+        //图片间距
+        owlCarousel.find('.item').css('marginLeft', param.option.slide_margin);
+        owlCarousel.find('.item').css('marginRight', param.option.slide_margin);
+
+        //bxslider img width&height data
+        if (Base.image && Base.image.sliderImg) {
+          Base.image.sliderImg();
+        }
+
+        // trigger onload fix ie11 effect
+        $(window).one('resize.imageSlider', function () {
+          owlCarousel.data('owlCarousel').reload();
+        }).trigger('resize.imageSlider');
+      });
+    });
+  </script>
+</div>
+  </div>
+</div></div>    </div>
+</div></div

@@ -1,0 +1,340 @@
+{template "content","top"}
+{pc:get sql="SELECT * from se_site where siteid = 3" num="1" return="data" }
+{loop $data $r}
+{php $setting = json_decode($r['setting'], true);}
+{/loop}
+{/pc}
+<div id="contentb6168d3fdcf21c19f3e5e8e1117aa4db" data-id="b6168d3fdcf21c19f3e5e8e1117aa4db" class="layout-content content" type="content" style="" inplate="0">
+    <div id="row597392442ed1629b69a56a4adc1d4f7e" class="row pure-g   limit-row-width" data-id="597392442ed1629b69a56a4adc1d4f7e" type="row" style="padding-top: 2%; padding-bottom: 1%;" inplate="0">
+      <div class="pure-g row-inner">
+          <div id="cellafb01a5048bb502b0d80a245a0f018f6" class="cell pure-u-1" data-id="afb01a5048bb502b0d80a245a0f018f6" type="cell" inplate="0" style="">
+        <div id="block3dde8f2f83f3ca8fcd2557bf6d740054" data-id="3dde8f2f83f3ca8fcd2557bf6d740054" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_3dde8f2f83f3ca8fcd2557bf6d740054" class="block_content content_title " style="position: relative;">
+      
+    
+     <p style="text-align: left;">&nbsp;</p>
+  
+  <p style="text-align: left;">
+    <span style="font-size:20px">
+      <span style="line-height:1.6">
+        <span style="color:#393939">
+          <img alt="" src="{$setting['index_logo']}" style="height:50px; width:200px">
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+        </span>
+      </span>
+    </span>
+    <span style="font-size:16px">
+      <span style="line-height:1">
+        <span style="color:#393939">中国总代理：&nbsp; &nbsp;&nbsp;</span>
+      </span>
+    </span>
+    {pc:link action="type_list" typeid="86" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+    {loop $pic_link $v}
+    <a href="{$v['url']}" target="_blank">
+      <img alt="" src="{$v['logo']}" style="color:rgb(57, 57, 57); font-size:14px; height:96px; width:300px; word-spacing:normal">
+    </a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+    {/loop}
+    {/pc}
+  </p>
+  
+  <p style="text-align: left;">&nbsp;</p>
+    </div>
+  </div></div>    </div>
+  </div><div id="rowa62b33ba5e12de41f566bb87ae59527a" class="row  limit-row-width" data-id="a62b33ba5e12de41f566bb87ae59527a" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="0">
+    <div class="pure-g row-inner">
+      {pc:link action="type_list" typeid="87" siteid="$siteid" linktype="1" order="listorder ASC" num="10" return="pic_link"}
+      {loop $pic_link $v}
+      <div id="cellc9b8abfc089f70b9d0cfa785e4022932" class="cell pure-u-1-2 pure-u-md-1-2 pure-u-lg-1-4" data-id="c9b8abfc089f70b9d0cfa785e4022932" type="cell" inplate="0" style="padding: 1%;">
+        <div id="block86ef05072b7f42412db169a88366a3ff" data-id="86ef05072b7f42412db169a88366a3ff" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+          <div id="block_content_86ef05072b7f42412db169a88366a3ff" class="block_content content_title " style="">
+            <p><span style="color:#393939;"><span style="font-size:16px;">{$v[name]}</span></span></p>
+          </div>
+        </div>
+        <div id="block3e544e658bbb1aadecf36c237b3bd354" data-id="3e544e658bbb1aadecf36c237b3bd354" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
+          <div id="block_content_3e544e658bbb1aadecf36c237b3bd354" class="block_content content_image " style="padding-bottom: 4%;">
+            <img title="" id="block-image_3e544e658bbb1aadecf36c237b3bd354" style="" alt="" src="{$v[logo]}" type="zoom">
+          </div>
+        </div>
+      </div>
+      {/loop}
+      {/pc}
+    </div>
+  
+  <div id="row75a5f58c4730b070fbf06686fa6f4610" class="row pure-g limit-row-width" data-id="75a5f58c4730b070fbf06686fa6f4610" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="0">
+      <div class="pure-g row-inner">
+          <div id="cell04201e7c5a2d2e71d1a4d1ea7210419c" class="cell pure-u-1" data-id="04201e7c5a2d2e71d1a4d1ea7210419c" type="cell" inplate="0" style="">
+        <div id="block14d50e726370184d59d0434837f6121a" data-id="14d50e726370184d59d0434837f6121a" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_14d50e726370184d59d0434837f6121a" class="block_content content_title " style="position: relative;">
+      
+    
+     <p><span style="font-size:18px">&nbsp;<span style="font-family:arial,helvetica,sans-serif; word-spacing:normal">指示器及按钮</span></span></p>
+  
+  <p><span style="font-size:18px"><font color="#666666" face="arial, helvetica, sans-serif">SWITCH</font></span></p>
+    </div>
+  </div>  <div id="block1da017a15fc7c13a93f84ac4df4af2dd" data-id="1da017a15fc7c13a93f84ac4df4af2dd" type="customer_service" class="block_layer " inplate="0" lock="false">
+    <div id="block_content_1da017a15fc7c13a93f84ac4df4af2dd" class="block_content content_customer_service " style="">
+      <div class="customer-service fixed customer-service-style-2 color-blue" data-param="{&quot;cs&quot;:[{&quot;cs_type&quot;:&quot;qq&quot;,&quot;cs_number&quot;:&quot;709732171&quot;,&quot;cs_text&quot;:&quot;\u5ba2\u670d\u4e00&quot;}],&quot;time&quot;:[{&quot;day_start&quot;:&quot;0&quot;,&quot;day_end&quot;:&quot;4&quot;,&quot;time_start&quot;:&quot;18&quot;,&quot;time_end&quot;:&quot;36&quot;}],&quot;contact&quot;:[{&quot;contact_name&quot;:&quot;\u9648\u5148\u751f&quot;,&quot;contact_content&quot;:&quot;020-83793353&quot;}],&quot;wechat&quot;:[]}" data-pending>
+    <div class="toggle">
+      在线咨询  </div>
+    <div class="inner">
+      <ul class="list-cs">
+          <li class="cs">
+              <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=709732171&amp;site=qq&amp;menu=yes">
+                    <span class="ico"><img border="0" src="https://pub.idqqimg.com/qconn/wpa/button/button_121.gif" alt="点击这里给我发消息" title="点击这里给我发消息" /></span>
+                    <span>客服一</span>
+                  </a>          </li>      </ul>    <ul class="list-time">
+          <li class="title">
+            <i class="iconfont">&#xe62c;</i>
+            <span>工作时间</span>
+          </li>
+          <li class="time">
+              <span class="tit">周一 至 周五</span>
+              <span class="cont">9:00 - 18:00</span>
+            </li>      </ul>    <ul class="list-contact">
+          <li class="title">
+            <i class="iconfont">&#xe62d;</i>
+            <span>联系方式</span>
+          </li>
+          <li class="contact">
+              <span class="tit">陈先生</span>
+              <span class="cont">020-83793353</span>
+            </li>      </ul>      </div>
+  </div>
+  <div class="customer-service-tip hide">
+    <p>"在线客服"插件已固定.</p>
+    <p>双击此处编辑客服号码.</p>
+    <script>
+      $(function () {
+        Base.plugin.load('cs', function () {
+          var
+            blockSN = '1da017a15fc7c13a93f84ac4df4af2dd'.replace(/^block/g, ''),
+            currentCtn = $('#block' + blockSN),
+            csWidget = currentCtn.find('.customer-service');
+          // in mobile mode, force to style-2.
+          // style-1 toooo large in screen
+          if (!window.EDIT_MODE && Base.siteInfo.isMobile) {
+            var MOBILE_STYLE = 'customer-service-style-2';
+            if (!csWidget.hasClass(MOBILE_STYLE)) {
+              csWidget.removeClass(function (_, cls) {
+                var
+                  classNames = cls.split(' '),
+                  styleClass = [];
+                classNames.forEach(function (c) {
+                  if (/^customer-service-style-/.test(c)) {
+                    styleClass.push(c);
+                  }
+                });
+                return styleClass.join(' ');
+              });
+              csWidget.addClass(MOBILE_STYLE);
+            }
+          }
+          // prevent transition effect when loaded.
+          setTimeout(function () {
+            csWidget.removeAttr(Base.siteInfo.pendingAttribute)
+          }, 6e2);
+        })
+      })
+    </script>
+  </div>  </div>
+  </div></div>    </div>
+  </div>
+  {php $subcatid=[];}
+  {php $subcats = subcat(96, NULL, 0, 3);}
+  {loop $subcats $k $v}
+  {php $subcatid[] = $k;}
+  {/loop}
+  {php $subcatid  = implode(',', $subcatid);}
+  <div id="row52cb080fd53541d63af29ef44856fde9" class="row  limit-row-width" data-id="52cb080fd53541d63af29ef44856fde9" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="0">
+      <div class="pure-g row-inner">
+          {pc:get sql="SELECT * from se_product_v2 where catid in ($subcatid) order by id DESC" num="4" return="data" }
+          {loop $data $r}
+          <div class="cell pure-u-1-2 pure-u-md-1-2 pure-u-lg-1-4" data-id="172de565641964493785eac9e5426486" type="cell" inplate="0" style="">
+            <div data-id="b0587904b4a88b68e77440758c7af9ee" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
+              <div class="block_content content_image " style="">
+                <a href="{$r[url]}" target="" data-linktype="product_list" data-link='{"link_page":"12991","content_id":"","target":""}'>
+                  <img title="" style="" alt="" src="{$r[thumb]}" type="zoom"></a>
+              </div>
+            </div>
+          </div>
+          {/loop}
+          {/pc}
+      </div>
+  <div id="rowed09ea5be42a3755c64cc864e076c3d6" class="row pure-g      limit-row-width   context-menu-active" data-id="ed09ea5be42a3755c64cc864e076c3d6" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="0">
+      <div class="pure-g row-inner">
+          <div id="cell1634ecb16f38e53315080ab2908a0f57" class="cell pure-u-1 pure-u-md-1-5" data-id="1634ecb16f38e53315080ab2908a0f57" type="cell" inplate="0" style="">
+      </div><div id="cell57ddbfd04089d729f0efc584663af6b4" class="cell pure-u-1 pure-u-md-1-5" data-id="57ddbfd04089d729f0efc584663af6b4" type="cell" inplate="0" style="">
+      </div><div id="cell0a1bd84f1d3e75a40cba44a81602e1ca" class="cell pure-u-1 pure-u-md-1-5" data-id="0a1bd84f1d3e75a40cba44a81602e1ca" type="cell" inplate="0" style="">
+        <div id="blockf068b7e50d76037c17288d00c3a17ca4" data-id="f068b7e50d76037c17288d00c3a17ca4" type="button" class="block_layer " inplate="0" lock="false">
+    <div id="block_content_f068b7e50d76037c17288d00c3a17ca4" class="block_content content_button " style="">
+      
+              <a class="button size-small button-style-6 color-none" id="block-button_f068b7e50d76037c17288d00c3a17ca4" href="/index.php?m=content&c=index&a=lists&catid=96" target="" data-linktype="page" data-link='{"link_page":"12991","target":""}'>MORE+</a>
+    </div>
+  </div></div><div id="cellc1a8ecec18879bd4d62cccb5a9f05981" class="cell pure-u-1 pure-u-md-1-5" data-id="c1a8ecec18879bd4d62cccb5a9f05981" type="cell" inplate="0" style="">
+      </div><div id="cell2690c857b44cd9c9f682abb9513d830c" class="cell pure-u-1 pure-u-md-1-5" data-id="2690c857b44cd9c9f682abb9513d830c" type="cell" inplate="0" style="">
+      </div>    </div>
+  </div><div id="row953506572d00a5dec7cca62b45a2608a" class="row pure-g     limit-row-width" data-id="953506572d00a5dec7cca62b45a2608a" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="0">
+      <div class="pure-g row-inner">
+          <div id="cell8ff1904c0e793988d13fc55cec0216fe" class="cell pure-u-1" data-id="8ff1904c0e793988d13fc55cec0216fe" type="cell" inplate="0" style="">
+        <div id="block9839913395c8075bb0a7f5ec540fb135" data-id="9839913395c8075bb0a7f5ec540fb135" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_9839913395c8075bb0a7f5ec540fb135" class="block_content content_title " style="position: relative;">
+      
+    
+     <p class=""><span style="font-size:20px;"><span style="line-height:1.6;"><span style="color:#393939;">关于我们</span></span></span></p>
+  
+  <p class=""><span style="line-height:1.6;"><span style="font-family:arial,helvetica,sans-serif;"><span style="color:#666;"><span style="font-size:16px;">ABOUT &nbsp;US</span></span></span></span></p>
+    </div>
+  </div></div>    </div>
+  </div><div id="rowc68d2f8302c7bf44a38c32aca9bd042d" class="row pure-g   limit-row-width" data-id="c68d2f8302c7bf44a38c32aca9bd042d" type="row" style="padding-top: 1%; padding-bottom: 1%; z-index: 64;" inplate="0">
+      <div class="pure-g row-inner">
+          <div id="cell6b69179420a7a1560b14c6f2586c4300" class="cell  pure-u-lg-1-2 pure-u-sm-1-2 pure-u-1-1" data-id="6b69179420a7a1560b14c6f2586c4300" type="cell" inplate="0" style="padding-right: 1%; padding-left: 1%;">
+        <div id="blocke063965a5a211b91ce2ab1db5f8a6ca3" data-id="e063965a5a211b91ce2ab1db5f8a6ca3" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_e063965a5a211b91ce2ab1db5f8a6ca3" class="block_content content_title " style="padding-top: 2.56%; padding-bottom: 1%; position: relative;">
+      
+    
+     <p><span style="font-size:20px"><span style="background-color:rgb(255, 255, 255); box-sizing:border-box; font-family:arial,microsoft yahei,\\5fae软雅黑,\\5b8b体,malgun gothic,meiryo,sans-serif; font-variant-east-asian:normal; font-variant-numeric:normal; line-height:21px">ABOUT US</span></span><br>
+  <font color="#333333"><span style="font-size:20px">公 司 简 介</span></font></p>
+    </div>
+  </div>  <div id="blockd36ff6cd4108164d5c902b7eafd19369" data-id="d36ff6cd4108164d5c902b7eafd19369" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_d36ff6cd4108164d5c902b7eafd19369" class="block_content content_title " style="border-top: 2px solid rgb(57, 57, 57); padding-right: 0%; padding-left: 0%; margin-right: 44%; margin-left: 44%; padding-bottom: 4%;">
+      
+    
+     <p>&nbsp;</p>
+    </div>
+  </div>  <div id="blockc960d6cc30121b679ea807e2e6ffc443" data-id="c960d6cc30121b679ea807e2e6ffc443" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_c960d6cc30121b679ea807e2e6ffc443" class="block_content content_title " style="padding: 1% 0% 4%; position: relative;text-align:left;">
+      {pc:get sql="SELECT * from se_page where catid = 93" num="1" return="data" }
+      {loop $data $r}
+      {$r['content']}
+      {/loop}
+      {/pc}
+    </div>
+  </div>  <div id="block9d4bc475285fe16a5d3f85b75aa8f903" data-id="9d4bc475285fe16a5d3f85b75aa8f903" type="button" class="block_layer " inplate="0" lock="false">
+    <div id="block_content_9d4bc475285fe16a5d3f85b75aa8f903" class="block_content content_button " style="">
+      
+              <a class="button size-small button-style-6 color-none" id="block-button_f068b7e50d76037c17288d00c3a17ca4" style="padding-top: 2%;" href="/index.php?m=content&c=index&a=lists&catid=93" target="" data-linktype="page" data-link='{"link_page":"12916","target":""}'>查看更多</a>
+    </div>
+  </div></div><div id="cell91a572fdb9b33f74dd94467b04316272" class="cell  pure-u-lg-1-2 pure-u-sm-1-2 pure-u-1-1" data-id="91a572fdb9b33f74dd94467b04316272" type="cell" inplate="0" style="padding-left: 1%; padding-right: 1%; padding-top: 1%; background-size: auto;">
+        <div id="block1786f59707407b6f06c3908a1ad02b4e" data-id="1786f59707407b6f06c3908a1ad02b4e" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_1786f59707407b6f06c3908a1ad02b4e" class="block_content content_image " style="">
+      {php $catpics = json_decode($CATEGORYS[92]['catpics'], true);}
+     <img title="" id="block-image_1786f59707407b6f06c3908a1ad02b4e" style="" alt="" src="{$catpics[0]['url']}" type="zoom" class="">
+    </div>
+  </div></div>    </div>
+  </div><div id="rowea95bc6968931415086d37772d69efba" class="row pure-g  limit-row-width" data-id="ea95bc6968931415086d37772d69efba" type="row" style="padding-top: 1%; padding-bottom: 1%;" inplate="0">
+      <div class="pure-g row-inner">
+          <div id="cell82e59d8d37ac51352e38166c25713101" class="cell pure-u-1 pure-u-md-1-2" data-id="82e59d8d37ac51352e38166c25713101" type="cell" inplate="0" style="">
+        <div id="block902d962d611764dc02357e7a7d2c00e5" data-id="902d962d611764dc02357e7a7d2c00e5" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
+    <div id="block_content_902d962d611764dc02357e7a7d2c00e5" class="block_content content_image " style="padding: 0% 100px 0% 97px;">
+    {pc:link action="type_list" typeid="90" siteid="$siteid" linktype="1" order="listorder ASC" num="1" return="pic_link"}
+    {loop $pic_link $v}
+     <img title="" id="block-image_902d962d611764dc02357e7a7d2c00e5" style="" alt="" src="{$v['logo']}" type="zoom">
+     {/loop}
+     {/pc}
+    </div>
+  </div></div><div id="cell03e4759ceea734659abbe507e1e2c5eb" class="cell pure-u-1 pure-u-md-1-2" data-id="03e4759ceea734659abbe507e1e2c5eb" type="cell" inplate="0" style="padding-left: 1%; padding-right: 1%;">
+        <div id="blockb3b0db835113f55642d3f0e2126fa246" data-id="b3b0db835113f55642d3f0e2126fa246" type="article_list" class="block_layer " inplate="0" lock="false">
+    <div id="block_content_b3b0db835113f55642d3f0e2126fa246" class="block_content content_article_list " style="padding-right: 1%; padding-left: 1%;">
+      <div class="article_list color-default article-list-1 noThumb noCategory size-normal" data-param='{&quot;row_num&quot;:&quot;4&quot;,&quot;show_page&quot;:&quot;0&quot;,&quot;detail_link&quot;:&quot;13401&quot;,&quot;cate_link&quot;:&quot;13126&quot;,&quot;__hash__&quot;:&quot;77505057e2279cb8c972db9059210057_60f6334c00cb861c59bf84be8bc666b6&quot;}'>
+    {pc:content action="lists" catid="98" num="10" order="id DESC" page="$page" moreinfo="1"}
+    {loop $data $r}
+    <div class="inner">
+      <dl>
+        <dt class="thumb">
+          <a href="{$r['url']}">
+            <img src="{$r['thumb']}" title="K&N 开关质保须知" />
+          </a>
+        </dt>
+        <dd class="info">
+          <h3>
+            <span class="category">[<a href="/index.php?m=content&c=index&a=lists&catid=98">公司新闻</a>]</span>
+            <a href="{$r['url']}" class="title" title="{$r[title]}">{$r[title]}<i class="iconfont ico-sticky">&#xeb3e;</i>
+            </a>
+          </h3>
+          <p class="time" data-year="{date('Y',$r[inputtime])}" data-month="{date('m',$r[inputtime])}" data-date="{date('d',$r[inputtime])}"><span>{date('Y-m-d',$r[inputtime])}</span></p>
+          <div class="abstract"></div>
+          <p class="more"><a href="{$r['url']}">查看详情</a></p>
+        </dd>
+      </dl>
+    </div>
+    {/loop}
+    {/pc}
+  </div>
+  <script>
+    $(function () {
+      Base.plugin.load('articleSlider', ['https://static.site.2003001.com/Public/js/plugins/bxSlider/jquery.bxslider.min.js'], function () {
+        Base.register('article.loadSlider', function () {
+          return function (blockSN) {
+            var
+              blockSN = blockSN.replace(/^block/g, ''),
+              articleList = $('#block' + blockSN + ' .article_list'),
+              articleListInner = articleList.children('.inner');
+            if (articleList.hasClass('mode-slider')) {
+              articleListInner.bxSlider({
+                slideSelector: 'dl',
+                maxSlides: 4,
+                slideWidth: 250,
+                slideMargin: 20,
+                shrinkItems: true,
+                adaptiveHeight: true,
+                auto: true,
+                autoHover: true
+              });
+            }
+          }
+        });
+        // init
+        Base.article.loadSlider('b3b0db835113f55642d3f0e2126fa246');
+      });
+      if (!window.EDIT_MODE) {
+        Base.plugin.load('articleList', function () {
+          var
+            blockSN = 'b3b0db835113f55642d3f0e2126fa246'.replace(/^block/g, ''),
+            currentCtn = $('#block' + blockSN),
+            articleList = currentCtn.find('.article_list'),
+            listParam = $.parseJSON('{"row_num":"4","show_page":"0","detail_link":"13401","cate_link":"13126","__hash__":"77505057e2279cb8c972db9059210057_60f6334c00cb861c59bf84be8bc666b6"}');
+          if (listParam.cate_target === '_blank') {
+            articleList.find('.category a').attr('target', '_blank');
+          }
+          if (listParam.detail_target === '_blank') {
+            articleList.find('.thumb a').attr('target', '_blank');
+            articleList.find('a.title').attr('target', '_blank');
+          }
+  
+          if (articleList.hasClass('article-list-7')) {
+            articleList.on('click', '.info', function (e) {
+              var $this = $(this);
+              $this.siblings('.thumb').children('a').get(0).click();
+            })
+          }
+        });
+      }
+    });
+  </script>  </div>
+  </div></div>    </div>
+  </div><div id="row5669846af30ee2d6e18e55655e2fe77e" class="row pure-g  limit-row-width" data-id="5669846af30ee2d6e18e55655e2fe77e" type="row" style="padding-top: 1%; padding-bottom: 2%;" inplate="0">
+      <div class="pure-g row-inner">
+          <div id="cellfffd5136a53ff78de5b8cb69a654ca23" class="cell pure-u-1 pure-u-md-1-5" data-id="fffd5136a53ff78de5b8cb69a654ca23" type="cell" inplate="0" style="">
+      </div><div id="cellf5de4fcb2cc04f07eace11e68be4fb73" class="cell pure-u-1 pure-u-md-1-5" data-id="f5de4fcb2cc04f07eace11e68be4fb73" type="cell" inplate="0" style="">
+      </div><div id="cellaef43eeae3f3cd847a9ffe4108dbe6b7" class="cell pure-u-1 pure-u-md-1-5" data-id="aef43eeae3f3cd847a9ffe4108dbe6b7" type="cell" inplate="0" style="">
+        <div id="block126ef895b811a6d90c0d9ce9d0dbf340" data-id="126ef895b811a6d90c0d9ce9d0dbf340" type="button" class="block_layer " inplate="0" lock="false">
+    <div id="block_content_126ef895b811a6d90c0d9ce9d0dbf340" class="block_content content_button " style="">
+      
+              <a class="button size-small button-style-6 color-none" id="block-button_f068b7e50d76037c17288d00c3a17ca4" href="/index.php?m=content&c=index&a=lists&catid=98" target="" data-linktype="page" data-link='{"link_page":"13126","target":""}'>MORE+</a>
+    </div>
+  </div></div><div id="cella3718e8adde30f57a07a15421280fdc2" class="cell pure-u-1 pure-u-md-1-5" data-id="a3718e8adde30f57a07a15421280fdc2" type="cell" inplate="0" style="">
+      </div><div id="cellcf36e68e088695307dd19abf140aab6e" class="cell pure-u-1 pure-u-md-1-5" data-id="cf36e68e088695307dd19abf140aab6e" type="cell" inplate="0" style="">
+      </div>    </div>
+  </div></div><div id="footer8ce3af66c51a3e53f173e51343bd220a" data-id="8ce3af66c51a3e53f173e51343bd220a" class="layout-content footer" type="footer" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%; margin-bottom: 0%; background-color: rgb(0, 0, 0);" inplate="1">
+    <div id="row9c8fffefdccd99f002c48f4f103f067a" class="row pure-g   limit-row-width" data-id="9c8fffefdccd99f002c48f4f103f067a" type="row" style="" inplate="1">
+      <div class="pure-g row-inner">
+          <div id="cell2566b4c618afe954c7e42218fce8c252" class="cell pure-u-1" data-id="2566b4c618afe954c7e42218fce8c252" type="cell" inplate="1" style="padding-top: 1%;">
+        <div id="block1d2d899fc866c5766194560ae3770b28" data-id="1d2d899fc866c5766194560ae3770b28" type="title" class="block_layer anim anim-pause" inplate="1" lock="false">
+    <div id="block_content_1d2d899fc866c5766194560ae3770b28" class="block_content content_title " style="position: relative;">
+      
+    
+            
+    </div>
+  </div></div>    </div>
+  </div>
+{template "content","footer"}

@@ -1,0 +1,300 @@
+{template "content","top"}
+<div id="content4b6ff85a2c1815940517992147125a2c" data-id="4b6ff85a2c1815940517992147125a2c" class="layout-content content" type="content" style="" inplate="0">
+	<div id="rowf4c88911b6e8b912df915eb7f693dcfd" class="row pure-g  limit-row-width" data-id="f4c88911b6e8b912df915eb7f693dcfd" type="row" style="padding-top: 2%; padding-left: 1%; padding-bottom: 4%;" inplate="0">
+	  <div class="pure-g row-inner">
+		  <div id="cell9929b8dfa865285372c164ff2cffb5db" class="cell pure-u-1 pure-u-md-1-4" data-id="9929b8dfa865285372c164ff2cffb5db" type="cell" inplate="0" style="">
+		<div id="block094ddbe2556c2799e5bfe68d01e6a9ea" data-id="094ddbe2556c2799e5bfe68d01e6a9ea" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+	<div id="block_content_094ddbe2556c2799e5bfe68d01e6a9ea" class="block_content content_title " style="padding-top: 2%; padding-bottom: 2%; background-color: rgb(2, 178, 181);">
+	  
+	
+	 <p><span style="line-height:1.6;"><span style="color:#FFFFFF;"><span style="font-size:22px;">产品中心</span></span></span></p>
+  
+  <p class=""><span style="line-height:1.6;"><span style="font-size:18px;"><span style="color:#FFFFFF;">PRODUCT</span></span></span></p>
+	</div>
+  </div>  <div id="block22c6705d3cef8f4be806f459655808f3" data-id="22c6705d3cef8f4be806f459655808f3" type="product_category" class="block_layer " inplate="0" lock="false">
+	<div id="block_content_22c6705d3cef8f4be806f459655808f3" class="block_content content_product_category " style="">
+	  <div class="product_category nav mode-horizontal drop-down collapse-default nav-style-4 size-normal color-none" data-param="{&quot;cate_link&quot;:&quot;12991&quot;,&quot;cate_id&quot;:[22483,22482,22481,22480],&quot;__hash__&quot;:&quot;0d5ed4971ff7ead5396bc09225ffbbfd_f8d0bdfc014e18549c01f16db17e3e63&quot;}">
+	  <ul>
+		{pc:content action="category" catid="96" num="25" siteid="$siteid" order="listorder ASC"}
+        {loop $data $r}
+        <li class="">
+            <a href="{$r[url]}" data-name="{$r[catname]}">{$r[catname]}</a>
+        </li>
+        {/loop}
+        {/pc}
+		</ul>
+		<script type="text/javascript">
+		$(function () {
+		  var
+			currentCtn = $('#block22c6705d3cef8f4be806f459655808f3'),
+			navbar = currentCtn.find('.nav'),
+			currentClass = 'current';
+		  if (!window.EDIT_MODE) {
+			Base.plugin.load('productNavbar', function () {
+			  var
+				className = $.trim(navbar.attr('class')),
+				styleClassReg = /collapse-\w+/,
+				collapseMode = className.match(styleClassReg) ? className.match(styleClassReg)[0] : 'collapse-default',
+				cateParam = $.parseJSON('{"cate_link":"12991","cate_id":[22483,22482,22481,22480],"__hash__":"0d5ed4971ff7ead5396bc09225ffbbfd_f8d0bdfc014e18549c01f16db17e3e63"}'),
+				isScrollMode = ~className.indexOf('mode-scroll');
+			  // check site mode, 
+			  // and fix collapseMode
+			  if ($(window).width() <= Base.siteInfo.padWidth) {
+				collapseMode = 'collapse-click';
+			  }
+			  // add default collapse for old format
+			  navbar.addClass(collapseMode);
+			  switch (collapseMode) {
+				case 'collapse-default':
+				  // hover(pc)
+				  navbar.find('>ul>li')
+					.on('mouseenter.nav', function () {
+					  var _this = $(this);
+					  _this.siblings().removeClass(currentClass).end().addClass(currentClass);
+					})
+					.on('mouseleave.nav', function () {
+					  $(this).removeClass(currentClass);
+					});
+				  break;
+				case 'collapse-expand':
+				  break;
+				case 'collapse-click':
+				  navbar.find('li a')
+					.on('click.nav', function (e) {
+					  var _this = $(this);
+					  if (_this.next('ul').length && !isScrollMode) {
+						e.preventDefault();
+					  }
+					  _this.parent().siblings().removeClass(currentClass).end().toggleClass(currentClass);
+					});
+				  break;
+			  }
+			  // set target
+			  if (cateParam.cate_target === '_blank') {
+				navbar.find('a').attr('target', '_blank');
+			  }
+			});
+		  } else {
+			if (navbar.find('>ul>li').length > 1) {
+			  // for customer style => current item
+			  if (!navbar.find('.' + currentClass).length) {
+				navbar.find('li').eq(0).children('a').addClass(currentClass);
+			  }
+			}
+		  }
+		});
+	  </script>
+	  </div>  </div>
+  </div>  <div id="block45deddffe0a2ea653186f057d1734a30" data-id="45deddffe0a2ea653186f057d1734a30" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
+	<div id="block_content_45deddffe0a2ea653186f057d1734a30" class="block_content content_image " style="margin-top: 1%; margin-bottom: 1%; padding-right: 40px; padding-left: 40px;">
+	  
+	 <img id="block-image_45deddffe0a2ea653186f057d1734a30" src="https://responsive-img.4000253533.com/Upload/9a881027-c3ef-4dd5-b63a-2bf9df9487ab/5e0d6509e117f.jpg" type="zoom" class="" style="" alt="" title="">
+	</div>
+  </div>  <div id="block89ea52b1dd33de350a656efeba1ed5fb" data-id="89ea52b1dd33de350a656efeba1ed5fb" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
+	<div id="block_content_89ea52b1dd33de350a656efeba1ed5fb" class="block_content content_title " style="padding-top: 2%; padding-bottom: 2%; background-color: rgb(2, 178, 181);">
+	  
+	
+	 <p><span style="line-height:1.6;"><span style="color:#FFFFFF;"><span style="font-size:22px;">联系我们</span></span></span></p>
+  
+  <p><span style="line-height:1.6;"><span style="font-size:18px;"><span style="color:#FFFFFF;">CONTACT US</span></span></span></p>
+	</div>
+  </div>
+  {template "content","contact_us_common"}
+  </div><div id="cell30c06a4f7080b54c6a757357cf235945" class="cell pure-u-1 pure-u-md-3-4" data-id="30c06a4f7080b54c6a757357cf235945" type="cell" inplate="0" style="padding-right: 2%; padding-left: 2%;">
+		<div id="blockd810ae80dccb55f8547a9c5a0aff1c7f" data-id="d810ae80dccb55f8547a9c5a0aff1c7f" type="product_detail" class="block_layer " inplate="0" lock="false">
+	<div id="block_content_d810ae80dccb55f8547a9c5a0aff1c7f" class="block_content content_product_detail " style="padding-top: 1%; padding-right: 0%; padding-left: 0%;">
+	  <div class="product_detail color-default product-detail-1 nav-display-block nav-position-right">
+	<div class="summary">
+		<div class="thumb">
+			<div class="inner">
+				<div class="view">
+					<a href="{$thumb}" target="_blank" rel="img-view" class="product-view" title="产品图片">
+					<img class="img-product-view jqzoom" src="{$thumb}" alt="{$title}" title="{$title}" />
+					</a>
+				</div>
+				<ul class="thumb-list">
+					<li>
+						<a href="javascript:void(0);" rel="{gallery:'img-view',smallimage:'{$thumb}',largeimage:'{$thumb}'}">
+							<img class="img-thumb" src="{$thumb}" alt="产品图片" title="产品图片" />
+						</a>
+					</li>
+				</ul>
+				<div class="lightbox-thumbs hide">
+					<a href="{$thumb}" data-lightbox="lb-d810ae80dccb55f8547a9c5a0aff1c7f"></a>
+				</div>
+			</div>
+		</div>
+		<div class="info">
+		  	<div class="inner">
+				<h1 class="name">{$title}</h1>
+				<div class="introduction"><p>{$model_number}</p></div>
+				<div class="price">
+					<div class="item-prop">
+						<div class="title">售价: </div>
+						<div class="sale content">￥{$price}</div>
+					</div>
+				</div>
+				<div class="spec"></div>
+			</div>
+		</div>
+	  </div>
+	  <div class="description">
+		<div class="title">产品详情</div> <p>{$content}</p>
+	  </div>
+	  <div class="pre_next">
+		<p>上一个:
+			<a href="{$previous_page[url]}">{$previous_page[title]}</a>      </p>
+		<p>下一个:
+			<a href="{$next_page[url]}">{$next_page[title]}</a>
+				  </p>
+	  </div>
+	  <script type="text/javascript">
+		$(function () {
+		  Base.plugin.load('productSpec', function () {
+			if (!window.EDIT_MODE) {
+			  var
+				$productDetail = $('#blockd810ae80dccb55f8547a9c5a0aff1c7f'),
+				// price
+				$productSalePrice = $productDetail.find('.price .sale'),
+				// stock
+				$productStock = $productDetail.find('.stock'),
+				// add cart
+				$addCart = $productDetail.find('.btn-add-cart'),
+				$itemPropDiy = $productDetail.find('.item-prop-diy'),
+				$cartForm = $productDetail.find('.form-buy-goods'),
+				// spec
+				productSpec = $.parseJSON('[]' || '{}'),
+				getMatchedSpec = function () {
+				  var
+					$specRow = $productDetail.find('.row-spec'),
+					selectedSpecKey = [],
+					priceSpec,
+					price = 0;
+				  $specRow.each(function () {
+					selectedSpecKey.push($(this).find('.item-selected').attr('data-key'));
+				  });
+				  // match it
+				  priceSpec = productSpec.filter(function (spec) {
+					return selectedSpecKey.every(function (key) {
+					  return ~spec.key.indexOf(key);
+					});
+				  });
+  
+				  return priceSpec[0] || {};
+				};
+  
+			  //if orderable
+			  if ($cartForm.length) {
+				$addCart.on('click', function (e) {
+				  var
+					url = '/Front/Cart/ajaxAddCart',
+					data = $cartForm.serialize() + '&goods_spec=' + (getMatchedSpec().key || '');
+				  $.post(url, data, function (res) {
+					Base.ui.msgBox({
+					  content: res.msg,
+					  type: res.status < 0 ? 'error' : 'success'
+					}, function () {
+					  // if cart widget, update ui
+					  if (Base.cart) {
+						Base.cart.action.getCartList();
+					  }
+					});
+				  });
+				});
+  
+				var
+				  $up = $productDetail.find('.up'),
+				  $down = $productDetail.find('.down'),
+				  $num = $productDetail.find('input[name="goods_num"]'),
+				  count = parseInt($num.val(), 10);
+				$up.on('click', function () {
+				  $num.val(parseInt($num.val(), 10) + 1);
+				});
+				$down.on('click', function () {
+				  $num.val(Math.max(parseInt($num.val(), 10) - 1, 1));
+				});
+				$num.on('blur', function () {
+				  $num.val(Math.max(parseInt($num.val(), 10), 1));
+				});
+			  }
+  
+			  //if item prop diy
+			  if ($itemPropDiy.length) {
+				$itemPropDiy.on('click', 'li', function () {
+				  var
+					$this = $(this),
+					matchedSpec;
+				  // set ui
+				  $this.siblings().removeClass('item-selected').end().addClass('item-selected');
+				  // get spec
+				  matchedSpec = getMatchedSpec();
+				  // set price
+				  $productSalePrice.text('￥' + matchedSpec.price);
+				  // set stock
+				  $productStock.find('em').text(matchedSpec.store_count).end().removeClass('hide');
+				});
+				$itemPropDiy.each(function (idx) {
+				  $itemPropDiy.eq(idx).find('li').eq(0).trigger('click');
+				});
+			  }
+			}
+		  });
+		  Base.plugin.load('jqZoom', ['https://static.site.2003001.com/Public/js/plugins/jqZoom/jquery.jqzoom.min.js', 'https://static.site.2003001.com/Public/js/plugins/lightbox/lightbox.min.js'], function () {
+			if (!window.EDIT_MODE) {
+			  var
+				productDetail = $('#blockd810ae80dccb55f8547a9c5a0aff1c7f'),
+				viewCtn = productDetail.find('.view'),
+				thumbImg = productDetail.find('.img-product-view'),
+				thumbList = productDetail.find('.thumb-list'),
+				productView = productDetail.find('.product-view'),
+				$lightboxThumbs = productDetail.find('.lightbox-thumbs');
+			  if (viewCtn.length) {
+				if (!Base.siteInfo.isMobile) {
+				  // pc mode
+				  if (productView.parents('.product-detail-1').length) {
+					// thumb on left
+					productView.jqzoom();
+				  } else {
+					// thumb on right
+					productView.jqzoom({
+					  position: 'left'
+					});
+				  }
+				} else {
+				  thumbList.on('click.preview', '.img-thumb', function () {
+					thumbImg.attr('src', this.src);
+					thumbList.find('a').removeClass('zoomThumbActive');
+					$(this).parent().addClass('zoomThumbActive');
+				  });
+				}
+  
+				productView.on('click', function (e) {
+				  e.preventDefault();
+				  var thumbIndex = thumbList.find('a').index(thumbList.find('.zoomThumbActive'));
+				  $lightboxThumbs.find('a').eq(thumbIndex).trigger('click');
+				});
+  
+				thumbList.on('mouseenter.viewThumb', 'a', function () {
+				  $(this).trigger('click');
+				});
+				thumbList.find('.img-thumb').eq(0).trigger('click');
+			  }
+			}
+		  });
+		});
+	  </script>
+	  </div>  </div>
+  </div></div>    </div>
+  </div></div><div id="footer8ce3af66c51a3e53f173e51343bd220a" data-id="8ce3af66c51a3e53f173e51343bd220a" class="layout-content footer" type="footer" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%; margin-bottom: 0%; background-color: rgb(0, 0, 0);" inplate="1">
+	<div id="row9c8fffefdccd99f002c48f4f103f067a" class="row pure-g   limit-row-width" data-id="9c8fffefdccd99f002c48f4f103f067a" type="row" style="" inplate="1">
+	  <div class="pure-g row-inner">
+		  <div id="cell2566b4c618afe954c7e42218fce8c252" class="cell pure-u-1" data-id="2566b4c618afe954c7e42218fce8c252" type="cell" inplate="1" style="padding-top: 1%;">
+		<div id="block1d2d899fc866c5766194560ae3770b28" data-id="1d2d899fc866c5766194560ae3770b28" type="title" class="block_layer anim anim-pause" inplate="1" lock="false">
+	<div id="block_content_1d2d899fc866c5766194560ae3770b28" class="block_content content_title " style="position: relative;">
+	  
+	
+			
+	</div>
+  </div></div>    </div>
+  </div>
+{template "content","footer"}

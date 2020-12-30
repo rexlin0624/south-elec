@@ -1,0 +1,20 @@
+{template "content","header"}
+<div id="inner-page">
+  <div class="top-center" style="background-color: #fff;background-image: url('{$CATEGORYS[$catid]['image']}');">
+  </div>
+  <div class="container">
+    <div class="col-md-12">
+      <ol class="breadcrumb" style="text-align: right;">
+        <li><a target="_blank" href="{siteurl($siteid)}">首页</a></li>
+        <li><a target="_blank" href="{$CATEGORYS[$catid]['url']}">{$CATEGORYS[$catid]['catname']}</a></li>
+      </ol>
+    </div>
+    {pc:content action="category" catid="14" num="25" siteid="$siteid" order="listorder ASC"}
+    {loop $data $r}
+    <h3>{$r['catname']}</h3>
+    <img src="{$r['image']}" width="100%">
+   {/loop}
+    {/pc}
+  </div>
+</div>
+{template "content","footer"}

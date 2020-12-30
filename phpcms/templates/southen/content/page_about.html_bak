@@ -1,0 +1,139 @@
+{template "content","header"}
+{pc:get sql="SELECT * FROM lldz_category_ext WHERE catid = 9" cache="3600" page="$page" return="data_ext"}
+{loop $data_ext $key $val}
+{php $ext_data = json_decode($val['data'], true)}
+{/loop}
+{/pc}
+<div id="inner-page">
+    <div class="top-center">
+        <h2>{$CATEGORYS[$catid]['catname']}</h2>
+        <p class="lead">{$CATEGORYS[$catid]['description']}</p>
+    </div>
+    <div class="container">
+        <div class="col-md-12">
+            <ol class="breadcrumb" style="text-align: right;">
+                <li><a target="_blank" href="{siteurl($siteid)}">首页</a></li>
+                <li><a target="_blank" href="{$CATEGORYS[$catid]['url']}">{$CATEGORYS[$catid]['catname']}</a></li>
+            </ol>
+        </div>
+        <div class="about-us">
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <img src="{$ext_data['company_logo']}" class="img-responsive" alt=""/>
+                </div>
+                <div class="col-md-8 col-sm-6">
+                    <p>
+                        <b>{$ext_data['company_title']}</b>{$ext_data['company_description']}</p>
+                    <p><b>{$ext_data['company_possess_title']}</b></p>
+                    <p class="p_indent">{$ext_data['company_possess_description']}</p>
+                    <p><b>{$ext_data['company_tenet_title']}</b></p>
+                    <p class="p_indent">{$ext_data['company_tenet_description']}</p>
+                    <p><b>{$ext_data['company_spirit_title']}</b></p>
+                    <p class="p_indent">{$ext_data['company_spirit_description']}</p>
+                    <p><b>{$ext_data['company_mission_title']}</b></p>
+                    <p class="p_indent">{$ext_data['company_mission_description']}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <!-- <h3>Our History</h3> -->
+                    <p style="margin-top: 20px;"><strong>{$ext_data['company_clture_title']}</strong><br>
+                        {$ext_data['company_clture_description']}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="middle">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+
+                <h3>关于我们的一些事实</h3>
+                <br>
+                {php $category_icon=array('27' => 'fa fa-smile-o pull-left fa-3x', '28' => 'fa fa-check-square-o pull-left fa-3x', '29' => 'fa fa-trophy pull-left fa-3x')}
+                {pc:content action="category" catid="30" num="25" siteid="$siteid" order="listorder ASC"}
+                {loop $data $r}
+                <div class="media"> <i class="{$category_icon[$r[catid]]}"></i>
+                    <div class="media-body">
+                        <h3 class="media-heading">{$r[catname]}</h3>
+                        {$r[description]}</div>
+                </div>
+                <br>
+                {/loop}
+                {/pc}
+            </div>
+            <div class="col-sm-6">
+                <div class="accordion">
+                    <h3>问题 & 解答</h3>
+                    <br>
+                    <div class="panel-group" id="accordion1">
+                        {pc:content action="category" catid="31" num="25" siteid="$siteid" order="listorder ASC"}
+                        {loop $data $r}
+                        <div class="panel panel-default">
+                            <div class="panel-heading active>
+                                <h3 class="panel-title"> <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1"> {$r[catname]} <i class="fa fa-angle-right pull-right"></i> </a> </h3>
+                            </div>
+                            <div id="collapseOne1" class="panel-collapse collapse in ">
+                                <div class="panel-body">
+                                    <div class="media accordion-inner">
+                                        <div class="media-body">{$r[description]}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/loop}
+                        {/pc}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="testimonials" class="text-center">
+    <div class="container">
+        <div class="center">
+            <h2>企业理念</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="top_banner">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            {pc:content action="category" catid="34" num="25" siteid="$siteid" order="listorder ASC"}
+                            {loop $data $r}
+                            <div class="swiper-slide"><p class="about_swipter_p">{$r[catname]}{$r[description]}</p></div>
+                            {/loop}
+                            {/pc}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="swiper-pagination col-md-12 col-xs-12"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<section id="get-started">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>想加入我们这个大家庭吗？</h2>
+                <a target="_blank" href="/index.php?m=content&c=index&a=lists&catid=15" class="btn btn-primary">联系我们</a> </div>
+        </div>
+    </div>
+</section>
+{template "content","footer"}
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: 2500,
+        autoplayDisableOnInteraction: false
+    });
+</script>

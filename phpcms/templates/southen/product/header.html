@@ -1,0 +1,82 @@
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>产品配置器</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="description" content="{$SEO['description']}">
+    <meta name="keywords" content="{$SEO['keyword']}">
+    <script type="text/javascript" src="/statics/layout/eao/script/modernizr.js"></script>
+    <script type="text/javascript" src="/statics/layout/eao/script/selectivizr.js"></script>
+    <link rel="stylesheet" type="text/css" href="/statics/layout/eao/combine.css" />
+</head>
+<?php $settings=[];?>{pc:get sql="SELECT setting FROM se_site WHERE siteid=1" return="data"}{loop $data $val}<?php $settings=string2array($val['setting'])?>{/loop}{/pc}
+<body>
+<div id="page">
+    <div class="row">
+        <ul class="column grid_3  service_links">
+            <li><a href="/index.php?m=product&c=index&a=init">首页</a></li>
+        </ul>
+        <div class="column right grid_5 logo">
+            <a href="/index.php" target="_blank"><img src="{$settings['logo']}" alt="logo"></a>
+        </div>
+    </div>
+
+    <?php
+        $controller = $_GET['c'];
+        $action = $_GET['a'];
+        $type = $_GET['type'];
+        $isMarket = $controller == 'index' && $action == 'step' && $type == 1;
+        $isFunction = $controller == 'index' && $action == 'functions';
+        $isSeries = $controller == 'index' && $action == 'step' && $type == 2;
+        $isSearch = $controller == 'search';
+    ?>
+    <div class="row">
+        <div class="column grid_3"></div>
+        <div class="column grid_5 float_right">
+            <ul class="nav row">
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=step&type=1"{if $isMarket} id="activer_link"{/if}>市场</a>
+                    <ul class="nav2">
+                        <div class="col">
+                            {loop $market_list $market}
+                            <li>
+                                <a href="/index.php?m=product&c=index&a=functions&type=1&id={$market['id']}" >{$market['title']}</a>
+                            </li>
+                            {/loop}
+                        </div>
+                    </ul>
+                </li>
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=functions"{if $isFunction} id="activer_link"{/if}>功能</a>
+                    <ul class="nav2 small">
+                        <div class="col">
+                            {loop $function_list $function}
+                            <li>
+                                <a href="/index.php?m=product&c=index&a=lists&functions_id={$function['id']}">{$function['title']}</a>
+                            </li>
+                            {/loop}
+                        </div>
+                    </ul>
+                </li>
+                <li class="column">
+                    <a href="/index.php?m=product&c=index&a=step&type=2"{if $isSeries} id="activer_link"{/if}>系列</a>
+                    <ul class="nav2 small">
+                        <div class="col">
+                            {loop $series_list $series}
+                            <li>
+                                <a href="/index.php?m=product&c=index&a=functions&type=2&id={$series['id']}" >{$series['title']}</a>
+                            </li>
+                            {/loop}
+                        </div>
+                    </ul>
+                </li>
+                <li class="column">
+                    <a href="/index.php?m=product&c=search&a=init"{if $isSearch} id="activer_link"{/if}>参数搜索</a>
+                    <ul class="nav2 small"></ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr>

@@ -1,0 +1,76 @@
+{template "content","top"}
+<div class="content-layout form-horizontal" id="design" lab="0" initlab="0">
+    <div class="design group draggable_area design_main" id="web_design_main">
+        <div id="public_set">
+            <div class="modulebox box_webset" id="com_9"></div>
+        </div>
+        <div id="page_set">
+            <div class="hide"></div>
+        </div>
+        <div id="member_lan">
+            <div class="modulebox box_member" id="com_7">
+                <style>#com_7{z-index: 1;}
+                #member_com_7{}
+                </style>
+            </div>
+        </div>
+        {template "content","header"}
+        <div id="Web_Main_Head">
+            <div id="web_top_float" class="web_hide_float" style=""></div>
+        </div>
+        <div id="design_edu_main" class="group web_Column">
+            <div id="box_web_float" class="group box_web_main"></div>
+            <div class="modulebox box_banner" id="com_176">
+                <div class="view" id="banner_com_176" style="height: 421px;" data-bwidth="1903" data-bheight="421">
+                    <div class="style_view" id="style_view_com_176">
+                        <style> </style>
+                    </div>
+                    <a class="bannerDiv " style="background-image: url('http://koss.iyong.com/swift/v1/iyong_public/iyong_2631626088743488/image/20180505/1525481907418078802.jpg');" href="javascript:void(0)" target=""></a>
+                </div>
+                <style id="com_176_style">#com_176.modulebox{z-index: 1; position: relative; height: 421px;}#banner_com_176{height: 421px;}</style>
+            </div>
+            <div class="modulebox box_articleDetail box_web_main" id="com_021">
+                <style>#com_021{z-index: 1;}
+                #articleDetail_com_021{display: none;}
+                </style>
+                <div class="style_view"><style>#articleDetail_com_021 {padding-left:0px;padding-top:20px;padding-right:0px;padding-bottom:10px;}
+                </style></div>
+                <div class="view" id="articleDetail_com_021" style="display:block;">
+                    <div class="skin_model_view">
+                        <div class="article_title" id="news_title">站点地图</div>
+                        <div class="article_view clearfix" id="article_content">
+                            {loop $CATEGORYS $childid $c}
+                                {if $c['ismenu']==1 and $c['parentid']==0}<!-- 判断栏目是否设置显示 -->
+                                <a href="{$c[url]}" style="color: #3881BB;"><strong>{$c[catname]}</strong></a>
+                                <ul style="padding: 0px;margin: 0px;list-style-type: none;margin-bottom: 20px;padding-left: 20px;color: #9CA3A6;">
+                                    {loop $CATEGORYS $childid1 $c1}
+                                    {if $c1[parentid]==$c[catid]}
+                                    <li style="display: inline-block;margin-right: 20px;width: 130px;"><a href="{$c1[url]}">{$c1[catname]}</a></li>
+                                    {/if}
+                                    {/loop}
+                                </ul>
+                                {/if}
+                            {/loop}
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <script>
+                        $(function(){
+                            var props={"articleId":"2948788620067776","readPermission":"0","customerImg":"","customerName":"","isComment":"0"};
+                            webUtil.articleComment(props);
+                        })
+                    </script>
+                </div>
+
+            </div>
+        </div>
+        {template "content","footer"}
+    </div>
+    <div style="position: absolute; opacity: 0.2; z-index: 499; display: none; width: 158px; height: 301px; left: 943px; top: 398px;"></div>
+</div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    document.title = '站点地图';
+</script>

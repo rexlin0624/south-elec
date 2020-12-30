@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{if isset($SEO['title']) && !empty($SEO['title'])}{$SEO['title']}{/if}{$SEO['site_title']}</title>
+	<link rel="stylesheet" type="text/css" href="/statics/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/statics/css/user_main.css">
+	<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<script src="/statics/js/jquery-3.2.1.min.js" ></script>
+	<script src="/statics/js/bootstrap.js" ></script>
+	<meta charset="utf-8">
+	<link rel = "Shortcut Icon" href=/statics/images/icon.ico>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+<header class="landing_header">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+				<a href="index.html"><img src="/statics/images/logo-3.png" width="150"></a>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="landing">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-7">
+				<div class="landing_form">
+					<h3 class="">用户登陆</h3>
+					<form method="post" action="" class="form-horizontal">
+						<input name="dosubmit" type="hidden"/>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">手机号：</label>
+							<div class="col-sm-8">
+								<input id="phone" name="phone" type="text" class="form-control"  placeholder="账号">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label">验证码：</label>
+							<div class="col-sm-8">
+								<div class="input-group">
+									<input name="code" type="text" class="form-control" aria-describedby="basic-addon2">
+									<span class="input-group-addon btn" id="basic-addon2">短信验证</span>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<!--  <label class="col-md-12 col-sm-12 control-label pull-right"><a href="" class="form_label_color">忘记密码？</a></label> -->
+						</div>
+						<div class="form-group">
+							<div class="col-md-12 col-sm-12">
+								<button  type="submit" class="btn btn btn-primary btn-block">登陆</button>
+							</div>
+							<!--  <label class="col-md-12 col-sm-12 text-center form_padding_top"><a href="register.html">免费注册</a></label> -->
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<footer class="landing_footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 text-center">Copyright &copy; 2016 <a href="index.html" >广州丽电电子科技有限责任公司</a>
+				<br>技术支持：赤狐科技
+			</div>
+		</div>
+	</div>
+	</div>
+</footer>
+</body>
+</html>
+<script type="text/javascript">
+    var countdown = 60;
+    var timeout;
+    function settime() {
+        if (countdown == 0) {
+            countdown = 60;
+            $('#basic-addon2').removeClass('disabled');
+            clearTimeout(timeout);
+            $('#basic-addon2').html('短信验证');
+        } else {
+            countdown--;
+            $('#basic-addon2').addClass('disabled');
+            $('#basic-addon2').html('重新发送' + countdown);
+
+            timeout = setTimeout(function () {
+                settime();
+            }, 1000);
+        }
+    }
+
+    $(document).ready(function () {
+        document.title = '会员登录';
+
+        $('#basic-addon2').click(function () {
+            if ($(this).hasClass('disabled')) {
+                return false;
+            }
+            var phone=$("#phone").val();
+            var url = '/index.php?m=member&c=index&a=public_send_sms&siteid=1';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data:{telephone:phone},
+                beforeSend: function () {
+                    settime();
+                },
+                success: function (data) {
+                    console.log('data = ', data);
+                }
+            });
+        });
+    });
+</script>
