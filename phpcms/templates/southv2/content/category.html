@@ -15,9 +15,9 @@
     <div id="block_content_22c6705d3cef8f4be806f459655808f3" class="block_content content_product_category " style="">
       <div class="product_category nav mode-horizontal collapse-default color-none drop-up size-larger nav-style-4" data-param="{&quot;cate_link&quot;:&quot;12991&quot;,&quot;cate_id&quot;:[22483,22482,22481,22480],&quot;__hash__&quot;:&quot;5b3558a9cc5276f26f2af729d26c1a24_01cc146c1747e1b526c8d324e8f9123f&quot;}">
       <ul>
-        {pc:content action="category" catid="96" num="25" siteid="$siteid" order="listorder ASC"}
+        {pc:content action="category" catid="112" num="25" siteid="$siteid" order="listorder ASC"}
         {loop $data $r}
-        {php $navUrl = str_replace('v2/', '', $r['url']);}
+        {php $navUrl = str_replace('en/', '', $r['url']);}
         <li class="">
             <a href="{$navUrl}" data-name="{$r[catname]}">{$r[catname]}</a>
         </li>
@@ -88,7 +88,7 @@
       </div>  </div>
   </div>  <div id="block45deddffe0a2ea653186f057d1734a30" data-id="45deddffe0a2ea653186f057d1734a30" type="image" class="block_layer anim anim-pause" inplate="0" lock="false">
     <div id="block_content_45deddffe0a2ea653186f057d1734a30" class="block_content content_image " style="padding: 0% 40px 1%;">
-      {php $catpics=json_decode($CATEGORYS[96]['catpics'], true)}
+      {php $catpics=json_decode($CATEGORYS[112]['catpics'], true)}
      <img title="" id="block-image_45deddffe0a2ea653186f057d1734a30" style="" alt="" src="{$catpics[0]['url']}" type="zoom">
     </div>
   </div>  <div id="block89ea52b1dd33de350a656efeba1ed5fb" data-id="89ea52b1dd33de350a656efeba1ed5fb" type="title" class="block_layer anim anim-pause" inplate="0" lock="false">
