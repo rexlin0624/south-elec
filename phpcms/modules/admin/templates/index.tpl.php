@@ -115,7 +115,7 @@ var pc_hash = '<?php echo $_SESSION['pc_hash']?>'
         </div>
     </div>
 </div>
-<div class="tab-web-panel hidden" style="position:absolute; z-index:999; background:#fff">
+<div class="tab-web-panel" style="position:absolute; z-index:999; background:#fff">
 <ul>
 <?php foreach ($sitelist as $key=>$v):?>
 	<li style="margin:0"><a href="javascript:site_select(<?php echo $v['siteid']?>, '<?php echo new_addslashes($v['name'])?>', '<?php echo $v['domain']?>', '<?php echo $v['siteid']?>')"><?php echo $v['name']?></a></li>
