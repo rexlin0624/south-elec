@@ -24,7 +24,7 @@ $mapSerialTitle = [
 // 获取空闲数量
 $totalFree = $db->getTotalFree();
 if ($totalFree == 0) {
-	die('No generate pdf queue.' . chr(10) . chr(13));
+	die('No generate pdf queue.' . chr(10) . chr(13) . ' at ' . date('Y-m-d H:i:s'));
 }
 if (!$isDebug) {
     echo '$totalFree = ', $totalFree, chr(10), chr(13);
@@ -119,8 +119,8 @@ $pdf_content = preg_replace('/{led_voltage}/', $props['led_voltage']['options'][
 
 // 军标
 $military_standard = $props['military_standard']['options'][$product['military_standard']];
-$military_standard = $military_standard ? $military_standard : '-';
-$pdf_content = preg_replace('/{military_standard}/', $military_standard, $pdf_content);
+//$military_standard = $military_standard ? $military_standard : '-';
+//$pdf_content = preg_replace('/{military_standard}/', $military_standard, $pdf_content);
 
 // 安装尺寸
 $pdf_content = preg_replace('/{install_size}/', $props['install_size']['options'][$product['install_size']], $pdf_content);
@@ -141,9 +141,15 @@ $bottom = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_bottom.ba
 $product_bg = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_product_bg.base64');
 $pdf_content = preg_replace('/{product_background}/', $product_bg, $pdf_content);
 
-$pdf_j_content = preg_replace('/{title}/', $product['title'] . '：' . $code_j, $pdf_content);
+// 军标
+$pdf_content_with_j = $pdf_content;
+$pdf_content_without_j = $pdf_content;
 
-$pdf_noj_content = preg_replace('/{title}/', $product['title'] . '：' . $code_noj, $pdf_content);
+$pdf_content_with_j = preg_replace('/{military_standard}/', $military_standard, $pdf_content_with_j);
+$pdf_j_content = preg_replace('/{title}/', $product['title'] . '：' . $code_j, $pdf_content_with_j);
+
+$pdf_content_without_j = preg_replace('/{military_standard}/', '', $pdf_content_with_j);
+$pdf_noj_content = preg_replace('/{title}/', $product['title'] . '：' . $code_noj, $pdf_content_without_j);
 
 if ($isDebug) {
     echo '$pdf_path =', $pdf_path,chr(10),chr(13);
