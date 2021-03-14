@@ -24,7 +24,7 @@ $mapSerialTitle = [
 // 获取空闲数量
 $totalFree = $db->getTotalFree();
 if ($totalFree == 0) {
-	die('No generate pdf queue.' . chr(10) . chr(13) . ' at ' . date('Y-m-d H:i:s'));
+	die('No generate pdf queue. At ' . date('Y-m-d H:i:s') . chr(10) . chr(13));
 }
 if (!$isDebug) {
     echo '$totalFree = ', $totalFree, chr(10), chr(13);
