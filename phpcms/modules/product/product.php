@@ -696,6 +696,7 @@ class product extends admin {
         ini_set('memory_limit', '-1');
         $time = time();
         $pc_hash = $_POST['pc_hash'];
+        $lang = (int)$_POST['lang'];
         $arrUnique = [];
 
         $product_props = $this->db_linkage->product_props();
@@ -815,7 +816,7 @@ class product extends admin {
             if (!empty($row)) {
                 $data[] = $row;
                 $code = $this->_generateCode($rowDef);
-                $values[] = '(\'' . $code . '\', \'' . implode('\',\'', $row) . '\', '. $time .')';
+                $values[] = '(' . $lang . ', \'' . $code . '\', \'' . implode('\',\'', $row) . '\', '. $time .')';
             }
         }
 
@@ -835,7 +836,7 @@ class product extends admin {
 //         var_export($data);
 //         exit;
         // 组装插入sql
-        $fields = '`code`,`' . implode('`,`', array_values($mapIndexProp)) . '`,`created_at`';
+        $fields = 'lang, `code`,`' . implode('`,`', array_values($mapIndexProp)) . '`,`created_at`';
         $sql = 'INSERT INTO se_productions (' . $fields . ') VALUES ' . implode(',', $values);
         $this->db->query($sql);
 

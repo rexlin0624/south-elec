@@ -41,6 +41,7 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
         </ul>
     </div>
     <div  class="form-tabs" id="form-1" style="display: block;">
+        <div style="color: #FF0000;">本功能已废弃，请使用导入功能。</div>
         <form method="post" action="?m=product&c=product&a=add" name="myform" id="myform">
             <input type="hidden" name="product[id]" id="product_id" value="<?php echo $id; ?>">
             <table class="table_form" width="100%" cellspacing="0">
@@ -130,7 +131,7 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
                 </tbody>
             </table>
             <div class="bk15"></div>
-            <input type="button" name="dosubmit" id="dosubmit" value="提交" class="button">
+            <input type="button" name="dosubmit" id="dosubmit" value="提交" class="button" style="display: none;">
         </form>
     </div>
     <div class="form-tabs" id="form-2">
@@ -138,6 +139,13 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
             <input type="hidden" name="pc_hash" value="<?php $_GET['pc_hash']; ?>" />
             <table class="table_form" width="100%" cellspacing="0">
                 <tbody>
+                <tr>
+                    <th><strong>语言：</strong></th>
+                    <td>
+                        <input type="radio" name="lang" value="1">&nbsp;中文
+                        <input type="radio" name="lang" value="2">&nbsp;English
+                    </td>
+                </tr>
                 <tr>
                     <th width="120"><strong>上传文件：</strong></th>
                     <td><input id="file" name="file" type="file" /></td>
@@ -153,10 +161,11 @@ $series_id = isset($info['series_id']) ? $info['series_id'] : 0;
             3.　将图片文件和data.xls一起打包成zip压缩包，压缩命名无要求，该压缩包即可上传导入。<br />
             <br />
             压缩包内容示例：<br />
-            - 4.0/17A.jpg<br />
-            - 5.0/16B.png<br />
-            - 6.0/16C.jpg<br />
-            - data.xls
+            - D:/zip/4.0/17A.jpg<br />
+            - D:/zip/5.0/16B.png<br />
+            - D:/zip/6.0/16C.jpg<br />
+            - D:/zip/data.xls<br />
+            在D:/zip目录下选中4.0、5.0、6.0、data.xls进行压缩
             </div>
         </form>
     </div>
@@ -193,6 +202,17 @@ $(document).ready(function(){
     generate_code();
 
     $('#doimport').click(function(){
+        var lang = $('#form-2').find('input[name="lang"]:checked').val();
+        if (!lang) {
+            alert('请先选择语言！');
+            return false;
+        }
+
+        if (!$('#file').val()) {
+            alert('请先上传产品压缩包！');
+            return false;
+        }
+
         $(this).attr('disabled', 'disabled').val('正在导入...');
         $('#myformimport').submit();
     });

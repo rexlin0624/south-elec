@@ -10,6 +10,7 @@ include $this->admin_tpl('header', 'admin');
                 <th></th>
                 <th>功能</th>
                 <th >产品名称</th>
+                <th >语言</th>
                 <th >添加时间</th>
                 <th width="160"><?php echo L('operations_manage')?></th>
             </tr>
@@ -23,6 +24,7 @@ include $this->admin_tpl('header', 'admin');
                         <td><img src="<?php echo $info['thumb']?>" style="height: 100px;"></td>
                         <td align="center"><?php echo $info['function']?></td>
                         <td align="center"><?php echo $info['title']?></td>
+                        <td align="center"><?php echo $info['lang'] == 1 ? '中文' : 'English';?></td>
                         <td align="center"><?php echo date('Y-m-d H:i:s', $info['created_at'])?></td>
                         <td align="center">
                             <span style="height:22">
