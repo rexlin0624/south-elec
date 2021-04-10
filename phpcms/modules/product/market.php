@@ -18,7 +18,7 @@ class market extends admin {
 
     public function init() {
         $page = 0;
-        $infos = $this->db_list->listinfo([], '', $page, 100);
+        $infos = $this->db_list->listinfo([], 'id DESC', $page, 100);
 
         $functions = $this->db_functions_list->listinfo([], '', $page, 100);
         $map_functions = [];
@@ -34,7 +34,12 @@ class market extends admin {
         $id = (int)$_GET['id'];
         $info = [];
 
-        $functions = $this->db_functions_list->listinfo();
+        if ($id > 0) {
+            $info = $this->db_list->get_one(['id' => $id]);
+        }
+
+        $lang = !empty($info) ? $info['lang'] : 1;
+        $functions = $this->db_functions_list->listinfo(['lang' => $lang]);
 
         if (isset($_POST['market'])) {
             $id = (int)$_POST['market']['id'];
@@ -51,10 +56,6 @@ class market extends admin {
                 $this->db_list->insert($market, true);
             }
             showmessage('添加成功', '?m=product&c=market&a=init');
-        }
-
-        if ($id > 0) {
-            $info = $this->db_list->get_one(['id' => $id]);
         }
 
         include $this->admin_tpl('market_add');
@@ -92,5 +93,12 @@ class market extends admin {
         }
 
         include $this->admin_tpl('market_setting');
+    }
+
+    public function functions() {
+        $lang = (int)$_GET['lang'];
+
+        $functions = $this->db_functions_list->listinfo(['lang' => $lang], '', 1, 10000);
+        echo json_encode($functions);
     }
 }

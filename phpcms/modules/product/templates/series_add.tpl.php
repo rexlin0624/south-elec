@@ -8,6 +8,13 @@ include $this->admin_tpl('header', 'admin');
         <table class="table_form" width="100%" cellspacing="0">
             <tbody>
             <tr>
+                <th width="80"><strong>语言：</strong></th>
+                <td>
+                    <input type="radio" name="series[lang]" value="1"<?php echo (!isset($info['lang']) || $info['lang'] == 1) ? ' checked="checked"' : ''; ?>>&nbsp;中文
+                    <input type="radio" name="series[lang]" value="2"<?php echo (isset($info['lang']) && $info['lang'] == 2) ? ' checked="checked"' : ''; ?>>&nbsp;English
+                </td>
+            </tr>
+            <tr>
                 <th width="80"><strong>标题：</strong></th>
                 <td><input name="series[title]" id="title" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo isset($info['title']) ? $info['title'] : ''; ?>"></td>
             </tr>

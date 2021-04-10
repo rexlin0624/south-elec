@@ -9,13 +9,20 @@ $market_functions = isset($info['functions']) ? explode(',', $info['functions'])
         <table class="table_form" width="100%" cellspacing="0">
             <tbody>
             <tr>
+                <th width="80"><strong>语言：</strong></th>
+                <td>
+                    <input type="radio" name="market[lang]" value="1"<?php echo (!isset($info['lang']) || $info['lang'] == 1) ? ' checked="checked"' : ''; ?>>&nbsp;中文
+                    <input type="radio" name="market[lang]" value="2"<?php echo (isset($info['lang']) && $info['lang'] == 2) ? ' checked="checked"' : ''; ?>>&nbsp;English
+                </td>
+            </tr>
+            <tr>
                 <th width="80"><strong>标题：</strong></th>
                 <td><input name="market[title]" id="title" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo isset($info['title']) ? $info['title'] : ''; ?>"></td>
             </tr>
             <tr>
                 <th><strong>功能：</strong></th>
                 <td>
-                    <select multiple="multiple" name="market[functions][]" style="height: 150px;overflow-x: hidden;overflow-y: auto;min-width: 120px;">
+                    <select id="functions" multiple="multiple" name="market[functions][]" style="height: 150px;overflow-x: hidden;overflow-y: auto;min-width: 120px;">
                         <?php foreach ($functions as $item) { ?>
                         <?php $selected = in_array($item['id'], $market_functions) ? ' selected="selected"' : ''; ?>
                         <option<?php echo $selected; ?> value="<?php echo $item['id']; ?>"><?php echo $item['title']; ?></option>
@@ -53,6 +60,22 @@ $(document).ready(function(){
         }
 
         $('#myform').submit();
+    });
+
+    $('#myform').find('input[name="market[lang]"]').click(function () {
+        var lang = $(this).val();
+
+        $.ajax({
+            type: 'GET',
+            url: '/index.php?m=product&c=market&a=functions&lang=' + lang,
+            success: function (response) {
+                $('#functions').find('option').remove();
+                var functions = JSON.parse(response);
+                for (let i = 0;i < functions.length;i++) {
+                    $('#functions').append('<option value="'+functions[i].id+'">'+functions[i].title+'</option>');
+                }
+            }
+        });
     });
 });
 </script>

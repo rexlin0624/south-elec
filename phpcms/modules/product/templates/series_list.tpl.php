@@ -6,7 +6,7 @@ include $this->admin_tpl('header', 'admin');
     <table width="100%" cellspacing="0" class="table-list nHover">
         <thead>
         <tr>
-            <th></th>
+            <th>语言</th>
             <th >名称</th>
             <th width="160"><?php echo L('operations_manage')?></th>
         </tr>
@@ -17,7 +17,7 @@ include $this->admin_tpl('header', 'admin');
             foreach($infos as $info){
                 ?>
                 <tr>
-                    <td width="100"><img src="<?php echo $info['thumb']?>" style="height: 100px;"></td>
+                    <td width="100"><?php echo $info['lang'] == 1 ? '中文' : 'English';?></td>
                     <td align="center"><?php echo $info['title']?></td>
                     <td align="center">
                         <span style="height:22"><a href="?m=product&c=series&a=add&id=<?php echo $info['id']?>&menuid=<?php echo $_GET['menuid']?>">修改</a></span> |

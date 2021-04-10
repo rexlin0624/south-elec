@@ -96,31 +96,39 @@ class index {
 
 	public function step() {
 	    $type = (int)$_GET['type'];
+	    $lang = isset($_GET['lang']) ? trim($_GET['lang']) : 'cn';
+	    $langId = $lang == 'cn' ? 1 : 2;
         $setting = $this->db_setting->get_one(['id' => 1]);
 
         if ($type == self::MARKET) {
             $market_setting = $this->db_market_setting->get_one(['id' => 1]);
-            $step_title = $market_setting['title'];
+            $step_title = $lang == 'cn' ? $market_setting['title'] : $market_setting['title_en'];
 
-            $lists = $this->db_market_list->listinfo([], '', 1, 10);
+            $lists = $this->db_market_list->listinfo(['lang' => $langId], '', 1, 10);
         } elseif ($type == self::SERIES) {
             $series_setting = $this->db_series_setting->get_one(['id' => 1]);
-            $step_title = $series_setting['title'];
+            $step_title = $lang == 'cn' ? $series_setting['title'] : $series_setting['title_en'];
 
-            $lists = $this->db_series_list->listinfo([], '', 1, 10);
+            $lists = $this->db_series_list->listinfo(['lang' => ($lang == 'cn' ? 1 : 2)], '', 1, 10);
         }
 
-        include template('product', 'step');
+        if ($lang == 'cn') {
+            include template('product', 'step');
+        } else {
+            include template('product', 'step_en');
+        }
     }
 
     public function functions() {
         $type = (int)$_GET['type'];
         $id = isset($_GET['id']) ? (int)$_GET['id'] : -1000;
+        $lang = isset($_GET['lang']) ? trim($_GET['lang']) : 'cn';
+        $langId = $lang == 'cn' ? 1 : 2;
         $setting = $this->db_setting->get_one(['id' => 1]);
 
         if (empty($type) && $id == -1000) {
-            $title = '功能';
-            $lists = $this->db_function_list->listinfo([], '', 1, 1000);
+            $title = $lang == 'cn' ? '功能' : 'Functions';
+            $lists = $this->db_function_list->listinfo(['lang' => $langId], '', 1, 1000);
         } else {
             if ($type == self::MARKET) {
                 $item = $this->db_market_list->get_one(['id' => $id]);
@@ -146,7 +154,11 @@ class index {
             }
         }
 
-        include template('product', 'functions');
+        if ($lang == 'cn') {
+            include template('product', 'functions');
+        } else {
+            include template('product', 'functions_en');
+        }
     }
 
     private function _c($param) {

@@ -137,13 +137,16 @@ class search {
 
 	// 参数搜索页
 	public function init() {
+        $lang = isset($_GET['lang']) ? trim($_GET['lang']) : 'cn';
+        $langId = $lang == 'cn' ? 1 : 2;
+
         $empty = self::EMPTY;
         $props = $this->db_linkage->product_props();
         $series_id = isset($_GET['serial_id']) ? (int)$_GET['serial_id'] : 0;
         $series_title = self::$_map_series_id_title[$series_id];
 
-        $serials = $this->db_series_list->listinfo();
-        $functions = $this->db_function_list->listinfo([], '', 1, 1000);
+        $serials = $this->db_series_list->listinfo(['lang' => $langId]);
+        $functions = $this->db_function_list->listinfo(['lang' => $langId], '', 1, 1000);
 
         $mapFunctionCode = [];
         foreach ($functions as $fun) {
@@ -341,6 +344,10 @@ class search {
         // 军标
         $code = product_code_format($code, $is_military_standard);
 
-		include template('product', 'search');
+        if ($lang == 'cn') {
+            include template('product', 'search');
+        } else {
+            include template('product', 'search_en');
+        }
 	}
 }

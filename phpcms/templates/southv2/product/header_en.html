@@ -37,7 +37,7 @@
         <div class="column grid_5 float_right">
             <ul class="nav row">
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=step&type=1"{if $isMarket} id="activer_link"{/if}>Market</a>
+                    <a href="/index.php?m=product&c=index&a=step&type=1&lang=en"{if $isMarket} id="activer_link"{/if}>Market</a>
                     <ul class="nav2">
                         <div class="col">
                             {loop $market_list $market}
@@ -49,7 +49,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=functions"{if $isFunction} id="activer_link"{/if}>Function</a>
+                    <a href="/index.php?m=product&c=index&a=functions&lang=en"{if $isFunction} id="activer_link"{/if}>Function</a>
                     <ul class="nav2 small">
                         <div class="col">
                             {loop $function_list $function}
@@ -61,7 +61,7 @@
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=index&a=step&type=2"{if $isSeries} id="activer_link"{/if}>Series</a>
+                    <a href="/index.php?m=product&c=index&a=step&type=2&lang=en"{if $isSeries} id="activer_link"{/if}>Series</a>
                     <ul class="nav2 small">
                         <div class="col">
                             {loop $series_list $series}

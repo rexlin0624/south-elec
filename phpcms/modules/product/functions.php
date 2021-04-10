@@ -18,7 +18,7 @@ class functions extends admin {
 
     public function init() {
         $page = 0;
-        $infos = $this->db_list->listinfo([], '', $page, 10);
+        $infos = $this->db_list->listinfo([], 'id DESC', $page, 10);
 
         include $this->admin_tpl('functions_list');
     }

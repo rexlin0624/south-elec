@@ -2,10 +2,30 @@
 defined('IN_ADMIN') or exit('No permission resources.');
 include $this->admin_tpl('header', 'admin');
 ?>
+<style type="text/css">
+    .tab-setting {
+        list-style-type: none;
+        padding: 5px;
+    }
+    .tab-setting li {
+        display: inline-block;
+        width: 60px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .tab-setting li.active {
+        background-color: #32514b;
+        color: #FFFFFF;
+    }
+</style>
 <div class="pad-10">
     <form method="post" action="?m=product&c=market&a=setting" name="myform" id="myform">
         <input type="hidden" name="market[id]" value="<?php echo !empty($info) ? $info['id'] : 0; ?>">
-        <table class="table_form" width="100%" cellspacing="0">
+        <ul id="product-setting-tab" class="tab-setting">
+            <li data-lang="cn" class="active">中文</li>
+            <li data-lang="en">English</li>
+        </ul>
+        <table id="tbl-cn" class="table_form" width="100%" cellspacing="0">
             <tbody>
             <tr>
                 <th width="80"><strong>标题：</strong></th>
@@ -21,6 +41,26 @@ include $this->admin_tpl('header', 'admin');
                     <?php echo form::images('market[thumb]', 'thumb', !empty($info) ? $info['thumb'] : '', 'market', '', 40)?>
                     <br /><br />
                     <img src="<?php echo !empty($info) ? $info['thumb'] : ''; ?>">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table id="tbl-en" class="table_form" width="100%" cellspacing="0" style="display: none;">
+            <tbody>
+            <tr>
+                <th width="80"><strong>标题：</strong></th>
+                <td><input name="market[title_en]" id="title_en" class="input-text" type="text" size="50" style="width: 350px;" value="<?php echo !empty($info) ? $info['title_en'] : ''; ?>"></td>
+            </tr>
+            <tr>
+                <th><strong>描述：</strong></th>
+                <td><textarea name="market[description_en]" id="description_en" style="width: 350px;height:50px;"><?php echo !empty($info) ? $info['description_en'] : ''; ?></textarea></td>
+            </tr>
+            <tr>
+                <th><strong>缩略图：</strong></th>
+                <td>
+                    <?php echo form::images('market[thumb_en]', 'thumb_en', !empty($info) ? $info['thumb_en'] : '', 'market', '', 40)?>
+                    <br /><br />
+                    <img src="<?php echo !empty($info) ? $info['thumb_en'] : ''; ?>">
                 </td>
             </tr>
             </tbody>
@@ -52,6 +92,16 @@ $(document).ready(function(){
         }
 
         $('#myform').submit();
+    });
+
+    $('#product-setting-tab').find('li').click(function () {
+        var lang = $(this).attr('data-lang');
+
+        $('#product-setting-tab').find('li').removeClass('active');
+        $(this).addClass('active');
+
+        $('.table_form').hide();
+        $('#tbl-' + lang).show();
     });
 });
 </script>
