@@ -122,7 +122,7 @@
                 <span class="summary"></span>
               </a>
             </li>
-            {else}
+            {/if}
             {pc:content action="category" catid="$r[catid]" num="20" siteid="$siteid" order="listorder ASC" return="data2"}
             {loop $data2 $r2}
             {php $navUrl2 = str_replace('en/', '', $r2['url']);}
@@ -134,7 +134,6 @@
             </li>
             {/loop}
             {/pc}
-            {/if}
           </ul>
         </li>
         {/loop}
