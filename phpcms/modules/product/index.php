@@ -71,6 +71,8 @@ class index {
 
 	//首页
 	public function init() {
+	    $lang = isset($_GET['lang']) ? trim($_GET['lang']) : 'cn';
+
 	    $setting = $this->db_setting->get_one(['id' => 1]);
 
 	    // market setting
@@ -85,7 +87,11 @@ class index {
         $series_setting = $this->db_series_setting->get_one(['id' => 1]);
         $series_list = $this->db_series_list->listinfo([], '', 1, 100);
 
-		include template('product', 'index');
+        if ($lang == 'en') {
+            include template('product', 'index_en');
+        } else {
+            include template('product', 'index');
+        }
 	}
 
 	public function step() {
