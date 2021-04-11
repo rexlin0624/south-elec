@@ -699,8 +699,6 @@ class product extends admin {
         $lang = (int)$_POST['lang'];
         $arrUnique = [];
 
-        $product_props = $this->db_linkage->product_props();
-
         // 获取产品数据表中最大的产品ID
         $product = $this->db->get_one('', 'id', 'id DESC');
         $lastId = $product['id'] ? $product['id'] : 0;
@@ -720,7 +718,7 @@ class product extends admin {
         $highestColumn = $sheet->getHighestColumn();
         $highestColumnNum = PHPExcel_Cell::columnIndexFromString($highestColumn);
 
-        $functions = $this->db_functions->listinfo([], '', 1, 100);
+        $functions = $this->db_functions->listinfo(['lang' => $lang], '', 1, 100);
         $mapFunction = [];
         foreach ($functions as $item) {
             $mapFunction[$item['code']] = $item['title'];
@@ -846,10 +844,9 @@ class product extends admin {
         $setting = $this->db_setting->get_one(['id' => 1]);
         $values = [];
         foreach ($productIds as $prod) {
-            $values[] = '(' . $prod['id'] . ', 0, ' . $time . ', ' . $time . ')';
-            // $this->toPdf($prod['id'], $setting, $product_props, $prod);
+            $values[] = '(' . $lang . ', ' . $prod['id'] . ', 0, ' . $time . ', ' . $time . ')';
         }
-        $sql = 'INSERT INTO se_queues(`product_id`, `status`, `created_at`, `updated_at`) VALUES ' . implode(',', $values);
+        $sql = 'INSERT INTO se_queues(`lang`, `product_id`, `status`, `created_at`, `updated_at`) VALUES ' . implode(',', $values);
         $this->db_queue->query($sql);
 
         echo '导入成功！<a href="/index.php?m=product&c=product&a=config_list&menuid=1604&pc_hash=' . $pc_hash . '">返回列表</a>';
