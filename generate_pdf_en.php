@@ -13,7 +13,7 @@ $db_linkage = pc_base::load_model('linkage_model');
 $db_setting = pc_base::load_model('productions_setting_model');
 $pdfkit = new Pdf('/usr/local/bin/wkhtmltopdf');
 
-$isDebug = true;
+$isDebug = false;
 
 $lang = 2;
 
@@ -136,7 +136,7 @@ $logo = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_logo.base64
 $pdf_content = preg_replace('/{logo}/', $logo, $pdf_content);
 
 // bottom
-$bottom = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_bottom.base64');
+$bottom = 'data:image/png;base64,' . file_get_contents(__DIR__ . '/pdf_bottom_en.base64');
 //$pdf_content = preg_replace('/{bottom_images}/', $bottom, $pdf_content);
 
 // 产品图底纹
