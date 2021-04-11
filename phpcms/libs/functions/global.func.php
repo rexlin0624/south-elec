@@ -446,6 +446,12 @@ function L($language = 'no_language',$pars = array(), $modules = '') {
 	} else {
 		$lang = pc_base::load_config('system','lang');
 	}
+	if (isset($_GET['lang'])) {
+	    if ($_GET['lang'] == 'en') {
+	        $lang = 'en';
+        }
+    }
+
 	if(!$LANG) {
 		require_once PC_PATH.'languages'.DIRECTORY_SEPARATOR.$lang.DIRECTORY_SEPARATOR.'system.lang.php';
 		if(defined('IN_ADMIN')) require_once PC_PATH.'languages'.DIRECTORY_SEPARATOR.$lang.DIRECTORY_SEPARATOR.'system_menu.lang.php';

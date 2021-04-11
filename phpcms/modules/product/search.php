@@ -141,11 +141,15 @@ class search {
         $langId = $lang == 'cn' ? 1 : 2;
 
         $empty = self::EMPTY;
-        $props = $this->db_linkage->product_props();
+        if ($lang == 'cn') {
+            $props = $this->db_linkage->product_props();
+        } else {
+            $props = $this->db_linkage->product_props_en();
+        }
         $series_id = isset($_GET['serial_id']) ? (int)$_GET['serial_id'] : 0;
         $series_title = self::$_map_series_id_title[$series_id];
 
-        $serials = $this->db_series_list->listinfo(['lang' => $langId]);
+        $serials = $this->db_series_list->listinfo();
         $functions = $this->db_function_list->listinfo(['lang' => $langId], '', 1, 1000);
 
         $mapFunctionCode = [];
@@ -241,7 +245,7 @@ class search {
         $contacts = $this->db_contact_setting->get_one(['id' => 1]);
         $page = (int)$_GET['page'];
         $page = $page > 1 ? $page : 1;
-        $where = '1 = 1';
+        $where = 'lang = ' . $langId;
         if (!empty($product_code)) {
             $where .= ' AND `code` LIKE \'%' . $product_code . '%\'';
         }
@@ -264,6 +268,9 @@ class search {
                 }
                 if ($flt == 'Z') {
                     $is_display_contact = 'block';
+                    continue;
+                }
+                if ($field == 'lang') {
                     continue;
                 }
 
