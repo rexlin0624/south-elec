@@ -8,6 +8,7 @@ include $this->admin_tpl('header', 'admin');
             <thead>
             <tr>
                 <th></th>
+                <th>系列</th>
                 <th>功能</th>
                 <th >产品名称</th>
                 <th >语言</th>
@@ -22,6 +23,7 @@ include $this->admin_tpl('header', 'admin');
                     ?>
                     <tr>
                         <td><img src="<?php echo $info['thumb']?>" style="height: 100px;"></td>
+                        <td align="center"><?php echo $mapSeriesId[$info['series_id']]?></td>
                         <td align="center"><?php echo $info['function']?></td>
                         <td align="center"><?php echo $info['title']?></td>
                         <td align="center"><?php echo $info['lang'] == 1 ? '中文' : 'English';?></td>

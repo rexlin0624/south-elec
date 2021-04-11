@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>pdf.html</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'simsun';
+    }
+    .header {
+        height: 3cm;
+    }
+    .logo {
+        position: absolute;
+        right: 1cm;
+        top: 1cm;
+    }
+    footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+    }
+    .base-info {
+        height: 10cm;
+        text-align: center;
+    }
+    .base-info > ul {
+        list-style-type: none;
+    }
+    .base-info > ul > li {
+        display: inline-block;
+    }
+    .thumb {
+        width: 8cm;
+    }
+    .product-info {
+    }
+    .product-info > ul {
+        list-style-type: none;
+        text-align: left;
+    }
+    .product-info > ul > li {
+        line-height: 26px;
+    }
+    .prop-title {
+        display: inline-block;
+        text-align: right;
+        width: 5cm;
+    }
+    .prop-value {
+        display: inline-block;
+        text-align: left;
+        width: 7cm;
+    }
+    .separator {
+        width: 94%;
+        height: 3px;
+        background-color: #7F7F7F;
+        margin-left: 3%;
+    }
+    .product-images {
+        text-align: center;
+    }
+    .product-background {
+        width: 5cm;
+        height: 17cm;
+        background-image: url({product_background});
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position:absolute;
+        left: 0;
+        top: 12cm;
+        z-index: -8888;
+    }
+    </style>
+</head>
+
+<body style="margin: 0px;padding: 0px;">
+    <div>
+        <div class="header"></div>
+        <div class="logo"><img src="{logo}" style="height: 100px;" /></div>
+        <div class="base-info">
+            <ul>
+                <li class="thumb" style="float: left;">
+                    <div style="font-weight: bold;font-size: 24px;">{title}</div>
+                    <div style="padding-top:1.5cm;padding-bottom:1.5cm;"><img src="{thumb}" height="150" /></div>
+                    <div>Sample</div>
+                </li>
+                <li class="product-info" style="float: right;padding-top:1cm;">
+                    <ul>
+                        <li><span class="prop-title">Front ring Dim：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{front_shape}</span></li>
+                        <li><span class="prop-title">Front ring/button material：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{front_button_material}</span></li>
+                        <li><span class="prop-title">Front ring/button shape：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{front_button_shape}</span></li>
+                        <li><span class="prop-title">Front ring/button colour：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{front_button_color}</span></li>
+                        <li><span class="prop-title">Switch function：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{switch_element}</span></li>
+                        <li><span class="prop-title">Illuminated：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{light_style}</span></li>
+                        <li><span class="prop-title">LED Color：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{led_color}</span></li>
+                        <li><span class="prop-title">LED：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{led_voltage}</span></li>
+                        <li><span class="prop-title">Installation dimension：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{install_size}</span></li>
+                        <li><span class="prop-title">Optional：</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="prop-value">{military_standard}</span></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="separator"></div>
+        <div class="product-background"></div>
+        <div class="product-images">
+            <img src="{product_images}" style="max-height: 20cm;" />
+        </div>
+    </div>
+</body>

@@ -53,6 +53,12 @@ class product extends admin {
         $items = $this->db->listinfo([], 'id DESC', $page, 10);
         $functions = $this->db_functions->listinfo([], '', 1, 10);
 
+        $mapSeriesId = [
+            6 => '4.0',
+            7 => '5.0',
+            8 => '6.0',
+        ];
+
         $map_func = [];
         foreach ($functions as $function) {
             $map_func[$function['code']] = $function['title'];

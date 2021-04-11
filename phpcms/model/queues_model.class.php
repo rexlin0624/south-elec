@@ -9,16 +9,16 @@ class queues_model extends model {
 		parent::__construct();
 	}
 
-	public function getTotalFree() {
-		return $this->count('`status` = 0');
+	public function getTotalFree($lang = 1) {
+		return $this->count('`status` = 0 AND `lang` = ' . $lang);
 	}
 
-    public function getTotalNoJ() {
-        return $this->count('`status` = 3');
+    public function getTotalNoJ($lang = 1) {
+        return $this->count('`status` = 3 AND `lang` = ' . $lang);
     }
 
-	public function getProcessing() {
-		return $this->count('`status` = 1') > 0;
+	public function getProcessing($lang = 1) {
+		return $this->count('`status` = 1 AND `lang` = ' . $lang) > 0;
 	}
 
 	public function markProcessing($id) {
