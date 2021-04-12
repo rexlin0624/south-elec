@@ -29,10 +29,11 @@
             <div class="column grid_6 bg">
 
                 <div class="row">
-                    <form action="/index.php?m=product&c=search&a=init" method="get" id="myformmm">
+                    <form action="/index.php?m=product&c=search&a=init&lang=en" method="get" id="myformmm">
                         <input type="hidden" name="m" value="product">
                         <input type="hidden" name="c" value="search">
                         <input type="hidden" name="a" value="init">
+                        <input type="hidden" name="lang" value="en">
                         <fieldset class="filter column grid_filter">
                             <label>Series(<?php echo count($search['serial_id']); ?>)</label>
                             <select onchange="setSeFilter();" name="serial_id" class="prodFinder" style="display: inline-block;">
