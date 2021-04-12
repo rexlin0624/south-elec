@@ -668,6 +668,8 @@ class product extends admin {
     private function _generateCode($row) {
         // 系列
         $code = sprintf("%.1f", $row[0]);
+        $code .= '-';
+
         // 前圈尺寸
         $code .= $this->_ce($row[1]);
         // 前圈/按键材料
