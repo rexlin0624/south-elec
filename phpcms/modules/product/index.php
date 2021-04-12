@@ -149,7 +149,7 @@ class index {
                     $functions_ids[] = $row['functions_id'];
                 }
 
-                $where = '`code` IN(' . implode(',', $functions_ids) . ')';
+                $where = '`code` IN(' . implode(',', $functions_ids) . ') AND lang = ' . $langId;
                 $lists = $this->db_function_list->listinfo($where, '', 1, 1000);
             }
         }
