@@ -109,7 +109,7 @@ class index {
             $series_setting = $this->db_series_setting->get_one(['id' => 1]);
             $step_title = $lang == 'cn' ? $series_setting['title'] : $series_setting['title_en'];
 
-            $lists = $this->db_series_list->listinfo(['lang' => ($lang == 'cn' ? 1 : 2)], '', 1, 10);
+            $lists = $this->db_series_list->listinfo([], '', 1, 10);
         }
 
         if ($lang == 'cn') {
