@@ -42,7 +42,7 @@
                         <div class="col">
                             {loop $market_list $market}
                             <li>
-                                <a href="/index.php?m=product&c=index&a=functions&type=1&id={$market['id']}" >{$market['title']}</a>
+                                <a href="/index.php?m=product&c=index&a=functions&type=1&lang=en&id={$market['id']}" >{$market['title']}</a>
                             </li>
                             {/loop}
                         </div>
@@ -54,7 +54,7 @@
                         <div class="col">
                             {loop $function_list $function}
                             <li>
-                                <a href="/index.php?m=product&c=index&a=lists&functions_id={$function['id']}">{$function['title']}</a>
+                                <a href="/index.php?m=product&c=index&a=lists&lang=en&functions_id={$function['id']}">{$function['title']}</a>
                             </li>
                             {/loop}
                         </div>
@@ -66,14 +66,14 @@
                         <div class="col">
                             {loop $series_list $series}
                             <li>
-                                <a href="/index.php?m=product&c=index&a=functions&type=2&id={$series['id']}" >{$series['title']}</a>
+                                <a href="/index.php?m=product&c=index&a=functions&type=2&lang=en&id={$series['id']}" >{$series['title']}</a>
                             </li>
                             {/loop}
                         </div>
                     </ul>
                 </li>
                 <li class="column">
-                    <a href="/index.php?m=product&c=search&a=init"{if $isSearch} id="activer_link"{/if}>Search</a>
+                    <a href="/index.php?m=product&c=search&a=init&lang=en"{if $isSearch} id="activer_link"{/if}>Search</a>
                     <ul class="nav2 small"></ul>
                 </li>
             </ul>
