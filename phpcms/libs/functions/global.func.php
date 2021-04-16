@@ -1831,7 +1831,7 @@ function is_phone($phone) {
  */
 function product_code_format($code, $is_military_standard = false) {
     $military_standard_code = 'J';
-    $code_prefix = substr($code, 0, 12);
+    $code_prefix = substr($code, 0, 13);
 
     $code_formatted = $code_prefix;
     if ($is_military_standard) {
