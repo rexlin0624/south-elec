@@ -66,7 +66,7 @@ class index {
 
         $this->db_linkage = pc_base::load_model('linkage_model');
 
-		$this->_product_props = $this->db_linkage->product_props();;
+		$this->_product_props = $this->db_linkage->product_props();
 	}
 
 	//首页
@@ -274,7 +274,12 @@ class index {
 	    $id = (int)$_GET['id'];
 	    $lang = $_GET['lang'];
         $setting = $this->db_setting->get_one(['id' => 1]);
-        $props = $this->_product_props;
+
+        if ($lang == 'en') {
+            $props = $this->db_linkage->product_props_en();
+        } else {
+            $props = $this->_product_props;
+        }
 
         $item = $this->db->get_one(['id' => $id]);
 
