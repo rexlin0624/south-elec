@@ -272,6 +272,7 @@ class index {
 
     public function show() {
 	    $id = (int)$_GET['id'];
+	    $lang = $_GET['lang'];
         $setting = $this->db_setting->get_one(['id' => 1]);
         $props = $this->_product_props;
 
@@ -282,7 +283,11 @@ class index {
         $g = (int)$_GET['g'];
         $item['code'] = product_code_format($item['code'], $g);
 
-        include template('product', 'show');
+        if ($lang == 'en') {
+            include template('product', 'show_en');
+        } else {
+            include template('product', 'show');
+        }
     }
 
     /**

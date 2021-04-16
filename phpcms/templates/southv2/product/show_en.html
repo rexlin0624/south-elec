@@ -1,0 +1,154 @@
+{template "product","header_en"}
+<?php
+    $g_path = 'g';
+    if (isset($_GET['g']) && $_GET['g'] == 0) {
+        $g_path = 'ng';
+    }
+?>
+<div class="row">
+    <div class="column grid_2 column_margin">
+        <div class="box">
+            <span class="boxheader"><h3>{$setting['title_en']}</h3></span>
+            <div class="boxcontent">
+                <div id="basketContentDynamic">
+                    <p>{$setting['description_en']}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="content grid_6">
+            <h1 class="c_3x2_h1">{$item['title']}</h1>
+            <div class="bg">
+                <div class="row">
+                    <div class="column grid_2">
+                        <a rel="zoom" href="{$item['thumb']}" class="modalImg" title="{$item['title']}">
+                            <img src="{$item['thumb']}" height="150" alt="{$item['title']}" title="">
+
+                        </a>
+                        <a rel="zoom" href="./media/zoom/BR04_KS_01_00189_zoom.jpg" class="modalImg hidden" title="704.022.5 - Indicator full-face illumination compact - Produktfoto" style="display:none;">
+                            <img src="./media/normal/BR04_KS_01_00189_normal.jpg" width="230" height="173" alt="undefined" title="">
+
+                        </a>
+
+                        <br>
+                        <p class="info">
+                            样品仅供参考
+                        </p>
+                        <br>
+
+                        <div class="row content">
+                            <div class="column grid_1 caption">
+                                <?php
+                                    for ($i = 1;$i <= 4;$i++) {
+                                        if (!empty($item['project_image_' . $i])) {
+                                ?>
+                                <a rel="zoom" href="<?php echo $item['project_image_' . $i] ?>" class="modalImg">
+                                    <img src="<?php echo $item['project_image_' . $i] ?>" height="125">
+                                </a>
+                                <?php }} ?>
+
+                                <br />
+                                <a target="_blank" href="caches/pdf/<?php echo $g_path; ?>/<?php echo $item['code']; ?>.pdf">PDF下载</a>
+                            </div>
+                            <div class="column grid_1 caption detail_pic">
+
+
+                            </div>
+                        </div>
+
+
+                        <br>
+                        <div class="downloads" style="display:none;">
+                            <h3>Information for download</h3>
+                            <a href="index.php?IdTreeGroup=124&amp;IdProduct=53701&amp;pdf=true" target="_blank">Create datasheet</a>
+
+
+
+                            <a href="./media/print/Massbilder/NEUTRAL/BR04_MA_01_00001.eps" title="704.022.5 - Indicator full-face illumination compact - Dimensions" target="_blank">
+                                Dimensions (eps, 452.5 kB)
+                            </a>
+
+                            <a href="./media/print/Lochbilder/NEUTRAL/BR04_LO_01_00002.eps" title="704.022.5 - Indicator full-face illumination compact - Mounting cut-outs" target="_blank">
+                                Mounting cut-outs (eps, 755.3 kB)
+                            </a>
+
+                            <a href="./media/print/Schaltbilder/NEUTRAL/piz25024.eps" title="704.022.5 - Indicator full-face illumination compact - Wiring diagram" target="_blank">
+                                Wiring diagram (eps, 410.3 kB)
+                            </a>
+
+                            <a href="./media/technische_daten/BR04_General_technical_data.pdf" title="704.022.5 - Indicator full-face illumination compact - " target="_blank">
+                                Tech. Data Serie.pdf (451.5 kB)
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column grid_2 product_details" style="width: 60%;">
+                        <h3 style="font-weight: bold;margin-bottom: 20px;">参数说明</h3>
+                        <table class="data">
+                            <tbody>
+                            <tr style="line-height: 30px;">
+                                <td>产品编码：</td>
+                                <td class="left"><?php echo $item['code']; ?></td>
+                            </tr>
+                            <?php foreach ($props[$series_title] as $key => $prop) { ?>
+                            <tr style="line-height: 30px;">
+                                <td><?php echo $prop['title']; ?>：</td>
+                                <?php
+                                    $propValue = $prop['options'][$item[$key]];
+                                    if ($key == 'military_standard') {
+                                        $propValue = $g == 1 ? $propValue : '-';
+                                    }
+                                ?>
+                                <td class="left"><?php echo $propValue; ?></td>
+                            </tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="column grid_2" style="display: none;">
+                        <div class="mandatory_components">
+                            <h3 class="red">Select necessary components</h3>
+
+                            <div id="builderBox" class="notwendig_comp">
+                                <div class="builder   column  caption" id="bbox_1" box="1" ref="" pid="53701" title="Lens cap">
+
+                                    <div style="float:left; width: 55px"><img style="margin: 0px auto;" src="media/thumb/BR14_EX_01_00014_thumb.jpg" defaultimage="media/thumb/BR14_EX_01_00014_thumb.jpg"></div>
+                                    <div style="margin-top:15px" class="JoinTypeName  fest ">Lens cap</div>
+                                </div>
+                                <div class="builder   column  caption" id="bbox_2" box="2" ref="" pid="53701" title="Marking cap">
+
+                                    <div style="float:left; width: 55px"><img style="margin: 0px auto;" src="media/thumb/BR04_EX_01_00035_thumb.jpg" defaultimage="media/thumb/BR04_EX_01_00035_thumb.jpg"></div>
+                                    <div style="margin-top:0px" class="JoinTypeName  fest ">Marking cap</div>
+                                </div>
+                                <div class="builder  active  column  caption" id="bbox_3" box="3" ref="hat_notwendige_Lampe" pid="53701" title="LED">
+
+                                    <div style="float:left; width: 55px"><img style="margin: 0px auto;" src="media/thumb/BR04_EX_01_00008_red_thumb.jpg" defaultimage="media/thumb/BR04_EX_01_00008_red_thumb.jpg"></div>
+                                    <div style="margin-top:15px" class="JoinTypeName  ">LED</div>
+                                </div>
+                                <div class="builder   column  caption" id="bbox_4" box="4" ref="" pid="53701" title="Actuator">
+
+                                    <div style="float:left; width: 55px"><img style="margin: 0px auto;" src="media/thumb/BR04_EX_01_00036_thumb.jpg" defaultimage="media/thumb/BR04_EX_01_00036_thumb.jpg"></div>
+                                    <div style="margin-top:15px" class="JoinTypeName  fest ">Actuator</div>
+                                </div>
+                                <div class="builder   column  caption" id="bbox_5" box="5" ref="" pid="53701" title="Fixing nut">
+
+                                    <div style="float:left; width: 55px"><img style="margin: 0px auto;" src="media/thumb/BR04_EX_01_00015_thumb.jpg" defaultimage="media/thumb/BR04_EX_01_00015_thumb.jpg"></div>
+                                    <div style="margin-top:0px" class="JoinTypeName  fest ">Fixing nut</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="optional_components">
+                            <a href="index.php?IdProduct=53701&amp;tpl=b_builderOptionalDialog" class="modal" title="Select optional accessories">
+                                <h3>Select optional accessories</h3>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{template "product","footer"}
