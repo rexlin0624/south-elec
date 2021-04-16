@@ -72,16 +72,17 @@ class index {
 	//首页
 	public function init() {
 	    $lang = isset($_GET['lang']) ? trim($_GET['lang']) : 'cn';
+	    $langId = $lang == 'en' ? 2 : 1;
 
 	    $setting = $this->db_setting->get_one(['id' => 1]);
 
 	    // market setting
         $market_setting = $this->db_market_setting->get_one(['id' => 1]);
-        $market_list = $this->db_market_list->listinfo([], '', 1, 100);
+        $market_list = $this->db_market_list->listinfo(['lang' => $langId], '', 1, 100);
 
         // functions setting
         $function_setting = $this->db_function_setting->get_one(['id' => 1]);
-        $function_list = $this->db_function_list->listinfo([], '', 1, 1000);
+        $function_list = $this->db_function_list->listinfo(['lang' => $langId], '', 1, 1000);
 
         // series setting
         $series_setting = $this->db_series_setting->get_one(['id' => 1]);
