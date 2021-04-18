@@ -48,7 +48,7 @@
     .prop-title {
         display: inline-block;
         text-align: right;
-        width: 5cm;
+        width: 7cm;
     }
     .prop-value {
         display: inline-block;
