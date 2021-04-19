@@ -34,7 +34,7 @@
         display: inline-block;
     }
     .thumb {
-        width: 8cm;
+        width: 7cm;
     }
     .product-info {
     }
@@ -48,12 +48,12 @@
     .prop-title {
         display: inline-block;
         text-align: right;
-        width: 7cm;
+        width: 6cm;
     }
     .prop-value {
         display: inline-block;
         text-align: left;
-        width: 7cm;
+        width: 8cm;
     }
     .separator {
         width: 94%;
@@ -85,7 +85,7 @@
         <div class="base-info">
             <ul>
                 <li class="thumb" style="float: left;">
-                    <div style="font-weight: bold;font-size: 24px;">{title}</div>
+                    <div style="font-weight: bold;font-size: 14px;">{title}</div>
                     <div style="padding-top:1.5cm;padding-bottom:1.5cm;"><img src="{thumb}" height="150" /></div>
                     <div>Sample</div>
                 </li>
@@ -108,7 +108,7 @@
         <div class="separator"></div>
         <div class="product-background"></div>
         <div class="product-images">
-            <img src="{product_images}" style="max-height: 20cm;" />
+            <img src="{product_images}" style="max-height: 21cm;width: 94%;" />
         </div>
     </div>
 </body>
