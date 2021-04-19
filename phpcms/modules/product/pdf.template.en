@@ -24,7 +24,7 @@
         width: 100%;
     }
     .base-info {
-        height: 10cm;
+        height: 8.3cm;
         text-align: center;
     }
     .base-info > ul {
@@ -109,7 +109,7 @@
         <div class="separator"></div>
         <div class="product-background"></div>
         <div class="product-images">
-            <img src="{product_images}" style="max-height: 21cm;" />
+            <img src="{product_images}" style="max-height: 22cm;" />
         </div>
     </div>
 </body>
