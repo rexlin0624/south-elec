@@ -63,6 +63,7 @@
     }
     .product-images {
         text-align: center;
+        margin-top: 0.2cm;
     }
     .product-background {
         width: 5cm;
