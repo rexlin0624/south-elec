@@ -86,8 +86,8 @@
         <div class="base-info">
             <ul>
                 <li class="thumb" style="float: left;">
-                    <div style="font-weight: bold;font-size: 14px;">{title}</div>
-                    <div style="padding-top:1.5cm;padding-bottom:1.5cm;"><img src="{thumb}" height="150" /></div>
+                    <div style="font-weight: bold;font-size: 18px;text-align:left;margin-left:2cm;">{title}</div>
+                    <div style="padding-top:1.5cm;padding-bottom:0.65cm;"><img src="{thumb}" height="150" /></div>
                     <div>Sample</div>
                 </li>
                 <li class="product-info" style="float: right;padding-top:1cm;">
