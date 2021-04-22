@@ -34,7 +34,7 @@
         display: inline-block;
     }
     .thumb {
-        width: 6cm;
+        width: 5.8cm;
     }
     .product-info {
     }
@@ -76,6 +76,13 @@
         top: 12cm;
         z-index: -8888;
     }
+    .product-title {
+        font-weight:bold;
+        font-size: 16px;
+        position: absolute;
+        top: 3cm;
+        left: 0cm;
+    }
     </style>
 </head>
 
@@ -85,9 +92,9 @@
         <div class="logo"><img src="{logo}" style="height: 100px;" /></div>
         <div class="base-info">
             <ul>
+                <li class="product-title">{title}</li>
                 <li class="thumb" style="float: left;">
-                    <div style="font-weight: bold;font-size: 14px;text-align:left;margin-left:1.5cm;">{title}</div>
-                    <div style="padding-top:1.5cm;padding-bottom:0.65cm;"><img src="{thumb}" height="150" /></div>
+                    <div style="padding-top:1.5cm;padding-bottom:1.8cm;"><img src="{thumb}" height="150" /></div>
                     <div>Sample</div>
                 </li>
                 <li class="product-info" style="float: right;padding-top:1cm;">

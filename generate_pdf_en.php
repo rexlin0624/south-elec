@@ -148,10 +148,10 @@ $pdf_content_with_j = $pdf_content;
 $pdf_content_without_j = $pdf_content;
 
 $pdf_content_with_j = preg_replace('/{military_standard}/', $military_standard, $pdf_content_with_j);
-$pdf_j_content = preg_replace('/{title}/', $product['title'] . '<br />' . $code_j, $pdf_content_with_j);
+$pdf_j_content = preg_replace('/{title}/', $product['title'] . '：' . $code_j, $pdf_content_with_j);
 
 $pdf_content_without_j = preg_replace('/{military_standard}/', '-', $pdf_content_without_j);
-$pdf_noj_content = preg_replace('/{title}/', $product['title'] . '<br />' . $code_noj, $pdf_content_without_j);
+$pdf_noj_content = preg_replace('/{title}/', $product['title'] . '：' . $code_noj, $pdf_content_without_j);
 
 if ($isDebug) {
     echo '$pdf_path =', $pdf_path,chr(10),chr(13);
