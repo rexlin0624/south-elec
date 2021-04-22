@@ -34,7 +34,7 @@
         display: inline-block;
     }
     .thumb {
-        width: 7cm;
+        width: 6cm;
     }
     .product-info {
     }
@@ -86,7 +86,7 @@
         <div class="base-info">
             <ul>
                 <li class="thumb" style="float: left;">
-                    <div style="font-weight: bold;font-size: 16px;text-align:left;margin-left:1.5cm;">{title}</div>
+                    <div style="font-weight: bold;font-size: 14px;text-align:left;margin-left:1.5cm;">{title}</div>
                     <div style="padding-top:1.5cm;padding-bottom:0.65cm;"><img src="{thumb}" height="150" /></div>
                     <div>Sample</div>
                 </li>
