@@ -214,7 +214,6 @@ class search {
                 $restrictProps[$kk] = $prop;
             }
         }
-//        var_dump($restrictProps);exit;
 
         // 根据$serial_id获取function list
         if (!empty($serial_id) && $series_id != $empty) {
@@ -279,10 +278,6 @@ class search {
                     continue;
                 }
 
-//                if ($field == 'military_standard' && $flt == 'G') {
-//                    continue;
-//                }
-
                 $condition[] = $field . ' = "' . $flt . '"';
             }
         }
@@ -339,8 +334,6 @@ class search {
         if (!in_array('J', $search['military_standard'])) {
             $search['military_standard'][] = 'J';
         }
-//        var_dump($search['military_standard']);
-//        exit;
 
         // 规则：系列-{前圈尺寸}{前圈/按键材料}{前圈/按键形状}{前圈/按键颜色}.{开关元件}{照明形式}{LED灯颜色}{LED灯电压}.{军标}{序列号}
         $this->_filter_params = $filter;
